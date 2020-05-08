@@ -1,8 +1,7 @@
 import assert from 'assert'
 
 import {
-  sortAlphabetical,
-  sortObject
+  ensureUnecognizedKeys
 } from './util.js'
 import {
   groupTopLevel,
@@ -34,7 +33,7 @@ import {
 /**
  * @description sorts an object that represents a package.json file
  * @param {object} input - object to sort
- * @return {object} output - the sorted object
+ * @return {object} the sorted object
  */
 export function sortPackageJson(input) {
   const groupRoot = {
@@ -81,26 +80,7 @@ export function sortPackageJson(input) {
     }
   }
 
-  // 'output' object is now sorted. but, properties unknown to this
-  // sorter are not in the 'output' object. we add them here
-  let finalOutput = {}
-  let surface = {}
-  for (const entryName in input) {
-    // add all unknown elements to 'finalOutput' first
-    if(input.hasOwnProperty(entryName) && !output.hasOwnProperty(entryName)) {
-      surface[entryName] = input[entryName]
-    }
-  }
-
-  // now, alphebatically sort 'surface'
-
-  surface = sortObject(surface, sortAlphabetical)
-
-  finalOutput = {
-    ...surface,
-    ...output
-  }
-
+  const finalOutput = ensureUnecognizedKeys(input, output)
   return finalOutput
 }
 
