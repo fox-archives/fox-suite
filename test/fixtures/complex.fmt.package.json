@@ -1,0 +1,17 @@
+{
+  "description": "desc",
+  "license": "license",
+  "private": false,
+  "scripts": {},
+  "husky": {},
+  "xo": {},
+  "author": "name",
+  "keywords": [],
+  "browser": "file",
+  "engines": ">= 14",
+  "publisher": "name",
+  "flat": true,
+  "resolutions": [],
+  "devDependencies": [],
+  "optionalDependencies": []
+}

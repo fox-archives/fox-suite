@@ -1,10 +1,16 @@
 {
   "name": "fox-util-sort-package-json",
-  "type": "module",
+  "type": "commonjs",
   "scripts": {
-    "test": "jest"
+    "test": "ava"
+  },
+  "ava": {
+    "require": [
+      "esm"
+    ]
   },
   "devDependencies": {
-    "jest": "^26.0.1"
+    "ava": "^3.8.1",
+    "esm": "^3.2.25"
   }
 }
