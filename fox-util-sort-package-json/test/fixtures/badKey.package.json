@@ -1,0 +1,9 @@
+{
+  "name": "name",
+  "unknown": "hosted to second",
+  "zebra": "hoisted to third",
+  "license": "license",
+  "scripts": "scripts",
+  "foxtrot": "hoisted to first",
+  "private": false
+}

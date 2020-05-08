@@ -1,6 +1,10 @@
 import assert from 'assert'
 
 import {
+  sortAlphabetical,
+  sortObject
+} from './util.js'
+import {
   groupTopLevel,
   groupScriptsAndConfig,
   groupExternalPackageConfig,
@@ -20,10 +24,12 @@ import {
  * only actually sorts groups relative to each other
  *
  * a 'surface' is a platform where sorting occurs. aka
- * a member of nested member of `package.json`
- *
- * @todo fix bug where if item in package.json is not in this list, it disappears
+ * an objects we add members to. members can be root keys to
+ * package.json or members of a nested object in package.json (ex. "eslint": {})
+ * usually we create a surface, then add members, and lastly, sort the members
+ * within that surface
  */
+
 
 /**
  * @description sorts an object that represents a package.json file
@@ -75,9 +81,27 @@ export function sortPackageJson(input) {
     }
   }
 
-  // console.log(JSON.stringify(output, null, 2))
+  // 'output' object is now sorted. but, properties unknown to this
+  // sorter are not in the 'output' object. we add them here
+  let finalOutput = {}
+  let surface = {}
+  for (const entryName in input) {
+    // add all unknown elements to 'finalOutput' first
+    if(input.hasOwnProperty(entryName) && !output.hasOwnProperty(entryName)) {
+      surface[entryName] = input[entryName]
+    }
+  }
 
-  return output
+  // now, alphebatically sort 'surface'
+
+  surface = sortObject(surface, sortAlphabetical)
+
+  finalOutput = {
+    ...surface,
+    ...output
+  }
+
+  return finalOutput
 }
 
 process.on('uncaughtException', (err) => console.error(err))
