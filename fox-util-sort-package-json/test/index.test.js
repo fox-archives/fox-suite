@@ -2,8 +2,8 @@ import path from 'path'
 import fs from 'fs'
 import test from 'ava'
 
-import { sortPackageJson } from '../lib/sort.js'
-import { groupExternalPackageConfig } from '../lib/groups.sort'
+import { sortPackageJson } from '../lib/sort.mjs'
+import { groupExternalPackageConfig } from '../lib/groups.sort.mjs'
 
 const testPackageJsons = ['empty', 'basic', 'complex', 'badKey', 'nestedArray', 'nestedObject']
 for (const testPackageJson of testPackageJsons) {

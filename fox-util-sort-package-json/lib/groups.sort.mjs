@@ -1,4 +1,4 @@
-import { sortAlphabetical } from "./util"
+import { sortAlphabetical } from "./util.mjs"
 
 /**
  * @summary specifics of each sorting group
@@ -17,6 +17,7 @@ export const groupTopLevel = {
     { name: 'version'},
     { name: 'license' },
     { name: 'private' },
+    { name: 'type' },
     { name: 'workspaces' },
   ],
 }
@@ -91,7 +92,6 @@ export const groupJsEntryPoints = {
   location: '',
   keys: [
     { name: 'sideEffects' },
-    { name: 'type' },
     { name: 'exports' },
     { name: 'main' },
     { name: 'umd:main' },

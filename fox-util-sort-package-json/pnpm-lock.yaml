@@ -1,3 +1,5 @@
+dependencies:
+  minimist: 1.2.5
 devDependencies:
   ava: 3.8.1
   esm: 3.2.25
@@ -1360,7 +1362,6 @@ packages:
     resolution:
       integrity: sha512-yJHVQEhyqPLUTgt9B83PXu6W3rx4MvvHvSUvToogpwoGDOUQ+yDrR0HRot+yOCdCO7u4hX3pWft6kWBBcqh0UA==
   /minimist/1.2.5:
-    dev: true
     resolution:
       integrity: sha512-FM9nNUYrRBAELZQT3xeZQ7fmMOBg6nWNmJKTcgsJeaLstP/UODVpGsr5OhXhhXg6f+qtJ8uiZ+PUxkDWcgIXLw==
   /ms/2.1.2:
@@ -2145,3 +2146,4 @@ specifiers:
   ava: ^3.8.1
   esm: ^3.2.25
   husky: ^4.2.5
+  minimist: ^1.2.5

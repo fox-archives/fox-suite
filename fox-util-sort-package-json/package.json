@@ -1,18 +1,25 @@
 {
   "name": "fox-util-sort-package-json",
-  "type": "commonjs",
+  "private": false,
   "scripts": {
     "test": "ava"
+  },
+  "ava": {
+    "require": [
+      "esm"
+    ]
   },
   "husky": {
     "hooks": {
       "pre-commit": "pnpm run test"
     }
   },
-  "ava": {
-    "require": [
-      "esm"
-    ]
+  "type": "commonjs",
+  "bin": {
+    "sort-package-json": "./bin/sort-package-json.js"
+  },
+  "dependencies": {
+    "minimist": "^1.2.5"
   },
   "devDependencies": {
     "ava": "^3.8.1",

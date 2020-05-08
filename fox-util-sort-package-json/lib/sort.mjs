@@ -3,7 +3,7 @@ import assert from 'assert'
 import {
   sortObject,
   ensureUnecognizedKeys
-} from './util.js'
+} from './util.mjs'
 import {
   groupTopLevel,
   groupScriptsAndConfig,
@@ -14,7 +14,7 @@ import {
   groupEnginesOsCpu,
   groupVsCodeExtensionMeta,
   groupDependencyTypes
-} from './groups.sort.js'
+} from './groups.sort.mjs'
 
 /**
  * terminology
