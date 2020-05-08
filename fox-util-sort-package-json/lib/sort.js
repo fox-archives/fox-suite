@@ -23,7 +23,7 @@ import {
  * only actually sorts groups relative to each other
  *
  * a 'surface' is a platform where sorting occurs. aka
- * an objects we add members to. members can be root keys to
+ * an object we add members to. members can be root keys to
  * package.json or members of a nested object in package.json (ex. "eslint": {})
  * usually we create a surface, then add members, and lastly, sort the members
  * within that surface
@@ -70,8 +70,10 @@ export function sortPackageJson(input) {
       if (key.type === 'lone') {
         surface[key.name] = input[key.name]
       }
+      else if (key.type === 'array') {
+        surface[key.name] = key.sortMethod(Array.from(input[key.name]))
+      }
     }
-
     if(group.location === '') {
       output = {
         ...output,
@@ -81,6 +83,7 @@ export function sortPackageJson(input) {
   }
 
   const finalOutput = ensureUnecognizedKeys(input, output)
+
   return finalOutput
 }
 

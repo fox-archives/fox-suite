@@ -2,7 +2,10 @@
  * @summary specifics of each sorting group
  * @todo implement more specific sorting strategies
  * for nested objects and arrays
+ * @todo remove need for type 'lone'
  */
+
+import { sortAlphabetical } from "./util"
 
 
 /**
@@ -30,7 +33,6 @@ export const groupScriptsAndConfig = {
     { name: 'betterScripts', type: 'lone' },
     { name: 'config', type: 'lone' }
   ]
-
 }
 
 /**
@@ -76,7 +78,7 @@ export const groupNpmPackageMeta = {
     { name: 'bugs', type: 'lone'},
     { name: 'funding', type: 'lone' },
     { name: 'contributors', type: 'lone' },
-    { name: 'keywords', type: 'lone' },
+    { name: 'keywords', type: 'array', sortMethod: sortAlphabetical },
     { name: 'publishConfig', type: 'lone' },
     { name: 'preferGlobal', type: 'lone' },
   ]
