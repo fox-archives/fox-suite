@@ -73,7 +73,7 @@ export function sortPackageJson(input) {
         surface[key.name] = input[key.name]
       }
       else if (key.type === 'array') {
-        surface[key.name] = key.sortMethod(Array.from(input[key.name]))
+        surface[key.name] = key.sortMethod(input[key.name])
       }
     }
     if(group.location === '') {
