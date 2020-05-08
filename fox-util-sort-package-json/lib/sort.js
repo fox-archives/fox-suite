@@ -1,6 +1,7 @@
 import assert from 'assert'
 
 import {
+  sortObject,
   ensureUnecognizedKeys
 } from './util.js'
 import {
@@ -74,6 +75,9 @@ export function sortPackageJson(input) {
       }
       else if (key.type === 'array') {
         surface[key.name] = key.sortMethod(input[key.name])
+      }
+      else if (key.type === 'object') {
+        surface[key.name] = sortObject(input[key.name], key.sortMethod)
       }
     }
     if(group.location === '') {

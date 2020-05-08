@@ -1,10 +1,9 @@
+import { sortAlphabetical } from "./util"
+
 /**
  * @summary specifics of each sorting group
- * @todo implement more specific sorting strategies
- * for nested objects and arrays
  */
 
-import { sortAlphabetical } from "./util"
 
 
 /**
@@ -30,7 +29,7 @@ export const groupScriptsAndConfig = {
   keys: [
     { name: 'scripts' },
     { name: 'betterScripts' },
-    { name: 'config' }
+    { name: 'config', type: 'object', sortMethod: sortAlphabetical }
   ]
 }
 

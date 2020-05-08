@@ -1,0 +1,7 @@
+{
+  "config": {
+    "port": 3000,
+    "key": "value"
+  },
+  "name": "name"
+}

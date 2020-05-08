@@ -4,7 +4,7 @@ import test from 'ava'
 
 import { sortPackageJson } from '../lib/sort.js'
 
-const testPackageJsons = ['empty', 'basic', 'complex', 'badKey', 'nestedArray']
+const testPackageJsons = ['empty', 'basic', 'complex', 'badKey', 'nestedArray', 'nestedObject']
 for (const testPackageJson of testPackageJsons) {
   test(`ensure ${testPackageJson}.package.json is ordered properly`, async t => {
     const packageJsonLocation = path.join(__dirname, `./fixtures/${testPackageJson}.package.json`)
