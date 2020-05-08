@@ -18,6 +18,10 @@ for (const testPackageJson of testPackageJsons) {
 
     const output = sortPackageJson(packageJson)
 
+    // ensure all the same properties exist on object
     t.deepEqual(correctPackageJson, output)
+
+    // ensure properties have correct ordering
+    t.deepEqual(Object.entries(correctPackageJson), Object.entries(output))
   })
 }
