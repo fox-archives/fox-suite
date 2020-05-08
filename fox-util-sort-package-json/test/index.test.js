@@ -3,6 +3,7 @@ import fs from 'fs'
 import test from 'ava'
 
 import { sortPackageJson } from '../lib/sort.js'
+import { groupExternalPackageConfig } from '../lib/groups.sort'
 
 const testPackageJsons = ['empty', 'basic', 'complex', 'badKey', 'nestedArray', 'nestedObject']
 for (const testPackageJson of testPackageJsons) {
@@ -24,3 +25,10 @@ for (const testPackageJson of testPackageJsons) {
     t.deepEqual(Object.keys(correctPackageJson), Object.keys(output))
   })
 }
+
+test('ensure externalPackageConfig is sorted alphabetically', t => {
+  const externalPackages = groupExternalPackageConfig.keys
+  const sortedExternalPackages = groupExternalPackageConfig.keys.sort()
+
+  t.deepEqual(externalPackages, sortedExternalPackages)
+})

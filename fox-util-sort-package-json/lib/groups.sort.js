@@ -17,6 +17,7 @@ export const groupTopLevel = {
     { name: 'version'},
     { name: 'license' },
     { name: 'private' },
+    { name: 'workspaces' },
   ],
 }
 
@@ -34,33 +35,33 @@ export const groupScriptsAndConfig = {
 }
 
 /**
- * @description members for external packages
- * @todo manually make this alphabetical
- * @todo ensure all are external
+ * @description members for external packages. it _must_ be
+ * sorted alphabetically
  */
 export const groupExternalPackageConfig = {
   location: '',
   keys: [
-    { name: 'husky' },
-    { name: 'pre-commit' },
-    { name: 'commitlint' },
-    { name: 'lint-staged' },
-    { name: 'config' },
-    { name: 'nodemonConfig' },
-    { name: 'browserify' },
+    { name: 'autoprefixer' },
+    { name: 'ava' },
     { name: 'babel' },
+    { name: 'browserify' },
     { name: 'browserslist' },
-    { name: 'xo' },
-    { name: 'prettier' },
+    { name: 'commitlint' },
     { name: 'eslintConfig' },
     { name: 'eslintIgnore' },
+    { name: 'husky' },
+    { name: 'jest' },
+    { name: 'lint-staged' },
+    { name: 'mocha' },
+    { name: 'nodemonConfig' },
     { name: 'npmpkgjsonlint' },
+    { name: 'nyc' },
+    { name: 'postcss' },
+    { name: 'pre-commit' },
+    { name: 'prettier' },
     { name: 'remarkConfig' },
     { name: 'stylelint' },
-    { name: 'ava' },
-    { name: 'jest' },
-    { name: 'mocha' },
-    { name: 'nyc' },
+    { name: 'xo' },
   ]
 }
 
@@ -119,7 +120,6 @@ export const groupMiscFile = {
     { name: 'man' },
     { name: 'directories' },
     { name: 'files' },
-    { name: 'workspaces' },
     { name: 'binary' },
   ]
 }
