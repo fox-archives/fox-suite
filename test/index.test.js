@@ -4,7 +4,7 @@ import test from 'ava'
 
 import { sort } from '../lib/sort.js'
 
-const testPackageJsons = ['empty', 'basic', 'full']
+const testPackageJsons = ['empty', 'basic', 'full', 'complex']
 for (const testPackageJson of testPackageJsons) {
   test(`ensure ${testPackageJson} package.json is ordered properly`, async t => {
     const packageJsonLocation = path.join(__dirname, `./fixtures/${testPackageJson}.package.json`)
@@ -17,8 +17,6 @@ for (const testPackageJson of testPackageJsons) {
     const correctPackageJson = JSON.parse(correctPackageJsonRaw)
 
     const output = sort(packageJson)
-
-    console.log('aa', output)
 
     t.deepEqual(correctPackageJson, output)
   })
