@@ -1,0 +1,10 @@
+{
+  "name": "fox-util-sort-package-json",
+  "type": "module",
+  "scripts": {
+    "test": "jest"
+  },
+  "devDependencies": {
+    "jest": "^26.0.1"
+  }
+}
