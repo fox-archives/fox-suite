@@ -2,7 +2,7 @@ import path from 'path'
 import fs from 'fs'
 import test from 'ava'
 
-import { sort } from '../lib/sort.js'
+import { sortPackageJson } from '../lib/sort.js'
 
 const testPackageJsons = ['empty', 'basic', 'full', 'complex']
 for (const testPackageJson of testPackageJsons) {
@@ -16,7 +16,7 @@ for (const testPackageJson of testPackageJsons) {
     const packageJson = JSON.parse(packageJsonRaw)
     const correctPackageJson = JSON.parse(correctPackageJsonRaw)
 
-    const output = sort(packageJson)
+    const output = sortPackageJson(packageJson)
 
     t.deepEqual(correctPackageJson, output)
   })

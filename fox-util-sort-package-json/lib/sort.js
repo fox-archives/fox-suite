@@ -30,7 +30,7 @@ import {
  * @param {object} input - object to sort
  * @return {object} output - the sorted object
  */
-export function sort(input) {
+export function sortPackageJson(input) {
   const groupRoot = {
     groupTopLevel,
     groupScriptsAndConfig,
