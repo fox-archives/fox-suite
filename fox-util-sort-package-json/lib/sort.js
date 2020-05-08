@@ -61,13 +61,15 @@ export function sortPackageJson(input) {
     for (const key of group.keys) {
       // ensure key meets schema requirements
       assert(typeof key.name === 'string', "keys must have a 'name' property of type string")
-      assert(typeof key.type === 'string', `key with name '${key.name}' must have a 'type' property of type string`)
 
       // ensure the key actually exists in package.json. if not,
       // 'continue' (skip) to next element in loop
       if (group.location === '' && !input.hasOwnProperty(key.name)) continue
 
-      if (key.type === 'lone') {
+      // if key does not have 'type' property, it's either some
+      // primitive or something we do not wish to sort (ex. if it were
+      // an object or array))
+      if (!key.hasOwnProperty('type')) {
         surface[key.name] = input[key.name]
       }
       else if (key.type === 'array') {
