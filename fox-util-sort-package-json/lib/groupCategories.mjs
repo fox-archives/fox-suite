@@ -183,3 +183,15 @@ export const groupDependencyTypes = {
     { name: 'bundleDependencies', sortMethod: sortAlphabetical },
   ]
 }
+
+export const groupRootCategories = {
+    groupTopLevel,
+    groupScriptsAndConfig,
+    groupExternalPackageConfig,
+    groupNpmPackageMeta,
+    groupJsEntryPoints,
+    groupMiscFile,
+    groupEnginesOsCpu,
+    groupVsCodeExtensionMeta,
+    groupDependencyTypes
+  }

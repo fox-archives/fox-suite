@@ -7,7 +7,8 @@ import _ from 'lodash'
 import {
   isString,
   isObject,
-  isArray
+  isArray,
+  isFunction
 } from './is.mjs'
 
 /**
@@ -25,11 +26,11 @@ export function sortAlphabetical(arr) {
  * properly each time. it skips formatting if array is heterogenous
  */
 export function sortContributors(arr) {
-  if (arr.every(el => typeof el === 'object' && !Array.isArray(el))) {
+  if (arr.every(isObject)) {
     return _.sortBy(arr, 'name')
 
   }
-  else if (arr.every(el => typeof el === 'string')) {
+  else if (arr.every(isString)) {
     return sortAlphabetical(arr)
   }
   return arr
@@ -63,20 +64,20 @@ export function processGroup(input, group) {
 
     // ensure the key actually exists in package.json. if not,
     // 'continue' (skip) to next element in loop
-    if (group.location === '' && !input.hasOwnProperty(key.name)) continue
+    if (!input.hasOwnProperty(key.name)) continue
 
     // do the reassigning. different behavior dependent if the key
     // value is a 'array', or 'object', or anything else
     const keyName = key.name
     const keyValue = input[keyName]
     if (!key.hasOwnProperty('sortMethod')) {
-      surface[key.name] = input[key.name]
+      surface[keyName] = keyValue
     }
     else if (isArray(keyValue)) {
-      surface[key.name] = key.sortMethod(input[key.name])
+      surface[keyName] = key.sortMethod(keyValue)
     }
     else if (isObject(keyValue)) {
-      surface[key.name] = sortObject(input[key.name], key.sortMethod)
+      surface[keyName] = sortObject(keyValue, key.sortMethod)
     }
   }
   return surface
@@ -94,9 +95,9 @@ export function processGroup(input, group) {
  */
 export function ensureUnecognizedKeys(oldSurface, sortedSurface, sortingFunction) {
   // ensure parameters are expected
-  assert(typeof oldSurface === 'object' && !Array.isArray(oldSurface))
-  assert(typeof sortedSurface === 'object' && !Array.isArray(sortedSurface))
-  sortingFunction && assert(typeof sortingFunction === 'function')
+  assert(isObject(oldSurface))
+  assert(isObject(sortedSurface))
+  sortingFunction && assert(isFunction(sortingFunction))
 
   let surfaceTemp = {}
   for (const entryName in oldSurface) {

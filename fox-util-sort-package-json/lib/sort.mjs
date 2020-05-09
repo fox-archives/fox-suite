@@ -12,15 +12,7 @@ import {
   isArray
 } from './is.mjs'
 import {
-  groupTopLevel,
-  groupScriptsAndConfig,
-  groupExternalPackageConfig,
-  groupNpmPackageMeta,
-  groupJsEntryPoints,
-  groupMiscFile,
-  groupEnginesOsCpu,
-  groupVsCodeExtensionMeta,
-  groupDependencyTypes
+  groupRootCategories
 } from './groupCategories.mjs'
 
 /**
@@ -68,21 +60,9 @@ export async function sortPackageJsonFile(packageJsonFile) {
  * @return {object} the sorted object
  */
 export function sortPackageJson(input) {
-  const groupRoot = {
-    groupTopLevel,
-    groupScriptsAndConfig,
-    groupExternalPackageConfig,
-    groupNpmPackageMeta,
-    groupJsEntryPoints,
-    groupMiscFile,
-    groupEnginesOsCpu,
-    groupVsCodeExtensionMeta,
-    groupDependencyTypes
-  }
-
   let output = {}
-  for (const groupName in groupRoot) {
-    const group = groupRoot[groupName]
+  for (const groupName in groupRootCategories) {
+    const group = groupRootCategories[groupName]
 
     assert(isObject(group), "groups must be an object")
     assert(isString(group.location), "groups must have a 'location' property of type stirng")
