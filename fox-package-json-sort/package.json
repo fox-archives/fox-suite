@@ -1,8 +1,8 @@
 {
-  "name": "fox-util-sort-package-json",
+  "name": "fox-package-json-sort",
+  "version": "0.1.0",
   "license": "MIT",
-  "private": false,
-  "type": "module",
+  "type": "commonjs",
   "scripts": {
     "test": "ava"
   },
@@ -19,8 +19,9 @@
       "pre-commit": "pnpm run test"
     }
   },
+  "main": "./build",
   "bin": {
-    "sort-package-json": "./bin/sort-package-json.js"
+    "fox-package-json-sort": "./bin/package-json-sort.js"
   },
   "dependencies": {
     "fox-utils": "workspace:^0.1.0",

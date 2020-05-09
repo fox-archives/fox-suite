@@ -1,5 +1,5 @@
 importers:
-  fox-lint-package-json:
+  fox-package-json-lint:
     dependencies:
       npm-package-json-lint: 5.1.0
     devDependencies:
@@ -33,26 +33,13 @@ importers:
       minimist: ^1.2.5
       ts-node: ^8.10.1
       typescript: ^3.8.3
-  fox-sort-package-json:
+  fox-suite:
     dependencies:
-      lodash: 4.17.15
-      minimist: 1.2.5
-    devDependencies:
-      '@types/lodash': 4.14.150
-      '@types/node': 13.13.5
-      ava: 3.8.2
-      husky: 4.2.5
-      ts-node: 8.10.1_typescript@3.8.3
-      typescript: 3.8.3
+      fox-package-json-lint: 'link:../fox-package-json-lint'
+      fox-package-json-sort: 'link:../fox-package-json-sort'
     specifiers:
-      '@types/lodash': ^4.14.150
-      '@types/node': ^13.13.5
-      ava: ^3.8.1
-      husky: ^4.2.5
-      lodash: ^4.17.15
-      minimist: ^1.2.5
-      ts-node: ^8.10.1
-      typescript: ^3.8.3
+      fox-package-json-lint: 'workspace:^0.1.0'
+      fox-package-json-sort: 'workspace:^0.1.0'
   fox-utils:
     dependencies:
       read-pkg-up: 7.0.1
@@ -63,6 +50,20 @@ importers:
     specifiers:
       '@types/node': ^13.13.5
       read-pkg-up: ^7.0.1
+      ts-node: ^8.10.1
+      typescript: ^3.8.3
+  test/fixtures/sample-project:
+    dependencies:
+      fox-package-json-lint: 'link:../../../fox-package-json-lint'
+      fox-package-json-sort: 'link:../../../fox-package-json-sort'
+    devDependencies:
+      '@types/node': 13.13.5
+      ts-node: 8.10.1_typescript@3.8.3
+      typescript: 3.8.3
+    specifiers:
+      '@types/node': ^13.13.5
+      fox-package-json-lint: 'workspace:^0.1.0'
+      fox-package-json-sort: 'workspace:^0.1.0'
       ts-node: ^8.10.1
       typescript: ^3.8.3
 lockfileVersion: 5.1

@@ -1,17 +1,21 @@
 {
-  "name": "fox-lint-package-json",
-  "version": "1.0.0",
+  "name": "fox-package-json-lint",
+  "version": "0.1.0",
   "description": "",
+  "type": "commonjs",
   "main": "index.js",
   "scripts": {
     "start": "ts-node src"
+  },
+  "bin": {
+    "fox-package-json-lint": "./bin/package-json-lint.js"
   },
   "engines": {
     "node": ">=14.2.0"
   },
   "keywords": [],
   "author": "Edwin Kofler",
-  "license": "ISC",
+  "license": "MIT",
   "dependencies": {
     "npm-package-json-lint": "^5.1.0"
   },

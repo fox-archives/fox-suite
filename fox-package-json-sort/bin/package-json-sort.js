@@ -1,8 +1,10 @@
 #!/usr/bin/env node
 
-import minimist from 'minimist'
+// import minimist from 'minimist'
+const minimist = require('minimist')
 
-import { sortPackageJsonFileAuto } from '../bin'
+// import { sortPackageJsonFileAuto } from '../'
+const { sortPackageJsonFileAuto } = require('../build')
 
 const argv = minimist(process.argv.slice(2))
 if (argv.help || argv.h) {

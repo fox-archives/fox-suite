@@ -1,0 +1,16 @@
+{
+  "name": "fox-suite",
+  "version": "0.1.0",
+  "description": "",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "MIT",
+  "dependencies": {
+    "fox-package-json-lint": "workspace:^0.1.0",
+    "fox-package-json-sort": "workspace:^0.1.0"
+  }
+}
