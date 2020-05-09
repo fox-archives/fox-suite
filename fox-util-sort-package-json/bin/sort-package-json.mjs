@@ -3,9 +3,7 @@
 import path from 'path'
 import fs from 'fs'
 import { fileURLToPath } from 'url'
-
 import minimist from 'minimist'
-
 
 import { sortPackageJsonFile } from '../lib/sort.mjs'
 
@@ -14,7 +12,7 @@ if (argv.help || argv.h) {
   console.log(`fox-util-sort-package-json
 
 Usage:
-  sort-package-json [...packageJsonLocations]
+  sort-package-json
 
 Description:
   Sorts the package.json of the current project
@@ -25,8 +23,7 @@ Options:
 
 Examples:
   sort-package-json --help
-  sort-package-json
-  sort-package-json customFile.package.json other.json`)
+  sort-package-json`)
 
   process.exitCode = 0
 }
