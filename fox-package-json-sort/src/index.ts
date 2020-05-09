@@ -1,9 +1,10 @@
 import fs from 'fs'
 import assert from 'assert'
+// @ts-ignore
+import * as foxUtils from 'fox-utils'
 
 import {
   ensureUnecognizedKeys,
-  findParentPackageJson,
   processGroup
 } from './util'
 import {
@@ -34,8 +35,10 @@ import {
   * @description finds the closes parent package.json file and sorts it
   */
 export async function sortPackageJsonFileAuto() {
-  const packageJsonFile = await findParentPackageJson()
-  await sortPackageJsonFile(packageJsonFile)
+  const { projectPackageJsonPath } = await foxUtils.getParentProjectData()
+
+  // const packageJsonFile = await findParentPackageJson()
+  await sortPackageJsonFile(projectPackageJsonPath)
 }
 
 

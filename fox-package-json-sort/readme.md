@@ -4,6 +4,8 @@
 
 Automatically sorts package.json according to predefined schema.
 
+// TODO: normalize-package-data
+
 ## Usage
 
 ### 1. Passing an object to sort

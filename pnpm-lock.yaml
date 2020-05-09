@@ -11,6 +11,28 @@ importers:
       npm-package-json-lint: ^5.1.0
       ts-node: ^8.10.1
       typescript: ^3.8.3
+  fox-package-json-sort:
+    dependencies:
+      fox-utils: 'link:../fox-utils'
+      lodash: 4.17.15
+      minimist: 1.2.5
+    devDependencies:
+      '@types/lodash': 4.14.150
+      '@types/node': 13.13.5
+      ava: 3.8.2
+      husky: 4.2.5
+      ts-node: 8.10.1_typescript@3.8.3
+      typescript: 3.8.3
+    specifiers:
+      '@types/lodash': ^4.14.150
+      '@types/node': ^13.13.5
+      ava: ^3.8.1
+      fox-utils: 'workspace:^0.1.0'
+      husky: ^4.2.5
+      lodash: ^4.17.15
+      minimist: ^1.2.5
+      ts-node: ^8.10.1
+      typescript: ^3.8.3
   fox-sort-package-json:
     dependencies:
       lodash: 4.17.15
@@ -29,6 +51,18 @@ importers:
       husky: ^4.2.5
       lodash: ^4.17.15
       minimist: ^1.2.5
+      ts-node: ^8.10.1
+      typescript: ^3.8.3
+  fox-utils:
+    dependencies:
+      read-pkg-up: 7.0.1
+    devDependencies:
+      '@types/node': 13.13.5
+      ts-node: 8.10.1_typescript@3.8.3
+      typescript: 3.8.3
+    specifiers:
+      '@types/node': ^13.13.5
+      read-pkg-up: ^7.0.1
       ts-node: ^8.10.1
       typescript: ^3.8.3
 lockfileVersion: 5.1

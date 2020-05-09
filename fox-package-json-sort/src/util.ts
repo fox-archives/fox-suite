@@ -124,38 +124,3 @@ export function ensureUnecognizedKeys(oldSurface: any, sortedSurface: any, sorti
     ...sortedSurface
   }
 }
-
-
-/**
- * @description given the location of this binary, this finds the package.json
- * folder of the parent project
- * @async returns function 'walkup' which is async
- * @return {string} absolute path of parent packageJson file
- * @private
- * @todo make more robust; this probably won't work for pnpm and yarn 2
- */
-export function findParentPackageJson() {
-  function parentDirOf(fileOrDir: string): string {
-    return path.join(fileOrDir, '..')
-  }
-  async function packageJsonExists(dir: string): Promise<boolean> {
-    const dirents = await fs.promises.readdir(dir, { withFileTypes: true })
-    return dirents.some(dirent => dirent.isFile() && dirent.name === 'package.json')
-  }
-
-  // currentLocation could be a file or dir
-  async function walkUp(currentLocation: string): Promise<string> {
-    if (await packageJsonExists(currentLocation)) {
-      return path.join(currentLocation, 'package.json')
-    }
-    else {
-      const newLocation = parentDirOf(currentLocation)
-      return walkUp(newLocation)
-    }
-  }
-
-  // const currentFile = fileURLToPath(import.meta.url)
-  const currentFile = __filename;
-  const currentDir = parentDirOf(currentFile)
-  return walkUp(currentDir)
-}
