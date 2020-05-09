@@ -1,4 +1,4 @@
-# fox-util-sort-package-json
+# fox-package-json-sort
 
 ## Description
 
