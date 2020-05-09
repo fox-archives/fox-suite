@@ -2,10 +2,15 @@ import fs from 'fs'
 import assert from 'assert'
 
 import {
-  sortObject,
   ensureUnecognizedKeys,
-  findParentPackageJson
+  findParentPackageJson,
+  processGroup
 } from './util.mjs'
+import {
+  isString,
+  isObject,
+  isArray
+} from './is.mjs'
 import {
   groupTopLevel,
   groupScriptsAndConfig,
@@ -16,7 +21,7 @@ import {
   groupEnginesOsCpu,
   groupVsCodeExtensionMeta,
   groupDependencyTypes
-} from './groups.sort.mjs'
+} from './groupCategories.mjs'
 
 /**
  * terminology
@@ -61,7 +66,6 @@ export async function sortPackageJsonFile(packageJsonFile) {
  * @description sorts an object that represents a package.json file
  * @param {object} input - object to sort
  * @return {object} the sorted object
- * @todo add guards so that if package.json member type is not as expected, it skips sortMethod formatting
  */
 export function sortPackageJson(input) {
   const groupRoot = {
@@ -76,52 +80,23 @@ export function sortPackageJson(input) {
     groupDependencyTypes
   }
 
-  const isString = val => typeof val === 'string'
-  const isArray = val => Array.isArray(val)
-  const isObject = val => typeof val === 'object' && !Array.isArray(val)
   let output = {}
   for (const groupName in groupRoot) {
     const group = groupRoot[groupName]
 
-    // ensure group meets schema requirements
     assert(isObject(group), "groups must be an object")
     assert(isString(group.location), "groups must have a 'location' property of type stirng")
     assert(isArray(group.keys), "groups must have a 'keys' property that's an array")
 
-    const surface = {}
-    for (const key of group.keys) {
-      // ensure key meets schema requirements
-      assert(isString(key.name), "keys must have a 'name' property of type string")
+    const surface = processGroup(input, group)
 
-      // ensure the key actually exists in package.json. if not,
-      // 'continue' (skip) to next element in loop
-      if (group.location === '' && !input.hasOwnProperty(key.name)) continue
-
-      // do the reassigning. different behavior dependent if the key
-      // value is a 'array', or 'object', or anything else
-      const keyName = key.name
-      const keyValue = input[keyName]
-      if (!key.hasOwnProperty('sortMethod')) {
-        surface[key.name] = input[key.name]
-      }
-      else if (isArray(keyValue)) {
-        surface[key.name] = key.sortMethod(input[key.name])
-      }
-      else if (isObject(keyValue)) {
-        surface[key.name] = sortObject(input[key.name], key.sortMethod)
-      }
-    }
-    if(group.location === '') {
-      output = {
-        ...output,
-        ...surface
-      }
+    output = {
+      ...output,
+      ...surface
     }
   }
 
-  const finalOutput = ensureUnecognizedKeys(input, output)
-
-  return finalOutput
+  return ensureUnecognizedKeys(input, output)
 }
 
 process.on('uncaughtException', (err) => console.error(err))

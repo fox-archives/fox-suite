@@ -3,7 +3,7 @@ import fs from 'fs'
 import test from 'ava'
 
 import { sortPackageJson } from '../lib/sort.mjs'
-import { groupExternalPackageConfig } from '../lib/groups.sort.mjs'
+import { groupExternalPackageConfig } from '../lib/groupCategories.mjs'
 
 const testPackageJsons = fs.readdirSync(path.join(__dirname, './fixtures'))
   .filter(fileName => fileName.includes('package.json') && !fileName.includes('fmt'))

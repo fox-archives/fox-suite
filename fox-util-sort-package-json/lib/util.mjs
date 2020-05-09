@@ -2,8 +2,13 @@ import assert from 'assert'
 import path from 'path'
 import fs from 'fs'
 import { fileURLToPath } from 'url'
-
 import _ from 'lodash'
+
+import {
+  isString,
+  isObject,
+  isArray
+} from './is.mjs'
 
 /**
  * @description alphabetically sorts array
@@ -47,6 +52,35 @@ export function sortObject(obj, sortFn) {
   return sortedObject
 }
 
+/**
+ * @description processes each group
+ */
+export function processGroup(input, group) {
+  const surface = {}
+  for (const key of group.keys) {
+    // ensure key meets schema requirements
+    assert(isString(key.name), "keys must have a 'name' property of type string")
+
+    // ensure the key actually exists in package.json. if not,
+    // 'continue' (skip) to next element in loop
+    if (group.location === '' && !input.hasOwnProperty(key.name)) continue
+
+    // do the reassigning. different behavior dependent if the key
+    // value is a 'array', or 'object', or anything else
+    const keyName = key.name
+    const keyValue = input[keyName]
+    if (!key.hasOwnProperty('sortMethod')) {
+      surface[key.name] = input[key.name]
+    }
+    else if (isArray(keyValue)) {
+      surface[key.name] = key.sortMethod(input[key.name])
+    }
+    else if (isObject(keyValue)) {
+      surface[key.name] = sortObject(input[key.name], key.sortMethod)
+    }
+  }
+  return surface
+}
 
 /**
  *  @description when converting from oldSurface to sortedSurface,
