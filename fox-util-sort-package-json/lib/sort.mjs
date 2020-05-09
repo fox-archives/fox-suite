@@ -1,3 +1,4 @@
+import fs from 'fs'
 import assert from 'assert'
 
 import {
@@ -30,6 +31,19 @@ import {
  * within that surface
  */
 
+/**
+ * @description sorts a particular package.json file
+ * @param {string} packageJsonFile - package.json file to sort. must be an absolute path
+ */
+export async function sortPackageJsonFile(packageJsonFile) {
+  if(!fs.existsSync(packageJsonFile)) {
+    throw new Error(`packageJsonFile '${packageJsonFile}' does not exist`)
+  }
+
+  const packageJson = JSON.parse(await fs.promises.readFile(packageJsonFile))
+  const sortedPackageJson = sortPackageJson(packageJson)
+  await fs.promises.writeFile(packageJsonFile, JSON.stringify(sortedPackageJson, null, 2))
+}
 
 /**
  * @description sorts an object that represents a package.json file
