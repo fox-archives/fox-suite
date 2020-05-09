@@ -1,9 +1,4 @@
-import { sortAlphabetical, sortContributors } from "./util.mjs"
-
-/**
- * @summary specifics of each sorting group
- */
-
+import { sortAlphabetical, sortContributors } from './util'
 
 /**
  * @description members at the top level

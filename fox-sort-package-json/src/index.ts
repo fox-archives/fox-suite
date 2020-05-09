@@ -5,15 +5,15 @@ import {
   ensureUnecognizedKeys,
   findParentPackageJson,
   processGroup
-} from './util.mjs'
+} from './util'
 import {
   isString,
   isObject,
   isArray
-} from './is.mjs'
+} from './is'
 import {
   groupRootCategories
-} from './groupCategories.mjs'
+} from './groupCategories'
 
 /**
  * terminology
@@ -43,12 +43,12 @@ export async function sortPackageJsonFileAuto() {
  * @description sorts a particular package.json file
  * @param {string} packageJsonFile - package.json file to sort. must be an absolute path
  */
-export async function sortPackageJsonFile(packageJsonFile) {
+export async function sortPackageJsonFile(packageJsonFile: any) {
   if(!fs.existsSync(packageJsonFile)) {
     throw new Error(`packageJsonFile '${packageJsonFile}' does not exist`)
   }
 
-  const packageJson = JSON.parse(await fs.promises.readFile(packageJsonFile))
+  const packageJson = JSON.parse(await fs.promises.readFile(packageJsonFile, { encoding: 'utf8' }))
   const sortedPackageJson = sortPackageJson(packageJson)
   await fs.promises.writeFile(packageJsonFile, JSON.stringify(sortedPackageJson, null, 2))
 }
@@ -59,9 +59,10 @@ export async function sortPackageJsonFile(packageJsonFile) {
  * @param {object} input - object to sort
  * @return {object} the sorted object
  */
-export function sortPackageJson(input) {
+export function sortPackageJson(input: any) {
   let output = {}
   for (const groupName in groupRootCategories) {
+    // @ts-ignore
     const group = groupRootCategories[groupName]
 
     assert(isObject(group), "groups must be an object")

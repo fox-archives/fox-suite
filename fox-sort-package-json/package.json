@@ -1,13 +1,16 @@
 {
   "name": "fox-util-sort-package-json",
   "private": false,
-  "type": "commonjs",
+  "type": "module",
   "scripts": {
     "test": "ava"
   },
   "ava": {
+    "extensions": [
+      "ts"
+    ],
     "require": [
-      "esm"
+      "ts-node/register"
     ]
   },
   "husky": {
@@ -23,8 +26,11 @@
     "minimist": "^1.2.5"
   },
   "devDependencies": {
+    "@types/lodash": "^4.14.150",
+    "@types/node": "^13.13.5",
     "ava": "^3.8.1",
-    "esm": "^3.2.25",
-    "husky": "^4.2.5"
+    "husky": "^4.2.5",
+    "ts-node": "^8.10.1",
+    "typescript": "^3.8.3"
   }
 }

@@ -2,8 +2,8 @@ import path from 'path'
 import fs from 'fs'
 import test from 'ava'
 
-import { sortPackageJson } from '../lib/sort.mjs'
-import { groupExternalPackageConfig } from '../lib/groupCategories.mjs'
+import { sortPackageJson } from '../src'
+import { groupExternalPackageConfig } from '../src/groupCategories'
 
 const testPackageJsons = fs.readdirSync(path.join(__dirname, './fixtures'))
   .filter(fileName => fileName.includes('package.json') && !fileName.includes('fmt'))
@@ -14,8 +14,8 @@ for (const testPackageJson of testPackageJsons) {
     const packageJsonLocation = path.join(__dirname, `./fixtures/${testPackageJson}.package.json`)
     const correctPackageJsonLocation = path.join(__dirname, `./fixtures/${testPackageJson}.fmt.package.json`)
 
-    const packageJsonRaw = await fs.promises.readFile(packageJsonLocation)
-    const correctPackageJsonRaw = await fs.promises.readFile(correctPackageJsonLocation)
+    const packageJsonRaw = await fs.promises.readFile(packageJsonLocation, { encoding: 'utf8' })
+    const correctPackageJsonRaw = await fs.promises.readFile(correctPackageJsonLocation, { encoding: 'utf8' })
 
     const packageJson = JSON.parse(packageJsonRaw)
     const correctPackageJson = JSON.parse(correctPackageJsonRaw)

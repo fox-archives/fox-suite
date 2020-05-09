@@ -1,7 +1,7 @@
 import assert from 'assert'
 import path from 'path'
 import fs from 'fs'
-import { fileURLToPath } from 'url'
+// import { fileURLToPath } from 'url'
 import _ from 'lodash'
 
 import {
@@ -9,14 +9,14 @@ import {
   isObject,
   isArray,
   isFunction
-} from './is.mjs'
+} from './is'
 
 /**
  * @description alphabetically sorts array
  * @param {array} arr - array to be sorted alphabetically
  * @return {array} array with sorted keys
  */
-export function sortAlphabetical(arr) {
+export function sortAlphabetical(arr: Array<string>) {
   return arr.sort(new Intl.Collator('en').compare)
 }
 
@@ -25,13 +25,18 @@ export function sortAlphabetical(arr) {
  * can be an array of strings or objects, this ensures that we treat it
  * properly each time. it skips formatting if array is heterogenous
  */
-export function sortContributors(arr) {
+interface IContributors {
+  name?: string,
+  email?: string,
+  url?: string
+}
+export function sortContributors(arr: Array<string | IContributors>) {
   if (arr.every(isObject)) {
     return _.sortBy(arr, 'name')
 
   }
   else if (arr.every(isString)) {
-    return sortAlphabetical(arr)
+    return sortAlphabetical(arr as Array<string>)
   }
   return arr
 }
@@ -43,11 +48,12 @@ export function sortContributors(arr) {
  * @param {function} sortFn - function that does sorting. it returns a sorted array
  * @return {object} object with sorted keys
  */
-export function sortObject(obj, sortFn) {
+export function sortObject(obj: any, sortFn: Function) {
   const sortedKeys = sortFn(Object.keys(obj))
 
   const sortedObject = {}
   for (const sortedKey of sortedKeys) {
+    // @ts-ignore
     sortedObject[sortedKey] = obj[sortedKey]
   }
   return sortedObject
@@ -56,7 +62,7 @@ export function sortObject(obj, sortFn) {
 /**
  * @description processes each group
  */
-export function processGroup(input, group) {
+export function processGroup(input: any, group: any) {
   const surface = {}
   for (const key of group.keys) {
     // ensure key meets schema requirements
@@ -71,12 +77,15 @@ export function processGroup(input, group) {
     const keyName = key.name
     const keyValue = input[keyName]
     if (!key.hasOwnProperty('sortMethod')) {
+      // @ts-ignore
       surface[keyName] = keyValue
     }
     else if (isArray(keyValue)) {
+      // @ts-ignore
       surface[keyName] = key.sortMethod(keyValue)
     }
     else if (isObject(keyValue)) {
+      // @ts-ignore
       surface[keyName] = sortObject(keyValue, key.sortMethod)
     }
   }
@@ -93,7 +102,7 @@ export function processGroup(input, group) {
  *  @param {function} [sortingFunction] - function to sort all unrecognized keys by. defualts to alphabetical
  *  @return {object} object with all keys intact
  */
-export function ensureUnecognizedKeys(oldSurface, sortedSurface, sortingFunction) {
+export function ensureUnecognizedKeys(oldSurface: any, sortedSurface: any, sortingFunction?: Function) {
   // ensure parameters are expected
   assert(isObject(oldSurface))
   assert(isObject(sortedSurface))
@@ -103,6 +112,7 @@ export function ensureUnecognizedKeys(oldSurface, sortedSurface, sortingFunction
   for (const entryName in oldSurface) {
     // add all unknown elements to 'finalOutput' first
     if(oldSurface.hasOwnProperty(entryName) && !sortedSurface.hasOwnProperty(entryName)) {
+      // @ts-ignore
       surfaceTemp[entryName] = oldSurface[entryName]
     }
   }
@@ -125,16 +135,16 @@ export function ensureUnecognizedKeys(oldSurface, sortedSurface, sortingFunction
  * @todo make more robust; this probably won't work for pnpm and yarn 2
  */
 export function findParentPackageJson() {
-  function parentDirOf(fileOrDir) {
+  function parentDirOf(fileOrDir: string): string {
     return path.join(fileOrDir, '..')
   }
-  async function packageJsonExists(dir) {
+  async function packageJsonExists(dir: string): Promise<boolean> {
     const dirents = await fs.promises.readdir(dir, { withFileTypes: true })
     return dirents.some(dirent => dirent.isFile() && dirent.name === 'package.json')
   }
 
   // currentLocation could be a file or dir
-  async function walkUp(currentLocation) {
+  async function walkUp(currentLocation: string): Promise<string> {
     if (await packageJsonExists(currentLocation)) {
       return path.join(currentLocation, 'package.json')
     }
@@ -144,7 +154,8 @@ export function findParentPackageJson() {
     }
   }
 
-  const currentFile = fileURLToPath(import.meta.url)
+  // const currentFile = fileURLToPath(import.meta.url)
+  const currentFile = __filename;
   const currentDir = parentDirOf(currentFile)
   return walkUp(currentDir)
 }

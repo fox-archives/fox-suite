@@ -2,7 +2,7 @@
 
 import minimist from 'minimist'
 
-import { sortPackageJsonFileAuto } from '../lib/sort.mjs'
+import { sortPackageJsonFileAuto } from '../bin'
 
 const argv = minimist(process.argv.slice(2))
 if (argv.help || argv.h) {
