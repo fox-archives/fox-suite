@@ -3,7 +3,8 @@ import assert from 'assert'
 
 import {
   sortObject,
-  ensureUnecognizedKeys
+  ensureUnecognizedKeys,
+  findParentPackageJson
 } from './util.mjs'
 import {
   groupTopLevel,
@@ -31,6 +32,16 @@ import {
  * within that surface
  */
 
+
+ /**
+  * @description finds the closes parent package.json file and sorts it
+  */
+export async function sortPackageJsonFileAuto() {
+  const packageJsonFile = await findParentPackageJson()
+  await sortPackageJsonFile(packageJsonFile)
+}
+
+
 /**
  * @description sorts a particular package.json file
  * @param {string} packageJsonFile - package.json file to sort. must be an absolute path
@@ -44,6 +55,7 @@ export async function sortPackageJsonFile(packageJsonFile) {
   const sortedPackageJson = sortPackageJson(packageJson)
   await fs.promises.writeFile(packageJsonFile, JSON.stringify(sortedPackageJson, null, 2))
 }
+
 
 /**
  * @description sorts an object that represents a package.json file

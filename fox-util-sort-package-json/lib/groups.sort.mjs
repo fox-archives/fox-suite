@@ -5,7 +5,6 @@ import { sortAlphabetical } from "./util.mjs"
  */
 
 
-
 /**
  * @description members at the top level
  */
@@ -22,6 +21,7 @@ export const groupTopLevel = {
   ],
 }
 
+
 /**
  * @description scripts
  * @todo scripts sort
@@ -34,6 +34,7 @@ export const groupScriptsAndConfig = {
     { name: 'config', type: 'object', sortMethod: sortAlphabetical }
   ]
 }
+
 
 /**
  * @description members for external packages. it _must_ be
@@ -66,6 +67,7 @@ export const groupExternalPackageConfig = {
   ]
 }
 
+
 /**
  * @description published package metadata
  */
@@ -83,6 +85,7 @@ export const groupNpmPackageMeta = {
     { name: 'preferGlobal' },
   ]
 }
+
 
 /**
  * @description members that concern how to access the bundle / type
@@ -106,6 +109,7 @@ export const groupJsEntryPoints = {
   ]
 }
 
+
 /**
  * @description miscellaneous files / folders
  */
@@ -124,6 +128,7 @@ export const groupMiscFile = {
   ]
 }
 
+
 /**
  * @description runtime platform related information
  */
@@ -136,6 +141,7 @@ export const groupEnginesOsCpu = {
     { name: 'cpu' },
   ]
 }
+
 
 /**
  * @description publishing information for
@@ -159,6 +165,7 @@ export const groupVsCodeExtensionMeta = {
     { name: 'publisher' },
   ]
 }
+
 
 /**
  * @description literally all dependencies
