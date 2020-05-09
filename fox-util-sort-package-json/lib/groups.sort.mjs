@@ -17,7 +17,7 @@ export const groupTopLevel = {
     { name: 'license' },
     { name: 'private' },
     { name: 'type' },
-    { name: 'workspaces', type: 'array', sortMethod: sortAlphabetical },
+    { name: 'workspaces', sortMethod: sortAlphabetical },
   ],
 }
 
@@ -30,7 +30,7 @@ export const groupScriptsAndConfig = {
   keys: [
     { name: 'scripts' },
     { name: 'betterScripts' },
-    { name: 'config', type: 'object', sortMethod: sortAlphabetical }
+    { name: 'config', sortMethod: sortAlphabetical }
   ]
 }
 
@@ -78,8 +78,8 @@ export const groupNpmPackageMeta = {
     { name: 'repository' },
     { name: 'bugs'},
     { name: 'funding' },
-    { name: 'contributors', type: 'array', sortMethod: sortContributors },
-    { name: 'keywords', type: 'array', sortMethod: sortAlphabetical },
+    { name: 'contributors', sortMethod: sortContributors },
+    { name: 'keywords', sortMethod: sortAlphabetical },
     { name: 'publishConfig' },
     { name: 'preferGlobal' },
   ]
@@ -173,13 +173,13 @@ export const groupDependencyTypes = {
   location: '',
   keys: [
     { name: 'flat' },
-    { name: 'resolutions', type: 'object', sortMethod: sortAlphabetical },
-    { name: 'dependencies', type: 'object', sortMethod: sortAlphabetical },
-    { name: 'devDependencies', type: 'object', sortMethod: sortAlphabetical },
-    { name: 'peerDependencies', type: 'object', sortMethod: sortAlphabetical },
-    { name: 'peerDependenciesMeta', type: 'object', sortMethod: sortAlphabetical },
-    { name: 'optionalDependencies', type: 'object', sortMethod: sortAlphabetical },
-    { name: 'bundledDependencies', type: 'object', sortMethod: sortAlphabetical },
-    { name: 'bundleDependencies', type: 'object', sortMethod: sortAlphabetical },
+    { name: 'resolutions', sortMethod: sortAlphabetical },
+    { name: 'dependencies', sortMethod: sortAlphabetical },
+    { name: 'devDependencies', sortMethod: sortAlphabetical },
+    { name: 'peerDependencies', sortMethod: sortAlphabetical },
+    { name: 'peerDependenciesMeta', sortMethod: sortAlphabetical },
+    { name: 'optionalDependencies', sortMethod: sortAlphabetical },
+    { name: 'bundledDependencies', sortMethod: sortAlphabetical },
+    { name: 'bundleDependencies', sortMethod: sortAlphabetical },
   ]
 }

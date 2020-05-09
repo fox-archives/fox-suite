@@ -15,7 +15,7 @@
   "engines": ">= 14",
   "publisher": "name",
   "flat": true,
-  "resolutions": [],
-  "devDependencies": [],
-  "optionalDependencies": []
+  "resolutions": {},
+  "devDependencies": {},
+  "optionalDependencies": {}
 }

@@ -76,34 +76,38 @@ export function sortPackageJson(input) {
     groupDependencyTypes
   }
 
+  const isString = val => typeof val === 'string'
+  const isArray = val => Array.isArray(val)
+  const isObject = val => typeof val === 'object' && !Array.isArray(val)
   let output = {}
   for (const groupName in groupRoot) {
     const group = groupRoot[groupName]
 
     // ensure group meets schema requirements
-    assert(typeof group === 'object' && !(group instanceof Array), "groups must be an object")
-    assert(typeof group.location === 'string', "groups must have a 'location' property of type stirng")
-    assert(Array.isArray(group.keys), "groups must have a 'keys' property that's an array")
+    assert(isObject(group), "groups must be an object")
+    assert(isString(group.location), "groups must have a 'location' property of type stirng")
+    assert(isArray(group.keys), "groups must have a 'keys' property that's an array")
 
     const surface = {}
     for (const key of group.keys) {
       // ensure key meets schema requirements
-      assert(typeof key.name === 'string', "keys must have a 'name' property of type string")
+      assert(isString(key.name), "keys must have a 'name' property of type string")
 
       // ensure the key actually exists in package.json. if not,
       // 'continue' (skip) to next element in loop
       if (group.location === '' && !input.hasOwnProperty(key.name)) continue
 
-      // if key does not have 'type' property, it's either some
-      // primitive or something we do not wish to sort (ex. if it were
-      // an object or array))
-      if (!key.hasOwnProperty('type')) {
+      // do the reassigning. different behavior dependent if the key
+      // value is a 'array', or 'object', or anything else
+      const keyName = key.name
+      const keyValue = input[keyName]
+      if (!key.hasOwnProperty('sortMethod')) {
         surface[key.name] = input[key.name]
       }
-      else if (key.type === 'array') {
+      else if (isArray(keyValue)) {
         surface[key.name] = key.sortMethod(input[key.name])
       }
-      else if (key.type === 'object') {
+      else if (isObject(keyValue)) {
         surface[key.name] = sortObject(input[key.name], key.sortMethod)
       }
     }
