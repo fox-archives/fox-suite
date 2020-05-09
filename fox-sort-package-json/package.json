@@ -1,5 +1,6 @@
 {
   "name": "fox-util-sort-package-json",
+  "license": "MIT",
   "private": false,
   "type": "module",
   "scripts": {

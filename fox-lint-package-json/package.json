@@ -4,8 +4,7 @@
   "description": "",
   "main": "index.js",
   "scripts": {
-    "start": "ts-node src",
-    "postinstall": "patch-package"
+    "start": "ts-node src"
   },
   "engines": {
     "node": ">=14.2.0"
@@ -14,8 +13,7 @@
   "author": "Edwin Kofler",
   "license": "ISC",
   "dependencies": {
-    "npm-package-json-lint": "^5.1.0",
-    "patch-package": "^6.2.2"
+    "npm-package-json-lint": "^5.1.0"
   },
   "devDependencies": {
     "@types/node": "^13.13.5",
