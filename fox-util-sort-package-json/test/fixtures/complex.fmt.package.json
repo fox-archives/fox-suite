@@ -6,6 +6,10 @@
   "husky": {},
   "xo": {},
   "author": "name",
+  "contributors": [
+    "delta <delta@example.com>",
+    "echo <echo@example.com>"
+  ],
   "keywords": [],
   "browser": "file",
   "engines": ">= 14",

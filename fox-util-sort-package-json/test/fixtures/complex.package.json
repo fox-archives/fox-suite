@@ -13,5 +13,9 @@
   "private": false,
   "browser": "file",
   "husky": {},
-  "license": "license"
+  "license": "license",
+  "contributors": [
+    "echo <echo@example.com>",
+    "delta <delta@example.com>"
+  ]
 }

@@ -61,6 +61,7 @@ export async function sortPackageJsonFile(packageJsonFile) {
  * @description sorts an object that represents a package.json file
  * @param {object} input - object to sort
  * @return {object} the sorted object
+ * @todo add guards so that if package.json member type is not as expected, it skips sortMethod formatting
  */
 export function sortPackageJson(input) {
   const groupRoot = {

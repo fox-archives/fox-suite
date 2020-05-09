@@ -3,6 +3,8 @@ import path from 'path'
 import fs from 'fs'
 import { fileURLToPath } from 'url'
 
+import _ from 'lodash'
+
 /**
  * @description alphabetically sorts array
  * @param {array} arr - array to be sorted alphabetically
@@ -12,6 +14,21 @@ export function sortAlphabetical(arr) {
   return arr.sort(new Intl.Collator('en').compare)
 }
 
+/**
+ * @description special function to sortContributors. since contributors
+ * can be an array of strings or objects, this ensures that we treat it
+ * properly each time. it skips formatting if array is heterogenous
+ */
+export function sortContributors(arr) {
+  if (arr.every(el => typeof el === 'object' && !Array.isArray(el))) {
+    return _.sortBy(arr, 'name')
+
+  }
+  else if (arr.every(el => typeof el === 'string')) {
+    return sortAlphabetical(arr)
+  }
+  return arr
+}
 
 /**
  * @description meta sort function that converts object

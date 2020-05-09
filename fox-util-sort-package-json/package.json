@@ -19,6 +19,7 @@
     "sort-package-json": "./bin/sort-package-json.js"
   },
   "dependencies": {
+    "lodash": "^4.17.15",
     "minimist": "^1.2.5"
   },
   "devDependencies": {

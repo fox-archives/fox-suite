@@ -5,7 +5,10 @@ import test from 'ava'
 import { sortPackageJson } from '../lib/sort.mjs'
 import { groupExternalPackageConfig } from '../lib/groups.sort.mjs'
 
-const testPackageJsons = ['empty', 'basic', 'complex', 'badKey', 'nestedArray', 'nestedObject']
+const testPackageJsons = fs.readdirSync(path.join(__dirname, './fixtures'))
+  .filter(fileName => fileName.includes('package.json') && !fileName.includes('fmt'))
+  .map(fileName => fileName.slice(0, fileName.indexOf('.')))
+
 for (const testPackageJson of testPackageJsons) {
   test(`ensure ${testPackageJson}.package.json is ordered properly`, async t => {
     const packageJsonLocation = path.join(__dirname, `./fixtures/${testPackageJson}.package.json`)

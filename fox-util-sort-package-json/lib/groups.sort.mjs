@@ -1,4 +1,4 @@
-import { sortAlphabetical } from "./util.mjs"
+import { sortAlphabetical, sortContributors } from "./util.mjs"
 
 /**
  * @summary specifics of each sorting group
@@ -17,14 +17,13 @@ export const groupTopLevel = {
     { name: 'license' },
     { name: 'private' },
     { name: 'type' },
-    { name: 'workspaces' },
+    { name: 'workspaces', type: 'array', sortMethod: sortAlphabetical },
   ],
 }
 
 
 /**
  * @description scripts
- * @todo scripts sort
  */
 export const groupScriptsAndConfig = {
   location: '',
@@ -79,7 +78,7 @@ export const groupNpmPackageMeta = {
     { name: 'repository' },
     { name: 'bugs'},
     { name: 'funding' },
-    { name: 'contributors' },
+    { name: 'contributors', type: 'array', sortMethod: sortContributors },
     { name: 'keywords', type: 'array', sortMethod: sortAlphabetical },
     { name: 'publishConfig' },
     { name: 'preferGlobal' },
@@ -174,13 +173,13 @@ export const groupDependencyTypes = {
   location: '',
   keys: [
     { name: 'flat' },
-    { name: 'resolutions' },
-    { name: 'dependencies' },
-    { name: 'devDependencies' },
-    { name: 'peerDependencies' },
-    { name: 'peerDependenciesMeta' },
-    { name: 'optionalDependencies' },
-    { name: 'bundledDependencies' },
-    { name: 'bundleDependencies' },
+    { name: 'resolutions', type: 'object', sortMethod: sortAlphabetical },
+    { name: 'dependencies', type: 'object', sortMethod: sortAlphabetical },
+    { name: 'devDependencies', type: 'object', sortMethod: sortAlphabetical },
+    { name: 'peerDependencies', type: 'object', sortMethod: sortAlphabetical },
+    { name: 'peerDependenciesMeta', type: 'object', sortMethod: sortAlphabetical },
+    { name: 'optionalDependencies', type: 'object', sortMethod: sortAlphabetical },
+    { name: 'bundledDependencies', type: 'object', sortMethod: sortAlphabetical },
+    { name: 'bundleDependencies', type: 'object', sortMethod: sortAlphabetical },
   ]
 }

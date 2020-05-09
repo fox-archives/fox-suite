@@ -25,7 +25,9 @@ const packageJsonFile = path.join(__dirname, 'package.json')
 await sortPackageJsonFile(packageJsonFile)
 ```
 
-### 3. Autofinding package.json based on `./bin/sort-package-json.mjs` file location (this is what the cli does)
+### 3. Autofinding and formating package.json
+
+More specifically, search begins at `./bin/sort-package-json.mjs` file location. the cli uses this option
 
 ```js
 import { sortPackageJsonFileAuto } from 'fox-util-sort-package-json'
