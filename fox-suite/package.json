@@ -4,13 +4,27 @@
   "description": "",
   "main": "index.js",
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "test": "start"
   },
   "keywords": [],
   "author": "",
   "license": "MIT",
+  "bin": {
+    "fox": "./bin/fox.mjs"
+  },
   "dependencies": {
+    "chalk": "^4.0.0",
     "fox-package-json-lint": "workspace:^0.1.0",
-    "fox-package-json-sort": "workspace:^0.1.0"
+    "fox-package-json-sort": "workspace:^0.1.0",
+    "minimist": "^1.2.5"
+  },
+  "devDependencies": {
+    "@types/jest": "^25.2.1",
+    "@types/minimist": "^1.2.0",
+    "@types/node": "^13.13.5",
+    "jest": "^26.0.1",
+    "ts-jest": "^25.5.1",
+    "ts-node": "^8.10.1",
+    "typescript": "^3.8.3"
   }
 }

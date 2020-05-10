@@ -1,12 +1,13 @@
 #!/usr/bin/env node
 
-// import minimist from 'minimist'
-const minimist = require('minimist')
+import minimist from 'minimist'
+// @ts-ignore
+import * as foxUtils from 'fox-utils'
 
-// import { sortPackageJsonFileAuto } from '../'
-const { sortPackageJsonFileAuto } = require('../build')
+import { sortPackageJsonFileAuto } from '../src'
 
 const argv = minimist(process.argv.slice(2))
+
 if (argv.help || argv.h) {
   console.log(`fox-util-sort-package-json
 
@@ -27,4 +28,7 @@ Examples:
   process.exitCode = 0
 }
 
-(async () => await sortPackageJsonFileAuto())()
+;(async () => {
+  const resultObj = await sortPackageJsonFileAuto()
+  foxUtils.printSuccess(`sorted packageJson at ${resultObj.projectPackageJsonPath}`)
+})()

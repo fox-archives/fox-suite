@@ -21,7 +21,8 @@
   },
   "main": "./build",
   "bin": {
-    "fox-package-json-sort": "./bin/package-json-sort.js"
+    "fox-package-json-sort": "./bin/package-json-sort.ts",
+    "fox-pjs": "./bin/package-json-sort.ts"
   },
   "dependencies": {
     "fox-utils": "workspace:^0.1.0",

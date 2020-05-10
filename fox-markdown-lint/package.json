@@ -1,0 +1,22 @@
+{
+  "name": "fox-markdown-lint",
+  "version": "1.0.0",
+  "description": "## Awknowledgements",
+  "main": "index.js",
+  "scripts": {
+    "test": ""
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "dependencies": {
+    "markdown-extensions": "^1.1.1",
+    "remark-cli": "^8.0.0",
+    "remark-lint": "^7.0.0",
+    "remark-preset-lint-recommended": "^4.0.0",
+    "unified-args": "^8.0.0"
+  },
+  "devDependencies": {
+    "@types/node": "^13.13.5"
+  }
+}

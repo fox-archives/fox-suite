@@ -8,7 +8,7 @@
     "start": "ts-node src"
   },
   "bin": {
-    "fox-package-json-lint": "./bin/package-json-lint.js"
+    "fox-package-json-lint": "./bin/package-json-lint.ts"
   },
   "engines": {
     "node": ">=14.2.0"
