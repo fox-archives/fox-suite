@@ -1,6 +1,6 @@
 {
   "name": "fox-package-json-sort",
-  "version": "0.1.0",
+  "version": "0.1.1",
   "license": "MIT",
   "type": "commonjs",
   "scripts": {
@@ -25,7 +25,7 @@
     "fox-pjs": "./bin/package-json-sort.ts"
   },
   "dependencies": {
-    "fox-utils": "^0.1.0",
+    "fox-utils": "^0.1.1",
     "lodash": "^4.17.15",
     "minimist": "^1.2.5"
   },
