@@ -1,2 +1,4 @@
 packages:
   - fox-*
+  - '*-fox'
+  - ./test

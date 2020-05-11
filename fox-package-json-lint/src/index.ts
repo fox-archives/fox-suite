@@ -1,16 +1,18 @@
 import fs from 'fs'
 // @ts-ignore
 import { NpmPackageJsonLint } from 'npm-package-json-lint'
+import * as foxUtils from 'fox-utils'
 
 async function lintPackageJson() {
-  const packageJson = JSON.parse(await fs.promises.readFile('./package.json', { encoding: 'utf8' }))
-  const lintPackageJsonConfig = JSON.parse(await fs.promises.readFile('./.npmpackagejsonlintrc.json', { encoding: 'utf8' }))
+  const { projectPackageJson,projectPackageJsonPath, projectPath } = await foxUtils.getParentProjectData()
+  const packageJsonLintConfig = await foxUtils.getConfig(projectPath, 'npmpackagejsonlintrc.config.js')
 
+  console.log(packageJsonLintConfig)
   const npmPackageLint = new NpmPackageJsonLint({
     cwd: process.cwd(),
-    packageJsonObject: packageJson,
-    packageJsonFilePath: './packageee.json',
-    config: lintPackageJsonConfig,
+    packageJsonObject: projectPackageJson,
+    packageJsonFilePath: projectPackageJsonPath,
+    config: packageJsonLintConfig,
     // configFile: '',
     // patterns: ['**/package.json'],
     quiet: false,

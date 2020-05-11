@@ -1,5 +1,6 @@
 #!/usr/bin/env node
 
+import path from 'path'
 import minimist from 'minimist'
 // @ts-ignore
 import * as foxUtils from 'fox-utils'
@@ -30,5 +31,7 @@ Examples:
 
 ;(async () => {
   const resultObj = await sortPackageJsonFileAuto()
-  foxUtils.printSuccess(`sorted packageJson at ${resultObj.projectPackageJsonPath}`)
+  const relativePackageJsonPath = foxUtils.absoluteToRelative(resultObj.projectPackageJsonPath)
+
+  foxUtils.printSuccess(`sorted packageJson at ${relativePackageJsonPath}`)
 })()

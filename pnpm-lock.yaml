@@ -28,14 +28,18 @@ importers:
       unified-args: ^8.0.0
   fox-package-json-lint:
     dependencies:
+      fox-utils: 'link:../fox-utils'
       npm-package-json-lint: 5.1.0
+      npm-package-json-lint-config-fox: 'link:../npm-package-json-lint-config-fox'
     devDependencies:
       '@types/node': 13.13.5
       ts-node: 8.10.1_typescript@3.8.3
       typescript: 3.8.3
     specifiers:
       '@types/node': ^13.13.5
+      fox-utils: 'workspace:^0.1.0'
       npm-package-json-lint: ^5.1.0
+      npm-package-json-lint-config-fox: 'workspace:^0.1.0'
       ts-node: ^8.10.1
       typescript: ^3.8.3
   fox-package-json-sort:
@@ -100,6 +104,24 @@ importers:
       read-pkg-up: ^7.0.1
       ts-node: ^8.10.1
       typescript: ^3.8.3
+  npm-package-json-lint-config-fox:
+    devDependencies:
+      '@types/jest': 25.2.1
+      jest: 26.0.1
+      npm-package-json-lint: 5.1.0
+      ts-node: 8.10.1_typescript@3.8.3
+      typescript: 3.8.3
+    specifiers:
+      '@types/jest': ^25.2.1
+      jest: ^26.0.1
+      npm-package-json-lint: ^5.1.0
+      ts-node: ^8.10.1
+      typescript: ^3.8.3
+  test:
+    dependencies:
+      npm-package-json-lint-config-fox: 'link:../npm-package-json-lint-config-fox'
+    specifiers:
+      npm-package-json-lint-config-fox: 'workspace:^0.1.0'
 lockfileVersion: 5.1
 packages:
   /@babel/code-frame/7.8.3:
@@ -489,7 +511,7 @@ packages:
       glob: 7.1.6
       graceful-fs: 4.2.4
       istanbul-lib-coverage: 3.0.0
-      istanbul-lib-instrument: 4.0.1
+      istanbul-lib-instrument: 4.0.3
       istanbul-lib-report: 3.0.0
       istanbul-lib-source-maps: 4.0.0
       istanbul-reports: 3.0.2
@@ -786,7 +808,6 @@ packages:
   /ajv-errors/1.0.1_ajv@6.12.2:
     dependencies:
       ajv: 6.12.2
-    dev: false
     peerDependencies:
       ajv: '>=5.0.0'
     resolution:
@@ -1050,7 +1071,7 @@ packages:
       '@babel/helper-plugin-utils': 7.8.3
       '@istanbuljs/load-nyc-config': 1.0.0
       '@istanbuljs/schema': 0.1.2
-      istanbul-lib-instrument: 4.0.1
+      istanbul-lib-instrument: 4.0.3
       test-exclude: 6.0.0
     dev: true
     engines:
@@ -1239,7 +1260,6 @@ packages:
       camelcase: 5.3.1
       map-obj: 4.1.0
       quick-lru: 4.0.1
-    dev: false
     engines:
       node: '>=8'
     resolution:
@@ -1662,7 +1682,6 @@ packages:
     dependencies:
       decamelize: 1.2.0
       map-obj: 1.0.1
-    dev: false
     engines:
       node: '>=0.10.0'
     resolution:
@@ -2294,7 +2313,6 @@ packages:
     resolution:
       integrity: sha512-sNvOCzEQNr/qrvJgc3UG/kD4QtlHycrzwS+6mfTrrSq97BvaYcPZZI1ZSqGSPR73Cxn4LKTD4PttRwfU7jWq5g==
   /hard-rejection/2.1.0:
-    dev: false
     engines:
       node: '>=6'
     resolution:
@@ -2701,13 +2719,11 @@ packages:
     resolution:
       integrity: sha512-/2UGPSgmtqwo1ktx8NDHjuPwZWmHhO+gj0f93EkhLB5RgW9RZevWYYlIkS6zePc6U2WpOdQYIwHe9YC4DWEBVg==
   /is-plain-obj/1.1.0:
-    dev: false
     engines:
       node: '>=0.10.0'
     resolution:
       integrity: sha1-caUMhCnfync8kqOQpKA7OfzVHT4=
   /is-plain-obj/2.1.0:
-    dev: false
     engines:
       node: '>=8'
     resolution:
@@ -2817,12 +2833,9 @@ packages:
       node: '>=8'
     resolution:
       integrity: sha512-UiUIqxMgRDET6eR+o5HbfRYP1l0hqkWOs7vNxC/mggutCMUIhWMm8gAHb8tHlyfD3/l6rlgNA5cKdDzEAf6hEg==
-  /istanbul-lib-instrument/4.0.1:
+  /istanbul-lib-instrument/4.0.3:
     dependencies:
       '@babel/core': 7.9.6
-      '@babel/parser': 7.9.6
-      '@babel/template': 7.8.6
-      '@babel/traverse': 7.9.6
       '@istanbuljs/schema': 0.1.2
       istanbul-lib-coverage: 3.0.0
       semver: 6.3.0
@@ -2830,7 +2843,7 @@ packages:
     engines:
       node: '>=8'
     resolution:
-      integrity: sha512-imIchxnodll7pvQBYOqUu88EufLCU56LMeFPZZM/fJZ1irYcYdqroaV+ACK1Ila8ls09iEYArp+nqyC6lW1Vfg==
+      integrity: sha512-BXgQl9kf4WTCPCCpmFGoJkz/+uhvm7h7PFKUYxh7qarQd3ER33vHG//qaE8eN25l07YqZPpHXU9I09l/RD5aGQ==
   /istanbul-lib-report/3.0.0:
     dependencies:
       istanbul-lib-coverage: 3.0.0
@@ -3369,7 +3382,6 @@ packages:
     resolution:
       integrity: sha512-KXPvOm8K9IJKFM0bmdn8QXh7udDh1g/giieX0NLCaMnb4hEiVFqnop2ImTXCc5e0/oHz3LTqmHGtExn5hfMkOA==
   /jsonc-parser/2.2.1:
-    dev: false
     resolution:
       integrity: sha512-o6/yDBYccGvTz1+QFevz6l6OBZ2+fMVu2JZ9CIhzsYRX4mjaK5IyX9eldUdCmga16zlgQxyrj5pt9kzuj2C02w==
   /jsprim/1.4.1:
@@ -3529,7 +3541,6 @@ packages:
   /log-symbols/4.0.0:
     dependencies:
       chalk: 4.0.0
-    dev: false
     engines:
       node: '>=10'
     resolution:
@@ -3583,13 +3594,11 @@ packages:
     resolution:
       integrity: sha1-wyq9C9ZSXZsFFkW7TyasXcmKDb8=
   /map-obj/1.0.1:
-    dev: false
     engines:
       node: '>=0.10.0'
     resolution:
       integrity: sha1-2TPOuSBdgr3PSIb2dCvcK03qFG0=
   /map-obj/4.1.0:
-    dev: false
     engines:
       node: '>=8'
     resolution:
@@ -3686,7 +3695,6 @@ packages:
       trim-newlines: 3.0.0
       type-fest: 0.13.1
       yargs-parser: 18.1.3
-    dev: false
     engines:
       node: '>=8'
     resolution:
@@ -3761,7 +3769,6 @@ packages:
     resolution:
       integrity: sha512-j5EctnkH7amfV/q5Hgmoal1g2QHFJRraOtmx0JpIqkxhBhI/lJSl1nMpQ45hVarwNETOoWEimndZ4QK0RHxuxQ==
   /min-indent/1.0.0:
-    dev: false
     engines:
       node: '>=4'
     resolution:
@@ -3775,7 +3782,6 @@ packages:
     dependencies:
       arrify: 1.0.1
       is-plain-obj: 1.1.0
-    dev: false
     engines:
       node: '>= 6'
     resolution:
@@ -3902,7 +3908,6 @@ packages:
       semver: 7.3.2
       slash: 3.0.0
       strip-json-comments: 3.1.0
-    dev: false
     engines:
       node: '>=10.0.0'
       npm: '>=6.0.0'
@@ -4317,7 +4322,6 @@ packages:
     resolution:
       integrity: sha512-N5ZAX4/LxJmF+7wN74pUD6qAh9/wnvdQcjq9TZjevvXzSUo7bfmw91saqMjzGS2xq91/odN2dW/WOl7qQHNDGA==
   /quick-lru/4.0.1:
-    dev: false
     engines:
       node: '>=8'
     resolution:
@@ -4376,7 +4380,6 @@ packages:
     dependencies:
       indent-string: 4.0.0
       strip-indent: 3.0.0
-    dev: false
     engines:
       node: '>=8'
     resolution:
@@ -4700,7 +4703,7 @@ packages:
       oauth-sign: 0.9.0
       performance-now: 2.1.0
       qs: 6.5.2
-      safe-buffer: 5.2.0
+      safe-buffer: 5.2.1
       tough-cookie: 2.5.0
       tunnel-agent: 0.6.0
       uuid: 3.4.0
@@ -4796,8 +4799,13 @@ packages:
     resolution:
       integrity: sha512-Gd2UZBJDkXlY7GbJxfsE8/nvKkUEU1G38c1siN6QP6a9PT9MmHB8GnpscSmMJSoF8LOIrt8ud/wPtojys4G6+g==
   /safe-buffer/5.2.0:
+    dev: false
     resolution:
       integrity: sha512-fZEwUGbVl7kouZs1jCdMLdt95hdIv0ZeHg6L7qPeciMZhZ+/gdesW4wgTARkrFWEpspjEATAzUGPG8N2jJiwbg==
+  /safe-buffer/5.2.1:
+    dev: true
+    resolution:
+      integrity: sha512-rp3So07KcdmmKbGvgaNxQSJr7bGVSVk5S9Eq1F+ppbRo70+YeaDxkw5Dd8NPN+GD6bjnYm2VuPuCXmpuYvmCXQ==
   /safe-regex/1.1.0:
     dependencies:
       ret: 0.1.15
@@ -5186,7 +5194,6 @@ packages:
   /strip-indent/3.0.0:
     dependencies:
       min-indent: 1.0.0
-    dev: false
     engines:
       node: '>=8'
     resolution:
@@ -5198,7 +5205,6 @@ packages:
     resolution:
       integrity: sha1-PFMZQukIwml8DsNEhYwobHygpgo=
   /strip-json-comments/3.1.0:
-    dev: false
     engines:
       node: '>=8'
     resolution:
@@ -5381,7 +5387,6 @@ packages:
     resolution:
       integrity: sha512-3n1qG+/5kg+jrbTzwAykB5yRYtQCTqOGKq5U5PE3b0a1/mzo6snDhjGS0zJVJunO0NrT3Dg1MLy5TjWP/UJppg==
   /trim-newlines/3.0.0:
-    dev: false
     engines:
       node: '>=8'
     resolution:
@@ -5460,7 +5465,7 @@ packages:
       integrity: sha512-bdNz1L4ekHiJul6SHtZWs1ujEKERJnHs4HxN7rjTyyVOFf3HaJ6sLqe6aPG62XTzAB/63pKRh5jTSWL0D7bsvw==
   /tunnel-agent/0.6.0:
     dependencies:
-      safe-buffer: 5.2.0
+      safe-buffer: 5.2.1
     dev: true
     resolution:
       integrity: sha1-J6XeoGs2sEoKmWZ3SykIaPD8QP0=
@@ -5489,7 +5494,6 @@ packages:
     resolution:
       integrity: sha512-OdjXJxnCN1AvyLSzeKIgXTXxV+99ZuXl3Hpo9XpJAv9MBcHrrJOQ5kV7ypXOuQie+AmWG25hLbiKdwYTifzcfQ==
   /type-fest/0.13.1:
-    dev: false
     engines:
       node: '>=10'
     resolution:

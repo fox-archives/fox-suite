@@ -18,6 +18,8 @@ export async function getParentProjectData() {
   const projectFoxConfigPath = path.resolve(projectPath, '.config')
 
   return {
+    projectPackageJson: projectPackagejson,
+    // TODO: fix
     projectPackagejson,
     projectPackageJsonPath,
     projectFoxConfigPath,
@@ -26,8 +28,30 @@ export async function getParentProjectData() {
 }
 
 /**
- * prints text in successfull color
+ * @desc gets the content of a config file (in ./.config) if its json or js
  */
-export function printSuccess(text: string) {
+export async function getConfig(absolutePackageJsonPath: string, configName: string): Promise<any> {
+  if (configName === 'npmpackagejsonlintrc.config.js') {
+    const config = await import(path.join(absolutePackageJsonPath, './.config/npmpackagejsonlintrc.config.js'))
+    return config
+  }
+}
+
+/**
+ * @desc Resolves an absolute path relative to the current working
+ * directory. prepends a './' if it doesn't already exist
+ */
+export function absoluteToRelative(absolutePath: string): string {
+
+  let relativePath = path.relative(process.cwd(), absolutePath)
+  if (absolutePath.slice(0, 1) !== './')
+    relativePath = './' + relativePath
+  return relativePath
+}
+
+/**
+ * @desc prints text in green color
+ */
+export function printSuccess(text: string): void {
   console.log(chalk.green(text))
 }
