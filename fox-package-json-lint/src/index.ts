@@ -1,10 +1,9 @@
-import fs from 'fs'
 // @ts-ignore
 import { NpmPackageJsonLint } from 'npm-package-json-lint'
 import * as foxUtils from 'fox-utils'
 
 async function lintPackageJson() {
-  const { projectPackageJson,projectPackageJsonPath, projectPath } = await foxUtils.getParentProjectData()
+  const { projectPackageJson,projectPackageJsonPath, projectPath } = await foxUtils.getProjectData()
   const packageJsonLintConfig = await foxUtils.getConfig(projectPath, 'npmpackagejsonlintrc.config.js')
 
   console.log(packageJsonLintConfig)

@@ -39,7 +39,7 @@ interface ISortPackageJsonFileAutoReturn {
  * @description finds the closes parent package.json file and sorts it
  */
 export async function sortPackageJsonFileAuto(): Promise<ISortPackageJsonFileAutoReturn> {
-  const { projectPackageJsonPath } = await foxUtils.getParentProjectData()
+  const { projectPackageJsonPath } = await foxUtils.getProjectData()
 
   // const packageJsonFile = await findParentPackageJson()
   await sortPackageJsonFile(projectPackageJsonPath)
