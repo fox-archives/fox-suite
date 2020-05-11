@@ -4,3 +4,7 @@ node_modules/
 # output
 build/
 dist/
+
+# misc
+*.log
+*.env
