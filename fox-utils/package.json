@@ -3,14 +3,17 @@
   "version": "0.1.0",
   "description": "",
   "main": "src/index.ts",
+  "license": "MIT",
   "scripts": {
-    "build": "tsc"
+    "test": "jest"
   },
   "keywords": [],
   "author": "",
-  "license": "ISC",
   "devDependencies": {
+    "@types/jest": "^25.2.1",
     "@types/node": "^13.13.5",
+    "jest": "^26.0.1",
+    "ts-jest": "^25.5.1",
     "ts-node": "^8.10.1",
     "typescript": "^3.8.3"
   },

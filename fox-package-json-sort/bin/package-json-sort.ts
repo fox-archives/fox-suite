@@ -31,7 +31,7 @@ Examples:
 
 ;(async () => {
   const resultObj = await sortPackageJsonFileAuto()
-  const relativePackageJsonPath = foxUtils.absoluteToRelative(resultObj.projectPackageJsonPath)
+  const relativePackageJsonPath = foxUtils.toRelativePath(resultObj.projectPackageJsonPath)
 
   foxUtils.printSuccess(`sorted packageJson at ${relativePackageJsonPath}`)
 })()
