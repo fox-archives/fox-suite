@@ -25,7 +25,7 @@
     "fox-pjs": "./bin/package-json-sort.ts"
   },
   "dependencies": {
-    "fox-utils": "workspace:^0.1.0",
+    "fox-utils": "^0.1.0",
     "lodash": "^4.17.15",
     "minimist": "^1.2.5"
   },
