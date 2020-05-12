@@ -1,10 +1,8 @@
 import path from 'path'
 import fs from 'fs'
-// @ts-ignore
 import test from 'ava'
 
 import { sortPackageJson } from '../src'
-// @ts-ignore
 import { groupExternalPackageConfig } from '../src/groupCategories'
 
 const testPackageJsons = fs.readdirSync(path.join(__dirname, './fixtures'))

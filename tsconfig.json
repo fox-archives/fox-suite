@@ -18,12 +18,6 @@
     "noImplicitThis": true,
     "strict": true,
     "baseUrl": ".",
-    // "paths": {
-    //   "~/*": [
-    //     "*-fox",
-    //     "fox-*",
-    //     "./test",
-    //   ]
     "esModuleInterop": true,
     "moduleResolution": "node", // deprecated
     "paths": {},
@@ -44,5 +38,6 @@
     "noUnusedParameters": false,
     "allowUnusedLabels": false, // default
     "forceConsistentCasingInFileNames": true,
+    "useDefineForClassFields": true
   }
 }

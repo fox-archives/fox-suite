@@ -1,5 +1,4 @@
 import path from 'path'
-// @ts-ignore
 import * as foxUtilsProjects from '../src/project'
 
 describe('getProjectData()', () => {

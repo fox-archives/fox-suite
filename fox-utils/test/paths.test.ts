@@ -1,5 +1,4 @@
 import path from 'path'
-// @ts-ignore
 import * as foxPathUtils from '../src/paths'
 
 /**
