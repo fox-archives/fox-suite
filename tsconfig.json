@@ -1,28 +1,48 @@
 {
+  "compileOnSave": true,
   "compilerOptions": {
-    "sourceMap": true,
-    "outDir": "build",
-    "target": "ES2019",
-    "module": "CommonJS",
-    "esModuleInterop": true,
-    "moduleResolution": "node",
-    "strict": true,
-    "noImplicitAny": true,
-    "noImplicitReturns": true,
-    "noImplicitThis": true,
-    "forceConsistentCasingInFileNames": true,
+    // general
+    "declaration": true,
+    // TODO: enable when using project references later
+    // "declarationMap": true,
+    "isolatedModules": true,
     "lib": [
       "ESNext"
     ],
-    "types": [
-      "node"
-    ],
+    "module": "CommonJS",
+    "outDir": "build",
+    "rootDir": ".",
+    "sourceMap": true,
+    "target": "ES2019",
+    "noImplicitAny": true,
+    "noImplicitThis": true,
+    "strict": true,
+    "baseUrl": ".",
+    // "paths": {
+    //   "~/*": [
+    //     "*-fox",
+    //     "fox-*",
+    //     "./test",
+    //   ]
+    "esModuleInterop": true,
+    "moduleResolution": "node", // deprecated
+    "paths": {},
     "typeRoots": [
-       "./node_modules/@types",
-       "./@types"
-    ]
-  },
-  "exclude": [
-    "test"
-  ]
+      "./node_modules/@types"
+    ],
+    "types": [
+      "node",
+      "lodash",
+      "jest",
+      "minimist"
+    ],
+
+    // linter checks / etc
+    "noFallthroughCasesInSwitch": false, // default
+    "noImplicitReturns": true,
+    "noUnusedLocals": false, // default
+    "noUnusedParameters": false,
+    "allowUnusedLabels": false, // default
+    "forceConsistentCasingInFileNames": true,
+  }
 }
