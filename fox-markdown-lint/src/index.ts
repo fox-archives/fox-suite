@@ -1,6 +1,5 @@
 import start from 'unified-args'
 import extensions from 'markdown-extensions'
-// @ts-ignore
 import processor from 'remark'
 import proc from 'remark/package.json'
 import cli from './package.json'

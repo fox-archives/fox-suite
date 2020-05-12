@@ -1,6 +1,4 @@
-// @ts-ignore
 import { NpmPackageJsonLint } from 'npm-package-json-lint'
-// @ts-ignore
 import * as foxUtils from 'fox-utils'
 
 async function lintPackageJson() {

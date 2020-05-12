@@ -1,6 +1,5 @@
 import fs from 'fs'
 import assert from 'assert'
-// @ts-ignore
 import * as foxUtils from 'fox-utils'
 
 import {
@@ -64,7 +63,6 @@ export async function sortPackageJsonFile(packageJsonFile: any) {
   await fs.promises.writeFile(packageJsonFile, JSON.stringify(sortedPackageJson, null, 2))
 }
 
-
 /**
  * @description sorts an object that represents a package.json file
  * @param {object} input - object to sort
@@ -73,7 +71,6 @@ export async function sortPackageJsonFile(packageJsonFile: any) {
 export function sortPackageJson(input: any): any {
   let output = {}
   for (const groupName in groupRootCategories) {
-    // @ts-ignore
     const group = groupRootCategories[groupName]
 
     assert(isObject(group), "groups must be an object")

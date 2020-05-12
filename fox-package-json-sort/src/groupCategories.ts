@@ -3,7 +3,7 @@ import { sortAlphabetical, sortContributors } from './util'
 /**
  * @description members at the top level
  */
-export const groupTopLevel = {
+export const groupTopLevel: IGroup = {
   location: '',
   keys: [
     { name: 'name' },
@@ -20,7 +20,7 @@ export const groupTopLevel = {
 /**
  * @description scripts
  */
-export const groupScriptsAndConfig = {
+export const groupScriptsAndConfig: IGroup = {
   location: '',
   keys: [
     { name: 'scripts' },
@@ -34,7 +34,7 @@ export const groupScriptsAndConfig = {
  * @description members for external packages. it _must_ be
  * sorted alphabetically
  */
-export const groupExternalPackageConfig = {
+export const groupExternalPackageConfig: IGroup = {
   location: '',
   keys: [
     { name: 'autoprefixer' },
@@ -65,7 +65,7 @@ export const groupExternalPackageConfig = {
 /**
  * @description published package metadata
  */
-export const groupNpmPackageMeta = {
+export const groupNpmPackageMeta: IGroup = {
   location: '',
   keys: [
     { name: 'author' },
@@ -85,7 +85,7 @@ export const groupNpmPackageMeta = {
  * @description members that concern how to access the bundle / type
  * of bundle that is being used
  */
-export const groupJsEntryPoints = {
+export const groupJsEntryPoints: IGroup = {
   location: '',
   keys: [
     { name: 'sideEffects' },
@@ -107,7 +107,7 @@ export const groupJsEntryPoints = {
 /**
  * @description miscellaneous files / folders
  */
-export const groupMiscFile = {
+export const groupMiscFile: IGroup = {
   location: '',
   keys: [
     { name: 'style' },
@@ -126,7 +126,7 @@ export const groupMiscFile = {
 /**
  * @description runtime platform related information
  */
-export const groupEnginesOsCpu = {
+export const groupEnginesOsCpu: IGroup = {
   location: '',
   keys: [
     { name: 'engines' },
@@ -141,7 +141,7 @@ export const groupEnginesOsCpu = {
  * @description publishing information for
  * vscode extension
  */
-export const groupVsCodeExtensionMeta = {
+export const groupVsCodeExtensionMeta: IGroup = {
   location: '',
   keys: [
     { name: 'displayName' },
@@ -164,7 +164,7 @@ export const groupVsCodeExtensionMeta = {
 /**
  * @description literally all dependencies
  */
-export const groupDependencyTypes = {
+export const groupDependencyTypes: IGroup = {
   location: '',
   keys: [
     { name: 'flat' },
@@ -179,14 +179,26 @@ export const groupDependencyTypes = {
   ]
 }
 
-export const groupRootCategories = {
-    groupTopLevel,
-    groupScriptsAndConfig,
-    groupExternalPackageConfig,
-    groupNpmPackageMeta,
-    groupJsEntryPoints,
-    groupMiscFile,
-    groupEnginesOsCpu,
-    groupVsCodeExtensionMeta,
-    groupDependencyTypes
-  }
+interface IGroup {
+  location: string,
+  keys: Array<{
+    name: string,
+    sortMethod?: Function
+  }>
+}
+
+interface IGroupRoot {
+  [key: string]: IGroup
+}
+
+export const groupRootCategories: IGroupRoot = {
+  groupTopLevel,
+  groupScriptsAndConfig,
+  groupExternalPackageConfig,
+  groupNpmPackageMeta,
+  groupJsEntryPoints,
+  groupMiscFile,
+  groupEnginesOsCpu,
+  groupVsCodeExtensionMeta,
+  groupDependencyTypes
+}

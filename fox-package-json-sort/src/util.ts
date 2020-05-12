@@ -1,6 +1,4 @@
 import assert from 'assert'
-import path from 'path'
-import fs from 'fs'
 // import { fileURLToPath } from 'url'
 import _ from 'lodash'
 
@@ -41,6 +39,9 @@ export function sortContributors(arr: Array<string | IContributors>) {
   return arr
 }
 
+interface ISortObject {
+  [key: string]: string | object
+}
 /**
  * @description meta sort function that converts object
  * to array for regular sort functions to consume
@@ -48,22 +49,25 @@ export function sortContributors(arr: Array<string | IContributors>) {
  * @param {function} sortFn - function that does sorting. it returns a sorted array
  * @return {object} object with sorted keys
  */
-export function sortObject(obj: any, sortFn: Function) {
+export function sortObject(obj: ISortObject, sortFn: Function) {
   const sortedKeys = sortFn(Object.keys(obj))
 
-  const sortedObject = {}
+  const sortedObject: ISortObject = {}
   for (const sortedKey of sortedKeys) {
-    // @ts-ignore
     sortedObject[sortedKey] = obj[sortedKey]
   }
   return sortedObject
+}
+
+interface ISurface {
+  [key: string]: string | object
 }
 
 /**
  * @description processes each group
  */
 export function processGroup(input: any, group: any) {
-  const surface = {}
+  const surface: ISurface = {}
   for (const key of group.keys) {
     // ensure key meets schema requirements
     assert(isString(key.name), "keys must have a 'name' property of type string")
@@ -77,15 +81,12 @@ export function processGroup(input: any, group: any) {
     const keyName = key.name
     const keyValue = input[keyName]
     if (!key.hasOwnProperty('sortMethod')) {
-      // @ts-ignore
       surface[keyName] = keyValue
     }
     else if (isArray(keyValue)) {
-      // @ts-ignore
       surface[keyName] = key.sortMethod(keyValue)
     }
     else if (isObject(keyValue)) {
-      // @ts-ignore
       surface[keyName] = sortObject(keyValue, key.sortMethod)
     }
   }
@@ -108,11 +109,10 @@ export function ensureUnecognizedKeys(oldSurface: any, sortedSurface: any, sorti
   assert(isObject(sortedSurface))
   sortingFunction && assert(isFunction(sortingFunction))
 
-  let surfaceTemp = {}
+  let surfaceTemp: ISurface = {}
   for (const entryName in oldSurface) {
     // add all unknown elements to 'finalOutput' first
     if(oldSurface.hasOwnProperty(entryName) && !sortedSurface.hasOwnProperty(entryName)) {
-      // @ts-ignore
       surfaceTemp[entryName] = oldSurface[entryName]
     }
   }

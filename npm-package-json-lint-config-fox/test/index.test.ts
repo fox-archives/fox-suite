@@ -1,6 +1,5 @@
 import fs from 'fs'
 import { default as lintPackageJsonConfig } from '../src/index'
-// @ts-ignore
 import { NpmPackageJsonLint } from 'npm-package-json-lint'
 
 let newNpmPackageLint = (packageJson: any) => new NpmPackageJsonLint({

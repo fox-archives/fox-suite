@@ -1,8 +1,6 @@
 #!/usr/bin/env node
 
-import path from 'path'
 import minimist from 'minimist'
-// @ts-ignore
 import * as foxUtils from 'fox-utils'
 
 import { sortPackageJsonFileAuto } from '../src'

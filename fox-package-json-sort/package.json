@@ -19,7 +19,7 @@
       "pre-commit": "pnpm run test"
     }
   },
-  "main": "./build",
+  "main": "./src/index.ts",
   "bin": {
     "fox-package-json-sort": "./bin/package-json-sort.ts",
     "fox-pjs": "./bin/package-json-sort.ts"

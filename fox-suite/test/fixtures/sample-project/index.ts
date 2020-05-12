@@ -1,4 +1,3 @@
-// @ts-ignore
 import { sortPackageJsonFileAuto } from 'fox-package-json-sort'
 
 (async () => {

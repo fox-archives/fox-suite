@@ -16,3 +16,5 @@ interface ILintOptions {
 //     export function lint(NpmPackageJsonLintOptions: ILintOptions): any
 //   }
 // }
+
+declare module 'npm-package-json-lint'
