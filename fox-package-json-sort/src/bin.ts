@@ -1,6 +1,6 @@
 import * as foxUtils from 'fox-utils'
 
-import { sortPackageJsonFileAuto } from '../src/main'
+import { sortPackageJsonFileAuto } from './main'
 
 const helpText = `fox-util-sort-package-json
 
