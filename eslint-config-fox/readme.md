@@ -1,9 +1,5 @@
 # eslint-config-fox
 
-## ⚠️ Archived ⚠️
-
-This repository has been moved to [fox-suite](https://github.com/eankeen/fox-suite)
-
 ## Description
 
 Edwin's ESLint configuration

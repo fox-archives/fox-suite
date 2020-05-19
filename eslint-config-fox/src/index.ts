@@ -1,10 +1,10 @@
-const bareConfig = require('./lib/config/bare.config.cjs')
-const defaultConfig = require('./lib/config/default.config.cjs')
-const anyConfig = require('./lib/config/lint/any.config.cjs')
-const cozyConfig = require('./lib/config/lint/cozy.config.cjs')
-const strictConfig = require('./lib/config/lint/strict.config.cjs')
-const excessiveConfig = require('./lib/config/lint/excessive.config.cjs')
-const { readFoxConfig } = require('./lib/readConfig.cjs')
+import bareConfig from './config/bare.config';
+import defaultConfig from './config/default.config';
+import anyConfig from './config/lint/any.config';
+import cozyConfig from './config/lint/cozy.config';
+import strictConfig from './config/lint/strict.config';
+import excessiveConfig from './config/lint/excessive.config';
+import { readFoxConfig } from './readConfig';
 
 /**
  * Rule Resolution
@@ -18,7 +18,7 @@ const { readFoxConfig } = require('./lib/readConfig.cjs')
  */
 const foxConfig = readFoxConfig()
 
-const configVariants = []
+const configVariants: any[] = []
 if (foxConfig.lint === 'off') {
   configVariants.concat([anyConfig])
 } else if (foxConfig.lint === 'cozy') {
@@ -44,9 +44,9 @@ for (const configVariant of configVariants) {
   }
 }
 
-const browserConfig = require('./lib/config/env/browser.config.cjs')
-const nodeConfig = require('./lib/config/env/node.config.cjs')
-const denoConfig = require('./lib/config/env/deno.config.cjs')
+import browserConfig from './config/env/browser.config'
+import nodeConfig from './config/env/node.config'
+import denoConfig from './config/env/deno.config'
 
 const configVariants2 = []
 function addEnvConfig(string) {

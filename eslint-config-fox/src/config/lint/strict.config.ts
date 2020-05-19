@@ -2,7 +2,7 @@
  * Enable rules that could prevent
  * potentially buggy code
  */
-module.exports = {
+export default {
   default: {
     globals: {
       document: 'readonly',

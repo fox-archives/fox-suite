@@ -2,7 +2,7 @@
  * configuration when environment is deno
  */
 // TODO: add deno environment
-module.exports = {
+export default {
   plugins: [
     // 'eslint-plugin-deno'
   ],

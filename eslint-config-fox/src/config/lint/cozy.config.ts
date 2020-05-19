@@ -1,7 +1,7 @@
 /**
  * Enable default rules
  */
-module.exports = {
+export default {
   default: {
     rules: {
       eqeqeq: ['error', 'always', { null: 'ignore' }],

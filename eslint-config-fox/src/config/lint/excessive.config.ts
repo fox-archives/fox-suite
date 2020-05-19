@@ -2,7 +2,7 @@
  * Enable rules that could prevent
  * potentially misinterpreted code
  */
-module.exports = {
+export default {
   default: {
     rules: {
       'accessor-pairs': 'error',

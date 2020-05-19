@@ -1,56 +1,45 @@
 {
   "name": "eslint-config-fox",
-  "description": "Edwin's eslint configuration",
-  "private": false,
+  "description": "ESLint configuration for Fox Suite",
   "version": "0.1.0",
   "keywords": [
     "eslint",
     "fox",
-    "eslint-config"
+    "eslint-config",
+    "fox-suite"
   ],
-  "homepage": "https://github.com/eankeen/eslint-config-fox#readme",
+  "homepage": "https://github.com/eankeen/fox-suite/tree/dev/eslint-config-fox#readme",
   "bugs": {
-    "url": "https://github.com/eankeen/eslint-config-fox/issues"
+    "url": "https://github.com/eankeen/fox-suite/issues"
   },
   "author": {
     "name": "Edwin Kofler",
     "url": "https://edwinkofler.com"
   },
-  "main": "eslint.config.cjs",
+  "main": "eslint.config.",
   "repository": {
     "type": "git",
-    "url": "https://github.com/eankeen/eslint-config-fox.git"
+    "url": "https://github.com/eankeen/fox-suite.git"
   },
   "license": "MIT",
-  "type": "module",
   "engines": {
     "node": ">=12",
     "pnpm": ">=4"
   },
   "scripts": {
-    "np": "np",
+    "start": "ts-node src",
+    "watch": "tsc --build --watch",
+    "build": "tsc --build",
     "test": "jest",
     "lint": "eslint --fix --config eslint.config.cjs ."
   },
-  "jest": {
-    "setupFilesAfterEnv": [
-      "jest-extended"
-    ],
-    "testRegex": [
-      "eslint.test.cjs.js"
-    ]
-  },
-  "husky": {
-    "hooks": {
-      "pre-commit": "pnpm run test"
-    }
-  },
   "devDependencies": {
     "eslint": "^6.8.0",
-    "husky": "^4.2.5",
     "jest": "^26.0.1",
     "jest-extended": "^0.11.5",
-    "np": "^6.2.3"
+    "np": "^6.2.3",
+    "ts-jest": "^26.0.0",
+    "typescript": "^3.9.2"
   },
   "peerDependencies": {
     "eslint": "^6.8.0"

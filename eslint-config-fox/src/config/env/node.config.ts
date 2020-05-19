@@ -1,7 +1,7 @@
 /**
  * configuration when environment is node
  */
-module.exports = {
+export default {
   env: {
     node: true,
   },

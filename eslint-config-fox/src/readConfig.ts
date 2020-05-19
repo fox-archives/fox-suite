@@ -1,4 +1,4 @@
-exports.readFoxConfig = function () {
+export function readFoxConfig() {
   return {
     lint: 'cozy',
     env: 'browser',

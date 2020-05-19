@@ -1,4 +1,4 @@
-module.exports = {
+export default {
   rules: {
     // enforce line breaks after opening and before closing array brackets
     // https://eslint.org/docs/rules/array-bracket-newline

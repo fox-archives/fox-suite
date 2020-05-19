@@ -2,7 +2,7 @@
  * root config that only contains properties
  */
 
-module.exports = {
+export default {
   parserOptions: {
     parser: 'babel-eslint',
     ecmaVersion: 2020,

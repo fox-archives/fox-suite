@@ -1,7 +1,7 @@
 /**
  * configuration when env is browser
  */
-module.exports = {
+export default {
   env: {
     browser: true,
   },

@@ -1,7 +1,7 @@
 /**
  * default configuration
  */
-module.exports = {
+export default {
   parserOptions: {
     ecmaFeatures: {
       // globalReturn: false,
