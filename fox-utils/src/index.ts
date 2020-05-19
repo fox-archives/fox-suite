@@ -1,3 +1,5 @@
 export * from './paths'
 export * from './print'
 export * from './project'
+export * from './cli'
+export { is } from './util/is'

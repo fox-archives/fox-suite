@@ -6,11 +6,7 @@ import {
   ensureUnecognizedKeys,
   processGroup
 } from './util'
-import {
-  isString,
-  isObject,
-  isArray
-} from './is'
+import { is } from 'fox-utils'
 import {
   groupRootCategories
 } from './groupCategories'
@@ -73,9 +69,9 @@ export function sortPackageJson(input: any): any {
   for (const groupName in groupRootCategories) {
     const group = groupRootCategories[groupName]
 
-    assert(isObject(group), "groups must be an object")
-    assert(isString(group.location), "groups must have a 'location' property of type stirng")
-    assert(isArray(group.keys), "groups must have a 'keys' property that's an array")
+    assert(is.object(group), "groups must be an object")
+    assert(is.string(group.location), "groups must have a 'location' property of type stirng")
+    assert(is.array(group.keys), "groups must have a 'keys' property that's an array")
 
     const surface = processGroup(input, group)
 

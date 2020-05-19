@@ -3,11 +3,8 @@ import assert from 'assert'
 import _ from 'lodash'
 
 import {
-  isString,
-  isObject,
-  isArray,
-  isFunction
-} from './is'
+  is
+} from 'fox-utils'
 
 /**
  * @description alphabetically sorts array
@@ -29,11 +26,11 @@ interface IContributors {
   url?: string
 }
 export function sortContributors(arr: Array<string | IContributors>) {
-  if (arr.every(isObject)) {
+  if (arr.every(is.object)) {
     return _.sortBy(arr, 'name')
 
   }
-  else if (arr.every(isString)) {
+  else if (arr.every(is.string)) {
     return sortAlphabetical(arr as Array<string>)
   }
   return arr
@@ -70,7 +67,7 @@ export function processGroup(input: any, group: any) {
   const surface: ISurface = {}
   for (const key of group.keys) {
     // ensure key meets schema requirements
-    assert(isString(key.name), "keys must have a 'name' property of type string")
+    assert(is.string(key.name), "keys must have a 'name' property of type string")
 
     // ensure the key actually exists in package.json. if not,
     // 'continue' (skip) to next element in loop
@@ -83,10 +80,10 @@ export function processGroup(input: any, group: any) {
     if (!key.hasOwnProperty('sortMethod')) {
       surface[keyName] = keyValue
     }
-    else if (isArray(keyValue)) {
+    else if (is.array(keyValue)) {
       surface[keyName] = key.sortMethod(keyValue)
     }
-    else if (isObject(keyValue)) {
+    else if (is.object(keyValue)) {
       surface[keyName] = sortObject(keyValue, key.sortMethod)
     }
   }
@@ -105,9 +102,9 @@ export function processGroup(input: any, group: any) {
  */
 export function ensureUnecognizedKeys(oldSurface: any, sortedSurface: any, sortingFunction?: Function) {
   // ensure parameters are expected
-  assert(isObject(oldSurface))
-  assert(isObject(sortedSurface))
-  sortingFunction && assert(isFunction(sortingFunction))
+  assert(is.object(oldSurface))
+  assert(is.object(sortedSurface))
+  sortingFunction && assert(is.function(sortingFunction))
 
   let surfaceTemp: ISurface = {}
   for (const entryName in oldSurface) {

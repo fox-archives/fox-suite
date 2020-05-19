@@ -1,15 +1,15 @@
 {
   "foo": "thing",
   "name": "main",
+  "description": "",
   "version": "0.1.1",
-  "main": "index.js",
+  "license": "ISC",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1"
   },
-  "keywords": [],
   "author": "",
-  "license": "ISC",
-  "description": "",
+  "keywords": [],
+  "main": "index.js",
   "dependencies": {
     "npm-package-json-lint-config-fox": "^0.1.1"
   }
