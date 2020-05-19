@@ -1,11 +1,10 @@
 import * as foxUtils from 'fox-utils'
-
 import { sortPackageJsonFileAuto } from './main'
 
-const helpText = `fox-util-sort-package-json
+const helpText = `fox-package-json-sort-json
 
 Usage:
-  sort-package-json
+  fox-sort-package-json
 
 Description:
   Sorts the package.json of the current project
@@ -15,18 +14,17 @@ Options:
   -h      show help
 
 Examples:
-  sort-package-json --help
-  sort-package-json`
+  fox-package-json-sort --help
+  fox-package-json-sort`
 
-
-foxUtils.cli(process.argv, {
-  helpText
-})
-
-run()
-async function run() {
+async function runFunction() {
   const resultObj = await sortPackageJsonFileAuto()
   const relativePackageJsonPath = foxUtils.toRelativePath(resultObj.projectPackageJsonPath)
 
   foxUtils.printSuccess(`sorted packageJson at ${relativePackageJsonPath}`)
 }
+
+foxUtils.cli(process.argv, {
+  helpText,
+  runFunction
+})
