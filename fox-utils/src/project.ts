@@ -30,6 +30,7 @@ export async function getProjectData() {
 export async function getConfig(absolutePackageJsonPath: string, configName: string): Promise<any> {
   if (configName === 'npmpackagejsonlintrc.config.js') {
     const config = await import(path.join(absolutePackageJsonPath, './.config/npmpackagejsonlintrc.config.js'))
+
     return config
   }
 }

@@ -5,7 +5,7 @@ import extensions from 'markdown-extensions'
 import processor from 'remark'
 // @ts-ignore
 import proc from 'remark/package.json'
-// @ts-ignore
+// @ts-ignorew
 import cli from './package.json'
 
 start({

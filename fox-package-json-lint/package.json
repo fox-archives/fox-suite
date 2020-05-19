@@ -3,12 +3,15 @@
   "version": "0.1.1",
   "description": "",
   "type": "commonjs",
-  "main": "index.js",
+  "main": "build",
   "scripts": {
-    "start": "ts-node src"
+    "start": "ts-node src",
+    "watch": "tsc --build --watch",
+    "build": "tsc --build"
+
   },
   "bin": {
-    "fox-package-json-lint": "./bin/package-json-lint.ts"
+    "fox-package-json-lint": "./bin/fox-package-json-lint.js"
   },
   "engines": {
     "node": ">=14.2.0"

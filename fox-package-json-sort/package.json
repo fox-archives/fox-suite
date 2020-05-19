@@ -19,10 +19,10 @@
       "pre-commit": "pnpm run test"
     }
   },
-  "main": "./src/index.ts",
+  "main": "build",
   "bin": {
-    "fox-package-json-sort": "./bin/package-json-sort.ts",
-    "fox-pjs": "./bin/package-json-sort.ts"
+    "fox-package-json-sort": "./bin/fox-package-json-sort.js",
+    "fox-pjs": "./bin/fox-package-json-sort.js"
   },
   "dependencies": {
     "fox-utils": "^0.1.1",

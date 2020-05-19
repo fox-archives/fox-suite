@@ -1,5 +1,3 @@
-#!/usr/bin/env node
-
 import minimist from 'minimist'
 import * as foxUtils from 'fox-utils'
 
@@ -33,3 +31,4 @@ Examples:
 
   foxUtils.printSuccess(`sorted packageJson at ${relativePackageJsonPath}`)
 })()
+
