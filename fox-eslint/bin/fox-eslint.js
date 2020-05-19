@@ -1,4 +1,4 @@
-#!/usr/bin/env node
+#!/bin/sh
 
 const { bin } = require('../build/bin')
 

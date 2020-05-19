@@ -1,0 +1,25 @@
+{
+  "name": "fox-eslint",
+  "version": "0.1.0",
+  "description": "",
+  "main": "index.js",
+  "scripts": {
+    "start": "ts-node src",
+    "watch": "tsc --build --watch",
+    "build": "tsc --build"
+  },
+  "bin": {
+    "fox-eslint": "./bin/fox-eslint.js"
+  },
+  "keywords": [
+    "fox-suite",
+    "fox",
+    "eslint"
+  ],
+  "author": "Edwin Kofler",
+  "license": "MIT",
+  "dependencies": {
+    "eslint": "^7.0.0",
+    "eslint-config-fox": "^0.1.0"
+  }
+}

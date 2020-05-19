@@ -19,7 +19,8 @@
       "lodash",
       "jest",
       "minimist",
-      "prompts"
+      "prompts",
+      "eslint"
     ],
     "lib": [
       "ESNext"

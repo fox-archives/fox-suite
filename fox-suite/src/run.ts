@@ -12,21 +12,6 @@ export function run(script: string): void {
     windowsHide: true
   })
 
-
-  // const child = childProcess.execFile(scriptPath, {
-  //   cwd: process.cwd(),
-  //   windowsHide: true
-  // })
-
-  // if (!child?.stdout) throw new Error('child null')
-  // if (!child?.stderr) throw new Error('child null')
-  // const child2 = execFile("node", ["--version"], (error, stdout, stderr) => {
-  //   if (error) {
-  //     throw error;
-  //   }
-  //   console.log(stdout);
-  // });
-
   let output = ""
   child.stdout.on('data', data => {
     console.log(data.toString())

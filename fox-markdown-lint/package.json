@@ -4,7 +4,10 @@
   "description": "",
   "main": "build",
   "scripts": {
-    "test": ""
+    "start": "ts-node src",
+    "watch": "tsc --build --watch",
+    "build": "tsc --build",
+    "test": "jest"
   },
   "keywords": [],
   "author": "Edwin Kofler",

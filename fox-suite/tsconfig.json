@@ -19,6 +19,9 @@
     },
     {
       "path": "../npm-package-json-lint-config-fox"
+    },
+    {
+      "path": "../fox-eslint"
     }
   ]
 }

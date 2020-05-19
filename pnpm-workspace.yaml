@@ -1,4 +1,3 @@
 packages:
-  - fox-*
-  - '*-fox'
-  - ./test
+  - '*fox*'
+  - test

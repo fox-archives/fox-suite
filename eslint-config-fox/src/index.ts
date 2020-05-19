@@ -48,8 +48,8 @@ import browserConfig from './config/env/browser.config'
 import nodeConfig from './config/env/node.config'
 import denoConfig from './config/env/deno.config'
 
-const configVariants2 = []
-function addEnvConfig(string) {
+const configVariants2: any[] = []
+function addEnvConfig(string: string) {
   if (foxConfig.env === 'browser') {
     configVariants2.push(browserConfig)
   } else if (foxConfig.env === 'node') {
@@ -63,6 +63,6 @@ if (Array.isArray(foxConfig.env)) {
 } else {
   addEnvConfig(foxConfig.env)
 }
-Object.assign(bareConfig.env, configVariants2.env)
+// Object.assign(bareConfig.env, configVariants2.env)
 
 module.exports = bareConfig
