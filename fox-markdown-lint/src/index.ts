@@ -1,7 +1,11 @@
 import start from 'unified-args'
+// @ts-ignore
 import extensions from 'markdown-extensions'
+// @ts-ignore
 import processor from 'remark'
+// @ts-ignore
 import proc from 'remark/package.json'
+// @ts-ignore
 import cli from './package.json'
 
 start({

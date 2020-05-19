@@ -5,6 +5,7 @@ importers:
       '@types/lodash': 4.14.150
       '@types/minimist': 1.2.0
       '@types/node': 13.13.5
+      '@types/prompts': 2.0.8
       lerna: 3.20.2
       ts-node: 8.10.1
     specifiers:
@@ -12,6 +13,7 @@ importers:
       '@types/lodash': ^4.14.150
       '@types/minimist': ^1.2.0
       '@types/node': ^13.13.5
+      '@types/prompts': ^2.0.8
       lerna: ^3.20.2
       ts-node: ^8.10.1
   fox-markdown-lint:
@@ -65,6 +67,7 @@ importers:
       fox-package-json-lint: 'link:../fox-package-json-lint'
       fox-package-json-sort: 'link:../fox-package-json-sort'
       minimist: 1.2.5
+      prompts: 2.3.2
     devDependencies:
       jest: 26.0.1
       ts-jest: 25.5.1_jest@26.0.1+typescript@3.8.3
@@ -76,6 +79,7 @@ importers:
       fox-package-json-sort: ^0.1.1
       jest: ^26.0.1
       minimist: ^1.2.5
+      prompts: ^2.3.2
       ts-jest: ^25.5.1
       ts-node: ^8.10.1
       typescript: ^3.8.3
@@ -1661,6 +1665,12 @@ packages:
     dev: true
     resolution:
       integrity: sha512-/rM+sWiuOZ5dvuVzV37sUuklsbg+JPOP8d+nNFlo2ZtfpzPiPvh1/gc8liWOLBqe+sR+ZM7guPaIcTt6UZTo7Q==
+  /@types/prompts/2.0.8:
+    dependencies:
+      '@types/node': 13.13.5
+    dev: true
+    resolution:
+      integrity: sha512-lXXAa8c8ASoA61Tj9H5E5V2mRUTvNZ/dpJ5KxghI+O5geWMHt73NLZ9kEBBDK7zUUfMsMY3ZH4Sqeqh3SjSyfg==
   /@types/stack-utils/1.0.1:
     dev: true
     resolution:
@@ -5360,7 +5370,6 @@ packages:
     resolution:
       integrity: sha512-dcS1ul+9tmeD95T+x28/ehLgd9mENa3LsvDTtzm3vyBEO7RPptvAD+t44WVXaUjTBRcrpFeFlC8WCruUR456hw==
   /kleur/3.0.3:
-    dev: true
     engines:
       node: '>=6'
     resolution:
@@ -6893,7 +6902,6 @@ packages:
     dependencies:
       kleur: 3.0.3
       sisteransi: 1.0.5
-    dev: true
     engines:
       node: '>= 6'
     resolution:
@@ -7762,7 +7770,6 @@ packages:
     resolution:
       integrity: sha512-VUJ49FC8U1OxwZLxIbTTrDvLnf/6TDgxZcK8wxR8zs13xpx7xbG60ndBlhNrFi2EMuFRoeDoJO7wthSLq42EjA==
   /sisteransi/1.0.5:
-    dev: true
     resolution:
       integrity: sha512-bLGGlR1QxBcynn2d5YmDX4MGjlZvy2MRBDRNHLJ8VI6l6+9FUiyTFNJ0IveOSP0bcXgVDPRcfGqA0pjaqUpfVg==
   /slash/2.0.0:

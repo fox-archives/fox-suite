@@ -1,35 +1,36 @@
 {
   "compileOnSave": true,
   "compilerOptions": {
-    // general
-    "declaration": true,
-    // TODO: enable when using project references later
-    // "declarationMap": true,
-    "isolatedModules": true,
-    "lib": [
-      "ESNext"
-    ],
-    "module": "CommonJS",
     "outDir": "build",
-    "rootDir": ".",
+    "isolatedModules": true,
     "sourceMap": true,
-    "target": "ES2019",
+    "target": "ES2017",
+    "module": "CommonJS",
+    "esModuleInterop": true,
+    "strict": true,
     "noImplicitAny": true,
     "noImplicitThis": true,
-    "strict": true,
-    "baseUrl": ".",
-    "esModuleInterop": true,
-    "moduleResolution": "node", // deprecated
-    "paths": {},
     "typeRoots": [
-      "./node_modules/@types"
+      "./node_modules/@types",
+      "./@types",
     ],
     "types": [
       "node",
       "lodash",
       "jest",
-      "minimist"
+      "minimist",
+      "prompts"
     ],
+    "lib": [
+      "ESNext"
+    ],
+    "moduleResolution": "node",
+    "composite": true,
+    // ensure this is on for composite and project references
+    "declaration": true,
+    "declarationMap": true,
+    "incremental": true,
+    "baseUrl": ".",
 
     // linter checks / etc
     "noFallthroughCasesInSwitch": false, // default

@@ -4,6 +4,7 @@
   "description": "",
   "main": "src/index.ts",
   "scripts": {
+    "watch": "tsc --build --watch",
     "test": "jest"
   },
   "keywords": [],
@@ -16,7 +17,8 @@
     "chalk": "^4.0.0",
     "fox-package-json-lint": "^0.1.1",
     "fox-package-json-sort": "^0.1.1",
-    "minimist": "^1.2.5"
+    "minimist": "^1.2.5",
+    "prompts": "^2.3.2"
   },
   "devDependencies": {
     "jest": "^26.0.1",
