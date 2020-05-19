@@ -12,7 +12,7 @@
   "author": "",
   "license": "MIT",
   "bin": {
-    "fox": "./bin/fox.ts"
+    "fox": "./bin/fox.js"
   },
   "dependencies": {
     "chalk": "^4.0.0",

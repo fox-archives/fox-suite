@@ -1,6 +1,8 @@
-import { lintPackageJson } from './index'
+import { runLintPackageJson } from './index'
 import * as foxUtils from 'fox-utils';
+import { setup } from 'fox-utils'
 
+setup()
 
 const helpText = `fox-package-json-lint
 
@@ -19,7 +21,7 @@ Examples:
   fox-package-json-lint`
 
 async function runFunction() {
-  await lintPackageJson()
+  await runLintPackageJson()
 }
 
 foxUtils.cli(process.argv, {
