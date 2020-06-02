@@ -8,6 +8,10 @@
     "build": "cross-env NODE_ENV=development tsc --build",
     "test": "cross-env jest"
   },
+  "type": "module",
+  "engines": {
+    "node": ">=12.17.0 >=14.3.0"
+  },
   "keywords": [],
   "author": "",
   "license": "MIT",

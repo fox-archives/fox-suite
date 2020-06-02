@@ -22,9 +22,9 @@
     "url": "https://github.com/eankeen/fox-suite.git"
   },
   "license": "MIT",
+  "type": "module",
   "engines": {
-    "node": ">=12",
-    "pnpm": ">=4"
+    "node": ">=12.17.0 >=14.3.0"
   },
   "scripts": {
     "start": "ts-node src",

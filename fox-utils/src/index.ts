@@ -1,7 +1,4 @@
-export * from "./bootstrap";
-export * from "./cli";
-export * from './paths'
-export * from './print'
-export * from './project'
-export { is } from './util/is'
-export { setup } from './util/setup'
+export * from "./bootstrap.js";
+export * from "./cli.js";
+export * from './project.js'
+export * from './util.js'

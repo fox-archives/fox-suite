@@ -9,6 +9,10 @@
     "build": "tsc --build",
     "test": "jest"
   },
+  "type": "module",
+  "engines": {
+    "node": ">=12.17.0 >=14.3.0"
+  },
   "keywords": [],
   "author": "Edwin Kofler",
   "license": "MIT",

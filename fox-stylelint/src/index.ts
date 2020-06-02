@@ -1,6 +1,6 @@
 import path from 'path'
-// @ts-ignore
-import { NpmPackageJsonLint } from "npm-package-json-lint";
+import stylelint from 'stylelint'
+
 import * as foxUtils from "fox-utils";
 
 export async function bootstrapFunction(): Promise<void> {
@@ -8,17 +8,43 @@ export async function bootstrapFunction(): Promise<void> {
     ".config/stylelint.config.js"
   ]
   await foxUtils.useBootstrapTemplate({
-    templateRoot: path.join(__dirname, '../src/templates'),
+    templateRoot: path.join(foxUtils.__dirname(import.meta), '../src/templates'),
     templateFiles
   })
 }
 
 export async function lintFunction(): Promise<void> {
-  const { projectPackageJson, projectPackageJsonPath, projectPath } =
+  const { projectPath } =
     await foxUtils.getProjectData();
-  const packageJsonLintConfig = await foxUtils.getAndCreateConfig(
-    projectPath,
-    "fox-package-json-lint",
-  );
-  if (!packageJsonLintConfig) return;
+
+  const { default: config } = await import(path.join(projectPath, '.config/stylelint.config.js'))
+  const cachePath = path.join(projectPath, '.config/.stylelintcache')
+  const ignorePath = path.join(projectPath, '.config/stylelintignore')
+
+  const result = await stylelint.lint({
+    config,
+    files: '**/*.css',
+    // TODO: fix
+    // @ts-ignore
+    globbyOptions: {
+      cwd: projectPath,
+      ignore: [],
+      caseSensitiveMatch: true, // default
+      dot: false, // default
+      gitignore: false // default
+    },
+    configBasedir: path.join(foxUtils.__dirname(import.meta), '..'),
+    fix: true,
+    formatter: 'string',
+    cache: true,
+    cacheLocation: cachePath,
+    disableDefaultIgnores: true,
+    ignorePath,
+    reportNeedlessDisables: true,
+    // TODO: fix
+    // @ts-ignore
+    reportInvalidScopeDisables: true
+  })
+
+  console.log(result)
 }

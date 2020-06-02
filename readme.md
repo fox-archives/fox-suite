@@ -33,6 +33,10 @@ with each project, you may want to slightly change the configuration, geared tow
 
 ## FAQ
 
+### Supported Versions
+
+right now we support running on node versions `>=12.17.0 >=v13.14.0 >=14.3.0` but realistically speaking it only works for node `>=14.3.0` since there are issues with loading es modules with node versions 12 and 13
+
 ### What about Rome?
 
 Rome solves a lot of problems related to tooling interoperability. However, there are some features that Rome will likely not have (such as markdown file linting or easy package release flow). Those seem out of the scope of the project (at least for now). `fox-suite` uses the apis of these somewhat niche tools to help improve your code. Eventually, `fox-suite` will hopefully include a module for easy integration with Rome.

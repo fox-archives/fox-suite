@@ -1,5 +1,5 @@
 #!/usr/bin/env node
-import { runFoxSuite } from './'
+import { runFoxSuite } from './index.js'
 
 export async function bin() {
   try {

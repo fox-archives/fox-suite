@@ -2,9 +2,12 @@
   "name": "fox-package-json-sort",
   "version": "0.1.1",
   "license": "MIT",
-  "type": "commonjs",
   "scripts": {
     "test": "ava"
+  },
+  "type": "module",
+  "engines": {
+    "node": ">=12.17.0 >=14.3.0"
   },
   "ava": {
     "extensions": [

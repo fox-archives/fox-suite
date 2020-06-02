@@ -2,11 +2,15 @@
   "name": "fox-stylelint",
   "version": "0.1.0",
   "description": "",
-  "main": "build",
+  "main": "build/index.js",
   "scripts": {
     "start": "ts-node src",
     "watch": "tsc --build --watch",
     "build": "tsc --build"
+  },
+  "type": "module",
+  "engines": {
+    "node": ">=12.17.0 >=14.3.0"
   },
   "bin": {
     "fox-stylelint": "./bin/fox-stylelint.js"
@@ -21,6 +25,7 @@
   "dependencies": {
     "eslint": "^7.0.0",
     "eslint-config-fox": "^0.1.0",
-    "fox-utils": "workspace:^0.1.1"
+    "fox-utils": "workspace:^0.1.1",
+    "stylelint": "^13.5.0"
   }
 }

@@ -5,12 +5,6 @@ import { run } from './run'
 export async function runFoxSuite() {
   const argv = minimist(process.argv.slice(2))
 
-  let has = (string: string) => argv._.includes(string)
-  console.log(argv)
-  if (has('bin') && has('package-json-sort')) {
-    console.log('test')
-  }
-
   const actionResponse = await prompts({
     type: 'select',
     name: 'action',
@@ -32,15 +26,19 @@ export async function runFoxSuite() {
     })
 
     const bootstrapModule: string = bootstrapResponse.module
-    const { bootstrapFunction } = await import(bootstrapModule)
+    console.log(bootstrapModule)
+    const r = '/home/edwin/docs/programming/repos/fox-suite/fox-suite/node_modules/fox-stylelint/build/index.js'
+    console.info(r)
+    const { bootstrapFunction } = await import(r)
     await bootstrapFunction()
 
   } else if (actionResponse.action === 'lint') {
-    const response = await prompts({
+    const lintResponse = await prompts({
       type: 'select',
-      name: 'script',
+      name: 'module',
       message: 'run a script',
       choices: [
+        { title: 'Stylelint', description: 'Lint CSS Files', value: 'fox-stylelint' },
         { title: 'fox-markdown-lint', description: 'Lint markdown files', value: 'fox-markdown-lint' },
         { title: 'fox-package-json-lint', description: 'Lint package.json', value: 'fox-package-json-lint' },
         { title: 'fox-package-json-sort', description: 'Sort package.json', value: 'fox-package-json-sort'},
@@ -48,7 +46,11 @@ export async function runFoxSuite() {
       ]
     });
 
-    const script: string = response.script;
-    run(script);
+    const lintModule: string = lintResponse.module
+    const { lintFunction } = await import(lintModule)
+    await lintFunction()
+
+    // const script: string = response.script;
+    // run(script);
   }
 }

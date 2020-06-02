@@ -1,5 +1,5 @@
 #!/usr/bin/env node
 
-const { bin } = require('../build/bin')
+import { bin } from '../build/bin.js'
 
 bin()

@@ -2,7 +2,7 @@ import path from 'path'
 import fs from 'fs'
 import prompts from 'prompts'
 
-import { getProjectData } from './project';
+import { getProjectData } from './project.js';
 
 /**
  * generate boilerpalte configuration in `.config`
