@@ -20,13 +20,13 @@ export async function lintFunction(fox: IFox): Promise<void> {
     await foxUtils.getProjectData();
 
   const configFn = await import(path.join(projectPath, '.config/stylelint.config.js'))
-  const stylelintConfigFoxPath = path.join(foxUtils.__dirname(import.meta), '../node_modules/stylelint-config-fox/build/index.js')
+  const stylelintConfigFoxPath = path.join(foxUtils.__dirname(import.meta), '../node_modules/stylelint-config-fox')
   const cachePath = path.join(projectPath, '.config/.stylelintcache')
   const ignorePath = path.join(projectPath, '.config/stylelintignore')
 
   const config = configFn.default(fox)
   config.extends = config.extends || [],
-  config.extends.unshift("/home/edwin/docs/programming/repos/fox-suite/fox-stylelint/node_modules/stylelint-config-fox")
+  config.extends.unshift(stylelintConfigFoxPath)
   console.log('config::', config)
   const result = await stylelint.lint({
     config,
@@ -54,5 +54,6 @@ export async function lintFunction(fox: IFox): Promise<void> {
   })
 
   console.log('output')
-  console.log(result.output)
+  // console.log(result)
+  console.log('a', result.output)
 }

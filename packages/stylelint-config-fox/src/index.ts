@@ -6,8 +6,7 @@ import { rootConfig } from './config/root.config'
 //   }
 // }
 
-console.log('fooooo')
-export default {
+module.exports = {
   // ...rootConfig()
   rules: {
     "at-rule-no-unknown": true,

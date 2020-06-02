@@ -2,6 +2,6 @@
 
 export default function(fox) {
   return {
-    rules: []
+    rules: {}
   }
 }
