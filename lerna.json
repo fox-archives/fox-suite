@@ -1,8 +1,7 @@
 {
   "packages": [
-    "*-fox",
-    "./test",
-    "fox-*"
+    "*fox*",
+    "./test"
   ],
   "version": "0.1.1"
 }
