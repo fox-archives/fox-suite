@@ -1,5 +1,5 @@
 {
-  "extends": "../tsconfig.base.json",
+  "extends": "../tsconfig.module.json",
   "compilerOptions": {
     "rootDir": "src",
     "outDir": "build"
@@ -8,9 +8,6 @@
     "src/**/*", "templates"
   ],
   "references": [
-    {
-      "path": "../fox-utils"
-    },
     {
       "path": "../stylelint-config-fox"
     }

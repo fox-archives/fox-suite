@@ -1,10 +1,10 @@
 {
-  "extends": "../tsconfig.base.json",
+  "extends": "../tsconfig.module.json",
   "compilerOptions": {
     "rootDir": "src",
     "outDir": "build"
   },
   "include": [
-    "src/**/*"
+    "src/**/*", "../fox-stylelint/src/templates"
   ]
 }

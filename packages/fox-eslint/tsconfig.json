@@ -1,0 +1,15 @@
+{
+  "extends": "../tsconfig.module.json",
+  "compilerOptions": {
+    "rootDir": "src",
+    "outDir": "build"
+  },
+  "include": [
+    "src/**/*"
+  ],
+  "references": [
+    {
+      "path": "../eslint-config-fox"
+    }
+  ]
+}
