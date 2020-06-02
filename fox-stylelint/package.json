@@ -1,5 +1,5 @@
 {
-  "name": "fox-eslint",
+  "name": "fox-stylelint",
   "version": "0.1.0",
   "description": "",
   "main": "build",
@@ -9,7 +9,7 @@
     "build": "tsc --build"
   },
   "bin": {
-    "fox-eslint": "./bin/fox-eslint.js"
+    "fox-stylelint": "./bin/fox-stylelint.js"
   },
   "keywords": [
     "fox-suite",
@@ -20,6 +20,7 @@
   "license": "MIT",
   "dependencies": {
     "eslint": "^7.0.0",
-    "eslint-config-fox": "^0.1.0"
+    "eslint-config-fox": "^0.1.0",
+    "fox-utils": "workspace:^0.1.1"
   }
 }

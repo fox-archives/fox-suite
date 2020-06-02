@@ -5,6 +5,11 @@
     "outDir": "build"
   },
   "include": [
-    "src/**/*", "../fox-stylelint/src/templates"
+    "src/**/*", "templates"
+  ],
+  "references": [
+    {
+      "path": "../fox-utils"
+    }
   ]
 }

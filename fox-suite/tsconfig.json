@@ -22,6 +22,9 @@
     },
     {
       "path": "../fox-eslint"
+    },
+    {
+      "path": "../fox-stylelint"
     }
   ]
 }

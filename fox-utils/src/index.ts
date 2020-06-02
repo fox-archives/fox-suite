@@ -1,6 +1,7 @@
+export * from "./bootstrap";
+export * from "./cli";
 export * from './paths'
 export * from './print'
 export * from './project'
-export * from './cli'
 export { is } from './util/is'
 export { setup } from './util/setup'

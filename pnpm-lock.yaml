@@ -88,6 +88,15 @@ importers:
       lodash: ^4.17.15
       ts-node: ^8.10.1
       typescript: ^3.8.3
+  fox-stylelint:
+    dependencies:
+      eslint: 7.0.0
+      eslint-config-fox: 'link:../eslint-config-fox'
+      fox-utils: 'link:../fox-utils'
+    specifiers:
+      eslint: ^7.0.0
+      eslint-config-fox: ^0.1.0
+      fox-utils: 'workspace:^0.1.1'
   fox-suite:
     dependencies:
       chalk: 4.0.0
@@ -95,6 +104,7 @@ importers:
       fox-markdown-lint: 'link:../fox-markdown-lint'
       fox-package-json-lint: 'link:../fox-package-json-lint'
       fox-package-json-sort: 'link:../fox-package-json-sort'
+      fox-stylelint: 'link:../fox-stylelint'
       minimist: 1.2.5
       prompts: 2.3.2
     devDependencies:
@@ -110,6 +120,7 @@ importers:
       fox-markdown-lint: 'workspace:^0.1.1'
       fox-package-json-lint: ^0.1.1
       fox-package-json-sort: ^0.1.1
+      fox-stylelint: 'workspace:^0.1.0'
       jest: ^26.0.1
       minimist: ^1.2.5
       prompts: ^2.3.2
@@ -119,6 +130,8 @@ importers:
   fox-utils:
     dependencies:
       chalk: 4.0.0
+      pkg-up: 3.1.0
+      prompts: 2.3.2
       read-pkg-up: 7.0.1
     devDependencies:
       cross-env: 7.0.2
@@ -132,6 +145,8 @@ importers:
       cross-env: ^7.0.2
       jest: ^26.0.1
       minimist: ^1.2.5
+      pkg-up: ^3.1.0
+      prompts: ^2.3.2
       read-pkg-up: ^7.0.1
       ts-jest: ^25.5.1
       ts-node: ^8.10.1
@@ -7679,6 +7694,14 @@ packages:
       node: '>=8'
     resolution:
       integrity: sha512-HRDzbaKjC+AOWVXxAU/x54COGeIv9eb+6CkDSQoNTt4XyWoIJvuPsXizxu/Fr23EiekbtZwmh1IcIG/l/a10GQ==
+  /pkg-up/3.1.0:
+    dependencies:
+      find-up: 3.0.0
+    dev: false
+    engines:
+      node: '>=8'
+    resolution:
+      integrity: sha512-nDywThFk1i4BQK4twPQ6TA4RT8bDY96yeuCVBWL3ePARCiEKDRSrNGbFIgUJpLp+XeIR65v8ra7WuJOFUBtkMA==
   /please-upgrade-node/3.2.0:
     dependencies:
       semver-compare: 1.0.0

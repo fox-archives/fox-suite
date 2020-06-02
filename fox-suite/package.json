@@ -20,6 +20,7 @@
     "fox-markdown-lint": "workspace:^0.1.1",
     "fox-package-json-lint": "^0.1.1",
     "fox-package-json-sort": "^0.1.1",
+    "fox-stylelint": "workspace:^0.1.0",
     "minimist": "^1.2.5",
     "prompts": "^2.3.2"
   },
