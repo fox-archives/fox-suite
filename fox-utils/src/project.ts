@@ -1,11 +1,20 @@
 import path from 'path'
 import fs from 'fs'
 import readPkgUp from 'read-pkg-up'
+import * as foxTypes from 'fox-types'
+
+interface Project {
+  projectPackageJson: Record<string, any>
+  projectPackageJsonPath: string,
+  foxConfig: Record<string, any>
+  projectFoxConfigPath: string,
+  projectPath: string
+}
 
 /**
  * @description get all necessary data from parent module
  */
-export async function getProjectData() {
+export async function getProjectData(): Promise<Project> {
   const {
     // @ts-ignore
     packageJson: projectPackageJson,
@@ -15,11 +24,14 @@ export async function getProjectData() {
       normalize: false
     })
   const projectPath = path.dirname(projectPackageJsonPath)
-  const projectFoxConfigPath = path.resolve(projectPath, '.config')
+  const projectFoxConfigPath = path.resolve(projectPath, 'fox.config.mjs')
+
+  const foxConfig = (await import(projectFoxConfigPath)).default
 
   return {
     projectPackageJson,
     projectPackageJsonPath,
+    foxConfig,
     projectFoxConfigPath,
     projectPath
   }

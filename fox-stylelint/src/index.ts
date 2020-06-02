@@ -2,10 +2,12 @@ import path from 'path'
 import stylelint from 'stylelint'
 
 import * as foxUtils from "fox-utils";
+import { IFox }from "fox-types";
 
 export async function bootstrapFunction(): Promise<void> {
   const templateFiles = [
-    ".config/stylelint.config.js"
+    ".config/stylelint.config.js",
+    ".config/stylelintignore"
   ]
   await foxUtils.useBootstrapTemplate({
     templateRoot: path.join(foxUtils.__dirname(import.meta), '../src/templates'),
@@ -13,14 +15,19 @@ export async function bootstrapFunction(): Promise<void> {
   })
 }
 
-export async function lintFunction(): Promise<void> {
+export async function lintFunction(fox: IFox): Promise<void> {
   const { projectPath } =
     await foxUtils.getProjectData();
 
-  const { default: config } = await import(path.join(projectPath, '.config/stylelint.config.js'))
+  const configFn = await import(path.join(projectPath, '.config/stylelint.config.js'))
+  const stylelintConfigFoxPath = path.join(foxUtils.__dirname(import.meta), '../node_modules/stylelint-config-fox/build/index.js')
   const cachePath = path.join(projectPath, '.config/.stylelintcache')
   const ignorePath = path.join(projectPath, '.config/stylelintignore')
 
+  const config = configFn.default(fox)
+  config.extends = config.extends || [],
+  config.extends.unshift("/home/edwin/docs/programming/repos/fox-suite/fox-stylelint/node_modules/stylelint-config-fox")
+  console.log('config::', config)
   const result = await stylelint.lint({
     config,
     files: '**/*.css',
@@ -33,7 +40,7 @@ export async function lintFunction(): Promise<void> {
       dot: false, // default
       gitignore: false // default
     },
-    configBasedir: path.join(foxUtils.__dirname(import.meta), '..'),
+    configBasedir: projectPath,
     fix: true,
     formatter: 'string',
     cache: true,
@@ -46,5 +53,6 @@ export async function lintFunction(): Promise<void> {
     reportInvalidScopeDisables: true
   })
 
-  console.log(result)
+  console.log('output')
+  console.log(result.output)
 }

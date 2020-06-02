@@ -1,18 +1,16 @@
 {
   "extends": "../tsconfig.base.json",
   "compilerOptions": {
+    "module": "CommonJS",
     "rootDir": "src",
     "outDir": "build"
   },
   "include": [
-    "src/**/*", "templates"
+    "src/**/*"
   ],
   "references": [
     {
       "path": "../fox-utils"
-    },
-    {
-      "path": "../stylelint-config-fox"
     }
   ]
 }

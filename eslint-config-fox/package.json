@@ -16,7 +16,7 @@
     "name": "Edwin Kofler",
     "url": "https://edwinkofler.com"
   },
-  "main": "eslint.config.",
+  "main": "build",
   "repository": {
     "type": "git",
     "url": "https://github.com/eankeen/fox-suite.git"

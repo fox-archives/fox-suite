@@ -1,0 +1,9 @@
+{
+  "name": "fox-types",
+  "version": "0.1.0",
+  "description": "",
+  "types": "types.d.ts",
+  "keywords": ["fox"],
+  "author": "Edwin Kofler",
+  "license": "MIT"
+}

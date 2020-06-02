@@ -2,7 +2,7 @@
   "name": "fox-stylelint",
   "version": "0.1.0",
   "description": "",
-  "main": "build/index.js",
+  "main": "build",
   "scripts": {
     "start": "ts-node src",
     "watch": "tsc --build --watch",
@@ -23,9 +23,11 @@
   "author": "Edwin Kofler",
   "license": "MIT",
   "dependencies": {
-    "eslint": "^7.0.0",
-    "eslint-config-fox": "^0.1.0",
-    "fox-utils": "workspace:^0.1.1",
-    "stylelint": "^13.5.0"
+    "fox-utils": "^0.1.1",
+    "stylelint": "^13.5.0",
+    "stylelint-config-fox": "workspace:^0.1.0"
+  },
+  "devDependencies": {
+    "fox-types": "0.1.0"
   }
 }

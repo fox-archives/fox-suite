@@ -1,0 +1,35 @@
+{
+  "name": "stylelint-config-fox",
+  "version": "0.1.0",
+  "description": "",
+  "main": "build",
+  "scripts": {
+    "start": "ts-node src",
+    "watch": "tsc --build --watch",
+    "build": "tsc --build",
+    "test": "jest",
+    "lint": "eslint --fix --config eslint.config.cjs ."
+  },
+  "type": "commonjs",
+  "engines": {
+    "node": ">=12.17.0 >=14.3.0"
+  },
+  "keywords": [
+    "stylelint",
+    "fox",
+    "stylelint-config",
+    "fox-suite"
+  ],
+  "devDependencies": {
+    "eslint": "^6.8.0",
+    "jest": "^26.0.1",
+    "jest-extended": "^0.11.5",
+    "ts-jest": "^26.0.0",
+    "typescript": "^3.9.2"
+  },
+  "peerDependencies": {
+    "eslint": "^6.8.0"
+  },
+  "author": "Edwin Kofler",
+  "license": "MIT"
+}

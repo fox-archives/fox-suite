@@ -22,9 +22,10 @@
     "chalk": "^4.0.0",
     "fox-eslint": "workspace:^0.1.0",
     "fox-markdown-lint": "workspace:^0.1.1",
-    "fox-package-json-lint": "^0.1.1",
-    "fox-package-json-sort": "^0.1.1",
+    "fox-package-json-lint": "workspace:^0.1.1",
+    "fox-package-json-sort": "workspace:^0.1.1",
     "fox-stylelint": "workspace:^0.1.0",
+    "fox-utils": "^0.1.1",
     "minimist": "^1.2.5",
     "prompts": "^2.3.2"
   },

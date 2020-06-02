@@ -92,15 +92,16 @@ importers:
       typescript: ^3.8.3
   fox-stylelint:
     dependencies:
-      eslint: 7.0.0
-      eslint-config-fox: 'link:../eslint-config-fox'
       fox-utils: 'link:../fox-utils'
       stylelint: 13.5.0
+      stylelint-config-fox: 'link:../stylelint-config-fox'
+    devDependencies:
+      fox-types: 'link:../fox-types'
     specifiers:
-      eslint: ^7.0.0
-      eslint-config-fox: ^0.1.0
-      fox-utils: 'workspace:^0.1.1'
+      fox-types: 0.1.0
+      fox-utils: ^0.1.1
       stylelint: ^13.5.0
+      stylelint-config-fox: 'workspace:^0.1.0'
   fox-suite:
     dependencies:
       chalk: 4.0.0
@@ -109,6 +110,7 @@ importers:
       fox-package-json-lint: 'link:../fox-package-json-lint'
       fox-package-json-sort: 'link:../fox-package-json-sort'
       fox-stylelint: 'link:../fox-stylelint'
+      fox-utils: 'link:../fox-utils'
       minimist: 1.2.5
       prompts: 2.3.2
     devDependencies:
@@ -122,15 +124,18 @@ importers:
       cross-env: ^7.0.2
       fox-eslint: 'workspace:^0.1.0'
       fox-markdown-lint: 'workspace:^0.1.1'
-      fox-package-json-lint: ^0.1.1
-      fox-package-json-sort: ^0.1.1
+      fox-package-json-lint: 'workspace:^0.1.1'
+      fox-package-json-sort: 'workspace:^0.1.1'
       fox-stylelint: 'workspace:^0.1.0'
+      fox-utils: ^0.1.1
       jest: ^26.0.1
       minimist: ^1.2.5
       prompts: ^2.3.2
       ts-jest: ^25.5.1
       ts-node: ^8.10.1
       typescript: ^3.8.3
+  fox-types:
+    specifiers: {}
   fox-utils:
     dependencies:
       chalk: 4.0.0
@@ -139,6 +144,7 @@ importers:
       read-pkg-up: 7.0.1
     devDependencies:
       cross-env: 7.0.2
+      fox-types: 'link:../fox-types'
       jest: 26.0.1
       minimist: 1.2.5
       ts-jest: 25.5.1_jest@26.0.1+typescript@3.8.3
@@ -147,6 +153,7 @@ importers:
     specifiers:
       chalk: ^4.0.0
       cross-env: ^7.0.2
+      fox-types: 'workspace:^0.1.0'
       jest: ^26.0.1
       minimist: ^1.2.5
       pkg-up: ^3.1.0
@@ -168,6 +175,19 @@ importers:
       npm-package-json-lint: ^5.1.0
       ts-node: ^8.10.1
       typescript: ^3.8.3
+  stylelint-config-fox:
+    devDependencies:
+      eslint: 6.8.0
+      jest: 26.0.1
+      jest-extended: 0.11.5
+      ts-jest: 26.0.0_jest@26.0.1+typescript@3.9.2
+      typescript: 3.9.2
+    specifiers:
+      eslint: ^6.8.0
+      jest: ^26.0.1
+      jest-extended: ^0.11.5
+      ts-jest: ^26.0.0
+      typescript: ^3.9.2
   test:
     devDependencies:
       fox-suite: 'link:../fox-suite'
@@ -5998,7 +6018,7 @@ packages:
       integrity: sha512-PUMlsLth0Azen8Q2WFTwnSkGh2JZ8FYuwijC8NR47vXKpsrKmA1wWvgcj1CquuVfcYiDEdj985u5Wmg7COEARw==
   /jest-message-util/24.9.0:
     dependencies:
-      '@babel/code-frame': 7.8.3
+      '@babel/code-frame': 7.10.1
       '@jest/test-result': 24.9.0
       '@jest/types': 24.9.0
       '@types/stack-utils': 1.0.1

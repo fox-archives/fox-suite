@@ -1,9 +1,12 @@
 import minimist from 'minimist'
 import prompts from 'prompts'
 import { run } from './run'
+import * as foxUtils from 'fox-utils'
 
 export async function runFoxSuite() {
   const argv = minimist(process.argv.slice(2))
+
+  const projectData = await foxUtils.getProjectData()
 
   const actionResponse = await prompts({
     type: 'select',
@@ -26,10 +29,7 @@ export async function runFoxSuite() {
     })
 
     const bootstrapModule: string = bootstrapResponse.module
-    console.log(bootstrapModule)
-    const r = '/home/edwin/docs/programming/repos/fox-suite/fox-suite/node_modules/fox-stylelint/build/index.js'
-    console.info(r)
-    const { bootstrapFunction } = await import(r)
+    const { bootstrapFunction } = await import(bootstrapModule)
     await bootstrapFunction()
 
   } else if (actionResponse.action === 'lint') {
@@ -48,7 +48,7 @@ export async function runFoxSuite() {
 
     const lintModule: string = lintResponse.module
     const { lintFunction } = await import(lintModule)
-    await lintFunction()
+    await lintFunction(projectData.foxConfig)
 
     // const script: string = response.script;
     // run(script);

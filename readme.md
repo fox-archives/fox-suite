@@ -4,7 +4,7 @@ A sly suite of tools for Typescript, Javascript, and web development in general
 
 Do you ever...
 
-- Get tired of setting up common tools and files (`.editorconfig`, `.prettierrc`, `.eslintconfig.js`, `.lint-stagedrc.json`, `husky.json`, etc.) over and over for each project
+- Get tired of setting up common tools and files (`.editorconfig`, `.prettierrc`, `.eslintconfig.js`, `.lint-stagedrc.json`, `husky.json`, etc.) over and over for each project?
 - Want sane defaults for all of these tools without having to think?
 - Allow to easily change the settings to something more strict if the project ends up being a bit more serious (and you want to focus on correctness rather than iterability)
 
@@ -18,14 +18,17 @@ Fox suite provides a unified interface for all formatting, linting, and boilerpl
 
 Most of these third party tools are not invoked directly. This would mean we would have to depend on how the third party tool searches the fs for its config file, and probably other things.
 
-`.fox.js` is a javascript module that specifies a few options
+`fox.config.js` is a javascript module that specifies a few options
 
 ```js
 // .fox.js
 export default {
   all: 'cozy',
-  eslint: 'cozy',
-  stylelint: 'excessive'
+  monorepo: true,
+  module: {
+    eslint: 'cozy',
+    stylelint: 'excessive'
+  }
 }
 ```
 
