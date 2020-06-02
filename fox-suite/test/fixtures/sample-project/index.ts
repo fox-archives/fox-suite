@@ -9,3 +9,6 @@ import { sortPackageJsonFileAuto } from 'fox-package-json-sort'
     process.exitCode = 1
   }
 })()
+
+
+ 

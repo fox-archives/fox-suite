@@ -92,6 +92,7 @@ importers:
     dependencies:
       chalk: 4.0.0
       fox-eslint: 'link:../fox-eslint'
+      fox-markdown-lint: 'link:../fox-markdown-lint'
       fox-package-json-lint: 'link:../fox-package-json-lint'
       fox-package-json-sort: 'link:../fox-package-json-sort'
       minimist: 1.2.5
@@ -106,6 +107,7 @@ importers:
       chalk: ^4.0.0
       cross-env: ^7.0.2
       fox-eslint: 'workspace:^0.1.0'
+      fox-markdown-lint: 'workspace:^0.1.1'
       fox-package-json-lint: ^0.1.1
       fox-package-json-sort: ^0.1.1
       jest: ^26.0.1
