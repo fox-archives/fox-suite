@@ -55,7 +55,7 @@ it's kind of simple
 ```ts
 export const info = {
 	// used by buildCli. must be the same name as what's in your package.json
-	name: 'fox-htmlhint',
+	name: 'fox-plugin-htmlhint',
 	// used by prompts in fox-suite
 	tool: 'Htmlhint',
 	toolConfig: 'https://htmlhint.com/docs/user-guide/list-rules',

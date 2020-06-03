@@ -1,4 +1,4 @@
-import { sortPackageJsonFileAuto } from 'fox-package-json-sort'
+import { sortPackageJsonFileAuto } from 'fox-plugin-package-json-sort'
 
 (async () => {
   try {
@@ -11,4 +11,4 @@ import { sortPackageJsonFileAuto } from 'fox-package-json-sort'
 })()
 
 
- 
+

@@ -11,8 +11,8 @@
   "author": "",
   "license": "MIT",
   "dependencies": {
-    "fox-package-json-lint": "^0.1.0",
-    "fox-package-json-sort": "^0.1.0"
+    "fox-plugin-package-json-lint": "^0.1.0",
+    "fox-plugin-package-json-sort": "^0.1.0"
   },
   "devDependencies": {
     "@types/node": "^13.13.5",

@@ -1,0 +1,47 @@
+{
+  "name": "fox-plugin-prettier",
+  "description": "Prettier configuration for Fox Suite",
+  "version": "0.1.0",
+  "keywords": [
+    "prettier",
+    "fox",
+    "fox-suite"
+  ],
+  "homepage": "https://github.com/eankeen/fox-suite/tree/dev/package/fox-plugin-prettier#readme",
+  "bugs": {
+    "url": "https://github.com/eankeen/fox-suite/issues"
+  },
+  "author": {
+    "name": "Edwin Kofler",
+    "url": "https://edwinkofler.com"
+  },
+  "main": "build",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/eankeen/fox-suite.git"
+  },
+  "license": "MIT",
+  "type": "commonjs",
+  "engines": {
+    "node": ">=12.17.0 >=v13.14.0 >=14.3.0"
+  },
+  "scripts": {
+    "start": "ts-node src",
+    "watch": "tsc --build --watch",
+    "build": "tsc --build",
+    "test": "jest",
+    "lint": "eslint --fix --config eslint.config.cjs ."
+  },
+  "devDependencies": {
+    "fox-types": "workspace:^0.1.0",
+    "jest": "^26.0.1",
+    "jest-extended": "^0.11.5",
+    "ts-jest": "^26.0.0",
+    "typescript": "^3.9.2"
+  },
+  "dependencies": {
+    "@prettier/plugin-xml": "^0.7.2",
+    "fox-utils": "workspace:^0.1.1",
+    "prettier": "^2.0.5"
+  }
+}

@@ -51,7 +51,7 @@ export function __dirname(importMeta: ImportMeta): string {
  * @description serialize foxOptions to and from the environment
  * @summary in some cases, we don't have control of when
  * a module is executed (ex. we pass in the path of `stylelint-config-fox`
- * in our `fox-stylelint` package directly to `stylelint` (we don't execute)
+ * in our `fox-plugin-stylelint` package directly to `stylelint` (we don't execute)
  * the module outselves and pass _that_ to `stylelint`). so do ensure
  * the module gets access to all `IFox` fox options, we pass it as an environment
  * variable

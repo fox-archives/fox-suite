@@ -23,10 +23,10 @@ export async function runFoxSuite() {
       name: 'plugin',
       message: 'which configuration would you like to bootstrap?',
       choices: [
-				{ title: 'Prettier', description: 'Lint most files', value: 'fox-prettier' },
-				{ title: 'Htmlhint', description: 'Lint HTML files', value: 'fox-htmlhint' },
-				{ title: 'Stylelint', description: 'Lint CSS files', value: 'fox-stylelint' },
-				{ title: 'Eslint', description: 'Lint JS files', value: 'fox-eslint' }
+				{ title: 'Prettier', description: 'Lint most files', value: 'fox-plugin-prettier' },
+				{ title: 'Htmlhint', description: 'Lint HTML files', value: 'fox-plugin-htmlhint' },
+				{ title: 'Stylelint', description: 'Lint CSS files', value: 'fox-plugin-stylelint' },
+				{ title: 'Eslint', description: 'Lint JS files', value: 'fox-plugin-eslint' }
       ]
     })
 
@@ -44,11 +44,11 @@ export async function runFoxSuite() {
       name: 'plugin',
       message: 'run a script',
       choices: [
-        { title: 'Stylelint', description: 'Lint CSS Files', value: 'fox-stylelint' },
-        { title: 'fox-markdown-lint', description: 'Lint markdown files', value: 'fox-markdown-lint' },
-        { title: 'fox-package-json-lint', description: 'Lint package.json', value: 'fox-package-json-lint' },
-        { title: 'fox-package-json-sort', description: 'Sort package.json', value: 'fox-package-json-sort'},
-        { title: 'fox-eslint', description: 'Lint Typescript / Javascript', value: 'fox-eslint' }
+        { title: 'Stylelint', description: 'Lint CSS Files', value: 'fox-plugin-stylelint' },
+        { title: 'fox-plugin-markdown-lint', description: 'Lint markdown files', value: 'fox-plugin-markdown-lint' },
+        { title: 'fox-plugin-package-json-lint', description: 'Lint package.json', value: 'fox-plugin-package-json-lint' },
+        { title: 'fox-plugin-package-json-sort', description: 'Sort package.json', value: 'fox-plugin-package-json-sort'},
+        { title: 'fox-plugin-eslint', description: 'Lint Typescript / Javascript', value: 'fox-plugin-eslint' }
       ]
     });
 

@@ -1,0 +1,41 @@
+{
+  "name": "fox-plugin-package-json-sort",
+  "version": "0.1.1",
+  "license": "MIT",
+  "scripts": {
+    "test": "ava"
+  },
+  "type": "commonjs",
+  "engines": {
+    "node": ">=12.17.0 >=v13.14.0 >=14.3.0"
+  },
+  "ava": {
+    "extensions": [
+      "ts"
+    ],
+    "require": [
+      "ts-node/register"
+    ]
+  },
+  "husky": {
+    "hooks": {
+      "pre-commit": "pnpm run test"
+    }
+  },
+  "main": "build",
+  "bin": {
+    "fox-plugin-package-json-sort": "./bin/fox-plugin-package-json-sort.js",
+    "fox-pjs": "./bin/fox-plugin-package-json-sort.js"
+  },
+  "dependencies": {
+    "fox-utils": "^0.1.1",
+    "lodash": "^4.17.15"
+  },
+  "devDependencies": {
+    "ava": "^3.8.1",
+    "fox-types": "workspace:^0.1.0",
+    "husky": "^4.2.5",
+    "ts-node": "^8.10.1",
+    "typescript": "^3.8.3"
+  }
+}

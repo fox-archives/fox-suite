@@ -22,6 +22,8 @@ importers:
       '@types/stylelint': ^9.10.1
       lerna: ^3.20.2
       ts-node: ^8.10.1
+  ../../../../.local/opt/n/pnpm-global:
+    specifiers: {}
   packages/eslint-config-fox:
     dependencies:
       babel-eslint: 10.1.0_eslint@6.8.0
@@ -42,7 +44,9 @@ importers:
       np: ^6.2.3
       ts-jest: ^26.0.0
       typescript: ^3.9.2
-  packages/fox-eslint:
+  packages/fox-esm:
+    specifiers: {}
+  packages/fox-plugin-eslint:
     dependencies:
       eslint: 7.1.0
       eslint-config-fox: 'link:../eslint-config-fox'
@@ -56,7 +60,7 @@ importers:
       fox-esm: 'workspace:^0.1.0'
       fox-types: 'workspace:^0.1.0'
       fox-utils: 'workspace:^0.1.1'
-  packages/fox-htmlhint:
+  packages/fox-plugin-htmlhint:
     dependencies:
       fox-esm: 'link:../fox-esm'
       fox-utils: 'link:../fox-utils'
@@ -74,7 +78,7 @@ importers:
       htmlhint: ^0.14.0
       ts-node: ^8.10.1
       typescript: ^3.8.3
-  packages/fox-markdown-lint:
+  packages/fox-plugin-markdown-lint:
     dependencies:
       markdown-extensions: 1.1.1
       remark-cli: 8.0.0
@@ -90,7 +94,7 @@ importers:
       remark-lint: ^7.0.0
       remark-preset-lint-recommended: ^4.0.0
       unified-args: ^8.0.0
-  packages/fox-package-json-lint:
+  packages/fox-plugin-package-json-lint:
     dependencies:
       fox-utils: 'link:../fox-utils'
       npm-package-json-lint: 5.1.0
@@ -106,7 +110,7 @@ importers:
       npm-package-json-lint-config-fox: ^0.1.1
       ts-node: ^8.10.1
       typescript: ^3.8.3
-  packages/fox-package-json-sort:
+  packages/fox-plugin-package-json-sort:
     dependencies:
       fox-utils: 'link:../fox-utils'
       lodash: 4.17.15
@@ -124,7 +128,7 @@ importers:
       lodash: ^4.17.15
       ts-node: ^8.10.1
       typescript: ^3.8.3
-  packages/fox-prettier:
+  packages/fox-plugin-prettier:
     dependencies:
       '@prettier/plugin-xml': 0.7.2
       fox-utils: 'link:../fox-utils'
@@ -144,7 +148,7 @@ importers:
       prettier: ^2.0.5
       ts-jest: ^26.0.0
       typescript: ^3.9.2
-  packages/fox-stylelint:
+  packages/fox-plugin-stylelint:
     dependencies:
       esm: 3.2.25
       fox-esm: 'link:../fox-esm'
@@ -166,14 +170,14 @@ importers:
     dependencies:
       chalk: 4.0.0
       esm: 3.2.25
-      fox-eslint: 'link:../fox-eslint'
       fox-esm: 'link:../fox-esm'
-      fox-htmlhint: 'link:../fox-htmlhint'
-      fox-markdown-lint: 'link:../fox-markdown-lint'
-      fox-package-json-lint: 'link:../fox-package-json-lint'
-      fox-package-json-sort: 'link:../fox-package-json-sort'
-      fox-prettier: 'link:../fox-prettier'
-      fox-stylelint: 'link:../fox-stylelint'
+      fox-plugin-eslint: 'link:../fox-plugin-eslint'
+      fox-plugin-htmlhint: 'link:../fox-plugin-htmlhint'
+      fox-plugin-markdown-lint: 'link:../fox-plugin-markdown-lint'
+      fox-plugin-package-json-lint: 'link:../fox-plugin-package-json-lint'
+      fox-plugin-package-json-sort: 'link:../fox-plugin-package-json-sort'
+      fox-plugin-prettier: 'link:../fox-plugin-prettier'
+      fox-plugin-stylelint: 'link:../fox-plugin-stylelint'
       fox-utils: 'link:../fox-utils'
       minimist: 1.2.5
       prompts: 2.3.2
@@ -187,14 +191,14 @@ importers:
       chalk: ^4.0.0
       cross-env: ^7.0.2
       esm: ^3.2.25
-      fox-eslint: 'workspace:^0.1.0'
       fox-esm: 'workspace:^0.1.0'
-      fox-htmlhint: 'workspace:^0.1.1'
-      fox-markdown-lint: 'workspace:^0.1.1'
-      fox-package-json-lint: 'workspace:^0.1.1'
-      fox-package-json-sort: 'workspace:^0.1.1'
-      fox-prettier: 'workspace:^0.1.0'
-      fox-stylelint: 'workspace:^0.1.0'
+      fox-plugin-eslint: 'workspace:^0.1.0'
+      fox-plugin-htmlhint: 'workspace:^0.1.1'
+      fox-plugin-markdown-lint: 'workspace:^0.1.1'
+      fox-plugin-package-json-lint: 'workspace:^0.1.1'
+      fox-plugin-package-json-sort: 'workspace:^0.1.1'
+      fox-plugin-prettier: 'workspace:^0.1.0'
+      fox-plugin-stylelint: 'workspace:^0.1.0'
       fox-utils: ^0.1.1
       jest: ^26.0.1
       minimist: ^1.2.5

@@ -50,7 +50,7 @@ export async function getConfig(absolutePackageJsonPath: string, configName: str
 }
 
 const configMap = new Map([
-  ['fox-package-json-lint', 'npmpackagejsonlint.config.js']
+  ['fox-plugin-package-json-lint', 'npmpackagejsonlint.config.js']
 ])
 
 /**
@@ -60,7 +60,7 @@ const configMap = new Map([
  * warning to console
  */
 
-type configFileTypes = 'fox-package-json-lint'
+type configFileTypes = 'fox-plugin-package-json-lint'
 export async function getAndCreateConfig(absProjectPath: string, configFileType: configFileTypes): Promise<object | undefined> {
   let configFile = configMap.get(configFileType)
   if (!configFile) throw new Error('unexpected connfiguration file')

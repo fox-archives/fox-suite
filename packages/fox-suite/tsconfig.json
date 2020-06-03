@@ -9,28 +9,28 @@
   ],
   "references": [
     {
-      "path": "../fox-markdown-lint"
+      "path": "../fox-plugin-markdown-lint"
     },
     {
-      "path": "../fox-package-json-lint"
+      "path": "../fox-plugin-package-json-lint"
     },
     {
-      "path": "../fox-package-json-sort"
+      "path": "../fox-plugin-package-json-sort"
     },
     {
       "path": "../npm-package-json-lint-config-fox"
     },
     {
-      "path": "../fox-eslint"
+      "path": "../fox-plugin-eslint"
     },
     {
-      "path": "../fox-stylelint"
+      "path": "../fox-plugin-stylelint"
 		},
 		{
-			"path": "../fox-htmlhint"
+			"path": "../fox-plugin-htmlhint"
 		},
 		{
-			"path": "../fox-prettier"
+			"path": "../fox-plugin-prettier"
 		}
   ]
 }
