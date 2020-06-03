@@ -18,6 +18,7 @@
   "license": "MIT",
   "dependencies": {
     "markdown-extensions": "^1.1.1",
+    "remark": "^12.0.0",
     "remark-cli": "^8.0.0",
     "remark-lint": "^7.0.0",
     "remark-preset-lint-recommended": "^4.0.0",

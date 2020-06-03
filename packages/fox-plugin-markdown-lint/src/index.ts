@@ -5,26 +5,24 @@ import extensions from 'markdown-extensions'
 import processor from 'remark'
 // @ts-ignore
 import proc from 'remark/package.json'
-// @ts-ignore
-import cli from './package.json'
 
 export { info } from './info'
 
 export async function runMarkdownLint() {
-  start({
-    processor: processor,
-    name: proc.name,
-    description: cli.description,
-    version: [
-      proc.name + ': ' + proc.version,
-      cli.name + ': ' + cli.version
-    ].join(', '),
-    pluginPrefix: proc.name,
-    // @ts-ignore
-    presetPrefix: proc.name + '-preset',
-    packageField: proc.name + 'Config',
-    rcName: '.' + proc.name + 'rc',
-    ignoreName: '.' + proc.name + 'ignore',
-    extensions: extensions
-  })
+  // start({
+  //   processor: processor,
+  //   name: proc.name,
+  //   description: cli.description,
+  //   version: [
+  //     proc.name + ': ' + proc.version,
+  //     cli.name + ': ' + cli.version
+  //   ].join(', '),
+  //   pluginPrefix: proc.name,
+  //   // @ts-ignore
+  //   presetPrefix: proc.name + '-preset',
+  //   packageField: proc.name + 'Config',
+  //   rcName: '.' + proc.name + 'rc',
+  //   ignoreName: '.' + proc.name + 'ignore',
+  //   extensions: extensions
+  // })
 }

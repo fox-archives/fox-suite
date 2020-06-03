@@ -30,7 +30,7 @@
     "fox-plugin-prettier": "workspace:^0.1.0",
     "fox-plugin-stylelint": "workspace:^0.1.0",
     "fox-utils": "^0.1.1",
-    "lodash.uniqby": "^4.7.0",
+    "lodash.uniq": "^4.5.0",
     "minimist": "^1.2.5",
     "prompts": "^2.3.2"
   },
