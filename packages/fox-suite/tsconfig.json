@@ -25,6 +25,9 @@
     },
     {
       "path": "../fox-stylelint"
-    }
+		},
+		{
+			"path": "../fox-htmlhint"
+		}
   ]
 }

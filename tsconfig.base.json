@@ -5,7 +5,6 @@
     "sourceMap": true,
     "target": "ES2019",
     "module": "ESNext",
-    // "allowSyntheticDefaultImports": true,
     "esModuleInterop": true,
     "strict": true,
     "noImplicitAny": true,

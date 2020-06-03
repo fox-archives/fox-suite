@@ -24,7 +24,8 @@ export async function runFoxSuite() {
       name: 'module',
       message: 'which configuration would you like to bootstrap?',
       choices: [
-        { title: 'Stylelint', description: 'Lint CSS files', value: 'fox-stylelint' }
+				{ title: 'Stylelint', description: 'Lint CSS files', value: 'fox-stylelint' },
+				{ title: 'Htmlhint', description: 'Lint HTML files', value: 'fox-htmlhint' }
       ]
     })
 

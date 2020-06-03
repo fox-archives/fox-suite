@@ -22,6 +22,7 @@
     "chalk": "^4.0.0",
     "esm": "^3.2.25",
     "fox-eslint": "workspace:^0.1.0",
+    "fox-htmlhint": "workspace:^0.1.1",
     "fox-markdown-lint": "workspace:^0.1.1",
     "fox-package-json-lint": "workspace:^0.1.1",
     "fox-package-json-sort": "workspace:^0.1.1",
