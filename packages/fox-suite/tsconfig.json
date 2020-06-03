@@ -28,6 +28,9 @@
 		},
 		{
 			"path": "../fox-htmlhint"
+		},
+		{
+			"path": "../fox-prettier"
 		}
   ]
 }

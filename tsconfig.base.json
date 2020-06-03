@@ -20,7 +20,8 @@
       "minimist",
       "prompts",
 			"eslint",
-			"stylelint"
+			"stylelint",
+			"prettier"
     ],
     "lib": [
       "ESNext"

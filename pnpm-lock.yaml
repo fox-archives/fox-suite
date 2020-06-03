@@ -6,6 +6,7 @@ importers:
       '@types/lodash': 4.14.154
       '@types/minimist': 1.2.0
       '@types/node': 13.13.9
+      '@types/prettier': 2.0.1
       '@types/prompts': 2.0.8
       '@types/stylelint': 9.10.1
       lerna: 3.22.0
@@ -16,6 +17,7 @@ importers:
       '@types/lodash': ^4.14.150
       '@types/minimist': ^1.2.0
       '@types/node': ^13.13.5
+      '@types/prettier': ^2.0.1
       '@types/prompts': ^2.0.8
       '@types/stylelint': ^9.10.1
       lerna: ^3.20.2
@@ -88,9 +90,11 @@ importers:
       npm-package-json-lint: 5.1.0
       npm-package-json-lint-config-fox: 'link:../npm-package-json-lint-config-fox'
     devDependencies:
+      fox-types: 'link:../fox-types'
       ts-node: 8.10.2_typescript@3.9.3
       typescript: 3.9.3
     specifiers:
+      fox-types: 'workspace:^0.1.0'
       fox-utils: ^0.1.1
       npm-package-json-lint: ^5.1.0
       npm-package-json-lint-config-fox: ^0.1.1
@@ -102,16 +106,38 @@ importers:
       lodash: 4.17.15
     devDependencies:
       ava: 3.8.2
+      fox-types: 'link:../fox-types'
       husky: 4.2.5
       ts-node: 8.10.2_typescript@3.9.3
       typescript: 3.9.3
     specifiers:
       ava: ^3.8.1
+      fox-types: 'workspace:^0.1.0'
       fox-utils: ^0.1.1
       husky: ^4.2.5
       lodash: ^4.17.15
       ts-node: ^8.10.1
       typescript: ^3.8.3
+  packages/fox-prettier:
+    dependencies:
+      '@prettier/plugin-xml': 0.7.2
+      fox-utils: 'link:../fox-utils'
+      prettier: 2.0.5
+    devDependencies:
+      fox-types: 'link:../fox-types'
+      jest: 26.0.1
+      jest-extended: 0.11.5
+      ts-jest: 26.1.0_jest@26.0.1+typescript@3.9.3
+      typescript: 3.9.3
+    specifiers:
+      '@prettier/plugin-xml': ^0.7.2
+      fox-types: 'workspace:^0.1.0'
+      fox-utils: 'workspace:^0.1.1'
+      jest: ^26.0.1
+      jest-extended: ^0.11.5
+      prettier: ^2.0.5
+      ts-jest: ^26.0.0
+      typescript: ^3.9.2
   packages/fox-stylelint:
     dependencies:
       esm: 3.2.25
@@ -139,6 +165,7 @@ importers:
       fox-markdown-lint: 'link:../fox-markdown-lint'
       fox-package-json-lint: 'link:../fox-package-json-lint'
       fox-package-json-sort: 'link:../fox-package-json-sort'
+      fox-prettier: 'link:../fox-prettier'
       fox-stylelint: 'link:../fox-stylelint'
       fox-utils: 'link:../fox-utils'
       minimist: 1.2.5
@@ -158,6 +185,7 @@ importers:
       fox-markdown-lint: 'workspace:^0.1.1'
       fox-package-json-lint: 'workspace:^0.1.1'
       fox-package-json-sort: 'workspace:^0.1.1'
+      fox-prettier: 'workspace:^0.1.0'
       fox-stylelint: 'workspace:^0.1.0'
       fox-utils: ^0.1.1
       jest: ^26.0.1
@@ -1681,6 +1709,13 @@ packages:
     dev: true
     resolution:
       integrity: sha512-/MKeipxtwMorckj1bfP+SKhbzKhqQimT5JuXKGtwnLazqDwj/noYYSPChpLzstVAwF8JVPygJ7L75cKCK47Ikg==
+  /@prettier/plugin-xml/0.7.2:
+    dependencies:
+      '@xml-tools/parser': 1.0.5
+      prettier: 2.0.5
+    dev: false
+    resolution:
+      integrity: sha512-c6i6OQ2y9kvWeUTrfkwHy+jdJXI3bpO8TT9EoVjJIEAApj5gLtJ/O2D9qthxWXh5zbipngueDEC2CT6tBZzBdA==
   /@samverschueren/stream-to-observable/0.3.0:
     dependencies:
       any-observable: 0.3.0
@@ -1896,6 +1931,12 @@ packages:
     dev: true
     resolution:
       integrity: sha512-Dk/IDOPtOgubt/IaevIUbTgV7doaKkoorvOyYM2CMwuDyP89bekI7H4xLIwunNYiK9jhCkmc6pUrJk3cj2AB9w==
+  /@xml-tools/parser/1.0.5:
+    dependencies:
+      chevrotain: 7.0.1
+    dev: false
+    resolution:
+      integrity: sha512-c3ZWjRNDDH/h3i/aYe7y4FPowRynNXOHW4+N+G/DekV1le6IZMu5MueSUXXk8+6XenxTry7ugHYqdbyTd5F1HA==
   /@zkochan/cmd-shim/3.1.0:
     dependencies:
       is-windows: 1.0.2
@@ -2774,6 +2815,12 @@ packages:
   /chardet/0.7.0:
     resolution:
       integrity: sha512-mT8iDcrh03qDGRRmoA2hmBJnxpllMR+0/0qlzjqZES6NdiWDcZkCNAk4rPFZ9Q85r27unkiNNg8ZOiwZXBHwcA==
+  /chevrotain/7.0.1:
+    dependencies:
+      regexp-to-ast: 0.5.0
+    dev: false
+    resolution:
+      integrity: sha512-B/44jrdw5GAzy483LEeVSgXSX0qOYM8lUd3l5+yf6Vl6OQjEUCm2BUiYbHRCIK6xCEvCLAFe1kj8uyV6+zdaVw==
   /chokidar/3.4.0:
     dependencies:
       anymatch: 3.1.1
@@ -8150,6 +8197,13 @@ packages:
       node: '>=4'
     resolution:
       integrity: sha1-6SQ0v6XqjBn0HN/UAddBo8gZ2Jc=
+  /prettier/2.0.5:
+    dev: false
+    engines:
+      node: '>=10.13.0'
+    hasBin: true
+    resolution:
+      integrity: sha512-7PtVymN48hGcO4fGjybyBSIWDsLU4H4XlvOHfq91pz9kkGlonzwTfYkaIEwiRg/dAJF9YlbsduBAgtYLi+8cFg==
   /pretty-format/22.4.3:
     dependencies:
       ansi-regex: 3.0.0
@@ -8485,6 +8539,10 @@ packages:
       node: '>=0.10.0'
     resolution:
       integrity: sha512-J6SDjUgDxQj5NusnOtdFxDwN/+HWykR8GELwctJ7mdqhcyy1xEc4SRFHUXvxTp661YaVKAjfRLZ9cCqS6tn32A==
+  /regexp-to-ast/0.5.0:
+    dev: false
+    resolution:
+      integrity: sha512-tlbJqcMHnPKI9zSrystikWKwHkBqu2a/Sgw01h3zFjvYrMxEDYHzzoMZnUrbIfpTFEsoRnnviOXNCzFiSc54Qw==
   /regexpp/2.0.1:
     engines:
       node: '>=6.5.0'

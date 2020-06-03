@@ -26,6 +26,7 @@
     "fox-markdown-lint": "workspace:^0.1.1",
     "fox-package-json-lint": "workspace:^0.1.1",
     "fox-package-json-sort": "workspace:^0.1.1",
+    "fox-prettier": "workspace:^0.1.0",
     "fox-stylelint": "workspace:^0.1.0",
     "fox-utils": "^0.1.1",
     "minimist": "^1.2.5",
