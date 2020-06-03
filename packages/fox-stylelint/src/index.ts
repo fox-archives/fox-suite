@@ -3,6 +3,7 @@ import stylelint from 'stylelint'
 import * as foxUtils from "fox-utils";
 import { IFox } from "fox-types";
 import postcssScss from 'postcss-scss'
+import type stylelintType from '../../../@types/stylelint'
 
 export async function bootstrapFunction(): Promise<void> {
   const templateFiles = [
@@ -33,9 +34,7 @@ export async function lintFunction(fox: IFox): Promise<void> {
   config.extends = config.extends || [],
   config.extends.unshift(stylelintConfigFoxPath)
 
-  const sharedOptions: Partial<stylelint.LinterOptions> | undefined = {
-    // TODO: fix
-    // @ts-ignore
+	const sharedOptions: Partial<stylelintType.i> | undefined = {
     globbyOptions: {
       cwd: projectPath,
       ignore: [],
@@ -51,8 +50,6 @@ export async function lintFunction(fox: IFox): Promise<void> {
     disableDefaultIgnores: true,
     ignorePath: path.join(projectPath, '.config/stylelintignore'),
     reportNeedlessDisables: true,
-    // TODO: fix
-    // @ts-ignore
     reportInvalidScopeDisables: true
   }
 

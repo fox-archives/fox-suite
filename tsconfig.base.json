@@ -19,7 +19,8 @@
       "jest",
       "minimist",
       "prompts",
-      "eslint"
+			"eslint",
+			"stylelint"
     ],
     "lib": [
       "ESNext"
