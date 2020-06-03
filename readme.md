@@ -1,6 +1,6 @@
 # fox-suite
 
-A sly suite of tools for Typescript, Javascript, and web development in general
+A sly suite of tools for web development
 
 Do you ever...
 
@@ -34,12 +34,23 @@ export default {
 
 with each project, you may want to slightly change the configuration, geared towards *developer satisfaction*. for example, the above config lints javascript such that only the most aggregous errors are caught and that most autofixable rules are enabled. if your project suddenly becomes a bit more serious / big, you can always increase the parameter to 'strict', or 'excessive', to give more guarentees
 
+
+## Who is this for?
+
+This is for the _modern_ web devleoper. This "toolchain" aims to be as lightweight as possible, with respect to the generated code and the mental tax on the developer. For example, we always configure stylelint with `value-no-vendor-prefix` and `color-function-notation` to `modern`, since we assume the output will be piped through `autoprefixer` (probably via `fox-postcss`) if the user actually wants better browser support. Another example, we target to `ES2018` with typescript for `node` projects because we assume the code will be run on a supported / LTS node version. Last example, we target `ESNext` when linting with `eslint` to make things more flexable and useless errors pop up less.
+
+Another thing, we try to be as explicit as possible. For example, if an API allows us, we try to remove any implicit 'commands'. Example, we explicitly set `node_modules/` in `stylelintignore` and prevent `node_modules` from automatically being added by setting an option when invoking stylelint node api. Again this removes mental tax since everything's more explicit
+
 ## FAQ
 
 ### Supported Versions
 
-right now we support running on node versions `>=12.17.0 >=v13.14.0 >=14.3.0` but realistically speaking it only works for node `>=14.3.0` since there are issues with loading es modules with node versions 12 and 13
+right now we support running on node versions `>=12.17.0 >=v13.14.0 >=14.3.0`, but realistically speaking it only works for node `>=14.3.0` since there are issues with loading es modules with node versions 12 and 13 (not to mention lack of non-exclusive `.mjs` support for node 10). Not using ECMAScript modules, even for a compilation feels really dirty in 2020, so I'll try to automatically invoke node 14 through `nvm` and `n` to have better compatability or whatever
 
 ### What about Rome?
 
 Rome solves a lot of problems related to tooling interoperability. However, there are some features that Rome will likely not have (such as markdown file linting or easy package release flow). Those seem out of the scope of the project (at least for now). `fox-suite` uses the apis of these somewhat niche tools to help improve your code. Eventually, `fox-suite` will hopefully include a module for easy integration with Rome.
+
+### I don't like rule X
+
+When you use `prettier`, `stylelint`, `eslint`, etc., there are bound to be rules you don't like. You can just, like, totally override them in `.config/*`.

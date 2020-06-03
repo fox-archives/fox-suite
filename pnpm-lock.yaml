@@ -95,6 +95,7 @@ importers:
   packages/fox-stylelint:
     dependencies:
       fox-utils: 'link:../fox-utils'
+      postcss-scss: 2.1.1
       stylelint: 13.5.0
       stylelint-config-fox: 'link:../stylelint-config-fox'
     devDependencies:
@@ -102,11 +103,13 @@ importers:
     specifiers:
       fox-types: 0.1.0
       fox-utils: ^0.1.1
+      postcss-scss: ^2.1.1
       stylelint: ^13.5.0
       stylelint-config-fox: 'workspace:^0.1.0'
   packages/fox-suite:
     dependencies:
       chalk: 4.0.0
+      esm: 3.2.25
       fox-eslint: 'link:../fox-eslint'
       fox-markdown-lint: 'link:../fox-markdown-lint'
       fox-package-json-lint: 'link:../fox-package-json-lint'
@@ -124,6 +127,7 @@ importers:
     specifiers:
       chalk: ^4.0.0
       cross-env: ^7.0.2
+      esm: ^3.2.25
       fox-eslint: 'workspace:^0.1.0'
       fox-markdown-lint: 'workspace:^0.1.1'
       fox-package-json-lint: 'workspace:^0.1.1'
@@ -178,6 +182,8 @@ importers:
       ts-node: ^8.10.1
       typescript: ^3.8.3
   packages/stylelint-config-fox:
+    dependencies:
+      fox-types: 'link:../fox-types'
     devDependencies:
       eslint: 6.8.0
       jest: 26.0.1
@@ -186,6 +192,7 @@ importers:
       typescript: 3.9.3
     specifiers:
       eslint: ^6.8.0
+      fox-types: 'workspace:^0.1.0'
       jest: ^26.0.1
       jest-extended: ^0.11.5
       ts-jest: ^26.0.0
@@ -3908,6 +3915,12 @@ packages:
     hasBin: true
     resolution:
       integrity: sha512-DfS3b8iHMK5z/YLSme8K5cge168I8j8o1uiVmFCgnnjxZQbCGyraF8bMl7Ju4yfBmCuxD7shOF7eqGkcuIHfsA==
+  /esm/3.2.25:
+    dev: false
+    engines:
+      node: '>=6'
+    resolution:
+      integrity: sha512-U1suiZ2oDVWv4zPO56S0NcR5QriEahGtdN2OR6FiOG4WJvcjBVFB0qI4+eKoWFH483PKGuLuu6V8Z4T5g63UVA==
   /espree/6.2.1:
     dependencies:
       acorn: 7.2.0

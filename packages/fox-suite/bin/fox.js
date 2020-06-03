@@ -1,5 +1,10 @@
 #!/usr/bin/env node
 
-import { bin } from '../build/bin.js'
+require = require("esm")(module, {
+
+})
+
+// import { bin } from '../build/bin.js'
+const { bin } = require('../build/bin')
 
 bin()

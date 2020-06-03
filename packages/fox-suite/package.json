@@ -8,7 +8,7 @@
     "build": "cross-env NODE_ENV=development tsc --build",
     "test": "cross-env jest"
   },
-  "type": "module",
+  "type": "commonjs",
   "engines": {
     "node": ">=12.17.0 >=14.3.0"
   },
@@ -20,6 +20,7 @@
   },
   "dependencies": {
     "chalk": "^4.0.0",
+    "esm": "^3.2.25",
     "fox-eslint": "workspace:^0.1.0",
     "fox-markdown-lint": "workspace:^0.1.1",
     "fox-package-json-lint": "workspace:^0.1.1",

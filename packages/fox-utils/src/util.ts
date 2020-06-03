@@ -1,7 +1,8 @@
 import path from 'path'
 import url from 'url';
-
 import chalk from 'chalk'
+
+import { IFox } from 'fox-types'
 /**
  * general miscellaneous utility functions
  */
@@ -44,4 +45,23 @@ export function toRelativePath(absolutePath: string): string {
 
 export function __dirname(importMeta: ImportMeta): string {
   return path.dirname(url.fileURLToPath(importMeta.url));
+}
+
+/**
+ * @description serialize foxOptions to and from the environment
+ * @summary in some cases, we don't have control of when
+ * a module is executed (ex. we pass in the path of `stylelint-config-fox`
+ * in our `fox-stylelint` package directly to `stylelint` (we don't execute)
+ * the module outselves and pass _that_ to `stylelint`). so do ensure
+ * the module gets access to all `IFox` fox options, we pass it as an environment
+ * variable
+ */
+export function setFoxOptionsToEnv(fox: IFox): void {
+  process.env.FOX_SUITE_FOX_OPTIONS = JSON.stringify(fox)
+}
+
+export function getFoxOptionsFromEnv(): IFox {
+  let foxOptions = process.env.FOX_SUITE_FOX_OPTIONS
+  foxOptions = foxOptions || "{ error: 'process.env.FOX_SUITE_FOX_OPTIONS is falsey' }"
+  return JSON.parse(foxOptions)
 }

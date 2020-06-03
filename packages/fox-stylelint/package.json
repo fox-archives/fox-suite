@@ -8,7 +8,7 @@
     "watch": "tsc --build --watch",
     "build": "tsc --build"
   },
-  "type": "module",
+  "type": "commonjs",
   "engines": {
     "node": ">=12.17.0 >=14.3.0"
   },
@@ -24,6 +24,7 @@
   "license": "MIT",
   "dependencies": {
     "fox-utils": "^0.1.1",
+    "postcss-scss": "^2.1.1",
     "stylelint": "^13.5.0",
     "stylelint-config-fox": "workspace:^0.1.0"
   },

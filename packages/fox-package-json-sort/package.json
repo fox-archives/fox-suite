@@ -5,7 +5,7 @@
   "scripts": {
     "test": "ava"
   },
-  "type": "module",
+  "type": "commonjs",
   "engines": {
     "node": ">=12.17.0 >=14.3.0"
   },
