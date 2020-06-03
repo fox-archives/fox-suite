@@ -1,6 +1,6 @@
 import path from 'path'
 import htmlhint from 'htmlhint'
-
+import { IFox } from "fox-types";
 import * as foxUtils from "fox-utils";
 
 export async function bootstrapFunction(): Promise<void> {
@@ -12,4 +12,8 @@ export async function bootstrapFunction(): Promise<void> {
 		// templateRoot: path.join(foxUtils.__dirname(import.meta), '../src/templates'),
 		templateFiles
 	})
+}
+
+export async function lintFunction(fox: IFox): Promise<void> {
+
 }

@@ -1,9 +1,23 @@
+import path from 'path'
 // @ts-ignore
 import { ESLint } from "eslint";
+import * as foxUtils from "fox-utils";
 // @ts-ignore
 import eslintConfigFox from 'eslint-config-fox'
 
-export async function runEslint() {
+export async function bootstrapFunction() {
+	const templateFiles = [
+		".config/eslint.config.js",
+		".config/eslintignore"
+	]
+	await foxUtils.useBootstrapTemplate({
+		templateRoot: path.join(__dirname, '../src/templates'),
+		// templateRoot: path.join(foxUtils.__dirname(import.meta), '../src/templates'),
+		templateFiles
+	})
+}
+
+export async function lintFunction() {
   // 1. Create an instance.
   const eslint = new ESLint({
     cwd: process.cwd(),

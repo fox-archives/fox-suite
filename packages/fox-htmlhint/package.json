@@ -8,6 +8,9 @@
 		"watch": "tsc --build --watch",
 		"build": "tsc --build"
 	},
+	"bin": {
+		"fox-htmlhint": "./bin/fox-htmlhint.js"
+	},
 	"type": "commonjs",
 	"engines": {
 		"node": ">=12.17.0 >=14.3.0"
@@ -16,11 +19,13 @@
 	"author": "Edwin Kofler",
 	"license": "MIT",
 	"dependencies": {
-		"fox-utils": "^0.1.1",
+		"fox-esm": "workspace:^0.1.0",
+		"fox-utils": "workspace:^0.1.1",
 		"htmlhint": "^0.14.0"
 	},
 	"devDependencies": {
 		"@types/htmlhint": "^0.9.1",
+		"fox-types": "workspace:^0.1.0",
 		"ts-node": "^8.10.1",
 		"typescript": "^3.8.3"
 	}

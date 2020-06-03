@@ -41,6 +41,12 @@ This is for the _modern_ web devleoper. This "toolchain" aims to be as lightweig
 
 Another thing, we try to be as explicit as possible. For example, if an API allows us, we try to remove any implicit 'commands'. Example, we explicitly set `node_modules/` in `stylelintignore` and prevent `node_modules` from automatically being added by setting an option when invoking stylelint node api. Again this removes mental tax since everything's more explicit
 
+## Support
+
+- ESlint
+- Stylelint
+- HTMLHint
+
 ## FAQ
 
 ### Supported Versions

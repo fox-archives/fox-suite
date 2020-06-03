@@ -24,6 +24,8 @@
   "license": "MIT",
   "dependencies": {
     "eslint": "^7.0.0",
-    "eslint-config-fox": "^0.1.0"
+    "eslint-config-fox": "^0.1.0",
+    "fox-esm": "workspace:^0.1.0",
+    "fox-utils": "workspace:^0.1.1"
   }
 }

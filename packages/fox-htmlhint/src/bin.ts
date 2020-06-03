@@ -1,30 +1,11 @@
-import { bootstrapFunction } from "./";
+import { bootstrapFunction, lintFunction } from "./";
 import * as foxUtils from "fox-utils";
-import { setup } from "fox-utils";
 
-setup();
-
-const helpText = `fox-htmlhint
-
-Usage:
-  fox-htmlhint
-
-Description:
-  Lints the html files of current project
-
-Options:
-  --help  show help
-  -h      show help
-
-Examples:
-  fox-htmlhint --help
-  fox-htmlhint`;
-
-async function runFunction() {
-	await bootstrapFunction();
+export async function bin() {
+	await foxUtils.buildCli(process.argv, {
+		moduleName: 'fox-htmlhint',
+		moduleDescription: 'Lints the html files of current project',
+		bootstrapFunction,
+		actionFunction: lintFunction
+	});
 }
-
-foxUtils.cli(process.argv, {
-	helpText,
-	runFunction,
-});

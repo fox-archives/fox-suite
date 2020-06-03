@@ -1,8 +1,7 @@
 import path from 'path'
 import stylelint from 'stylelint'
-
 import * as foxUtils from "fox-utils";
-import { IFox }from "fox-types";
+import { IFox } from "fox-types";
 import postcssScss from 'postcss-scss'
 
 export async function bootstrapFunction(): Promise<void> {

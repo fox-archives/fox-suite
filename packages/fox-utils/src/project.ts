@@ -1,12 +1,12 @@
 import path from 'path'
 import fs from 'fs'
 import readPkgUp from 'read-pkg-up'
-import * as foxTypes from 'fox-types'
+import { IFox } from 'fox-types'
 
 interface Project {
   projectPackageJson: Record<string, any>
   projectPackageJsonPath: string,
-  foxConfig: Record<string, any>
+  foxConfig: IFox
   projectFoxConfigPath: string,
   projectPath: string
 }
@@ -26,7 +26,16 @@ export async function getProjectData(): Promise<Project> {
   const projectPath = path.dirname(projectPackageJsonPath)
   const projectFoxConfigPath = path.resolve(projectPath, 'fox.config.mjs')
 
-  const foxConfig = (await import(projectFoxConfigPath)).default
+	let foxConfig
+	try {
+		await fs.promises.access(projectFoxConfigPath, fs.constants.F_OK)
+		foxConfig = (await import(projectFoxConfigPath)).default
+	} catch {
+		foxConfig = {
+			all: 'cozy'
+		}
+	}
+
 
   return {
     projectPackageJson,

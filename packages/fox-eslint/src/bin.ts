@@ -1,10 +1,11 @@
-import { runEslint } from './'
+import { bootstrapFunction, lintFunction } from "./";
+import * as foxUtils from "fox-utils";
 
 export async function bin() {
-  try {
-    await runEslint()
-  } catch (err) {
-    console.error(err)
-    process.exitCode = 1
-  }
+	await foxUtils.buildCli(process.argv, {
+		moduleName: 'fox-stylelint',
+		moduleDescription: 'Lints the css files of current project',
+		bootstrapFunction,
+		actionFunction: lintFunction
+	});
 }
