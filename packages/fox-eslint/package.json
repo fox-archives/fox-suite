@@ -18,7 +18,7 @@
   ],
   "type": "commonjs",
   "engines": {
-    "node": ">=12.17.0 >=14.3.0"
+    "node": ">=12.17.0 >=v13.14.0 >=14.3.0"
   },
   "author": "Edwin Kofler",
   "license": "MIT",

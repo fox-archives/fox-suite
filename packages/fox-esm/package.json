@@ -5,5 +5,8 @@
 	"main": "cjs.js",
 	"author": "Edwin Kofler",
 	"license": "MIT",
-	"type": "commonjs"
+	"type": "commonjs",
+	"engines": {
+		"node": ">=12.17.0 >=v13.14.0 >=14.3.0"
+	}
 }
