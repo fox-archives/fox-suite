@@ -1,6 +1,5 @@
 import minimist from 'minimist'
 import prompts from 'prompts'
-import { run } from './run'
 import * as foxUtils from 'fox-utils'
 
 export async function runFoxSuite() {
@@ -8,7 +7,7 @@ export async function runFoxSuite() {
 
   const projectData = await foxUtils.getProjectData()
 
-  const actionResponse = await prompts({
+  const { action } = await prompts({
     type: 'select',
     name: 'action',
     message: 'choose action',
@@ -18,10 +17,10 @@ export async function runFoxSuite() {
     ]
   })
 
-  if (actionResponse.action === 'bootstrap') {
-    const bootstrapResponse = await prompts({
+  if (action === 'bootstrap') {
+    const { plugin } = await prompts({
       type: 'select',
-      name: 'module',
+      name: 'plugin',
       message: 'which configuration would you like to bootstrap?',
       choices: [
 				{ title: 'Prettier', description: 'Lint most files', value: 'fox-prettier' },
@@ -31,14 +30,18 @@ export async function runFoxSuite() {
       ]
     })
 
-    const bootstrapModule: string = bootstrapResponse.module
-    const { bootstrapFunction } = await import(bootstrapModule)
-    await bootstrapFunction()
+		if(plugin) {
+			const { bootstrapFunction } = await import(plugin)
+			await bootstrapFunction()
+		} else {
+			process.exitCode = 1
+		}
 
-  } else if (actionResponse.action === 'lint') {
-    const lintResponse = await prompts({
+
+  } else if (action === 'lint') {
+    const { plugin } = await prompts({
       type: 'select',
-      name: 'module',
+      name: 'plugin',
       message: 'run a script',
       choices: [
         { title: 'Stylelint', description: 'Lint CSS Files', value: 'fox-stylelint' },
@@ -49,11 +52,13 @@ export async function runFoxSuite() {
       ]
     });
 
-    const lintModule: string = lintResponse.module
-    const { lintFunction } = await import(lintModule)
-    await lintFunction(projectData.foxConfig)
-
-    // const script: string = response.script;
-    // run(script);
-  }
+		if(plugin) {
+			const { lintFunction } = await import(plugin)
+			await lintFunction(projectData.foxConfig)
+		} else {
+			process.exitCode = 1
+		}
+  } else {
+		process.exitCode = 1
+	}
 }
