@@ -1,35 +1,27 @@
 import path from 'path'
 import fs from 'fs'
 import readPkgUp from 'read-pkg-up'
-import { IFox } from 'fox-types'
-
-interface Project {
-  projectPackageJson: Record<string, any>
-  projectPackageJsonPath: string,
-  foxConfig: IFox
-  projectFoxConfigPath: string,
-  projectPath: string
-}
+import { IProject } from 'fox-types'
 
 /**
  * @description get all necessary data from parent module
  */
-export async function getProjectData(): Promise<Project> {
+export async function getProjectData(): Promise<IProject> {
   const {
     // @ts-ignore
-    packageJson: projectPackageJson,
+    packageJson: packageJson,
     // @ts-ignore
-    path: projectPackageJsonPath } = await readPkgUp({
+    path: packageJsonPath } = await readPkgUp({
       cwd: process.cwd(),
       normalize: false
     })
-  const projectPath = path.dirname(projectPackageJsonPath)
-  const projectFoxConfigPath = path.resolve(projectPath, 'fox.config.mjs')
+  const location = path.dirname(packageJsonPath)
+  const foxConfigPath = path.resolve(location, 'fox.config.mjs')
 
 	let foxConfig
 	try {
-		await fs.promises.access(projectFoxConfigPath, fs.constants.F_OK)
-		foxConfig = (await import(projectFoxConfigPath)).default
+		await fs.promises.access(foxConfigPath, fs.constants.F_OK)
+		foxConfig = (await import(foxConfigPath)).default
 	} catch {
 		foxConfig = {
 			all: 'cozy'
@@ -38,11 +30,11 @@ export async function getProjectData(): Promise<Project> {
 
 
   return {
-    projectPackageJson,
-    projectPackageJsonPath,
+    packageJson,
+    packageJsonPath,
     foxConfig,
-    projectFoxConfigPath,
-    projectPath
+    foxConfigPath,
+    location
   }
 }
 

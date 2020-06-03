@@ -21,14 +21,14 @@ export async function useBootstrapTemplate({
   templateRoot,
   templateFiles
 }: IUseBootstrapTemplate): Promise<void> {
-  const { projectPath } = await getProjectData()
-  await ensureDotConfigDir(projectPath)
+  const { location } = await getProjectData()
+  await ensureDotConfigDir(location)
 
 
   const retryFiles: { templateSrc: string, templateDest: string }[] = []
   for (const templateFileName of templateFiles) {
     const templateSrc = path.join(templateRoot, templateFileName);
-    const templateDest = path.join(projectPath, templateFileName)
+    const templateDest = path.join(location, templateFileName)
 
     try {
       await fs.promises.copyFile(
@@ -75,8 +75,8 @@ export async function useBootstrapTemplate({
 
 }
 
-async function ensureDotConfigDir(projectPath: string): Promise<void> {
-  const dotConfigDir = path.join(projectPath, '.config')
+async function ensureDotConfigDir(location: string): Promise<void> {
+  const dotConfigDir = path.join(location, '.config')
   try {
     await fs.promises.access(dotConfigDir, fs.constants.F_OK);
   } catch(err) {

@@ -20,11 +20,11 @@ export async function bootstrapFunction(): Promise<void> {
 }
 
 export async function lintFunction(fox: IFox): Promise<void> {
-  const { projectPath } = await foxUtils.getProjectData();
+  const { location } = await foxUtils.getProjectData();
 
   foxUtils.setFoxOptionsToEnv(fox)
 
-  const config = (await import(path.join(projectPath, '.config/stylelint.config.js'))).default(fox)
+  const config = (await import(path.join(location, '.config/stylelint.config.js'))).default(fox)
 
   const resolve = (module: string) =>
     path.join(__dirname, `../node_modules/${module}`)
@@ -38,19 +38,19 @@ export async function lintFunction(fox: IFox): Promise<void> {
 
 	const sharedOptions: Partial<stylelintType.i> | undefined = {
     globbyOptions: {
-      cwd: projectPath,
+      cwd: location,
       ignore: [],
       caseSensitiveMatch: true, // default
       dot: false, // default
       gitignore: false // default
     },
-    configBasedir: projectPath,
+    configBasedir: location,
     fix: true,
     formatter: "string",
     cache: true,
-    cacheLocation: path.join(projectPath, '.config/.stylelintcache'),
+    cacheLocation: path.join(location, '.config/.stylelintcache'),
     disableDefaultIgnores: true,
-    ignorePath: path.join(projectPath, '.config/stylelintignore'),
+    ignorePath: path.join(location, '.config/stylelintignore'),
     reportNeedlessDisables: true,
     reportInvalidScopeDisables: true
   }

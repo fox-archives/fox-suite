@@ -10,14 +10,14 @@ export async function bootstrapFunction(): Promise<void> {
 }
 
 export async function lintFunction(fox: IFox): Promise<void> {
-	const { projectPackageJson, projectPackageJsonPath, projectPath } = await foxUtils.getProjectData();
-	const packageJsonLintConfig = await foxUtils.getAndCreateConfig(projectPath, 'fox-package-json-lint');
+	const { packageJson, packageJsonPath, location } = await foxUtils.getProjectData();
+	const packageJsonLintConfig = await foxUtils.getAndCreateConfig(location, 'fox-package-json-lint');
 	if (!packageJsonLintConfig) return
 
 	const npmPackageLint = new NpmPackageJsonLint({
 		cwd: process.cwd(),
-		packageJsonObject: projectPackageJson,
-		packageJsonFilePath: projectPackageJsonPath,
+		packageJsonObject: packageJson,
+		packageJsonFilePath: packageJsonPath,
 		config: packageJsonLintConfig,
 		// configFile: '',
 		// patterns: ['**/package.json'],

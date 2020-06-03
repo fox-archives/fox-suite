@@ -1,5 +1,5 @@
 {
-  "extends": "../tsconfig.module.json",
+  "extends": "../tsconfig.plugin.json",
   "compilerOptions": {
     "module": "CommonJS",
     "rootDir": "src",

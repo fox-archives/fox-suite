@@ -8,14 +8,14 @@ describe('getProjectData()', () => {
 
     const projectData = await foxUtilsProjects.getProjectData()
 
-    expect(projectData.projectPackageJson.name).toBe('fake-project')
-    expect(projectData.projectPackageJson).toHaveProperty('license')
+    expect(projectData.packageJson.name).toBe('fake-project')
+    expect(projectData.packageJson).toHaveProperty('license')
 
-    const projectPackageJsonPath = path.join(__dirname, './fixtures/fake-project/package.json')
-    expect(projectData.projectPackageJsonPath).toBe(projectPackageJsonPath)
+    const packageJsonPath = path.join(__dirname, './fixtures/fake-project/package.json')
+    expect(projectData.packageJsonPath).toBe(packageJsonPath)
 
-    const projectPath = path.join(__dirname, './fixtures/fake-project')
-    expect(projectData.projectPath).toBe(projectPath)
+    const location = path.join(__dirname, './fixtures/fake-project')
+    expect(projectData.location).toBe(location)
   })
 })
 
