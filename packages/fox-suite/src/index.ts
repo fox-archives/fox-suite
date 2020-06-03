@@ -1,64 +1,100 @@
 import minimist from 'minimist'
 import prompts from 'prompts'
+import { getInstalledFoxPlugins } from './util'
+import { IPlugin } from "fox-types";
 import * as foxUtils from 'fox-utils'
 
 export async function runFoxSuite() {
   const argv = minimist(process.argv.slice(2))
 
-  const projectData = await foxUtils.getProjectData()
 
-  const { action } = await prompts({
+	const [projectData, foxPlugins] = await Promise.all([
+		foxUtils.getProjectData(), getInstalledFoxPlugins()
+	])
+
+	// import all plugins
+	const foxPluginModulesPromise = []
+	for (const foxPlugin of foxPlugins) {
+		foxPluginModulesPromise.push(import(foxPlugin))
+	}
+
+	const bootstrapChoices: prompts.Choice[] = []
+	const formatChoices: prompts.Choice[] = []
+	const lintChoices: prompts.Choice[] = []
+	for (let plugin of await Promise.all(foxPluginModulesPromise)) {
+		const foxPlugin: IPlugin = plugin
+
+		if(!foxPlugin.info) {
+			// TODO: make error more specific
+			throw new Error(`an installed plugin does not have the 'info' object exported. exiting.`)
+		}
+
+		if(foxPlugin.bootstrapFunction) {
+			bootstrapChoices.push({
+				title: foxPlugin.info.tool,
+				description: foxPlugin.info.description,
+				value: foxPlugin.bootstrapFunction
+			})
+		}
+
+		if(foxPlugin.formatFunction) {
+			formatChoices.push({
+				title: foxPlugin.info.tool,
+				description: foxPlugin.info.description,
+				value: foxPlugin.formatFunction
+			})
+		}
+		if(foxPlugin.lintFunction) {
+			lintChoices.push({
+				title: foxPlugin.info.tool,
+				description: foxPlugin.info.description,
+				value: foxPlugin.lintFunction
+			})
+		}
+	}
+	const actionChoices = []
+	if (bootstrapChoices.length > 0) actionChoices.push({ title: 'Bootstrap', description: 'Bootstrap configuration boilerplate', value: 'bootstrap' })
+	if (formatChoices.length > 0) actionChoices.push({ title: 'Format', description: 'Format files', value: 'format' })
+	if (lintChoices.length > 0) actionChoices.push({ title: 'Lint', description: 'Lint via category', value: 'lint' })
+
+	const { action } = await prompts({
     type: 'select',
     name: 'action',
     message: 'choose action',
-    choices: [
-      { title: 'Bootstrap', description: 'Bootstrap configuration boilerplate', value: 'bootstrap' },
-      { title: 'Lint', description: 'Lint via category', value: 'lint' }
-    ]
+    choices: actionChoices
   })
 
   if (action === 'bootstrap') {
-    const { plugin } = await prompts({
+    const { bootstrap }: { bootstrap: IPlugin["bootstrapFunction"] } = await prompts({
       type: 'select',
-      name: 'plugin',
+      name: 'bootstrap',
       message: 'which configuration would you like to bootstrap?',
-      choices: [
-				{ title: 'Prettier', description: 'Lint most files', value: 'fox-plugin-prettier' },
-				{ title: 'Htmlhint', description: 'Lint HTML files', value: 'fox-plugin-htmlhint' },
-				{ title: 'Stylelint', description: 'Lint CSS files', value: 'fox-plugin-stylelint' },
-				{ title: 'Eslint', description: 'Lint JS files', value: 'fox-plugin-eslint' }
-      ]
+      choices: bootstrapChoices
     })
 
-		if(plugin) {
-			const { bootstrapFunction } = await import(plugin)
-			await bootstrapFunction()
-		} else {
-			process.exitCode = 1
-		}
+		if(bootstrap) await bootstrap()
+		else process.exitCode = 1
+	} else if (action === 'format') {
+		const { format }: { format: IPlugin["formatFunction"] } = await prompts({
+			type: 'select',
+			name: 'format',
+			message: 'Which formatter would you like to use?',
+			choices: formatChoices
+		})
 
-
-  } else if (action === 'lint') {
-    const { plugin } = await prompts({
+		if (format) await format(projectData.foxConfig)
+		else process.exitCode = 1
+	} else if (action === 'lint') {
+    const { lint }: { lint: IPlugin["lintFunction"] } = await prompts({
       type: 'select',
-      name: 'plugin',
+      name: 'lint',
       message: 'run a script',
-      choices: [
-        { title: 'Stylelint', description: 'Lint CSS Files', value: 'fox-plugin-stylelint' },
-        { title: 'fox-plugin-markdown-lint', description: 'Lint markdown files', value: 'fox-plugin-markdown-lint' },
-        { title: 'fox-plugin-package-json-lint', description: 'Lint package.json', value: 'fox-plugin-package-json-lint' },
-        { title: 'fox-plugin-package-json-sort', description: 'Sort package.json', value: 'fox-plugin-package-json-sort'},
-        { title: 'fox-plugin-eslint', description: 'Lint Typescript / Javascript', value: 'fox-plugin-eslint' }
-      ]
+      choices: lintChoices
     });
 
-		if(plugin) {
-			const { lintFunction } = await import(plugin)
-			await lintFunction(projectData.foxConfig)
-		} else {
-			process.exitCode = 1
-		}
-  } else {
-		process.exitCode = 1
+		if(lint) await lint(projectData.foxConfig)
+		else process.exitCode = 1
 	}
+
+	process.exitCode = 1
 }

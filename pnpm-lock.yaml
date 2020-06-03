@@ -4,6 +4,7 @@ importers:
       '@types/eslint': 6.8.1
       '@types/jest': 25.2.3
       '@types/lodash': 4.14.154
+      '@types/lodash.uniqby': 4.7.6
       '@types/minimist': 1.2.0
       '@types/node': 13.13.9
       '@types/prettier': 2.0.1
@@ -15,6 +16,7 @@ importers:
       '@types/eslint': ^6.8.1
       '@types/jest': ^25.2.1
       '@types/lodash': ^4.14.150
+      '@types/lodash.uniqby': ^4.7.6
       '@types/minimist': ^1.2.0
       '@types/node': ^13.13.5
       '@types/prettier': ^2.0.1
@@ -179,10 +181,12 @@ importers:
       fox-plugin-prettier: 'link:../fox-plugin-prettier'
       fox-plugin-stylelint: 'link:../fox-plugin-stylelint'
       fox-utils: 'link:../fox-utils'
+      lodash.uniqby: 4.7.0
       minimist: 1.2.5
       prompts: 2.3.2
     devDependencies:
       cross-env: 7.0.2
+      fox-types: 'link:../fox-types'
       jest: 26.0.1
       ts-jest: 25.5.1_jest@26.0.1+typescript@3.9.3
       ts-node: 8.10.2_typescript@3.9.3
@@ -199,8 +203,10 @@ importers:
       fox-plugin-package-json-sort: 'workspace:^0.1.1'
       fox-plugin-prettier: 'workspace:^0.1.0'
       fox-plugin-stylelint: 'workspace:^0.1.0'
+      fox-types: 'workspace:^0.1.0'
       fox-utils: ^0.1.1
       jest: ^26.0.1
+      lodash.uniqby: ^4.7.0
       minimist: ^1.2.5
       prompts: ^2.3.2
       ts-jest: ^25.5.1
@@ -1878,6 +1884,12 @@ packages:
     dev: true
     resolution:
       integrity: sha512-8+KAKzEvSUdeo+kmqnKrqgeE+LcA0tjYWFY7RPProVYwnqDjukzO+3b6dLD56rYX5TdWejnEOLJYOIeh4CXKuA==
+  /@types/lodash.uniqby/4.7.6:
+    dependencies:
+      '@types/lodash': 4.14.154
+    dev: true
+    resolution:
+      integrity: sha512-9wBhrm1y6asW50Joj6tsySCNUgzK2tCqL7vtKIej0E9RyeBFdcte7fxUosmFuMoOU0eHqOMK76kCCrK99jxHgg==
   /@types/lodash/4.14.154:
     dev: true
     resolution:
@@ -6620,6 +6632,10 @@ packages:
     dev: true
     resolution:
       integrity: sha1-0CJTc662Uq3BvILklFM5qEJ1R3M=
+  /lodash.uniqby/4.7.0:
+    dev: false
+    resolution:
+      integrity: sha1-2ZwHpmnp5tJOE2Lf4mbGdhavEwI=
   /lodash.zip/4.2.0:
     dev: true
     resolution:

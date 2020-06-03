@@ -8,6 +8,13 @@ export interface IFox {
   }
 }
 
+export interface IPlugin {
+	info: IPluginInfo,
+	bootstrapFunction?: () => Promise<void>
+	formatFunction?: (fox: IFox) => Promise<void>
+	lintFunction?: (fox: IFox) => Promise<void>
+}
+
 export interface IPluginInfo {
 	name: string,
 	tool: string,
