@@ -48,10 +48,13 @@ importers:
       eslint-config-fox: 'link:../eslint-config-fox'
       fox-esm: 'link:../fox-esm'
       fox-utils: 'link:../fox-utils'
+    devDependencies:
+      fox-types: 'link:../fox-types'
     specifiers:
       eslint: ^7.0.0
       eslint-config-fox: ^0.1.0
       fox-esm: 'workspace:^0.1.0'
+      fox-types: 'workspace:^0.1.0'
       fox-utils: 'workspace:^0.1.1'
   packages/fox-htmlhint:
     dependencies:
@@ -78,7 +81,10 @@ importers:
       remark-lint: 7.0.0
       remark-preset-lint-recommended: 4.0.0
       unified-args: 8.0.0
+    devDependencies:
+      fox-types: 'link:../fox-types'
     specifiers:
+      fox-types: 'workspace:^0.1.0'
       markdown-extensions: ^1.1.1
       remark-cli: ^8.0.0
       remark-lint: ^7.0.0
@@ -161,6 +167,7 @@ importers:
       chalk: 4.0.0
       esm: 3.2.25
       fox-eslint: 'link:../fox-eslint'
+      fox-esm: 'link:../fox-esm'
       fox-htmlhint: 'link:../fox-htmlhint'
       fox-markdown-lint: 'link:../fox-markdown-lint'
       fox-package-json-lint: 'link:../fox-package-json-lint'
@@ -181,6 +188,7 @@ importers:
       cross-env: ^7.0.2
       esm: ^3.2.25
       fox-eslint: 'workspace:^0.1.0'
+      fox-esm: 'workspace:^0.1.0'
       fox-htmlhint: 'workspace:^0.1.1'
       fox-markdown-lint: 'workspace:^0.1.1'
       fox-package-json-lint: 'workspace:^0.1.1'

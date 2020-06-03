@@ -8,6 +8,8 @@ import proc from 'remark/package.json'
 // @ts-ignore
 import cli from './package.json'
 
+export { info } from './info'
+
 export async function runMarkdownLint() {
   start({
     processor: processor,

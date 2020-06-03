@@ -1,5 +1,7 @@
 import { IFox } from "fox-types";
 
+export { info } from './info'
+
 export async function bootstrapFunction(): Promise<void> {
 
 }

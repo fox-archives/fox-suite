@@ -1,7 +1,9 @@
 import path from 'path'
 import htmlhint from 'htmlhint'
-import { IFox } from "fox-types";
+import type { IFox } from "fox-types";
 import * as foxUtils from "fox-utils";
+
+export { info } from './info'
 
 export async function bootstrapFunction(): Promise<void> {
 	const templateFiles = [

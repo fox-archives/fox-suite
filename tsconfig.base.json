@@ -26,7 +26,7 @@
     "lib": [
       "ESNext"
     ],
-    "moduleResolution": "node",
+		"moduleResolution": "node",
     "composite": true,
     // ensure this is on for composite and project references
     "declaration": true,

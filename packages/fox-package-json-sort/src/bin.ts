@@ -1,10 +1,11 @@
 import * as foxUtils from 'fox-utils'
 import { bootstrapFunction, lintFunction } from './'
+import { info } from './info'
 
 export async function bin() {
 	await foxUtils.buildCli(process.argv, {
-		moduleName: 'fox-package-json-sort',
-		moduleDescription: 'Lints (sorts) the package.json',
+		moduleName: info.name,
+		moduleDescription: info.description,
 		bootstrapFunction,
 		actionFunction: lintFunction
 	});

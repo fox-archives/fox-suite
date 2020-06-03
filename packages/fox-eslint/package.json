@@ -27,5 +27,8 @@
     "eslint-config-fox": "^0.1.0",
     "fox-esm": "workspace:^0.1.0",
     "fox-utils": "workspace:^0.1.1"
+  },
+  "devDependencies": {
+    "fox-types": "workspace:^0.1.0"
   }
 }

@@ -3,6 +3,8 @@ import { NpmPackageJsonLint } from 'npm-package-json-lint'
 import * as foxUtils from 'fox-utils'
 import { IFox } from "fox-types";
 
+export { info } from './info'
+
 export async function bootstrapFunction(): Promise<void> {
 
 }

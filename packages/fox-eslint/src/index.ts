@@ -5,6 +5,8 @@ import * as foxUtils from "fox-utils";
 // @ts-ignore
 import eslintConfigFox from 'eslint-config-fox'
 
+export { info } from './info'
+
 export async function bootstrapFunction() {
 	const templateFiles = [
 		".config/eslint.config.js",

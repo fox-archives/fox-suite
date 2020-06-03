@@ -1,10 +1,6 @@
 #!/usr/bin/env node
 
-require = require("esm")(module, {
+require = require("fox-esm")(module)
 
-})
-
-// import { bin } from '../build/bin.js'
 const { bin } = require('../build/bin')
-
 bin()

@@ -5,6 +5,8 @@ import { IFox } from "fox-types";
 import postcssScss from 'postcss-scss'
 import type stylelintType from '../../../@types/stylelint'
 
+export { info } from './info'
+
 export async function bootstrapFunction(): Promise<void> {
   const templateFiles = [
     ".config/stylelint.config.js",

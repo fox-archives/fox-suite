@@ -47,6 +47,26 @@ Another thing, we try to be as explicit as possible. For example, if an API allo
 - Stylelint
 - HTMLHint
 
+## Building your own modules
+
+it's kind of simple
+
+`info.ts`
+```ts
+export const info = {
+	// used by buildCli. must be the same name as what's in your package.json
+	name: 'fox-htmlhint',
+	// used by prompts in fox-suite
+	tool: 'Htmlhint',
+	toolConfig: 'https://htmlhint.com/docs/user-guide/list-rules',
+	// used by prompts in fox-suite and buildCli
+	description: 'Lints the HTML files',
+	// used by nothing
+	descriptionLong: 'Lints HTML files'
+
+}
+```
+
 ## FAQ
 
 ### Supported Versions
