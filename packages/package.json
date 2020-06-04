@@ -1,0 +1,5 @@
+{
+	"dependencies": {
+		"fox-test": "workspace:^1.0.0"
+	}
+}

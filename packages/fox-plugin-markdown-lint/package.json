@@ -17,6 +17,7 @@
   "author": "Edwin Kofler",
   "license": "MIT",
   "dependencies": {
+    "fox-test": "workspace:^1.0.0",
     "markdown-extensions": "^1.1.1",
     "remark": "^12.0.0",
     "remark-cli": "^8.0.0",

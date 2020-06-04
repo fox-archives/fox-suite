@@ -41,6 +41,7 @@
   },
   "dependencies": {
     "@prettier/plugin-xml": "^0.7.2",
+    "fox-test": "workspace:^1.0.0",
     "fox-utils": "workspace:^0.1.1",
     "prettier": "^2.0.5"
   }

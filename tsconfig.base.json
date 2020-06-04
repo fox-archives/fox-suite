@@ -41,6 +41,7 @@
     "noUnusedParameters": false,
     "allowUnusedLabels": false, // default
     "forceConsistentCasingInFileNames": true,
-    "useDefineForClassFields": true
+		"useDefineForClassFields": true
+		// TODO: add babel comapt since jest test runner uses babel
   }
 }

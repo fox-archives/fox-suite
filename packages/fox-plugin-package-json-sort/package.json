@@ -28,6 +28,7 @@
     "fox-pjs": "./bin/fox-plugin-package-json-sort.js"
   },
   "dependencies": {
+    "fox-test": "workspace:^1.0.0",
     "fox-utils": "^0.1.1",
     "lodash": "^4.17.15"
   },

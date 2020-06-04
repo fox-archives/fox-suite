@@ -20,6 +20,7 @@
 	"license": "MIT",
 	"dependencies": {
 		"fox-esm": "workspace:^0.1.0",
+		"fox-test": "workspace:^1.0.0",
 		"fox-utils": "workspace:^0.1.1",
 		"htmlhint": "^0.14.0"
 	},
