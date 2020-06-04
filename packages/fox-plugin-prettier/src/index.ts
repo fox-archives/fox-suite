@@ -10,7 +10,7 @@ export async function bootstrapFunction(): Promise<void> {
 		".config/prettier.config.js",
 		".config/prettierignore"
 	]
-	await foxUtils.useBootstrapTemplate({
+	await foxUtils.buildBootstrap({
 		templateRoot: path.join(__dirname, '../src/templates'),
 		templateFiles
 	})

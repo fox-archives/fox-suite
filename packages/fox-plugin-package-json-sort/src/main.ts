@@ -1,15 +1,16 @@
 import fs from 'fs'
 import assert from 'assert'
 import * as foxUtils from 'fox-utils'
+import { is } from './util'
 
 import {
   ensureUnecognizedKeys,
   processGroup
 } from './util'
-import { is } from 'fox-utils'
 import {
   groupRootCategories
 } from './groupCategories'
+
 
 /**
  * terminology

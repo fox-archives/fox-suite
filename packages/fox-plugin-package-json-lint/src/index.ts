@@ -10,28 +10,28 @@ export async function bootstrapFunction(): Promise<void> {
 	const templateFiles = [
 		".config/npmpackagejsonlint.config.js"
 	]
-	await foxUtils.useBootstrapTemplate({
+	await foxUtils.buildBootstrap({
 		templateRoot: path.join(__dirname, '../src/templates'),
 		templateFiles
 	})
 }
 
 export async function lintFunction(fox: IFox): Promise<void> {
-	const { packageJson, packageJsonPath, location } = await foxUtils.getProjectData();
-	const packageJsonLintConfig = await foxUtils.getAndCreateConfig(location, 'fox-plugin-package-json-lint');
-	if (!packageJsonLintConfig) return
+	// const { packageJson, packageJsonPath, location } = await foxUtils.getProjectData();
+	// const packageJsonLintConfig = await foxUtils.getAndCreateConfig(location, 'fox-plugin-package-json-lint');
+	// if (!packageJsonLintConfig) return
 
-	const npmPackageLint = new NpmPackageJsonLint({
-		cwd: process.cwd(),
-		packageJsonObject: packageJson,
-		packageJsonFilePath: packageJsonPath,
-		config: packageJsonLintConfig,
-		// configFile: '',
-		// patterns: ['**/package.json'],
-		quiet: false,
-		// ignorePath: ''
-	})
+	// const npmPackageLint = new NpmPackageJsonLint({
+	// 	cwd: process.cwd(),
+	// 	packageJsonObject: packageJson,
+	// 	packageJsonFilePath: packageJsonPath,
+	// 	config: packageJsonLintConfig,
+	// 	// configFile: '',
+	// 	// patterns: ['**/package.json'],
+	// 	quiet: false,
+	// 	// ignorePath: ''
+	// })
 
-	const lintedPackageJson = npmPackageLint.lint()
-	console.log(lintedPackageJson)
+	// const lintedPackageJson = npmPackageLint.lint()
+	// console.log(lintedPackageJson)
 }

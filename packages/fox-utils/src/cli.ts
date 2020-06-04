@@ -1,5 +1,5 @@
 import minimist from 'minimist'
-import  { setup } from './util'
+import  { setup } from './misc'
 import { IFox, ICli } from "fox-types";
 import * as foxUtils from './'
 import * as c from 'colorette'

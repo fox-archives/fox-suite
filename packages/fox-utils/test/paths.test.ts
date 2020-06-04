@@ -1,5 +1,22 @@
 import path from 'path'
-import * as foxPathUtils from '../src/paths'
+import url from 'url'
+
+/**
+ * @desc Resolves an absolute path relative to the current working
+ * directory. prepends a './' if it doesn't already exist
+ */
+export function toRelativePath(absolutePath: string): string {
+
+	let relativePath = path.relative(process.cwd(), absolutePath)
+
+	if (relativePath.slice(0, 2) !== './' && relativePath.slice(0, 3) !== '../')
+		relativePath = './' + relativePath
+	return relativePath
+}
+
+export function __dirname(importMeta: ImportMeta): string {
+	return path.dirname(url.fileURLToPath(importMeta.url));
+}
 
 /**
  * these have weird paths because toRelativePath resolves
@@ -14,7 +31,7 @@ describe('toRelativePath()', () => {
 
   test('relative path two dirs up', () => {
     const absolute = path.resolve(__dirname, '../../file')
-    const relativePath = foxPathUtils.toRelativePath(absolute)
+    const relativePath = toRelativePath(absolute)
 
     expect(relativePath).toBe('../../file')
   })
@@ -26,7 +43,7 @@ describe('toRelativePath()', () => {
    */
   test('relative path to current directory', () => {
     const absolute = path.resolve(__dirname, './file.json')
-    const relativePath = foxPathUtils.toRelativePath(absolute)
+    const relativePath = toRelativePath(absolute)
 
     expect(relativePath).toBe('./file.json')
   })

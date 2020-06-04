@@ -8,14 +8,13 @@ import type stylelintType from '../../../@types/stylelint'
 export { info } from './info'
 
 export async function bootstrapFunction(): Promise<void> {
-  const templateFiles = [
-    ".config/stylelint.config.js",
-    ".config/stylelintignore"
-  ]
-  await foxUtils.useBootstrapTemplate({
+  await foxUtils.buildBootstrap({
     templateRoot: path.join(__dirname, '../src/templates'),
-    templateFiles
-  })
+		templateFiles: [
+			".config/stylelint.config.js",
+			".config/stylelintignore"
+		]
+	})
 }
 
 export async function lintFunction(fox: IFox): Promise<void> {

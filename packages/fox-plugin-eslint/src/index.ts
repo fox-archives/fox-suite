@@ -12,7 +12,7 @@ export async function bootstrapFunction() {
 		".config/eslint.config.js",
 		".config/eslintignore"
 	]
-	await foxUtils.useBootstrapTemplate({
+	await foxUtils.buildBootstrap({
 		templateRoot: path.join(__dirname, '../src/templates'),
 		// templateRoot: path.join(foxUtils.__dirname(import.meta), '../src/templates'),
 		templateFiles

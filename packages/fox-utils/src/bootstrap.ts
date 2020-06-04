@@ -17,7 +17,7 @@ interface IUseBootstrapTemplate {
 /**
  * @property {string[]} - absolute path of config files to copy over
  */
-export async function useBootstrapTemplate({
+export async function buildBootstrap({
   templateRoot,
   templateFiles
 }: IUseBootstrapTemplate): Promise<void> {

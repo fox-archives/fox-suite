@@ -131,6 +131,10 @@ right now we support running on node versions `>=12.17.0 >=v13.14.0 >=14.3.0`, b
 
 Rome solves a lot of problems related to tooling interoperability. However, there are some features that Rome will likely not have (such as markdown file linting or easy package release flow). Those seem out of the scope of the project (at least for now). `fox-suite` uses the apis of these somewhat niche tools to help improve your code. Eventually, `fox-suite` will hopefully include a module for easy integration with Rome.
 
+# What about Rush?
+
+Ruch Stack is a great and usefull tool, but I wanted something a but more customizable and lighterweight - something that was able to integrate with existing tooling a bit easier
+
 ### I don't like rule X
 
-When you use `prettier`, `stylelint`, `eslint`, etc., there are bound to be rules you don't like. You can just, like, totally override them in `.config/*`.
+When you use `prettier`, `stylelint`, `eslint`, etc., there are bound to be rules you don't like. You can just, like, totally override them in `.config/*`. Remember to have the daemon running when doing this so the configuration files get properly regenerated for consumption by existing tooling. You may also have to restart existing tools like webpack dev server, or gulp using file watchers etc.

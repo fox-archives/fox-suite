@@ -19,7 +19,6 @@
     "fox": "./bin/fox.js"
   },
   "dependencies": {
-    "chalk": "^4.0.0",
     "colorette": "^1.2.0",
     "debug": "^4.1.1",
     "esm": "^3.2.25",

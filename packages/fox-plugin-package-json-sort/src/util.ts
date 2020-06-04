@@ -2,9 +2,16 @@ import assert from 'assert'
 // import { fileURLToPath } from 'url'
 import _ from 'lodash'
 
-import {
-  is
-} from 'fox-utils'
+export const is = {
+	string: (val: any): boolean =>
+		typeof val === 'string',
+	array: (val: any): boolean =>
+		Array.isArray(val),
+	object: (val: any): boolean =>
+		typeof val === 'object' && !Array.isArray(val),
+	function: (val: any): boolean =>
+		typeof val === 'function'
+}
 
 /**
  * @description alphabetically sorts array
