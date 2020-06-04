@@ -4,6 +4,7 @@ importers:
       '@types/eslint': 6.8.1
       '@types/jest': 25.2.3
       '@types/lodash': 4.14.154
+      '@types/lodash.merge': 4.6.6
       '@types/lodash.uniq': 4.5.6
       '@types/minimist': 1.2.0
       '@types/node': 13.13.9
@@ -16,6 +17,7 @@ importers:
       '@types/eslint': ^6.8.1
       '@types/jest': ^25.2.1
       '@types/lodash': ^4.14.150
+      '@types/lodash.merge': ^4.6.6
       '@types/lodash.uniq': ^4.5.6
       '@types/minimist': ^1.2.0
       '@types/node': ^13.13.5
@@ -55,7 +57,6 @@ importers:
     dependencies:
       eslint: 7.1.0
       eslint-config-fox: 'link:../eslint-config-fox'
-      fo: 0.1.1
       fox-esm: 'link:../fox-esm'
       fox-test: 'link:../fox-test'
       fox-utils: 'link:../fox-utils'
@@ -64,7 +65,6 @@ importers:
     specifiers:
       eslint: ^7.0.0
       eslint-config-fox: ^0.1.0
-      fo: ^0.1.1
       fox-esm: 'workspace:^0.1.0'
       fox-test: 'workspace:^1.0.0'
       fox-types: 'workspace:^0.1.0'
@@ -345,6 +345,7 @@ importers:
   packages/stylelint-config-fox:
     dependencies:
       fox-types: 'link:../fox-types'
+      lodash.merge: 4.6.2
     devDependencies:
       eslint: 6.8.0
       jest: 26.0.1
@@ -356,6 +357,7 @@ importers:
       fox-types: 'workspace:^0.1.0'
       jest: ^26.0.1
       jest-extended: ^0.11.5
+      lodash.merge: ^4.6.2
       ts-jest: ^26.0.0
       typescript: ^3.9.2
   test:
@@ -2573,6 +2575,12 @@ packages:
     dev: true
     resolution:
       integrity: sha512-8+KAKzEvSUdeo+kmqnKrqgeE+LcA0tjYWFY7RPProVYwnqDjukzO+3b6dLD56rYX5TdWejnEOLJYOIeh4CXKuA==
+  /@types/lodash.merge/4.6.6:
+    dependencies:
+      '@types/lodash': 4.14.155
+    dev: true
+    resolution:
+      integrity: sha512-IB90krzMf7YpfgP3u/EvZEdXVvm4e3gJbUvh5ieuI+o+XqiNEt6fCzqNRaiLlPVScLI59RxIGZMQ3+Ko/DJ8vQ==
   /@types/lodash.uniq/4.5.6:
     dependencies:
       '@types/lodash': 4.14.155
@@ -2997,7 +3005,7 @@ packages:
   /autoprefixer/9.8.0:
     dependencies:
       browserslist: 4.12.0
-      caniuse-lite: 1.0.30001066
+      caniuse-lite: 1.0.30001077
       chalk: 2.4.2
       normalize-range: 0.1.2
       num2fraction: 1.2.2
@@ -3428,10 +3436,6 @@ packages:
       node: '>=10'
     resolution:
       integrity: sha512-8KMDF1Vz2gzOq54ONPJS65IvTUaB1cHJ2DMM7MbPmLZljDH1qpzzLsWdiN9pHh6qvkRVDTi/07+eNGch/oLU4w==
-  /caniuse-lite/1.0.30001066:
-    dev: false
-    resolution:
-      integrity: sha512-Gfj/WAastBtfxLws0RCh2sDbTK/8rJuSeZMecrSkNGYxPcv7EzblmDGfWQCFEQcSqYE2BRgQiJh8HOD07N5hIw==
   /caniuse-lite/1.0.30001077:
     dev: false
     resolution:
@@ -4308,7 +4312,7 @@ packages:
   /dom-serializer/0.2.2:
     dependencies:
       domelementtype: 2.0.1
-      entities: 2.0.2
+      entities: 2.0.3
     dev: false
     resolution:
       integrity: sha512-2/xPb3ORsQ42nHYiSunXkDjPLBaEj/xTwUO4B7XCZQTRk7EBtTOPaygh10YAAh2OI1Qrp6NWfpAhzswj0ydt9g==
@@ -4424,10 +4428,10 @@ packages:
     dev: false
     resolution:
       integrity: sha512-f2LZMYl1Fzu7YSBKg+RoROelpOaNrcGmE9AZubeDfrCEia483oW4MI4VyFd5VNHIgQ/7qm1I0wUHK1eJnn2y2w==
-  /entities/2.0.2:
+  /entities/2.0.3:
     dev: false
     resolution:
-      integrity: sha512-dmD3AvJQBUjKpcNkoqr+x+IF0SdRtPz9Vk0uTy4yWqga9ibB6s4v++QFWNohjiUGoMlF552ZvNyXDxz5iW0qmw==
+      integrity: sha512-MyoZ0jgnLvB2X3Lg5HqpFmn1kybDiIfEQmKzTb5apr51Rb+T3KdmMiqa70T+bhGnyv7bQ6WMj2QMHpGMmlrUYQ==
   /env-paths/2.2.0:
     dev: true
     engines:
@@ -5022,10 +5026,6 @@ packages:
     dev: true
     resolution:
       integrity: sha512-3Z4XhFZ3992uIq0XOqb9AreonueSYphE6oYbpt5+3u06JWklbsPkNv3ZKkP9Bz/r+1MWCaMoSQ28P85+1Yc77w==
-  /fo/0.1.1:
-    dev: false
-    resolution:
-      integrity: sha1-UKx+mhvk9GuJ3MRji2ZGMux7HZ0=
   /for-in/1.0.2:
     engines:
       node: '>=0.10.0'
@@ -7186,7 +7186,6 @@ packages:
     resolution:
       integrity: sha1-vMbEmkKihA7Zl/Mj6tpezRguC/4=
   /lodash.merge/4.6.2:
-    dev: true
     resolution:
       integrity: sha512-0KpjqXRVvrYyCsX1swR/XTK0va6VQkQM6MNo7PqW77ByjAhoARA8EfrP1N4+KlKj8YS0ZUCtRT/YUuhyYDujIQ==
   /lodash.set/4.3.2:

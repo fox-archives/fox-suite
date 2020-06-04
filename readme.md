@@ -34,6 +34,60 @@ export default {
 
 with each project, you may want to slightly change the configuration, geared towards *developer satisfaction*. for example, the above config lints javascript such that only the most aggregous errors are caught and that most autofixable rules are enabled. if your project suddenly becomes a bit more serious / big, you can always increase the parameter to 'strict', or 'excessive', to give more guarentees
 
+## Options Explanation
+
+## Behavior
+
+- Styling issues are always _warnings_ and auto-fixable
+- Syntax issues are usually _errors_ when either auto-fixable or not
+  - Exceptions include obviously temporary errors (ex. `no-lone-blocks` (`{}`)) (which may be _off_ or \_warning)
+- Extra syntax issues may be _error_ on `NODE_ENV === production` (ex. loggers)
+
+## Options
+
+### Example
+
+```js
+// fox.config.js
+export default {
+  lint: 'off | cozy (default) || strict || excessive',
+}
+```
+
+### Description
+
+### off
+
+Turns of all functionality
+
+### cozy
+
+Catches code that has / is
+
+- aggregous errors
+- non-aggregous auto-fixable errors
+- hard to debug / easy to be buggy
+- isn't obviously buggy (but is buggy)
+- not unobviously buggy (and isn't)
+- deprecated syntax
+
+### strict
+
+Catches code that has / is
+
+- not up to best practices
+- unecessarily verbose / unecessarily misleading
+  - ex. needlessly using `.bind()`
+- ambiguous
+- essentially similar to what you would expect from `eslint-config-airbnr`, `stylelint-config-standard`, etc. but a bit looser
+
+### excessive
+
+Essentially the same as `strict`, but includes options that are
+more annoying than helpfull when coding a project
+
+- ex. forcing default to exist at end of switch
+
 
 ## Who is this for?
 

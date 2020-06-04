@@ -1,5 +1,9 @@
-import { rootConfig } from './config/root.config'
+import merge from 'lodash.merge'
+import { cozyConfig } from './config/cozy.config'
+import { strictConfig } from './config/strict.config'
+import { excessiveConfig } from './config/excessive.config'
 import { IFox } from 'fox-types'
+
 
 /**
  * @todo remove duplicate function (can't
@@ -16,6 +20,19 @@ function getFoxOptionsFromEnv(): IFox {
 
 const fox = getFoxOptionsFromEnv()
 
-module.exports = {
-  ...rootConfig(fox)
+let stylelintConfigFox = {}
+if (fox.plugin.stylelint === "off" || fox.all === "off") {
+
+} else if (fox.plugin.stylelint === "cozy" || fox.all === "cozy") {
+	stylelintConfigFox = merge(cozyConfig(fox))
+} else if (fox.plugin.stylelint === "strict" || fox.all === "strict") {
+	stylelintConfigFox = merge(cozyConfig(fox))
+	stylelintConfigFox = merge(strictConfig(fox))
+} else if (fox.plugin.stylelint === "excessive" || fox.all === "excessive") {
+	stylelintConfigFox = merge(cozyConfig(fox))
+	stylelintConfigFox = merge(strictConfig(fox))
+	stylelintConfigFox = merge(excessiveConfig(fox))
 }
+
+
+module.exports = stylelintConfigFox
