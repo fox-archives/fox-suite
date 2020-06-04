@@ -12,7 +12,6 @@ export async function bootstrapFunction(): Promise<void> {
 	]
 	await foxUtils.useBootstrapTemplate({
 		templateRoot: path.join(__dirname, '../src/templates'),
-		// templateRoot: path.join(foxUtils.__dirname(import.meta), '../src/templates'),
 		templateFiles
 	})
 }

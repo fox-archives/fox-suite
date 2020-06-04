@@ -2,11 +2,18 @@
 import { NpmPackageJsonLint } from 'npm-package-json-lint'
 import * as foxUtils from 'fox-utils'
 import { IFox } from "fox-types";
+import path from 'path'
 
 export { info } from './info'
 
 export async function bootstrapFunction(): Promise<void> {
-
+	const templateFiles = [
+		".config/npmpackagejsonlint.config.js"
+	]
+	await foxUtils.useBootstrapTemplate({
+		templateRoot: path.join(__dirname, '../src/templates'),
+		templateFiles
+	})
 }
 
 export async function lintFunction(fox: IFox): Promise<void> {

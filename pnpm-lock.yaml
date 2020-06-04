@@ -228,6 +228,7 @@ importers:
   packages/fox-suite:
     dependencies:
       chalk: 4.0.0
+      colorette: 1.2.0
       debug: 4.1.1
       esm: 3.2.25
       fox-esm: 'link:../fox-esm'
@@ -251,6 +252,7 @@ importers:
       typescript: 3.9.3
     specifiers:
       chalk: ^4.0.0
+      colorette: ^1.2.0
       cross-env: ^7.0.2
       debug: ^4.1.1
       esm: ^3.2.25
@@ -308,6 +310,7 @@ importers:
   packages/fox-utils:
     dependencies:
       chalk: 4.0.0
+      colorette: 1.2.0
       esm: 3.2.25
       pkg-up: 3.1.0
       prompts: 2.3.2
@@ -322,6 +325,7 @@ importers:
       typescript: 3.9.3
     specifiers:
       chalk: ^4.0.0
+      colorette: ^1.2.0
       cross-env: ^7.0.2
       esm: ^3.2.25
       fox-types: 'workspace:^0.1.0'
@@ -371,7 +375,7 @@ importers:
       fox-suite: 'link:../packages/fox-suite'
       npm-package-json-lint-config-fox: 'link:../packages/npm-package-json-lint-config-fox'
     specifiers:
-      fox-suite: ^0.1.1
+      fox-suite: 'workspace:^0.1.1'
       npm-package-json-lint-config-fox: ^0.1.1
 lockfileVersion: 5.1
 packages:
@@ -3733,6 +3737,10 @@ packages:
   /color-name/1.1.4:
     resolution:
       integrity: sha512-dOy+3AuW3a2wNbZHIuMZpTcgjGuLU/uBL/ubcZF9OXbDo8ff4O8yVp5Bf0efS8uEoYo5q4Fx7dY9OgQGXgAsQA==
+  /colorette/1.2.0:
+    dev: false
+    resolution:
+      integrity: sha512-soRSroY+OF/8OdA3PTQXwaDJeMc7TfknKKrxeSCencL2a4+Tx5zhxmmv7hdpCjhKBjehzp8+bwe/T68K0hpIjw==
   /columnify/1.5.4:
     dependencies:
       strip-ansi: 3.0.1

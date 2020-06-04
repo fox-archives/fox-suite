@@ -1,7 +1,7 @@
 import path from 'path'
 import fs from 'fs'
 import prompts from 'prompts'
-
+import * as c from 'colorette'
 import { getProjectData } from './project.js';
 
 /**
@@ -69,10 +69,9 @@ export async function useBootstrapTemplate({
         );
       }
     }
-  }
+	}
 
-  console.log('done')
-
+	console.info(c.bold(c.green('bootstrapped files successfully')))
 }
 
 async function ensureDotConfigDir(location: string): Promise<void> {

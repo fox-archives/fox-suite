@@ -1,6 +1,5 @@
 import path from 'path'
 import fs from 'fs'
-import util from 'util'
 import type { Dirent } from 'fs'
 import * as foxUtils from 'fox-utils'
 import { spawn } from 'child_process'
@@ -11,6 +10,7 @@ import debug from './debug'
 // HACK: this could be less dirty
 export async function getInstalledFoxPlugins(): Promise<string[]> {
 	const nodeModulesPath = path.join((await foxUtils.getProjectData()).location, 'node_modules')
+	debug('nodeModulesPath: %s', nodeModulesPath)
 
 	try {
 		const getPlugins = async (pluginParentDirectory: string): Promise<string[]> => {
@@ -45,7 +45,6 @@ export async function getInstalledFoxPlugins(): Promise<string[]> {
 				}
 			}
 
-			debug('found plugins in directory: %o', pluginList)
 			return pluginList
 		}
 

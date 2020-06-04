@@ -4,16 +4,25 @@ import * as foxUtils from 'fox-utils'
 import { doAction } from './action';
 import * as util from './util'
 import debug from './debug'
-
+import * as c from 'colorette'
 /**
  * @description if no command line arguments were given,
  * start (interactive) terminal user interface
  */
-export async function tui() {
+export async function tui(): Promise<void> {
 	debug('activating tui')
 	const [projectData, foxPlugins] = await Promise.all([
 		foxUtils.getProjectData(), util.getInstalledFoxPlugins()
 	])
+
+	debug('projectData: %o', projectData)
+	debug('foxPlugins: %o', foxPlugins)
+
+	if (foxPlugins.length === 0) {
+		console.log(c.bold(c.red('no fox-plugins or fox-presets found. please install some to continue')))
+		process.exit(0)
+	}
+
 
 	// import all plugins
 	const promises: Promise<IPlugin>[] = []

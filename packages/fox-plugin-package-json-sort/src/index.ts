@@ -1,11 +1,7 @@
 import { IFox } from "fox-types";
-
+// import myPackageJsonSort from 'my-pacakge-json-sort'
 export { info } from './info'
 
-export async function bootstrapFunction(): Promise<void> {
-
-}
-
-export async function lintFunction(fox: IFox): Promise<void> {
-
+export async function formatFunction(fox: IFox): Promise<void> {
+	// await myPackageJsonSort()
 }

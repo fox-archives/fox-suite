@@ -2,6 +2,7 @@ import minimist from 'minimist'
 import  { setup } from './util'
 import { IFox, ICli } from "fox-types";
 import * as foxUtils from './'
+import * as c from 'colorette'
 
 export async function buildCli(nodeArgv: NodeJS.Process["argv"], {
 	pluginName,
@@ -11,6 +12,7 @@ export async function buildCli(nodeArgv: NodeJS.Process["argv"], {
 }: ICli) {
 	setup()
 
+	// TODO: change help menu depending on if module has a function for `--bootstrap`
 	const argv = minimist(nodeArgv.slice(2));
 	const helpText = `Usage:
   ${pluginName}
@@ -32,6 +34,10 @@ Examples:
     process.exitCode = 0
   } else if (argv.bootstrap) {
 		try {
+			if (!bootstrapFunction) {
+				console.info(c.bold(c.blue('this module does not have a bootstrap function')))
+				return
+			}
 			await bootstrapFunction()
 		} catch (err) {
 			console.error(err)

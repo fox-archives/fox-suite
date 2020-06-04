@@ -7,7 +7,7 @@ import debug from './debug'
 /**
  * @description start `fox` based on cli arguments if any were given
  */
-export async function cli(argv: ParsedArgs) {
+export async function cli(argv: ParsedArgs): Promise<void> {
 	debug('activating cli. passed args: %o', argv)
 	const [projectData, foxPlugins] = await Promise.all([
 		foxUtils.getProjectData(), util.getInstalledFoxPlugins()

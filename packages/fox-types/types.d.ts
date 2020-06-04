@@ -27,7 +27,7 @@ export interface IPluginInfo {
 export interface ICli {
 	pluginName: string,
 	pluginDescription: string,
-	bootstrapFunction: () => Promise<void>,
+	bootstrapFunction?: () => Promise<void>,
 	actionFunction: (fox: IFox) => Promise<void>
 }
 
