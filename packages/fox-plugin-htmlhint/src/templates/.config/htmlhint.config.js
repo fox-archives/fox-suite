@@ -1,6 +1,10 @@
 // this is a non-standard htmlhint configuration file
 // (meaning only .htmlhintrc is usually valid)
 
+/**
+ * @param {import("../node_modules/fox-suite/node_modules/fox-types/types").IFox} [fox] - `fox.config.js` configuration object
+ * @return {Record<string, any>}
+ */
 export default function(fox) {
 	return {
 		// TODO: ensure preset
