@@ -1,5 +1,5 @@
 /**
- * @param {import("fox-types/types").IFox} [fox] - `fox.config.js` configuration object
+ * @param {import("fox-types/types").IFoxConfig} [fox] - `fox.config.js` configuration object
  * @return {Record<string, any>}
  */
 export default function(fox) {

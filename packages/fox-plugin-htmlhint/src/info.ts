@@ -1,6 +1,6 @@
-import type { IPluginInfo } from 'fox-types'
+import type { IPluginExportInfo } from 'fox-types'
 
-export const info: IPluginInfo = {
+export const info: IPluginExportInfo = {
 	name: '',
 	tool: 'Htmlhint',
 	toolConfigSchemaHelpUri: 'https://htmlhint.com/docs/user-guide/list-rules',

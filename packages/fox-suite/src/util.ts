@@ -3,14 +3,13 @@ import fs from 'fs'
 import type { Dirent } from 'fs'
 import * as foxUtils from 'fox-utils'
 import { spawn } from 'child_process'
-import { IPlugin } from "fox-types";
+import { IPluginExportIndex } from "fox-types";
 import type { IActionFunction } from '../@types/index'
 import debug from './debug'
 
 // HACK: this could be less dirty
 export async function getInstalledFoxPlugins(): Promise<string[]> {
-	const projectData = await foxUtils.getProjectData()
-	const nodeModulesPath = path.join(projectData.location, 'node_modules')
+	const nodeModulesPath = path.join((await foxUtils.getProjectData()).location, 'node_modules')
 	debug('nodeModulesPath: %s', nodeModulesPath)
 
 	try {
@@ -18,10 +17,11 @@ export async function getInstalledFoxPlugins(): Promise<string[]> {
 			const pluginList: string[] = []
 			const nodeModules = await fs.promises.readdir(pluginParentDirectory, { withFileTypes: true })
 
-			const resolveModule = (...modulePath: string[]): string => {
-				let entryPoint = 'build/index.js'
-				if (projectData.packageJson.main) entryPoint = projectData.packageJson.main
-				return path.join.apply(null, [...modulePath, entryPoint])
+			const resolveModule = async (...modulePath: string[]): Promise<string> => {
+				const pluginRoot = path.join.apply(null, modulePath)
+				const pluginData = await foxUtils.getPluginData(pluginRoot)
+				const entryPoint = pluginData.packageJson.main || 'build/index.js'
+				return path.join(pluginRoot, entryPoint)
 			}
 
 			const isFoxPlugin = (nodePackage: Dirent) => {
@@ -34,14 +34,14 @@ export async function getInstalledFoxPlugins(): Promise<string[]> {
 
 			for (const nodeModule of nodeModules) {
 				if (isFoxPlugin(nodeModule)) {
-					const pluginPath = resolveModule(nodeModulesPath, nodeModule.name)
+					const pluginPath = await resolveModule(nodeModulesPath, nodeModule.name)
 					pluginList.push(pluginPath)
 				} else if (isFoxPreset(nodeModule)) {
 					const presetPath = path.join(nodeModulesPath, nodeModule.name)
 					const presetPlugins = await fs.promises.readdir(path.join(presetPath, 'node_modules'), { withFileTypes: true })
 					for (const pluginDirent of presetPlugins) {
 						if (isFoxPlugin(pluginDirent)) {
-							const pluginPath = resolveModule(presetPath, 'node_modules', pluginDirent.name)
+							const pluginPath = await resolveModule(presetPath, 'node_modules', pluginDirent.name)
 							pluginList.push(pluginPath)
 						}
 					}
@@ -120,7 +120,7 @@ export function run(script: string): void {
 
 type actionFunctions = "bootstrapFunction" | "formatFunction" | "lintFunction"
 type fns = IActionFunction["action"]
-export const pickModuleProperty = (foxPluginModules: IPlugin[], actionFunctions: actionFunctions): fns => {
+export const pickModuleProperty = (foxPluginModules: IPluginExportIndex[], actionFunctions: actionFunctions): fns => {
 	const pickedFunctions: fns = []
 	for (const foxPluginModule of foxPluginModules) {
 		// @ts-ignore

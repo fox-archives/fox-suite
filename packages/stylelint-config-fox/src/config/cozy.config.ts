@@ -1,6 +1,6 @@
-import { IFox } from 'fox-types'
+import { IFoxConfig } from 'fox-types'
 
-export function cozyConfig(fox: IFox): Record<string, any> {
+export function cozyConfig(fox: IFoxConfig): Record<string, any> {
 	return {
 		rules: {
 			/* ------------------- possible errors ------------------ */

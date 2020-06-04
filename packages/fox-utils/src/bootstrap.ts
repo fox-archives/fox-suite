@@ -68,7 +68,7 @@ export async function buildBootstrap(opts: IBuildBootstrap): Promise<void> {
 		const { fileDest, templatedText } = await doTemplate(fileToTemplate)
 		try {
 			await fs.promises.writeFile(fileDest, templatedText, {
-				mode: 0o755,
+				mode: 0o644,
 				flag: 'wx+'
 			})
 		} catch (err) {

@@ -4,22 +4,25 @@ import readPkgUp from 'read-pkg-up'
 import { IProject } from 'fox-types'
 import * as c from 'colorette'
 
-import { IFox } from 'fox-types'
-
 /**
  * @description get all necessary data from parent module
  */
 export async function getProjectData(): Promise<IProject> {
-  const {
-    // @ts-ignore
-    packageJson: packageJson,
-    // @ts-ignore
-    path: packageJsonPath } = await readPkgUp({
+  const obj = await readPkgUp({
       cwd: process.cwd(),
       normalize: false
-    })
-  const location = path.dirname(packageJsonPath)
-  const foxConfigPath = path.resolve(location, 'fox.config.mjs')
+		})
+	if (!obj) {
+		console.error(c.bold(c.red("we couldn't get the package.json of your project. exiting.")))
+		process.exit(1)
+	}
+	const {
+		packageJson: packageJson,
+			path: packageJsonPath
+	} = obj
+
+	const location = path.dirname(packageJsonPath)
+	const foxConfigPath = path.resolve(location, 'fox.config.js')
 
 	let foxConfig
 	try {
@@ -30,7 +33,6 @@ export async function getProjectData(): Promise<IProject> {
 			all: 'cozy'
 		}
 	}
-
 
   return {
     packageJson,

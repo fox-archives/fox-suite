@@ -1,6 +1,6 @@
 import path from 'path'
 import prettier from 'prettier'
-import { IFox } from "fox-types";
+import { IFoxConfig } from "fox-types";
 import * as foxUtils from "fox-utils";
 
 export { info } from './info'
@@ -11,6 +11,6 @@ export async function bootstrapFunction(): Promise<void> {
 	})
 }
 
-export async function formatFunction(fox: IFox): Promise<void> {
+export async function formatFunction(fox: IFoxConfig): Promise<void> {
 
 }

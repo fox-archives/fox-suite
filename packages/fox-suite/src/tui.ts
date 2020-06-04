@@ -1,5 +1,5 @@
 import prompts from 'prompts'
-import { IPlugin } from "fox-types";
+import { IPluginExportIndex } from "fox-types";
 import * as foxUtils from 'fox-utils'
 import { doAction } from './action';
 import * as util from './util'
@@ -26,7 +26,7 @@ export async function tui(): Promise<void> {
 
 
 	// import all plugins
-	const promises: Promise<IPlugin>[] = []
+	const promises: Promise<IPluginExportIndex>[] = []
 	for (const foxPlugin of foxPlugins) {
 		promises.push(import(foxPlugin))
 	}
@@ -37,7 +37,7 @@ export async function tui(): Promise<void> {
 	const foxPluginModules = await Promise.all(promises)
 	for (let foxPluginModule of foxPluginModules.filter(Boolean)) {
 		debug('processing foxPluginModule %s', foxPluginModule.info.name)
-		const foxPlugin: IPlugin = foxPluginModule
+		const foxPlugin: IPluginExportIndex = foxPluginModule
 
 		if (!foxPlugin.info) {
 			// TODO: make error more specific
@@ -100,7 +100,7 @@ export async function tui(): Promise<void> {
 	})
 
 	if (action === 'bootstrap') {
-		const { bootstrap }: { bootstrap: IPlugin["bootstrapFunction"] } = await prompts({
+		const { bootstrap }: { bootstrap: IPluginExportIndex["bootstrapFunction"] } = await prompts({
 			type: 'select',
 			name: 'bootstrap',
 			message: 'which configuration would you like to bootstrap?',
@@ -113,7 +113,7 @@ export async function tui(): Promise<void> {
 		})
 
 	} else if (action === 'format') {
-		const { format }: { format: IPlugin["formatFunction"] } = await prompts({
+		const { format }: { format: IPluginExportIndex["formatFunction"] } = await prompts({
 			type: 'select',
 			name: 'format',
 			message: 'Which formatter would you like to use?',
@@ -125,7 +125,7 @@ export async function tui(): Promise<void> {
 			projectData
 		})
 	} else if (action === 'lint') {
-		const { lint }: { lint: IPlugin["lintFunction"] } = await prompts({
+		const { lint }: { lint: IPluginExportIndex["lintFunction"] } = await prompts({
 			type: 'select',
 			name: 'lint',
 			message: 'run a script',

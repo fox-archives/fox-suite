@@ -2,7 +2,7 @@ import * as foxUtils from 'fox-utils'
 import * as util from './util'
 import { doAction } from './action';
 import type { ParsedArgs } from "minimist"
-import { IPlugin } from 'fox-types';
+import { IPluginExportIndex } from 'fox-types';
 import debug from './debug'
 import * as c from 'colorette'
 
@@ -15,7 +15,7 @@ export async function cli(argv: ParsedArgs): Promise<void> {
 		foxUtils.getProjectData(), util.getInstalledFoxPlugins()
 	])
 
-	const promises: Promise<IPlugin>[] = []
+	const promises: Promise<IPluginExportIndex>[] = []
 	for (const foxPluginPath of foxPlugins) {
 		promises.push(import(foxPluginPath))
 	}

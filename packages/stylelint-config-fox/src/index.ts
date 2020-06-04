@@ -2,7 +2,7 @@ import merge from 'lodash.merge'
 import { cozyConfig } from './config/cozy.config'
 import { strictConfig } from './config/strict.config'
 import { excessiveConfig } from './config/excessive.config'
-import { IFox } from 'fox-types'
+import { IFoxConfig } from 'fox-types'
 
 
 /**
@@ -12,7 +12,7 @@ import { IFox } from 'fox-types'
  * is emitted as a CommonJS module for
  * compatability with stylelint)
  */
-function getFoxOptionsFromEnv(): IFox {
+function getFoxOptionsFromEnv(): IFoxConfig {
   let foxOptions = process.env.FOX_SUITE_FOX_OPTIONS
   foxOptions = foxOptions || "{ error: 'process.env.FOX_SUITE_FOX_OPTIONS is falsey' }"
   return JSON.parse(foxOptions)

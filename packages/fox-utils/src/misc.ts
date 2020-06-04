@@ -1,5 +1,5 @@
 import * as c from 'colorette';
-import { IFox } from "fox-types";
+import { IFoxConfig } from "fox-types";
 
 /**
  * functions that can't be put in other categories
@@ -11,10 +11,10 @@ import { IFox } from "fox-types";
  * a module is executed (ex. we pass in the path of `stylelint-config-fox`
  * in our `fox-plugin-stylelint` package directly to `stylelint` (we don't execute)
  * the module outselves and pass _that_ to `stylelint`). so do ensure
- * the module gets access to all `IFox` fox options, we pass it as an environment
+ * the module gets access to all `IFoxConfig` fox options, we pass it as an environment
  * variable
  */
-export function setFoxOptionsToEnv(fox: IFox): void {
+export function setFoxOptionsToEnv(fox: IFoxConfig): void {
 	process.env.FOX_SUITE_FOX_OPTIONS = JSON.stringify(fox)
 }
 
@@ -22,7 +22,7 @@ export function setFoxOptionsToEnv(fox: IFox): void {
  * @description serialize foxOptions to and from the environment
  * @summary see foxUtils.setFoxOptionsToEnv for details on when to use this
  */
-export function getFoxOptionsFromEnv(): IFox {
+export function getFoxOptionsFromEnv(): IFoxConfig {
 	let foxOptions = process.env.FOX_SUITE_FOX_OPTIONS
 	foxOptions = foxOptions || "{ error: 'process.env.FOX_SUITE_FOX_OPTIONS is falsey' }"
 	console.error(c.bold(c.red('process.env.FOX_SUITE_FOX_OPTIONS is falsey. your configuration may not be what you expect')))

@@ -1,8 +1,8 @@
-import { IFox } from 'fox-types'
+import { IFoxConfig } from 'fox-types'
 
 const isProd = process.env.NODE_ENV === 'production'
 
-export function excessiveConfig(fox: IFox): Record<string, any> {
+export function excessiveConfig(fox: IFoxConfig): Record<string, any> {
 	const obj: Record<string, any> = {
 		rules: {
 			/* --------------- limit language features -------------- */

@@ -1,6 +1,6 @@
-import type { IPluginInfo } from 'fox-types'
+import type { IPluginExportInfo } from 'fox-types'
 
-export const info: IPluginInfo = {
+export const info: IPluginExportInfo = {
 	name: 'fox-plugin-stylelint',
 	tool: 'Stylelint',
 	toolConfigSchemaHelpUri: 'https://stylelint.io/user-guide/rules/list',

@@ -1,6 +1,6 @@
-import type { IPluginInfo } from 'fox-types'
+import type { IPluginExportInfo } from 'fox-types'
 
-export const info: IPluginInfo = {
+export const info: IPluginExportInfo = {
 	name: 'fox-plugin-package-json-lint',
 	tool: 'npm-package-json-lint',
 	toolConfigSchemaHelpUri: 'https://npmpackagejsonlint.org/docs/en/rules',

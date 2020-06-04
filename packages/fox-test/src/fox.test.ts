@@ -1,22 +1,22 @@
 import path from 'path'
 import fs from 'fs'
-import { IPlugin, IPluginInfo } from 'fox-types'
+import { IPluginExportIndex, IPluginExportInfo } from 'fox-types'
 import { getPluginInfo, loadModule, readPackageJson, getBinDirents, readBinFile } from './test.util'
 import 'jest-extended'
 
 const { pluginName } = getPluginInfo()
 
-let infoModule: { info: IPluginInfo }
-let pluginModule: IPlugin
+let infoModule: { info: IPluginExportInfo }
+let pluginModule: IPluginExportIndex
 beforeEach(async () => {
 	[ infoModule, pluginModule ] = await Promise.all([
 	 	loadModule('src/info.ts'),
 	 	loadModule('src/index.ts')
-	]) as [ { info: IPluginInfo }, IPlugin ]
+	]) as [ { info: IPluginExportInfo }, IPluginExportIndex ]
 })
 
 describe(`testing module: '${pluginName}' using the 'fox-test' jest autorunner`, () => {
-	test("`src/info.ts` exports an 'info' object that conforms to the IPluginInfo schema", async () => {
+	test("`src/info.ts` exports an 'info' object that conforms to the IPluginExportInfo schema", async () => {
 		expect(infoModule).toBeObject()
 		// src/info.ts must include `export const info = { name: '' }'`
 		expect(infoModule).toHaveProperty('info')

@@ -1,7 +1,10 @@
 import { PackageJson } from 'type-fest'
 type option = 'off' | 'cozy' | 'strict' | 'excessive'
 
-export interface IFox {
+/**
+ * @description format of the `fox.config.js` file
+ */
+export interface IFoxConfig {
   all: option,
   monorepo: boolean,
   plugin: {
@@ -17,7 +20,7 @@ export interface IBuildCli {
 	pluginName: string,
 	pluginDescription: string,
 	bootstrapFunction?: () => Promise<void>,
-	actionFunction: (fox: IFox) => Promise<void>
+	actionFunction: (fox: IFoxConfig) => Promise<void>
 }
 
 /**
@@ -28,31 +31,49 @@ export interface IBuildBootstrap {
 }
 
 /**
+ * @description used when building a lint
+ */
+export interface IBuildLint {
+	dirname: string,
+	fn: () => Promise<void>
+}
+
+/**
  * @description used when dealing with user projects (the actual
  * project this tool gets installed to)
  */
 export interface IProject {
 	packageJson: PackageJson
 	packageJsonPath: string,
-	foxConfig: IFox
+	foxConfig: IFoxConfig
 	foxConfigPath: string,
 	location: string
 }
 
 /**
- * @description found in a plugin's `src/index.ts` file
+ * @private
+ * @description this is when dealing with plugins
  */
 export interface IPlugin {
-	info: IPluginInfo,
+	templateDir: string,
+	pluginRoot: string,
+	packageJson: PackageJson
+}
+
+/**
+ * @description found in a plugin's `src/index.ts` file
+ */
+export interface IPluginExportIndex {
+	info: IPluginExportInfo,
 	bootstrapFunction?: () => Promise<void>
-	formatFunction?: (fox: IFox) => Promise<void>
-	lintFunction?: (fox: IFox) => Promise<void>
+	formatFunction?: (fox: IFoxConfig) => Promise<void>
+	lintFunction?: (fox: IFoxConfig) => Promise<void>
 }
 
 /**
  * @description found in a plugin's `src/info.ts` file
  */
-export interface IPluginInfo {
+export interface IPluginExportInfo {
 	name: string,
 	tool: string,
 	toolConfigSchemaHelpUri: string,
@@ -60,11 +81,3 @@ export interface IPluginInfo {
 	descriptionLong: string
 }
 
-/**
- * @private
- * @description this is used internally when dealing with plugins
- */
-export interface IPluginPrivateInfo {
-	templateDir: string,
-	pluginRoot: string
-}

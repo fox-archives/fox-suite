@@ -1,19 +1,19 @@
-import type { IPlugin, IProject } from 'fox-types'
+import type { IPluginExportIndex, IProject } from 'fox-types'
 
 interface IAction {
 	projectData: IProject
 }
 
 interface IActionBootstrap extends IAction {
-	action: IPlugin["bootstrapFunction"] | IPlugin["bootstrapFunction"][]
+	action: IPluginExportIndex["bootstrapFunction"] | IPluginExportIndex["bootstrapFunction"][]
 }
 
 interface IActionFormat extends IAction {
-	action: IPlugin["formatFunction"] | IPlugin["formatFunction"][],
+	action: IPluginExportIndex["formatFunction"] | IPluginExportIndex["formatFunction"][],
 }
 
 interface IActionLint extends IAction {
-	action: IPlugin["lintFunction"] | IPlugin["lintFunction"][]
+	action: IPluginExportIndex["lintFunction"] | IPluginExportIndex["lintFunction"][]
 }
 
 export type IActionFunction = IActionBootstrap | IActionFormat | IActionLint

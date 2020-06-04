@@ -1,6 +1,6 @@
 import path from 'path'
 import htmlhint from 'htmlhint'
-import type { IFox } from "fox-types";
+import type { IFoxConfig } from "fox-types";
 import * as foxUtils from "fox-utils";
 
 export { info } from './info'
@@ -11,6 +11,6 @@ export async function bootstrapFunction(): Promise<void> {
 	})
 }
 
-export async function lintFunction(fox: IFox): Promise<void> {
+export async function lintFunction(fox: IFoxConfig): Promise<void> {
 
 }

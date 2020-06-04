@@ -1,6 +1,6 @@
-import type { IPluginInfo } from 'fox-types'
+import type { IPluginExportInfo } from 'fox-types'
 
-export const info: IPluginInfo = {
+export const info: IPluginExportInfo = {
 	name: 'fox-plugin-prettier',
 	tool: 'Prettier',
 	toolConfigSchemaHelpUri: 'https://prettier.io/docs/en/options.html',
