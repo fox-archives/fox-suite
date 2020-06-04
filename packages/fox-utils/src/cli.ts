@@ -1,6 +1,6 @@
 import minimist from 'minimist'
 import  { setup } from './misc'
-import { IFox, ICli } from "fox-types";
+import { IFox, IBuildCli } from "fox-types";
 import * as foxUtils from './'
 import * as c from 'colorette'
 
@@ -9,7 +9,7 @@ export async function buildCli(nodeArgv: NodeJS.Process["argv"], {
 	pluginDescription,
 	bootstrapFunction,
 	actionFunction
-}: ICli) {
+}: IBuildCli) {
 	setup()
 
 	// TODO: change help menu depending on if module has a function for `--bootstrap`

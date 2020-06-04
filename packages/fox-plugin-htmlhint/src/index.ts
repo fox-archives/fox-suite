@@ -6,13 +6,8 @@ import * as foxUtils from "fox-utils";
 export { info } from './info'
 
 export async function bootstrapFunction(): Promise<void> {
-	const templateFiles = [
-		".config/htmlhint.config.js"
-	]
 	await foxUtils.buildBootstrap({
-		templateRoot: path.join(__dirname, '../src/templates'),
-		// templateRoot: path.join(foxUtils.__dirname(import.meta), '../src/templates'),
-		templateFiles
+		dirname: __dirname
 	})
 }
 

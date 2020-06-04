@@ -3,6 +3,7 @@ importers:
     devDependencies:
       '@types/debug': 4.1.5
       '@types/eslint': 6.8.1
+      '@types/glob': 7.1.1
       '@types/jest': 25.2.3
       '@types/lodash': 4.14.155
       '@types/lodash.merge': 4.6.6
@@ -17,6 +18,7 @@ importers:
     specifiers:
       '@types/debug': ^4.1.5
       '@types/eslint': ^6.8.1
+      '@types/glob': ^7.1.1
       '@types/jest': ^25.2.1
       '@types/lodash': ^4.14.150
       '@types/lodash.merge': ^4.6.6
@@ -303,7 +305,10 @@ importers:
   packages/fox-utils:
     dependencies:
       colorette: 1.2.0
+      debug: 4.1.1
       esm: 3.2.25
+      glob: 7.1.6
+      handlebars: 4.7.6
       pkg-up: 3.1.0
       prompts: 2.3.2
       read-pkg-up: 7.0.1
@@ -318,8 +323,11 @@ importers:
     specifiers:
       colorette: ^1.2.0
       cross-env: ^7.0.2
+      debug: ^4.1.1
       esm: ^3.2.25
       fox-types: 'workspace:^0.1.0'
+      glob: ^7.1.6
+      handlebars: ^4.7.6
       jest: ^26.0.1
       minimist: ^1.2.5
       pkg-up: ^3.1.0
@@ -2542,7 +2550,7 @@ packages:
     dependencies:
       '@types/events': 3.0.0
       '@types/minimatch': 3.0.3
-      '@types/node': 14.0.10
+      '@types/node': 13.13.9
     dev: true
     resolution:
       integrity: sha512-1Bh06cbWJUHMC97acuD6UMG29nMt0Aqz1vF3guLfG+kHHJhy3AyohZFFxYk2f7Q1SQIrNwvncxAE0N/9s70F2w==
@@ -3743,7 +3751,6 @@ packages:
     resolution:
       integrity: sha512-FQN4MRfuJeHf7cBbBMJFXhKSDq+2kAArBlmRBvcvFE5BB1HZKXtSFASDhdlz9zOYwxh8lDdnvmMOe/+5cdoEdg==
   /commander/2.20.3:
-    dev: true
     optional: true
     resolution:
       integrity: sha512-GpVkmM8vF2vQUkj2LvZmD35JxeJOLCwJ9cUkugyk2nuhbv3+mJvpLYYt+0+USMxE+oj+ey/lJEnhZw75x/OMcQ==
@@ -5429,7 +5436,6 @@ packages:
       neo-async: 2.6.1
       source-map: 0.6.1
       wordwrap: 1.0.0
-    dev: true
     engines:
       node: '>=0.4.7'
     hasBin: true
@@ -7776,7 +7782,6 @@ packages:
     resolution:
       integrity: sha1-Sr6/7tdUHywnrPspvbvRXI1bpPc=
   /neo-async/2.6.1:
-    dev: true
     resolution:
       integrity: sha512-iyam8fBuCUpWeKPGpaNMetEocMt364qkCsfL9JuhjXX6dRnguRVOfk2GZaDpPjcOKiiXCPINZC1GczQ7iTq3Zw==
   /new-github-release-url/1.0.0:
@@ -10764,7 +10769,6 @@ packages:
   /uglify-js/3.9.4:
     dependencies:
       commander: 2.20.3
-    dev: true
     engines:
       node: '>=0.8.0'
     hasBin: true
@@ -11248,7 +11252,6 @@ packages:
     resolution:
       integrity: sha512-Hz/mrNwitNRh/HUAtM/VT/5VH+ygD6DV7mYKZAtHOrbs8U7lvPS6xf7EJKMF0uW1KJCl0H701g3ZGus+muE5vQ==
   /wordwrap/1.0.0:
-    dev: true
     resolution:
       integrity: sha1-J1hIEIkUVqQXHI0CJkQa3pDLyus=
   /wrap-ansi/3.0.1:

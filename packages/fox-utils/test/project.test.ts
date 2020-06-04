@@ -19,6 +19,3 @@ describe('getProjectData()', () => {
   })
 })
 
-describe('getConfig()', () => {
-  test.todo('works with npmpackagejsonlinrc.config.js')
-})

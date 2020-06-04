@@ -7,12 +7,8 @@ import path from 'path'
 export { info } from './info'
 
 export async function bootstrapFunction(): Promise<void> {
-	const templateFiles = [
-		".config/npmpackagejsonlint.config.js"
-	]
 	await foxUtils.buildBootstrap({
-		templateRoot: path.join(__dirname, '../src/templates'),
-		templateFiles
+		dirname: __dirname
 	})
 }
 

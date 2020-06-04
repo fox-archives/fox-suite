@@ -8,12 +8,8 @@ import type stylelintType from '../../../@types/stylelint'
 export { info } from './info'
 
 export async function bootstrapFunction(): Promise<void> {
-  await foxUtils.buildBootstrap({
-    templateRoot: path.join(__dirname, '../src/templates'),
-		templateFiles: [
-			".config/stylelint.config.js",
-			".config/stylelintignore"
-		]
+	await foxUtils.buildBootstrap({
+		dirname: __dirname
 	})
 }
 
