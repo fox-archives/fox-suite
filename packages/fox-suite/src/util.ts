@@ -4,21 +4,15 @@ import util from 'util'
 import type { Dirent } from 'fs'
 import * as foxUtils from 'fox-utils'
 
-// TODO: make less dirty
+// HACK: this could be less dirty
 export async function getInstalledFoxPlugins(): Promise<string[]> {
 	const nodeModulesPath = path.join((await foxUtils.getProjectData()).location, 'node_modules')
-
-	// const { location } = (await foxUtils.getProjectData())
-	// console.info(`${location}/node_modules`)
-	// const matches = await util.promisify(glob)(`${location}/node_modules/+(fox-plugin-*|fox-preset-*)/*`, {})
-	// console.log(matches)
 
 	try {
 		const getPlugins = async (pluginParentDirectory: string): Promise<string[]> => {
 			const pluginList: string[] = []
 			const nodeModules = await fs.promises.readdir(pluginParentDirectory, { withFileTypes: true })
 
-			// TODO: make module resolution better (better than require.resolve for non cjs)
 			const resolveModule = (...modulePath: string[]): string => {
 				return path.join.apply(null, [...modulePath, 'build/index.js'])
 			}

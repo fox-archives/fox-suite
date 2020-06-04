@@ -14,7 +14,6 @@ export async function bootstrapFunction(): Promise<void> {
   ]
   await foxUtils.useBootstrapTemplate({
     templateRoot: path.join(__dirname, '../src/templates'),
-    // templateRoot: path.join(foxUtils.__dirname(import.meta), '../src/templates'),
     templateFiles
   })
 }
@@ -28,10 +27,8 @@ export async function lintFunction(fox: IFox): Promise<void> {
 
   const resolve = (module: string) =>
     path.join(__dirname, `../node_modules/${module}`)
-  // path.join(foxUtils.__dirname(import.meta), `../node_modules/${module}`)
   const stylelintConfigFoxPath =
     path.join(__dirname, '../node_modules/stylelint-config-fox')
-    // path.join(foxUtils.__dirname(import.meta), '../node_modules/stylelint-config-fox')
 
   config.extends = config.extends || [],
   config.extends.unshift(stylelintConfigFoxPath)

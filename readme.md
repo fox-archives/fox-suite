@@ -21,11 +21,11 @@ Most of these third party tools are not invoked directly. This would mean we wou
 `fox.config.js` is a javascript module that specifies a few options
 
 ```js
-// .fox.js
+// fox.config.js
 export default {
   all: 'cozy',
   monorepo: true,
-  module: {
+  plugin: {
     eslint: 'cozy',
     stylelint: 'excessive'
   }
@@ -49,7 +49,7 @@ Another thing, we try to be as explicit as possible. For example, if an API allo
 
 ## Building your own modules
 
-it's kind of simple
+it's kind of simple. you have to make sure you fork the template, since everything is setup there already. if you try to set it up yourself right now at the moment, you'll run into troubles (ex. since we load directly from `build/index.js` of package, completely bypassing node's module resolution algorithm). sometime in the future this will probably be improved
 
 `info.ts`
 ```ts
