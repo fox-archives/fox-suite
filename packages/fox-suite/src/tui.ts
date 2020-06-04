@@ -3,13 +3,14 @@ import { IPlugin } from "fox-types";
 import * as foxUtils from 'fox-utils'
 import { doAction } from './action';
 import * as util from './util'
-
+import debug from './debug'
 
 /**
  * @description if no command line arguments were given,
  * start (interactive) terminal user interface
  */
 export async function tui() {
+	debug('activating tui')
 	const [projectData, foxPlugins] = await Promise.all([
 		foxUtils.getProjectData(), util.getInstalledFoxPlugins()
 	])
@@ -25,6 +26,7 @@ export async function tui() {
 	const lintChoices: prompts.Choice[] = []
 	const foxPluginModules = await Promise.all(promises)
 	for (let foxPluginModule of foxPluginModules.filter(Boolean)) {
+		debug('processing foxPluginModule %s', foxPluginModule.info.name)
 		const foxPlugin: IPlugin = foxPluginModule
 
 		if (!foxPlugin.info) {

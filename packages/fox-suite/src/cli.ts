@@ -2,13 +2,13 @@ import * as foxUtils from 'fox-utils'
 import * as util from './util'
 import { doAction } from './action';
 import type { ParsedArgs } from "minimist"
-import type { IActionFunction } from './action'
 import { IPlugin } from 'fox-types';
-
+import debug from './debug'
 /**
  * @description start `fox` based on cli arguments if any were given
  */
 export async function cli(argv: ParsedArgs) {
+	debug('activating cli. passed args: %o', argv)
 	const [projectData, foxPlugins] = await Promise.all([
 		foxUtils.getProjectData(), util.getInstalledFoxPlugins()
 	])

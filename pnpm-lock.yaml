@@ -1,6 +1,7 @@
 importers:
   .:
     devDependencies:
+      '@types/debug': 4.1.5
       '@types/eslint': 6.8.1
       '@types/jest': 25.2.3
       '@types/lodash': 4.14.154
@@ -14,6 +15,7 @@ importers:
       lerna: 3.22.0
       ts-node: 8.10.2
     specifiers:
+      '@types/debug': ^4.1.5
       '@types/eslint': ^6.8.1
       '@types/jest': ^25.2.1
       '@types/lodash': ^4.14.150
@@ -226,6 +228,7 @@ importers:
   packages/fox-suite:
     dependencies:
       chalk: 4.0.0
+      debug: 4.1.1
       esm: 3.2.25
       fox-esm: 'link:../fox-esm'
       fox-plugin-eslint: 'link:../fox-plugin-eslint'
@@ -249,6 +252,7 @@ importers:
     specifiers:
       chalk: ^4.0.0
       cross-env: ^7.0.2
+      debug: ^4.1.1
       esm: ^3.2.25
       fox-esm: 'workspace:^0.1.0'
       fox-plugin-eslint: 'workspace:^0.1.0'
@@ -2520,6 +2524,10 @@ packages:
   /@types/color-name/1.1.1:
     resolution:
       integrity: sha512-rr+OQyAjxze7GgWrSaJwydHStIhHq2lvY3BOC2Mj7KnzI7XK0Uw1TOOdI9lDoajEbSWLiYgoo4f1R51erQfhPQ==
+  /@types/debug/4.1.5:
+    dev: true
+    resolution:
+      integrity: sha512-Q1y515GcOdTHgagaVFhHnIFQ38ygs/kmxdNpvpou+raI9UO3YZcHDngBSYKQklcKlvA7iuQlmIKbzvmxcOE9CQ==
   /@types/eslint/6.8.1:
     dependencies:
       '@types/estree': 0.0.44

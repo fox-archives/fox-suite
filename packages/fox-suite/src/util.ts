@@ -6,6 +6,7 @@ import * as foxUtils from 'fox-utils'
 import { spawn } from 'child_process'
 import { IPlugin } from "fox-types";
 import type { IActionFunction } from './action'
+import debug from './debug'
 
 // HACK: this could be less dirty
 export async function getInstalledFoxPlugins(): Promise<string[]> {
@@ -44,6 +45,7 @@ export async function getInstalledFoxPlugins(): Promise<string[]> {
 				}
 			}
 
+			debug('found plugins in directory: %o', pluginList)
 			return pluginList
 		}
 
@@ -62,6 +64,7 @@ export async function getInstalledFoxPlugins(): Promise<string[]> {
 
 			pluginName = pluginName.slice(0, pluginName.indexOf("/") || pluginName.indexOf(path.delimiter))
 
+			debug('shortened list of plugins: %o', pluginName)
 			return pluginName
 
 			// const i1 = arr.findIndex(el => el.includes(pluginName))
@@ -83,6 +86,7 @@ export async function getInstalledFoxPlugins(): Promise<string[]> {
 			}
 		}
 
+		debug('returned value from getInstalledFoxPlugins: %o', newAllPlugins)
 		return newAllPlugins
 	} catch (err) {
 		console.error(err)
@@ -95,6 +99,7 @@ export function run(script: string): void {
 	const scriptPath2 = path.join(__dirname, '../node_modules', script, 'bin', `${script}.js`)
 	const tsNodePath = path.join(__dirname, '../../node_modules/.bin/ts-node')
 
+	debug('spawning script at: %s', scriptPath2)
 	const child = spawn('node', ['--enable-source-maps', scriptPath2], {
 		cwd: process.cwd(),
 		windowsHide: true
