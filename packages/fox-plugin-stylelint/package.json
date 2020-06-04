@@ -31,6 +31,7 @@
     "stylelint-config-fox": "workspace:^0.1.0"
   },
   "devDependencies": {
+    "fox-test": "workspace:^1.0.0",
     "fox-types": "0.1.0"
   }
 }
