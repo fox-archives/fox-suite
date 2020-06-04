@@ -1,10 +1,11 @@
-import prompts, { Choice } from 'prompts'
+import prompts from 'prompts'
 import { IPlugin } from "fox-types";
 import * as foxUtils from 'fox-utils'
 import { doAction } from './action';
 import * as util from './util'
 import debug from './debug'
 import * as c from 'colorette'
+
 /**
  * @description if no command line arguments were given,
  * start (interactive) terminal user interface

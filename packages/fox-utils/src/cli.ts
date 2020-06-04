@@ -1,6 +1,6 @@
 import minimist from 'minimist'
 import  { setup } from './misc'
-import { IFox, IBuildCli } from "fox-types";
+import { IBuildCli } from "fox-types";
 import * as foxUtils from './'
 import * as c from 'colorette'
 

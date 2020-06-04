@@ -301,7 +301,10 @@ importers:
       type-fest: ^0.15.0
       typescript: ^3.9.3
   packages/fox-types:
-    specifiers: {}
+    dependencies:
+      type-fest: 0.15.0
+    specifiers:
+      type-fest: ^0.15.0
   packages/fox-utils:
     dependencies:
       colorette: 1.2.0
@@ -10725,7 +10728,6 @@ packages:
     resolution:
       integrity: sha512-34R7HTnG0XIJcBSn5XhDd7nNFPRcXYRZrBB2O2jdKqYODldSzBAqzsWoZYYvduky73toYS/ESqxPvkDf/F0XMg==
   /type-fest/0.15.0:
-    dev: true
     engines:
       node: '>=10'
     resolution:

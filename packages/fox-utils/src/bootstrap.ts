@@ -109,20 +109,3 @@ export async function buildBootstrap(opts: IBuildBootstrap): Promise<void> {
 
 	console.info(c.bold(c.green('bootstrapped files successfully')))
 }
-
-/**
- * @description not sure if this should be removed right now
- * @deprecated
- */
-async function ensureDotConfigDir(location: string): Promise<void> {
-  const dotConfigDir = path.join(location, '.config')
-  try {
-    await fs.promises.access(dotConfigDir, fs.constants.F_OK);
-  } catch(err) {
-    if (err.code === 'ENOENT') {
-      await fs.promises.mkdir(dotConfigDir, { recursive: true, mode: 0o755 })
-    } else {
-      throw new Error(err)
-    }
-  }
-}

@@ -1,3 +1,4 @@
+import { PackageJson } from 'type-fest'
 type option = 'off' | 'cozy' | 'strict' | 'excessive'
 
 export interface IFox {
@@ -31,7 +32,7 @@ export interface IBuildBootstrap {
  * project this tool gets installed to)
  */
 export interface IProject {
-	packageJson: Record<string, any>
+	packageJson: PackageJson
 	packageJsonPath: string,
 	foxConfig: IFox
 	foxConfigPath: string,

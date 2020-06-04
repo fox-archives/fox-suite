@@ -4,12 +4,13 @@ import type { Dirent } from 'fs'
 import * as foxUtils from 'fox-utils'
 import { spawn } from 'child_process'
 import { IPlugin } from "fox-types";
-import type { IActionFunction } from './action'
+import type { IActionFunction } from '../@types/index'
 import debug from './debug'
 
 // HACK: this could be less dirty
 export async function getInstalledFoxPlugins(): Promise<string[]> {
-	const nodeModulesPath = path.join((await foxUtils.getProjectData()).location, 'node_modules')
+	const projectData = await foxUtils.getProjectData()
+	const nodeModulesPath = path.join(projectData.location, 'node_modules')
 	debug('nodeModulesPath: %s', nodeModulesPath)
 
 	try {
@@ -18,7 +19,9 @@ export async function getInstalledFoxPlugins(): Promise<string[]> {
 			const nodeModules = await fs.promises.readdir(pluginParentDirectory, { withFileTypes: true })
 
 			const resolveModule = (...modulePath: string[]): string => {
-				return path.join.apply(null, [...modulePath, 'build/index.js'])
+				let entryPoint = 'build/index.js'
+				if (projectData.packageJson.main) entryPoint = projectData.packageJson.main
+				return path.join.apply(null, [...modulePath, entryPoint])
 			}
 
 			const isFoxPlugin = (nodePackage: Dirent) => {

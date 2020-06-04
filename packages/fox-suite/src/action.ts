@@ -1,22 +1,4 @@
-import type { IProject, IPlugin } from 'fox-types'
-
-interface IAction {
-	projectData: IProject
-}
-
-interface IActionBootstrap extends IAction {
-	action: IPlugin["bootstrapFunction"] | IPlugin["bootstrapFunction"][]
-}
-
-interface IActionFormat extends IAction {
-	action: IPlugin["formatFunction"] | IPlugin["formatFunction"][],
-}
-
-interface IActionLint extends IAction {
-	action: IPlugin["lintFunction"] | IPlugin["lintFunction"][]
-}
-
-export type IActionFunction = IActionBootstrap | IActionFormat | IActionLint
+import type { IActionFunction } from '../@types/index'
 
 /**
  * @description bootstraps, formats, or lints a project
