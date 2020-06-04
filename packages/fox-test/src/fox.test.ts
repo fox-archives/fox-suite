@@ -1,3 +1,5 @@
+import path from 'path'
+import fs from 'fs'
 import { IPlugin, IPluginInfo } from 'fox-types'
 import { getPluginInfo, loadModule, readPackageJson, getBinDirents, readBinFile } from './test.util'
 import 'jest-extended'
@@ -14,7 +16,7 @@ beforeEach(async () => {
 })
 
 describe(`testing module: '${pluginName}' using the 'fox-test' jest autorunner`, () => {
-	test("src/info.ts exports an 'info' object that conforms to the IPluginInfo schema", async () => {
+	test("`src/info.ts` exports an 'info' object that conforms to the IPluginInfo schema", async () => {
 		expect(infoModule).toBeObject()
 		// src/info.ts must include `export const info = { name: '' }'`
 		expect(infoModule).toHaveProperty('info')
@@ -32,7 +34,7 @@ describe(`testing module: '${pluginName}' using the 'fox-test' jest autorunner`,
 		expect(info.descriptionLong).toBeString()
 	})
 
-	test('src/index.ts contains all the required exports', () => {
+	test('`src/index.ts` contains all the required exports', () => {
 		expect(pluginModule).toBeObject()
 		// src/index.ts must include `export { info } from './info'`
 		expect(pluginModule).toHaveProperty('info')
@@ -40,7 +42,7 @@ describe(`testing module: '${pluginName}' using the 'fox-test' jest autorunner`,
 		expect(info).toBeObject()
 	})
 
-	test("package.json and src/info 'name' property are the same", async () => {
+	test("`package.json` and `src/info` 'name' property are the same", async () => {
 		const { pluginPath } = getPluginInfo()
 		const packageJson = await readPackageJson(pluginPath)
 
@@ -50,7 +52,7 @@ describe(`testing module: '${pluginName}' using the 'fox-test' jest autorunner`,
 		expect(namePackageJson).toBe(nameSrcInfo)
 	})
 
-	test("bin/fox-plugin-*.js has a filename equivalent to package.json 'name'", async () => {
+	test("`bin/fox-plugin-*.js` has a filename equivalent to package.json 'name'", async () => {
 		const { pluginPath } = getPluginInfo()
 		const packageJson = await readPackageJson(pluginPath)
 
@@ -64,7 +66,7 @@ describe(`testing module: '${pluginName}' using the 'fox-test' jest autorunner`,
 		expect(binDirHasFilename).toBe(true)
 	})
 
-	test("bin/fox-plugin-*.js has a shebang", async () => {
+	test("`bin/fox-plugin-*.js` has a shebang", async () => {
 		const { pluginPath } = getPluginInfo()
 		const binFileContents = await readBinFile(pluginPath)
 
@@ -73,7 +75,7 @@ describe(`testing module: '${pluginName}' using the 'fox-test' jest autorunner`,
 		).toBe(true)
 	})
 
-	test("bin/fox-plugin-*.js requires 'fox-esm'", async () => {
+	test("`bin/fox-plugin-*.js` requires 'fox-esm'", async () => {
 		const { pluginPath } = getPluginInfo()
 		const binFileContents = await readBinFile(pluginPath)
 
@@ -82,5 +84,31 @@ describe(`testing module: '${pluginName}' using the 'fox-test' jest autorunner`,
 			binFileContents.includes(`\nrequire = require("fox-esm")(module)`)
 		).toBe(true)
 		// bin/fox-plugin-*.js must include `require = require('fox-esm')(module)`
+	})
+
+	test("ensure the templates folder is called 'templates' and not 'template'", async () => {
+		const { pluginPath } = getPluginInfo()
+
+		expect(fs.existsSync(path.join(pluginPath, 'template'))).toBe(false)
+	})
+
+	test("ensure there is a 'templates' folder if a `src/index.ts` exports a `buildTemplates` function", async () => {
+		const { pluginPath } = getPluginInfo()
+
+		if (pluginModule.bootstrapFunction) {
+			const templateFileLocation = path.join(pluginPath, 'templates')
+			if (!fs.existsSync(templateFileLocation)) {
+				expect(true).toBe(false)
+			}
+		}
+
+	})
+
+	test("ensure `src/index.ts` exports a buildTemplates function if a 'templates' folder exists", async () => {
+		const { pluginPath } = getPluginInfo()
+			const templateFileLocation = path.join(pluginPath, 'templates')
+			if (fs.existsSync(templateFileLocation)) {
+				expect(pluginModule).toHaveProperty('bootstrapFunction')
+			}
 	})
 })

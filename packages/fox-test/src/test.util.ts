@@ -31,3 +31,14 @@ export async function readBinFile(pluginPath: string): Promise<string> {
 	const binLocation = path.join(pluginPath, `bin/${packageJson.name}.js`)
 	return fs.promises.readFile(binLocation, { encoding: 'utf8' })
 }
+
+export async function doesWrongTemplateFolderExist(pluginPath: string): Promise<boolean> {
+	const wrongTemplateFileLocation = path.join(pluginPath, 'templates')
+
+	return new Promise((resolve, reject) => {
+		fs.exists(wrongTemplateFileLocation, (err) => {
+			if (err) resolve(false)
+			else resolve(true)
+		})
+	})
+}
