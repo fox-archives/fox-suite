@@ -112,7 +112,7 @@ export const info = {
 	name: 'fox-plugin-htmlhint',
 	// used by prompts in fox-suite
 	tool: 'Htmlhint',
-	toolConfig: 'https://htmlhint.com/docs/user-guide/list-rules',
+	toolConfigSchemaHelpUri: 'https://htmlhint.com/docs/user-guide/list-rules',
 	// used by prompts in fox-suite and buildCli
 	description: 'Lints the HTML files',
 	// used by nothing

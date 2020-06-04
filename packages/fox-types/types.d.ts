@@ -19,7 +19,7 @@ export interface IPlugin {
 export interface IPluginInfo {
 	name: string,
 	tool: string,
-	toolConfig: string,
+	toolConfigSchemaHelpUri: string,
 	description: string,
 	descriptionLong: string
 }
