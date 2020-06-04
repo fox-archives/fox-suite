@@ -3,6 +3,9 @@ import fs from 'fs'
 import util from 'util'
 import type { Dirent } from 'fs'
 import * as foxUtils from 'fox-utils'
+import { spawn } from 'child_process'
+import { IPlugin } from "fox-types";
+import type { IActionFunction } from './action'
 
 // HACK: this could be less dirty
 export async function getInstalledFoxPlugins(): Promise<string[]> {
@@ -85,4 +88,36 @@ export async function getInstalledFoxPlugins(): Promise<string[]> {
 		console.error(err)
 		process.exit(1)
 	}
+}
+
+export function run(script: string): void {
+	const scriptPath = path.join(__dirname, '../node_modules/.bin', script)
+	const scriptPath2 = path.join(__dirname, '../node_modules', script, 'bin', `${script}.js`)
+	const tsNodePath = path.join(__dirname, '../../node_modules/.bin/ts-node')
+
+	const child = spawn('node', ['--enable-source-maps', scriptPath2], {
+		cwd: process.cwd(),
+		windowsHide: true
+	})
+
+	let output = ""
+	child.stdout.on('data', data => {
+		console.log(data.toString())
+		output += data
+	})
+	child.stderr.on('data', data => {
+		console.info(data.toString())
+		output += data
+	})
+}
+
+type actionFunctions = "bootstrapFunction" | "formatFunction" | "lintFunction"
+type fns = IActionFunction["action"]
+export const pickModuleProperty = (foxPluginModules: IPlugin[], actionFunctions: actionFunctions): fns => {
+	const pickedFunctions: fns = []
+	for (const foxPluginModule of foxPluginModules) {
+		// @ts-ignore
+		pickedFunctions.push(foxPluginModule[actionFunctions])
+	}
+	return pickedFunctions
 }
