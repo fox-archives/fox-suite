@@ -47,15 +47,9 @@ Examples:
 		console.log(c.bold(c.green('bootstrap complete')))
 	} else if (argv.format) {
 		await doAction({
-			action: util.pickModuleProperty(foxPluginModules, "formatFunction"),
+			action: util.pickModuleProperty(foxPluginModules, "fixFunction"),
 			projectData
 		})
 		console.log(c.bold(c.green('format complete')))
-	} else if (argv.lint) {
-		await doAction({
-			action: util.pickModuleProperty(foxPluginModules, "lintFunction"),
-			projectData
-		})
-		console.log(c.bold(c.green('lint complete')))
 	}
 }

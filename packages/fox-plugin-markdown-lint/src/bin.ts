@@ -1,10 +1,12 @@
-import { runMarkdownLint } from '.'
+import * as foxUtils from "fox-utils";
+import { bootstrapFunction, fixFunction } from "./";
+import { info } from './info'
 
 export async function bin() {
-  try {
-    await runMarkdownLint()
-  } catch (err) {
-    console.error(err)
-    process.exitCode = 1
-  }
+	await foxUtils.buildCli(process.argv, {
+		pluginName: info.name,
+		pluginDescription: info.description,
+		bootstrapFunction,
+		fixFunction
+	});
 }

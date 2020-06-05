@@ -5,24 +5,37 @@ import extensions from 'markdown-extensions'
 import processor from 'remark'
 // @ts-ignore
 import proc from 'remark/package.json'
+import type { IFoxConfig } from 'fox-types'
+import * as foxUtils from 'fox-utils'
 
 export { info } from './info'
 
-export async function runMarkdownLint() {
-  // start({
-  //   processor: processor,
-  //   name: proc.name,
-  //   description: cli.description,
-  //   version: [
-  //     proc.name + ': ' + proc.version,
-  //     cli.name + ': ' + cli.version
-  //   ].join(', '),
-  //   pluginPrefix: proc.name,
-  //   // @ts-ignore
-  //   presetPrefix: proc.name + '-preset',
-  //   packageField: proc.name + 'Config',
-  //   rcName: '.' + proc.name + 'rc',
-  //   ignoreName: '.' + proc.name + 'ignore',
-  //   extensions: extensions
-  // })
+export async function bootstrapFunction(): Promise<void> {
+	await foxUtils.buildBootstrap({
+		dirname: __dirname
+	})
 }
+
+export async function fixFunction(fox: IFoxConfig): Promise<void> {
+	console.log('fix markdownlint')
+}
+
+
+// export async function fixFunction() {
+//   // start({
+//   //   processor: processor,
+//   //   name: proc.name,
+//   //   description: cli.description,
+//   //   version: [
+//   //     proc.name + ': ' + proc.version,
+//   //     cli.name + ': ' + cli.version
+//   //   ].join(', '),
+//   //   pluginPrefix: proc.name,
+//   //   // @ts-ignore
+//   //   presetPrefix: proc.name + '-preset',
+//   //   packageField: proc.name + 'Config',
+//   //   rcName: '.' + proc.name + 'rc',
+//   //   ignoreName: '.' + proc.name + 'ignore',
+//   //   extensions: extensions
+//   // })
+// }

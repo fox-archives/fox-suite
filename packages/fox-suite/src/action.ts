@@ -8,14 +8,27 @@ export async function doAction({
 	projectData
 }: IActionFunction): Promise<void> {
 	if (Array.isArray(actionFunctions)) {
-		for (const actionFunction of actionFunctions) {
-			if (!actionFunction) continue
+		for (const fixFunction of actionFunctions) {
+			if (!fixFunction) continue
 
-			await actionFunction(projectData.foxConfig)
+			await fixFunction(projectData.foxConfig)
 		}
 	} else if (actionFunctions) {
 		await actionFunctions(projectData.foxConfig)
 	}
 
 	process.exit(1)
+}
+
+export async function watchAndDoAction({
+	action: actionFunctions,
+	projectData
+}: IActionFunction): Promise<void> {
+	// test for watchers and then do action
+	console.log('fake watching')
+
+	await doAction({
+		action: actionFunctions,
+		projectData
+	})
 }

@@ -8,12 +8,8 @@ interface IActionBootstrap extends IAction {
 	action: IPluginExportIndex["bootstrapFunction"] | IPluginExportIndex["bootstrapFunction"][]
 }
 
-interface IActionFormat extends IAction {
-	action: IPluginExportIndex["formatFunction"] | IPluginExportIndex["formatFunction"][],
+interface IActionFix extends IAction {
+	action: IPluginExportIndex["fixFunction"] | IPluginExportIndex["fixFunction"][],
 }
 
-interface IActionLint extends IAction {
-	action: IPluginExportIndex["lintFunction"] | IPluginExportIndex["lintFunction"][]
-}
-
-export type IActionFunction = IActionBootstrap | IActionFormat | IActionLint
+export type IActionFunction = IActionBootstrap | IActionFix

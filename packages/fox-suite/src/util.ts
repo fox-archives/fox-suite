@@ -118,7 +118,7 @@ export function run(script: string): void {
 	})
 }
 
-type actionFunctions = "bootstrapFunction" | "formatFunction" | "lintFunction"
+type actionFunctions = "bootstrapFunction" | "fixFunction"
 type fns = IActionFunction["action"]
 export const pickModuleProperty = (foxPluginModules: IPluginExportIndex[], actionFunctions: actionFunctions): fns => {
 	const pickedFunctions: fns = []

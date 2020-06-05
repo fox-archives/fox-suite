@@ -116,6 +116,7 @@ importers:
   packages/fox-plugin-markdown-lint:
     dependencies:
       fox-test: 'link:../fox-test'
+      fox-utils: 'link:../fox-utils'
       markdown-extensions: 1.1.1
       remark: 12.0.0
       remark-cli: 8.0.0
@@ -127,6 +128,7 @@ importers:
     specifiers:
       fox-test: 'workspace:^1.0.0'
       fox-types: 'workspace:^0.1.0'
+      fox-utils: 'workspace:^0.1.1'
       markdown-extensions: ^1.1.1
       remark: ^12.0.0
       remark-cli: ^8.0.0
@@ -286,6 +288,7 @@ importers:
       fox-plugin-package-json-sort: 'link:../fox-plugin-package-json-sort'
       fox-plugin-prettier: 'link:../fox-plugin-prettier'
       fox-plugin-stylelint: 'link:../fox-plugin-stylelint'
+      fox-runner: 'link:../fox-runner'
       fox-utils: 'link:../fox-utils'
       lodash.uniq: 4.5.0
       minimist: 1.2.5
@@ -310,6 +313,7 @@ importers:
       fox-plugin-package-json-sort: 'workspace:^0.1.1'
       fox-plugin-prettier: 'workspace:^0.1.0'
       fox-plugin-stylelint: 'workspace:^0.1.0'
+      fox-runner: 'workspace:^0.1.1'
       fox-types: 'workspace:^0.1.0'
       fox-utils: ^0.1.1
       jest: ^26.0.1

@@ -1,5 +1,6 @@
 #!/usr/bin/env node
 
-const { bin } = require('../build/bin');
+require = require('fox-esm')(module)
 
-bin()
+const { bin } = require("../build/bin");
+bin();

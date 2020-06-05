@@ -21,7 +21,7 @@ export interface IBuildCli {
 	pluginName: string,
 	pluginDescription: string,
 	bootstrapFunction?: () => Promise<void>,
-	actionFunction: (fox: IFoxConfig) => Promise<void>
+	fixFunction: (fox: IFoxConfig) => Promise<void>
 }
 
 /**
@@ -164,7 +164,11 @@ export interface IPlugin {
  * @description found in a plugin's `src/index.ts` file
  */
 export interface IPluginExportIndex {
+	/**
+	 * the plugin's exported `info` object
+	 */
 	info: IPluginExportInfo,
+
 	/**
 	 * @description the function that is executed when the user wants your
 	 * project's tooling to be 'bootstrapped'
@@ -172,16 +176,10 @@ export interface IPluginExportIndex {
 	bootstrapFunction?: () => Promise<void>
 
 	/**
-	 * @description the function that is executed when the user wants your
-	 * project's tooling to do the 'formatting'
+	 * @description the function that does the thing that your
+	 * plugin says it does
 	 */
-	formatFunction?: (fox: IFoxConfig) => Promise<void>
-
-	/**
-	 * @description the function that is executed when the user wants your
-	 * project's tooling to do the 'linting'
-	 */
-	lintFunction?: (fox: IFoxConfig) => Promise<void>
+	fixFunction?: (fox: IFoxConfig) => Promise<void>
 }
 
 /**

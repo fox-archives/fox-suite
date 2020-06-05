@@ -1,5 +1,5 @@
-import { bootstrapFunction, lintFunction } from "./";
 import * as foxUtils from "fox-utils";
+import { bootstrapFunction, fixFunction } from "./";
 import { info } from './info'
 
 export async function bin() {
@@ -7,6 +7,6 @@ export async function bin() {
 		pluginName: info.name,
 		pluginDescription: info.description,
 		bootstrapFunction,
-		actionFunction: lintFunction
+		fixFunction
 	});
 }

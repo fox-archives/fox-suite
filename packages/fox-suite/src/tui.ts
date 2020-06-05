@@ -1,7 +1,7 @@
 import prompts from 'prompts'
 import { IPluginExportIndex } from "fox-types";
 import * as foxUtils from 'fox-utils'
-import { doAction } from './action';
+import { doAction, watchAndDoAction } from './action';
 import * as util from './util'
 import debug from './debug'
 import * as c from 'colorette'
@@ -12,36 +12,41 @@ import * as c from 'colorette'
  */
 export async function tui(): Promise<void> {
 	debug('activating tui')
-	const [projectData, foxPlugins] = await Promise.all([
+	const [projectData, foxPluginPaths] = await Promise.all([
 		foxUtils.getProjectData(), util.getInstalledFoxPlugins()
 	])
 
 	debug('projectData: %o', projectData)
-	debug('foxPlugins: %o', foxPlugins)
+	debug('foxPlugins: %o', foxPluginPaths)
 
-	if (foxPlugins.length === 0) {
+	if (foxPluginPaths.length === 0) {
 		console.log(c.bold(c.red('no fox-plugins or fox-presets found. please install some to continue')))
 		process.exit(0)
 	}
 
-
-	// import all plugins
+	// convert the array of objects with properties 'bootstrapFunction' and 'fixFunction'
+	// to two arrays, each for either 'bootstrapFunction' or 'fixFunction'
 	const promises: Promise<IPluginExportIndex>[] = []
-	for (const foxPlugin of foxPlugins) {
-		promises.push(import(foxPlugin))
+	for (const foxPluginPath of foxPluginPaths) {
+		promises.push(import(foxPluginPath))
 	}
 
 	const bootstrapChoices: prompts.Choice[] = []
-	const formatChoices: prompts.Choice[] = []
-	const lintChoices: prompts.Choice[] = []
-	const foxPluginModules = await Promise.all(promises)
-	for (let foxPluginModule of foxPluginModules.filter(Boolean)) {
+	const fixChoices: prompts.Choice[] = []
+
+	const foxPluginModules = (await Promise.all(promises)).filter(Boolean)
+	for (let i = 0; i < foxPluginModules.length; ++i) {
+		const foxPluginModule = foxPluginModules[i]
+		const foxPluginPath = foxPluginPaths[i]
+
 		debug('processing foxPluginModule %s', foxPluginModule.info.name)
+
 		const foxPlugin: IPluginExportIndex = foxPluginModule
 
-		if (!foxPlugin.info) {
-			// TODO: make error more specific
-			throw new Error(`an installed plugin does not have the 'info' object exported. exiting.`)
+		if (!foxPlugin.info.name || !foxPlugin.info) {
+			throw new Error(
+				`plugin located at ${foxPluginPath} does not have exported info object. exiting.`
+			)
 		}
 
 		if (foxPlugin.bootstrapFunction) {
@@ -52,18 +57,11 @@ export async function tui(): Promise<void> {
 			})
 		}
 
-		if (foxPlugin.formatFunction) {
-			formatChoices.push({
+		if (foxPlugin.fixFunction) {
+			fixChoices.push({
 				title: foxPlugin.info.tool,
 				description: foxPlugin.info.description,
-				value: foxPlugin.formatFunction
-			})
-		}
-		if (foxPlugin.lintFunction) {
-			lintChoices.push({
-				title: foxPlugin.info.tool,
-				description: foxPlugin.info.description,
-				value: foxPlugin.lintFunction
+				value: foxPlugin.fixFunction
 			})
 		}
 	}
@@ -75,22 +73,28 @@ export async function tui(): Promise<void> {
 		value: util.pickModuleProperty(foxPluginModules, "bootstrapFunction")
 	})
 
-	if (formatChoices.length > 2) formatChoices.unshift({
+	if (fixChoices.length > 2) fixChoices.unshift({
 		title: 'All',
 		description: 'Format files from all config',
-		value: util.pickModuleProperty(foxPluginModules, "formatFunction")
-	})
-
-	if (lintChoices.length > 2) lintChoices.unshift({
-		title: 'All',
-		description: 'Lint files from all config',
-		value: util.pickModuleProperty(foxPluginModules, "lintFunction")
+		value: util.pickModuleProperty(foxPluginModules, "fixFunction")
 	})
 
 	const actionChoices: prompts.Choice[] = []
-	if (bootstrapChoices.length > 0) actionChoices.push({ title: 'Bootstrap', description: 'Bootstrap configuration boilerplate', value: 'bootstrap' })
-	if (formatChoices.length > 0) actionChoices.push({ title: 'Format', description: 'Format files', value: 'format' })
-	if (lintChoices.length > 0) actionChoices.push({ title: 'Lint', description: 'Lint via category', value: 'lint' })
+	if (bootstrapChoices.length > 0) actionChoices.push({
+		title: 'Bootstrap',
+		description: 'Bootstrap configuration boilerplate',
+		value: 'bootstrap'
+	})
+	if (fixChoices.length > 0) actionChoices.push({
+		title: 'Fix',
+		description: 'Fix files and show errors, if any',
+		value: 'fix'
+	})
+	if (fixChoices.length > 0) actionChoices.push({
+		title: 'Watch',
+		description: "Same as 'fix', but watches files and rebuilds on changes",
+		value: 'watch'
+	})
 
 	const { action } = await prompts({
 		type: 'select',
@@ -112,28 +116,28 @@ export async function tui(): Promise<void> {
 			projectData
 		})
 
-	} else if (action === 'format') {
-		const { format }: { format: IPluginExportIndex["formatFunction"] } = await prompts({
+	} else if (action === 'fix') {
+		const { fixFunctions }: { fixFunctions: IPluginExportIndex["fixFunction"] } = await prompts({
 			type: 'select',
-			name: 'format',
+			name: 'fixFunctions',
 			message: 'Which formatter would you like to use?',
-			choices: formatChoices
+			choices: fixChoices
 		})
 
 		await doAction({
-			action: format,
+			action: fixFunctions,
 			projectData
 		})
-	} else if (action === 'lint') {
-		const { lint }: { lint: IPluginExportIndex["lintFunction"] } = await prompts({
+	} else if (action === 'watch') {
+		const { fixFunctions }: { fixFunctions: IPluginExportIndex["fixFunction"] } = await prompts({
 			type: 'select',
-			name: 'lint',
-			message: 'run a script',
-			choices: lintChoices
-		});
+			name: 'fixFunctions',
+			message: 'Which formatter would you like to use?',
+			choices: fixChoices
+		})
 
-		await doAction({
-			action: lint,
+		await watchAndDoAction({
+			action: fixFunctions,
 			projectData
 		})
 	}

@@ -8,7 +8,7 @@ export async function buildCli(nodeArgv: NodeJS.Process["argv"], {
 	pluginName,
 	pluginDescription,
 	bootstrapFunction,
-	actionFunction
+	fixFunction
 }: IBuildCli) {
 	setup()
 
@@ -22,7 +22,8 @@ Description:
 
 Options:
   --boostrap   Bootstrap ${pluginName} configuration
-  --action     Format or lint files
+	--fix        Fix Files as per tool
+  --watch     Same as fix, but creates a watcher (recommended)
   --help       Show help
 
 Examples:
@@ -46,7 +47,7 @@ Examples:
   } else if (argv.action) {
 		try {
 			const projectData = await foxUtils.getProjectData()
-			await actionFunction(projectData.foxConfig)
+			await fixFunction(projectData.foxConfig)
 		} catch (err) {
 			console.error(err)
 			process.exitCode = 1

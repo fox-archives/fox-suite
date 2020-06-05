@@ -30,6 +30,7 @@
     "fox-plugin-package-json-sort": "workspace:^0.1.1",
     "fox-plugin-prettier": "workspace:^0.1.0",
     "fox-plugin-stylelint": "workspace:^0.1.0",
+    "fox-runner": "workspace:^0.1.1",
     "fox-utils": "^0.1.1",
     "lodash.uniq": "^4.5.0",
     "minimist": "^1.2.5",

@@ -11,6 +11,6 @@ export async function bootstrapFunction(): Promise<void> {
 	})
 }
 
-export async function lintFunction(fox: IFoxConfig): Promise<void> {
-
+export async function fixFunction(fox: IFoxConfig): Promise<void> {
+	console.log('fix htmlhint')
 }

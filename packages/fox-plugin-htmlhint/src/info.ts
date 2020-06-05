@@ -1,8 +1,9 @@
 import type { IPluginExportInfo } from 'fox-types'
 
 export const info: IPluginExportInfo = {
-	name: '',
-	tool: 'Htmlhint',
+	name: 'fox-plugin-htmlhint',
+	tool: 'htmlhint',
+	toolName: 'Htmlhint',
 	toolConfigSchemaHelpUri: 'https://htmlhint.com/docs/user-guide/list-rules',
 	description: 'Lints the html files of current project',
 	descriptionLong: 'pending'

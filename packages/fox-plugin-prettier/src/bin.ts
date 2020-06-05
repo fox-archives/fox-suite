@@ -7,6 +7,6 @@ export async function bin() {
 		pluginName: info.name,
 		pluginDescription: info.description,
 		bootstrapFunction,
-		actionFunction: formatFunction
+		fixFunction: formatFunction
 	});
 }

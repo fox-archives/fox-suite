@@ -6,6 +6,6 @@ export async function bin() {
 	await foxUtils.buildCli(process.argv, {
 		pluginName: info.name,
 		pluginDescription: info.description,
-		actionFunction: formatFunction
+		fixFunction: formatFunction
 	});
 }
