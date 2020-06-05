@@ -2,6 +2,8 @@ import path from 'path'
 import fs from 'fs'
 import type { PackageJson } from 'type-fest'
 import type { Dirent } from 'fs'
+import { BabelFileResult } from '@babel/core'
+import * as babel from "@babel/core"
 
 export function getPluginInfo(): { pluginPath: string, pluginName: string } {
 	let pluginPath: string = process.env.FOX_PLUGIN_DIRECTORY || ''
@@ -41,4 +43,16 @@ export async function doesWrongTemplateFolderExist(pluginPath: string): Promise<
 			else resolve(true)
 		})
 	})
+}
+
+export async function babelTraverse(traverseOption: any): Promise<babel.types.File | babel.types.Program | null> {
+	const { pluginPath } = getPluginInfo()
+	const indexFile = path.join(pluginPath, 'src/index.ts')
+	const fileContents = await fs.promises.readFile(indexFile, { encoding: 'utf8' })
+	const ast = await babel.parseAsync(fileContents, {
+		filename: 'index.ts',
+		presets: [ "@babel/typescript" ]
+	})
+	babel.traverse(ast!, traverseOption)
+	return ast
 }

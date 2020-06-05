@@ -4,5 +4,8 @@
 		"rootDir": "src",
 		"outDir": "build"
 	},
-	"include": [ "src/**/*" ]
+	"include": [ "src/**/*" ],
+	"paths": {
+		"bt": [ "./@types/babel-types" ],
+	}
 }
