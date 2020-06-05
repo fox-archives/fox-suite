@@ -75,7 +75,6 @@ export interface IProject {
 	packageJson: PackageJson
 
 	/**
-	 * @deprecated this is repetative?? with `packageJson` and `location` members present
 	 * @description absolute path to location of project's json file
 	 * @example `/abs/my-react-app/package.json`
 	 */
@@ -196,11 +195,20 @@ export interface IPluginExportInfo {
 	name: string,
 
 	/**
-	 * @description name of the tool that is being abstracted over. note that this text
-	 * will be shown to the user, so having correct casing may be important
+	 * @description name of the tool that is being abstracted over. _important_, this will be
+	 * the property of an object, so just use alphanumerics. more specifically, this will be your
+	 * key in `fox.config.js` (under foxConfig.plugins[tool])
 	 * @example this would be `Stylelint` for `fox-plugin-stylelint`
+	 * @todo ensure there is a `fox-test` test (read desc) for that case
 	 */
 	tool: string,
+
+	/**
+	 * @description name of the tool that is being abstracted over. note that this text
+	 * will be shown to the user, so having correct casing will make things look better
+	 * @example this would be `stylelint` for `fox-plugin-stylelint`
+	 */
+	toolName: string,
 
 	/**
 	 * @description website url that shows more information about

@@ -6,6 +6,7 @@ import { IFoxConfig } from "fox-types";
  */
 
 /**
+ * @deprecate ? use AOC on getProjectData
  * @description serialize foxOptions to and from the environment
  * @summary in some cases, we don't have control of when
  * a module is executed (ex. we pass in the path of `stylelint-config-fox`
@@ -19,6 +20,7 @@ export function setFoxOptionsToEnv(fox: IFoxConfig): void {
 }
 
 /**
+ * @deprecate ? use AOC getProjectData
  * @description serialize foxOptions to and from the environment
  * @summary see foxUtils.setFoxOptionsToEnv for details on when to use this
  */

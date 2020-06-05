@@ -27,7 +27,7 @@
     "fox-esm": "workspace:^0.1.0",
     "fox-utils": "workspace:^0.1.1",
     "postcss-scss": "^2.1.1",
-    "stylelint": "^13.5.0",
+    "stylelint": "^13.6.0",
     "stylelint-config-fox": "workspace:^0.1.0"
   },
   "devDependencies": {

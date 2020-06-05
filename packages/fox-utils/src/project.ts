@@ -29,8 +29,11 @@ export async function getProjectData(): Promise<IProject> {
 		await fs.promises.access(foxConfigPath, fs.constants.F_OK)
 		foxConfig = (await import(foxConfigPath)).default
 	} catch {
+		// default foxConfig options
 		foxConfig = {
-			all: 'cozy'
+			all: 'cozy',
+			monorepo: false,
+			plugins: []
 		}
 	}
 

@@ -1,0 +1,18 @@
+{
+	"extends": "../tsconfig.plugin.json",
+	"compilerOptions": {
+		"rootDir": "src",
+		"outDir": "build"
+	},
+	"typeRoots": [
+		"./@types"
+	],
+	"include": [
+		"src/**/*", "input.js"
+	],
+	"references": [
+		{
+			"path": "../babel-plugin-fox-runner"
+		}
+	]
+}

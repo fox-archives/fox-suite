@@ -37,6 +37,9 @@
 		},
 		{
 			"path": "../fox-test"
+		},
+		{
+			"path": "../fox-runner"
 		}
   ]
 }

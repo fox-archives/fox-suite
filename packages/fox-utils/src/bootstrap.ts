@@ -6,7 +6,6 @@ import { getProjectData } from './project.js';
 import handlebars from 'handlebars'
 import { IBuildBootstrap, ITemplateFile } from 'fox-types'
 import { getPluginData } from './plugin.js';
-import util from 'util'
 import debug from './debug'
 import readPkgUp from 'read-pkg-up'
 

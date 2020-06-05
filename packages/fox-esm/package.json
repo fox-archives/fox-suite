@@ -8,5 +8,8 @@
 	"type": "commonjs",
 	"engines": {
 		"node": ">=12.17.0 >=v13.14.0 >=14.3.0"
+	},
+	"dependencies": {
+		"esm": "^3.2.25"
 	}
 }
