@@ -3,12 +3,12 @@ import fs from 'fs'
 import prompts from 'prompts'
 import * as c from 'colorette'
 import { getProjectData } from './project.js';
-import glob from 'glob'
 import handlebars from 'handlebars'
-import { IBuildBootstrap } from 'fox-types'
+import { IBuildBootstrap, ITemplateFile } from 'fox-types'
 import { getPluginData } from './plugin.js';
 import util from 'util'
 import debug from './debug'
+import readPkgUp from 'read-pkg-up'
 
 /**
  * generate boilerpalte configuration in `.config`
@@ -20,40 +20,18 @@ import debug from './debug'
 	* essentially automatically managed
   */
 export async function buildBootstrap(opts: IBuildBootstrap): Promise<void> {
-	const pluginRoot = path.join(opts.dirname, '..')
+	const pluginRoot = path.dirname((await readPkgUp({ cwd: opts.dirname }))?.path as string)
+	if (!pluginRoot) throw new Error('could not find pluginRoot')
+
 	const [ pluginData, projectData ] = await Promise.all([ getPluginData(pluginRoot), getProjectData() ])
 
-	const files = await util.promisify(glob)(`${pluginData.templateDir}/**/*`, {
-		dot: true
-	})
-
-	interface fileObject {
-		filePathAbsolute: string,
-		filePathRelative: string,
-		stats: fs.Stats
-	}
-	const filesToTemplatePromise: Promise<fileObject | undefined>[] = files.map(async (filePathAbsolute: string): Promise<fileObject | undefined> => {
-		const filePathRelative = filePathAbsolute.slice(pluginData.pluginRoot.length + 'templates'.length + 2)
-		const stats = await fs.promises.stat(filePathAbsolute)
-
-		if (stats.isDirectory()) return undefined
-
-		return {
-			filePathAbsolute,
-			filePathRelative,
-			stats
-		}
-	})
-
-	// these are all the files we need to process with handlebars
-	const filesToTemplate = (await Promise.all(filesToTemplatePromise)).filter(Boolean) as fileObject[]
-	const doTemplate = async (fileToTemplate: fileObject): Promise<{ fileDest: string, templatedText: string }> => {
-		const fileContents = await fs.promises.readFile(fileToTemplate.filePathAbsolute, { encoding: 'utf8' })
+	const doTemplate = async (fileToTemplate: ITemplateFile): Promise<{ fileDest: string, templatedText: string }> => {
+		const fileContents = await fs.promises.readFile(fileToTemplate.absolutePath, { encoding: 'utf8' })
 		const templateFn = handlebars.compile(fileContents)
 		const templatedText = templateFn({
 			noEscape: true
 		})
-		const fileDest = path.join(projectData.location, fileToTemplate.filePathRelative)
+		const fileDest = path.join(projectData.location, fileToTemplate.relativePath)
 
 		return {
 			fileDest,
@@ -61,9 +39,8 @@ export async function buildBootstrap(opts: IBuildBootstrap): Promise<void> {
 		}
 	}
 
-	debug('filesToTemplate: %o', filesToTemplate)
-	const retryFilesToTemplate: fileObject[] = []
-	for (const fileToTemplate of filesToTemplate) {
+	const retryFilesToTemplate: ITemplateFile[] = []
+	for (const fileToTemplate of pluginData.templateFiles) {
 		// const fileDest = path.join(projectData.location, fileToTemplate.filePathRelative)
 		const { fileDest, templatedText } = await doTemplate(fileToTemplate)
 		try {
@@ -84,7 +61,7 @@ export async function buildBootstrap(opts: IBuildBootstrap): Promise<void> {
 	// ask the user if they actually want them to be overriden
 	if (retryFilesToTemplate.length > 0) {
 		const alreadyExistingFilesFormatted = JSON.stringify(retryFilesToTemplate.map(
-			(el: fileObject): string => el.filePathRelative
+			(el: ITemplateFile): string => el.relativePath
 		))
 
 		const { wantsToOverwrite } = await prompts({

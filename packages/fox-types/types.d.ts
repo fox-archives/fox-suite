@@ -1,4 +1,5 @@
 import { PackageJson } from 'type-fest'
+import type { Stats } from 'fs'
 type option = 'off' | 'cozy' | 'strict' | 'excessive'
 
 /**
@@ -52,10 +53,20 @@ export interface IProject {
 
 /**
  * @private
+ */
+export interface ITemplateFile {
+	absolutePath: string,
+	relativePath: string,
+	stats: Stats
+}
+
+/**
+ * @private
  * @description this is when dealing with plugins
  */
 export interface IPlugin {
 	templateDir: string,
+	templateFiles: ITemplateFile[],
 	pluginRoot: string,
 	packageJson: PackageJson
 }
