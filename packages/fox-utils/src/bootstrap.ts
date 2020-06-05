@@ -24,7 +24,6 @@ export async function buildBootstrap(opts: IBuildBootstrap): Promise<void> {
 	if (!pluginRoot) throw new Error('could not find pluginRoot')
 
 	const [ pluginData, projectData ] = await Promise.all([ getPluginData(pluginRoot), getProjectData() ])
-
 	const doTemplate = async (fileToTemplate: ITemplateFile): Promise<{ fileDest: string, templatedText: string }> => {
 		const fileContents = await fs.promises.readFile(fileToTemplate.absolutePath, { encoding: 'utf8' })
 		const templateFn = handlebars.compile(fileContents)

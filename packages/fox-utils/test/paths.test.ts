@@ -2,7 +2,7 @@ import path from 'path'
 import url from 'url'
 
 /**
- * @desc Resolves an absolute path relative to the current working
+ * @description Resolves an absolute path relative to the current working
  * directory. prepends a './' if it doesn't already exist
  */
 export function toRelativePath(absolutePath: string): string {
