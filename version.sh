@@ -9,4 +9,6 @@ packageJsonFiles=$(ls **/**/package.json | grep -v node_modules)
 for packageJsonFile in $packageJsonFiles; do
 	sed -i "s/\"version\".*/\"version\": \"${1}\",/g" $packageJsonFile
 	sed -Ei "s/(fox-.*)(\"\^.*)/\1\"^${1}\",/g" $packageJsonFile
+	sed -Ei "s/(.*-fox)(\"\^.*)/\1\"^${1}\",/g" $packageJsonFile
+	sed -Ei "s/(babel-plugin-fox-.*)(\"\^.*)/\1\"^${1}\",/g" $packageJsonFile
 done

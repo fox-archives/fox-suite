@@ -23,13 +23,14 @@
   "author": "Edwin Kofler",
   "license": "MIT",
   "dependencies": {
-    "eslint": "^7.0.0",
     "eslint-config-fox": "^0.1.0",
      "fox-esm": "^0.2.1",
     "fox-test": "^0.2.1",
-    "fox-utils": "^0.2.1",
+		"fox-utils": "^0.2.1",
+		"eslint": "^7.0.0"
   },
   "devDependencies": {
-    "fox-types": "^0.2.1",
+		"fox-types": "^0.2.1",
+		"http": "0.0.1-security"
   }
 }

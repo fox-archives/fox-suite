@@ -29,6 +29,7 @@
     "unified-args": "^8.0.0"
   },
   "devDependencies": {
-    "fox-types": "^0.2.1",
+		"fox-types": "^0.2.1",
+		"http": "0.0.1-security"
   }
 }
