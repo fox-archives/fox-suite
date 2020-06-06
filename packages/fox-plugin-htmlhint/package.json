@@ -20,15 +20,15 @@
 	"license": "MIT",
 	"dependencies": {
 		"colorette": "^1.2.0",
-		"fox-esm": "workspace:^0.1.0",
-		"fox-test": "workspace:^1.0.0",
-		"fox-utils": "workspace:^0.1.1",
+		"fox-esm": ^0.1.0",
+		"fox-test": ^1.0.0",
+		"fox-utils": ^0.1.1",
 		"glob": "^7.1.6",
 		"htmlhint": "^0.14.0"
 	},
 	"devDependencies": {
 		"@types/htmlhint": "^0.9.1",
-		"fox-types": "workspace:^0.1.0",
+		"fox-types": ^0.1.0",
 		"ts-node": "^8.10.1",
 		"typescript": "^3.8.3"
 	}

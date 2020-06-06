@@ -33,7 +33,7 @@
 		"lint": "eslint --fix --config eslint.config.cjs ."
 	},
 	"devDependencies": {
-		"fox-types": "workspace:^0.1.0",
+		"fox-types": ^0.1.0",
 		"jest": "^26.0.1",
 		"jest-extended": "^0.11.5",
 		"ts-jest": "^26.0.0",
@@ -41,16 +41,16 @@
 	},
 	"dependencies": {
 		"@prettier/plugin-xml": "^0.7.2",
-		"fox-plugin-eslint": "workspace:^0.1.0",
-		"fox-plugin-html-validate": "workspace:^0.1.1",
-		"fox-plugin-htmlhint": "workspace:^0.1.1",
-		"fox-plugin-htmllint": "workspace:^0.1.1",
-		"fox-plugin-markdownlint": "workspace:^0.1.1",
-		"fox-plugin-package-json-lint": "workspace:^0.1.1",
-		"fox-plugin-package-json-sort": "workspace:^0.1.1",
-		"fox-plugin-prettier": "workspace:^0.1.0",
-		"fox-plugin-stylelint": "workspace:^0.1.0",
-		"fox-utils": "workspace:^0.1.1",
+		"fox-plugin-eslint": ^0.1.0",
+		"fox-plugin-html-validate": ^0.1.1",
+		"fox-plugin-htmlhint": ^0.1.1",
+		"fox-plugin-htmllint": ^0.1.1",
+		"fox-plugin-markdownlint": ^0.1.1",
+		"fox-plugin-package-json-lint": ^0.1.1",
+		"fox-plugin-package-json-sort": ^0.1.1",
+		"fox-plugin-prettier": ^0.1.0",
+		"fox-plugin-stylelint": ^0.1.0",
+		"fox-utils": ^0.1.1",
 		"prettier": "^2.0.5"
 	}
 }

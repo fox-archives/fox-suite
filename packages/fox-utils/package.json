@@ -17,7 +17,7 @@
   "author": "",
   "devDependencies": {
     "cross-env": "^7.0.2",
-    "fox-types": "workspace:^0.1.0",
+    "fox-types": ^0.1.0",
     "jest": "^26.0.1",
     "minimist": "^1.2.5",
     "ts-jest": "^25.5.1",

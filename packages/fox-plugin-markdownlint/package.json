@@ -17,8 +17,8 @@
   "author": "Edwin Kofler",
   "license": "MIT",
   "dependencies": {
-    "fox-test": "workspace:^1.0.0",
-    "fox-utils": "workspace:^0.1.1",
+    "fox-test": ^1.0.0",
+    "fox-utils": ^0.1.1",
     "glob": "^7.1.6",
     "markdown-extensions": "^1.1.1",
     "markdownlint": "^0.20.3",
@@ -29,6 +29,6 @@
     "unified-args": "^8.0.0"
   },
   "devDependencies": {
-    "fox-types": "workspace:^0.1.0"
+    "fox-types": ^0.1.0"
   }
 }

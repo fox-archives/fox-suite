@@ -24,14 +24,14 @@
   "license": "MIT",
   "dependencies": {
     "esm": "^3.2.25",
-    "fox-esm": "workspace:^0.1.0",
-    "fox-utils": "workspace:^0.1.1",
+    "fox-esm": ^0.1.0",
+    "fox-utils": ^0.1.1",
     "postcss-scss": "^2.1.1",
     "stylelint": "^13.6.0",
-    "stylelint-config-fox": "workspace:^0.1.0"
+    "stylelint-config-fox": ^0.1.0"
   },
   "devDependencies": {
-    "fox-test": "workspace:^1.0.0",
+    "fox-test": ^1.0.0",
     "fox-types": "0.1.0"
   }
 }

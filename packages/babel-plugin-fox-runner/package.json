@@ -13,9 +13,9 @@
     "@babel/generator": "^7.10.2",
     "@babel/helper-plugin-utils": "^7.10.1",
     "deasync": "^0.1.20",
-    "fox-utils": "workspace:^0.1.1"
+    "fox-utils": ^0.1.1"
   },
   "devDependencies": {
-    "fox-types": "workspace:^0.1.0"
+    "fox-types": ^0.1.0"
   }
 }
