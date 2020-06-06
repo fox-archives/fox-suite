@@ -4,7 +4,7 @@ import type { Dirent } from 'fs'
 import * as foxUtils from 'fox-utils'
 import { spawn } from 'child_process'
 import { IPluginExportIndex } from "fox-types";
-import type { IActionFunction } from '../@types/index'
+import type { IAction } from 'fox-types'
 import debug from './debug'
 
 // HACK: this could be less dirty
@@ -119,7 +119,7 @@ export function run(script: string): void {
 }
 
 type actionFunctions = "bootstrapFunction" | "fixFunction"
-type fns = IActionFunction["action"]
+type fns = IAction["actionFunctions"]
 export const pickModuleProperty = (foxPluginModules: IPluginExportIndex[], actionFunctions: actionFunctions): fns => {
 	const pickedFunctions: fns = []
 	for (const foxPluginModule of foxPluginModules) {

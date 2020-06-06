@@ -11,6 +11,7 @@ importers:
       '@types/jest': 25.2.3
       '@types/lodash': 4.14.155
       '@types/lodash.merge': 4.6.6
+      '@types/lodash.throttle': 4.1.6
       '@types/lodash.uniq': 4.5.6
       '@types/minimist': 1.2.0
       '@types/node': 13.13.9
@@ -30,6 +31,7 @@ importers:
       '@types/jest': ^25.2.1
       '@types/lodash': ^4.14.150
       '@types/lodash.merge': ^4.6.6
+      '@types/lodash.throttle': ^4.1.6
       '@types/lodash.uniq': ^4.5.6
       '@types/minimist': ^1.2.0
       '@types/node': ^13.13.5
@@ -277,6 +279,7 @@ importers:
       typescript: ^3.8.3
   packages/fox-suite:
     dependencies:
+      chokidar: 3.4.0
       colorette: 1.2.0
       debug: 4.1.1
       esm: 3.2.25
@@ -289,7 +292,9 @@ importers:
       fox-plugin-prettier: 'link:../fox-plugin-prettier'
       fox-plugin-stylelint: 'link:../fox-plugin-stylelint'
       fox-runner: 'link:../fox-runner'
+      fox-transpiler: 'link:../fox-transpiler'
       fox-utils: 'link:../fox-utils'
+      lodash.throttle: 4.1.1
       lodash.uniq: 4.5.0
       minimist: 1.2.5
       prompts: 2.3.2
@@ -301,6 +306,7 @@ importers:
       ts-node: 8.10.2_typescript@3.9.3
       typescript: 3.9.3
     specifiers:
+      chokidar: ^3.4.0
       colorette: ^1.2.0
       cross-env: ^7.0.2
       debug: ^4.1.1
@@ -314,9 +320,11 @@ importers:
       fox-plugin-prettier: 'workspace:^0.1.0'
       fox-plugin-stylelint: 'workspace:^0.1.0'
       fox-runner: 'workspace:^0.1.1'
+      fox-transpiler: 'workspace:^0.1.1'
       fox-types: 'workspace:^0.1.0'
       fox-utils: ^0.1.1
       jest: ^26.0.1
+      lodash.throttle: ^4.1.1
       lodash.uniq: ^4.5.0
       minimist: ^1.2.5
       prompts: ^2.3.2
@@ -359,6 +367,34 @@ importers:
       ts-jest: ^26.1.0
       type-fest: ^0.15.0
       typescript: ^3.9.3
+  packages/fox-transpiler:
+    dependencies:
+      '@babel/core': 7.10.2
+      '@rollup/plugin-babel': 5.0.3_@babel+core@7.10.2+rollup@2.13.1
+      babel-plugin-fox-runner: 'link:../babel-plugin-fox-runner'
+      esm: 3.2.25
+      fox-esm: 'link:../fox-esm'
+      fox-utils: 'link:../fox-utils'
+      rollup: 2.13.1
+    devDependencies:
+      cross-env: 7.0.2
+      fox-types: 'link:../fox-types'
+      ts-jest: 25.5.1_typescript@3.9.5
+      ts-node: 8.10.2_typescript@3.9.5
+      typescript: 3.9.5
+    specifiers:
+      '@babel/core': ^7.10.2
+      '@rollup/plugin-babel': ^5.0.2
+      babel-plugin-fox-runner: 'workspace:^1.0.0'
+      cross-env: ^7.0.2
+      esm: ^3.2.25
+      fox-esm: 'workspace:^0.1.0'
+      fox-types: 'workspace:^0.1.0'
+      fox-utils: 'workspace:^0.1.1'
+      rollup: ^2.13.1
+      ts-jest: ^25.5.1
+      ts-node: ^8.10.1
+      typescript: ^3.8.3
   packages/fox-types:
     dependencies:
       type-fest: 0.15.0
@@ -2550,6 +2586,20 @@ packages:
       rollup: ^1.20.0||^2.0.0
     resolution:
       integrity: sha512-GiL7jL+FGppzQ1Sn4y2ER4UYXlgXFFEt+sHm4WJEzQwI76Yf9oy2QDqIvcon6xApZWlik3L8fezRGC6Mj2vRXg==
+  /@rollup/plugin-babel/5.0.3_@babel+core@7.10.2+rollup@2.13.1:
+    dependencies:
+      '@babel/core': 7.10.2
+      '@babel/helper-module-imports': 7.10.1
+      '@rollup/pluginutils': 3.1.0_rollup@2.13.1
+      rollup: 2.13.1
+    dev: false
+    engines:
+      node: '>= 10.0.0'
+    peerDependencies:
+      '@babel/core': ^7.0.0
+      rollup: ^1.20.0||^2.0.0
+    resolution:
+      integrity: sha512-NlaPf4E6YFxeOCbqc+A2PTkB1BSy3rfKu6EJuQ1MGhMHpTVvMqKi6Rf0DlwtnEsTNK9LueUgsGEgp5Occ4KDVA==
   /@rollup/pluginutils/3.0.10_rollup@2.13.1:
     dependencies:
       '@types/estree': 0.0.39
@@ -2563,6 +2613,19 @@ packages:
       rollup: ^1.20.0||^2.0.0
     resolution:
       integrity: sha512-d44M7t+PjmMrASHbhgpSbVgtL6EFyX7J4mYxwQ/c5eoaE6N2VgCgEcWVzNnwycIloti+/MpwFr8qfw+nRw00sw==
+  /@rollup/pluginutils/3.1.0_rollup@2.13.1:
+    dependencies:
+      '@types/estree': 0.0.39
+      estree-walker: 1.0.1
+      picomatch: 2.2.2
+      rollup: 2.13.1
+    dev: false
+    engines:
+      node: '>= 8.0.0'
+    peerDependencies:
+      rollup: ^1.20.0||^2.0.0
+    resolution:
+      integrity: sha512-GksZ6pr6TpIjHm8h9lSQ8pi8BE9VeubNT0OMJ3B5uZJ8pz73NPiqOtCog/x2/QzM1ENChPKxMDhiQuRHsqc+lg==
   /@samverschueren/stream-to-observable/0.3.0:
     dependencies:
       any-observable: 0.3.0
@@ -2731,6 +2794,12 @@ packages:
     dev: true
     resolution:
       integrity: sha512-IB90krzMf7YpfgP3u/EvZEdXVvm4e3gJbUvh5ieuI+o+XqiNEt6fCzqNRaiLlPVScLI59RxIGZMQ3+Ko/DJ8vQ==
+  /@types/lodash.throttle/4.1.6:
+    dependencies:
+      '@types/lodash': 4.14.155
+    dev: true
+    resolution:
+      integrity: sha512-/UIH96i/sIRYGC60NoY72jGkCJtFN5KVPhEMMMTjol65effe1gPn0tycJqV5tlSwMTzX8FqzB5yAj0rfGHTPNg==
   /@types/lodash.uniq/4.5.6:
     dependencies:
       '@types/lodash': 4.14.155
@@ -7380,6 +7449,10 @@ packages:
     dev: true
     resolution:
       integrity: sha512-stgLz+i3Aa9mZgnjr/O+v9ruKZsPsndy7qPZOchbqk2cnTU1ZaldKK+v7m54WoKIyxiuMZTKT2H81F8BeAc3ZQ==
+  /lodash.throttle/4.1.1:
+    dev: false
+    resolution:
+      integrity: sha1-wj6RtxAkKscMN/HhzaknTMOb8vQ=
   /lodash.uniq/4.5.0:
     resolution:
       integrity: sha1-0CJTc662Uq3BvILklFM5qEJ1R3M=

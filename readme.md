@@ -121,6 +121,11 @@ export const info = {
 }
 ```
 
+### Treatment of `template` files
+Files are copied over from your plugin's `template` directly to the project's root directory, templated with `handlebars`. right now, no extra variables are passed to handlebars
+
+When your config is rebuild for consumption by tools, this is how it works. We only rebuild javascript files. javascript files _must_ be placed in the `.config` folder. they will be rebuild to `.config/build` under the same name
+
 ## FAQ
 
 ### Supported Versions

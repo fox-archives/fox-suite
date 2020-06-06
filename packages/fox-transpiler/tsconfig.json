@@ -8,7 +8,7 @@
 		"./@types"
 	],
 	"include": [
-		"src/**/*", "input.js"
+		"src/**/*"
 	],
 	"references": [
 		{

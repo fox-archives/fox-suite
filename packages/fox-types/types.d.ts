@@ -228,3 +228,19 @@ export interface IPluginExportInfo {
 	descriptionLong: string
 }
 
+/**
+ * @description basically a single unit that has information
+ * about the stuff we want to do to a specific project
+ * @todo make this only an array and handle that
+ */
+interface IActionBootstrap {
+	actionFunctions: IPluginExportIndex["bootstrapFunction"] | IPluginExportIndex["bootstrapFunction"][]
+	projectData: IProject
+}
+
+interface IActionFix {
+	actionFunctions: IPluginExportIndex["fixFunction"] | IPluginExportIndex["fixFunction"][],
+	projectData: IProject
+}
+
+export type IAction = IActionBootstrap | IActionFix

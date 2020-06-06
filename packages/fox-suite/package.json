@@ -19,6 +19,7 @@
     "fox": "./bin/fox.js"
   },
   "dependencies": {
+    "chokidar": "^3.4.0",
     "colorette": "^1.2.0",
     "debug": "^4.1.1",
     "esm": "^3.2.25",
@@ -31,7 +32,9 @@
     "fox-plugin-prettier": "workspace:^0.1.0",
     "fox-plugin-stylelint": "workspace:^0.1.0",
     "fox-runner": "workspace:^0.1.1",
+    "fox-transpiler": "workspace:^0.1.1",
     "fox-utils": "^0.1.1",
+    "lodash.throttle": "^4.1.1",
     "lodash.uniq": "^4.5.0",
     "minimist": "^1.2.5",
     "prompts": "^2.3.2"

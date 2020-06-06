@@ -39,7 +39,7 @@
 			"path": "../fox-test"
 		},
 		{
-			"path": "../fox-runner"
+			"path": "../fox-transpiler"
 		}
   ]
 }

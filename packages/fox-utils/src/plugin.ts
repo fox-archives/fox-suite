@@ -4,12 +4,15 @@ import util from 'util'
 import { IPlugin } from 'fox-types'
 import glob from 'glob'
 import { ITemplateFile } from 'fox-types'
+import readPkgUp from 'read-pkg-up'
+
 
 /**
  * @description get necessary information about a plugin that the
  * plugin shouldn't have to expose
  */
-export async function getPluginData(pluginRoot: string): Promise<IPlugin> {
+export async function getPluginData(pluginRootOrSubDir: string): Promise<IPlugin> {
+	const pluginRoot = path.dirname((await readPkgUp({ cwd: pluginRootOrSubDir }))?.path as string)
 	const templateDir = path.join(pluginRoot, 'templates')
 
 	const packageJson = JSON.parse(await fs.promises.readFile(

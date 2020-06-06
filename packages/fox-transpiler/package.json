@@ -1,5 +1,5 @@
 {
-	"name": "fox-runner",
+	"name": "fox-transpiler",
 	"version": "0.1.1",
 	"description": "",
 	"main": "build",
@@ -27,6 +27,7 @@
 		"babel-plugin-fox-runner": "workspace:^1.0.0",
 		"esm": "^3.2.25",
 		"fox-esm": "workspace:^0.1.0",
+		"fox-utils": "workspace:^0.1.1",
 		"rollup": "^2.13.1"
 	},
 	"devDependencies": {

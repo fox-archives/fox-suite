@@ -3,15 +3,11 @@ import { getProjectData } from './project'
 import { getPluginData } from './plugin'
 import path from 'path'
 import fs from 'fs'
-import readPkgUp from 'read-pkg-up'
 import * as c from 'colorette'
 
 export async function buildLint(opts: IBuildLint): Promise<void> {
-	const pluginRoot = path.dirname((await readPkgUp({ cwd: opts.dirname }))?.path as string)
-	if (!pluginRoot) throw new Error('could not find pluginRoot')
-
 	const [ projectData, pluginData ] = await Promise.all([
-		getProjectData(), getPluginData(pluginRoot)
+		getProjectData(), getPluginData(opts.dirname)
 	])
 
 	const templateFilesExistPromises = pluginData.templateFiles.map((templateFile: ITemplateFile): Promise<void> => {

@@ -5,6 +5,7 @@ import { doAction, watchAndDoAction } from './action';
 import * as util from './util'
 import debug from './debug'
 import * as c from 'colorette'
+import { transpileConfig } from 'fox-transpiler'
 
 /**
  * @description if no command line arguments were given,
@@ -34,14 +35,13 @@ export async function tui(): Promise<void> {
 	const bootstrapChoices: prompts.Choice[] = []
 	const fixChoices: prompts.Choice[] = []
 
-	const foxPluginModules = (await Promise.all(promises)).filter(Boolean)
-	for (let i = 0; i < foxPluginModules.length; ++i) {
-		const foxPluginModule = foxPluginModules[i]
+	const foxPlugins = (await Promise.all(promises)).filter(Boolean)
+
+	for (let i = 0; i < foxPlugins.length; ++i) {
+		const foxPlugin = foxPlugins[i]
 		const foxPluginPath = foxPluginPaths[i]
 
-		debug('processing foxPluginModule %s', foxPluginModule.info.name)
-
-		const foxPlugin: IPluginExportIndex = foxPluginModule
+		debug('processing foxPluginModule %s', foxPlugin.info.name)
 
 		if (!foxPlugin.info.name || !foxPlugin.info) {
 			throw new Error(
@@ -70,13 +70,13 @@ export async function tui(): Promise<void> {
 	if (bootstrapChoices.length > 2) bootstrapChoices.unshift({
 		title: 'All',
 		description: 'Bootstrap all configuration',
-		value: util.pickModuleProperty(foxPluginModules, "bootstrapFunction")
+		value: util.pickModuleProperty(foxPlugins, "bootstrapFunction")
 	})
 
 	if (fixChoices.length > 2) fixChoices.unshift({
 		title: 'All',
 		description: 'Format files from all config',
-		value: util.pickModuleProperty(foxPluginModules, "fixFunction")
+		value: util.pickModuleProperty(foxPlugins, "fixFunction")
 	})
 
 	const actionChoices: prompts.Choice[] = []
@@ -112,7 +112,7 @@ export async function tui(): Promise<void> {
 		})
 
 		await doAction({
-			action: bootstrap,
+			actionFunctions: bootstrap,
 			projectData
 		})
 
@@ -124,8 +124,12 @@ export async function tui(): Promise<void> {
 			choices: fixChoices
 		})
 
+		await transpileConfig({
+			foxPluginPaths,
+			projectData
+		})
 		await doAction({
-			action: fixFunctions,
+			actionFunctions: fixFunctions,
 			projectData
 		})
 	} else if (action === 'watch') {
@@ -136,8 +140,12 @@ export async function tui(): Promise<void> {
 			choices: fixChoices
 		})
 
+		await transpileConfig({
+			foxPluginPaths,
+			projectData
+		})
 		await watchAndDoAction({
-			action: fixFunctions,
+			actionFunctions: fixFunctions,
 			projectData
 		})
 	}

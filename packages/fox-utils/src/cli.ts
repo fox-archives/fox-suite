@@ -23,7 +23,7 @@ Description:
 Options:
   --boostrap   Bootstrap ${pluginName} configuration
 	--fix        Fix Files as per tool
-  --watch     Same as fix, but creates a watcher (recommended)
+  --watch      Same as fix, but creates a watcher (recommended)
   --help       Show help
 
 Examples:

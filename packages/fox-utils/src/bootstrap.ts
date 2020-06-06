@@ -7,7 +7,6 @@ import handlebars from 'handlebars'
 import { IBuildBootstrap, ITemplateFile } from 'fox-types'
 import { getPluginData } from './plugin.js';
 import debug from './debug'
-import readPkgUp from 'read-pkg-up'
 
 /**
  * generate boilerpalte configuration in `.config`
@@ -19,10 +18,7 @@ import readPkgUp from 'read-pkg-up'
 	* essentially automatically managed
   */
 export async function buildBootstrap(opts: IBuildBootstrap): Promise<void> {
-	const pluginRoot = path.dirname((await readPkgUp({ cwd: opts.dirname }))?.path as string)
-	if (!pluginRoot) throw new Error('could not find pluginRoot')
-
-	const [ pluginData, projectData ] = await Promise.all([ getPluginData(pluginRoot), getProjectData() ])
+	const [ pluginData, projectData ] = await Promise.all([ getPluginData(opts.dirname), getProjectData() ])
 	const doTemplate = async (fileToTemplate: ITemplateFile): Promise<{ fileDest: string, templatedText: string }> => {
 		const fileContents = await fs.promises.readFile(fileToTemplate.absolutePath, { encoding: 'utf8' })
 		const templateFn = handlebars.compile(fileContents)
@@ -39,7 +35,6 @@ export async function buildBootstrap(opts: IBuildBootstrap): Promise<void> {
 
 	const retryFilesToTemplate: ITemplateFile[] = []
 	for (const fileToTemplate of pluginData.templateFiles) {
-		// const fileDest = path.join(projectData.location, fileToTemplate.filePathRelative)
 		const { fileDest, templatedText } = await doTemplate(fileToTemplate)
 		try {
 			await fs.promises.writeFile(fileDest, templatedText, {
@@ -74,7 +69,9 @@ export async function buildBootstrap(opts: IBuildBootstrap): Promise<void> {
 		if (wantsToOverwrite) {
 			for (const fileToTemplate of retryFilesToTemplate) {
 				const { fileDest, templatedText } = await doTemplate(fileToTemplate)
-				await fs.promises.writeFile(fileDest, templatedText)
+				await fs.promises.writeFile(fileDest, templatedText, {
+					mode: 0o644
+				})
 			}
 		} else {
 			console.info(c.bold(c.red('exiting tui')))
