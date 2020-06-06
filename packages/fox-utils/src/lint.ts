@@ -1,11 +1,11 @@
-import { IBuildLint, ITemplateFile } from 'fox-types'
+import { IBuildFix, ITemplateFile } from 'fox-types'
 import { getProjectData } from './project'
 import { getPluginData } from './plugin'
 import path from 'path'
 import fs from 'fs'
 import * as c from 'colorette'
 
-export async function buildLint(opts: IBuildLint): Promise<void> {
+export async function buildFix(opts: IBuildFix): Promise<void> {
 	const [ projectData, pluginData ] = await Promise.all([
 		getProjectData(), getPluginData(opts.dirname)
 	])

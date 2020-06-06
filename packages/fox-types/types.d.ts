@@ -39,7 +39,7 @@ export interface IBuildBootstrap {
 /**
  * @description used when building a lint
  */
-export interface IBuildLint {
+export interface IBuildFix {
 	/**
 	 * @description the current directory. note that this gets passed to `read-pkg-up`,
 	 * so as long as the dirname is at or under where `package.json` is at,

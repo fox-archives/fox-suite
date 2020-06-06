@@ -14,7 +14,7 @@ export async function bootstrapFunction(): Promise<void> {
 }
 
 export async function fixFunction(fox: IFoxConfig): Promise<void> {
-	await foxUtils.buildLint({
+	await foxUtils.buildFix({
 		dirname: __dirname,
 		async fn() {
 			console.log('fix stylelint')
