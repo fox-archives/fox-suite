@@ -1,7 +1,7 @@
 {
   "name": "fox-plugin-prettier",
   "description": "Prettier configuration for Fox Suite",
-  "version": "0.2.0",
+  "version": "0.2.1",
   "keywords": [
     "prettier",
     "fox",
@@ -33,7 +33,7 @@
     "lint": "eslint --fix --config eslint.config.cjs ."
   },
   "devDependencies": {
-    "fox-types": "^0.1.0",
+    "fox-types": "^0.2.1",
     "jest": "^26.0.1",
     "jest-extended": "^0.11.5",
     "ts-jest": "^26.0.0",
@@ -41,8 +41,8 @@
   },
   "dependencies": {
     "@prettier/plugin-xml": "^0.7.2",
-    "fox-test": "^1.0.0",
-    "fox-utils": "^0.1.1",
+    "fox-test": "^0.2.1",
+    "fox-utils": "^0.2.1",
     "prettier": "^2.0.5"
   }
 }

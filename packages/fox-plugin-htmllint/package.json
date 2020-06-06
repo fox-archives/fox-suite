@@ -1,6 +1,6 @@
 {
 	"name": "fox-plugin-htmllint",
-	"version": "0.2.0",
+	"version": "0.2.1",
 	"description": "",
 	"main": "build",
 	"scripts": {
@@ -20,15 +20,15 @@
 	"license": "MIT",
 	"dependencies": {
 		"colorette": "^1.2.0",
-		"fox-esm": "^0.1.0",
-		"fox-test": "^1.0.0",
-		"fox-utils": "^0.1.1",
+		"fox-esm": "^0.2.1",
+		"fox-test": "^0.2.1",
+		"fox-utils": "^0.2.1",
 		"glob": "^7.1.6",
 		"htmllint": "^0.8.0"
 	},
 	"devDependencies": {
 		"@types/htmlhint": "^0.9.1",
-		"fox-types": "^0.1.0",
+		"fox-types": "^0.2.1",
 		"ts-node": "^8.10.1",
 		"typescript": "^3.8.3"
 	}

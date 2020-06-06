@@ -1,6 +1,6 @@
 {
   "name": "npm-package-json-lint-config-fox",
-  "version": "0.2.0",
+  "version": "0.2.1",
   "description": "",
   "main": "build",
   "scripts": {
