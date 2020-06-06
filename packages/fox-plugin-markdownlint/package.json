@@ -1,5 +1,5 @@
 {
-  "name": "fox-plugin-markdown-lint",
+  "name": "fox-plugin-markdownlint",
   "version": "0.1.1",
   "description": "",
   "main": "build",
@@ -19,7 +19,9 @@
   "dependencies": {
     "fox-test": "workspace:^1.0.0",
     "fox-utils": "workspace:^0.1.1",
+    "glob": "^7.1.6",
     "markdown-extensions": "^1.1.1",
+    "markdownlint": "^0.20.3",
     "remark": "^12.0.0",
     "remark-cli": "^8.0.0",
     "remark-lint": "^7.0.0",

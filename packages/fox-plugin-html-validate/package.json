@@ -1,5 +1,5 @@
 {
-	"name": "fox-plugin-htmlhint",
+	"name": "fox-plugin-html-validate",
 	"version": "0.1.1",
 	"description": "",
 	"main": "build",
@@ -9,7 +9,7 @@
 		"build": "tsc --build"
 	},
 	"bin": {
-		"fox-plugin-htmlhint": "./bin/fox-plugin-htmlhint.js"
+		"fox-plugin-html-validate": "./bin/fox-plugin-html-validate.js"
 	},
 	"type": "commonjs",
 	"engines": {
@@ -24,7 +24,7 @@
 		"fox-test": "workspace:^1.0.0",
 		"fox-utils": "workspace:^0.1.1",
 		"glob": "^7.1.6",
-		"htmlhint": "^0.14.0"
+		"html-validate": "^2.23.0"
 	},
 	"devDependencies": {
 		"@types/htmlhint": "^0.9.1",

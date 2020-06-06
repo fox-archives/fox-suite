@@ -42,8 +42,10 @@
 	"dependencies": {
 		"@prettier/plugin-xml": "^0.7.2",
 		"fox-plugin-eslint": "workspace:^0.1.0",
+		"fox-plugin-html-validate": "workspace:^0.1.1",
 		"fox-plugin-htmlhint": "workspace:^0.1.1",
-		"fox-plugin-markdown-lint": "workspace:^0.1.1",
+		"fox-plugin-htmllint": "workspace:^0.1.1",
+		"fox-plugin-markdownlint": "workspace:^0.1.1",
 		"fox-plugin-package-json-lint": "workspace:^0.1.1",
 		"fox-plugin-package-json-sort": "workspace:^0.1.1",
 		"fox-plugin-prettier": "workspace:^0.1.0",

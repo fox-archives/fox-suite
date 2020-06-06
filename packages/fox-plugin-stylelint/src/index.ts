@@ -28,8 +28,8 @@ export async function fixFunction(): Promise<void> {
 			const stylelintConfigFoxPath =
 				path.join(__dirname, '../node_modules/stylelint-config-fox')
 
-			stylelintConfig.extends = stylelintConfig.extends || [],
-			stylelintConfig.extends.unshift(stylelintConfigFoxPath)
+			// stylelintConfig.extends = stylelintConfig.extends || [],
+			// stylelintConfig.extends.unshift(stylelintConfigFoxPath)
 
 			const sharedOptions: Partial<stylelintType.i> | undefined = {
 				globbyOptions: {
