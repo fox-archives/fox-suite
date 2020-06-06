@@ -104,7 +104,6 @@ describe(`testing module: '${pluginName}' using the 'fox-test' jest autorunner`,
 				expect(true).toBe(false)
 			}
 		}
-
 	})
 
 	test("ensure `src/index.ts` exports a buildTemplates function if a 'templates' folder exists", async () => {
@@ -115,7 +114,7 @@ describe(`testing module: '${pluginName}' using the 'fox-test' jest autorunner`,
 			}
 	})
 
-	test("ensure {bootstrap,lint,format}Functions are async", async () => {
+	test("ensure {bootstrap,fix}Functions are async", async () => {
 		await babelTraverse({
 			ExportDeclaration(path: any) {
 				const { node } = path
@@ -128,7 +127,7 @@ describe(`testing module: '${pluginName}' using the 'fox-test' jest autorunner`,
 				if (!declaration.id) throw new Error ('ndoe does not have id')
 				if (declaration.id.type !== 'Identifier') return
 
-				const fnsNames = new Set(['bootstrapFunction', 'lintFunction', 'formatFunction'])
+				const fnsNames = new Set(['bootstrapFunction', 'fixFunction'])
 				if (fnsNames.has(declaration.id.name)) {
 					expect(declaration.async).toBe(true)
 				}
@@ -136,7 +135,7 @@ describe(`testing module: '${pluginName}' using the 'fox-test' jest autorunner`,
 		})
 	})
 
-	test("ensure foxUtils.build{Bootstrap,Lint,Format} are awaited. tbh test might be buggy, so file issue if experiencing issues", async () => {
+	test("ensure foxUtils.build{Bootstrap,Fix} are awaited", async () => {
 		await babelTraverse({
 			ExpressionStatement(path: any) {
 				const { node } = path
@@ -162,7 +161,7 @@ describe(`testing module: '${pluginName}' using the 'fox-test' jest autorunner`,
 				const callExpressionIsAwaited = node.expression.type === 'AwaitExpression'
 
 
-				const identifierNames = new Set(['buildBootstrap', 'buildLint', 'buildFormat'])
+				const identifierNames = new Set(['buildBootstrap', 'buildFix'])
 
 				const isValidCallExpression = (callExpression: any): boolean => {
 					if (callExpression.callee.type === 'Identifier') {

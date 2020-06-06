@@ -251,32 +251,6 @@ importers:
       prettier: ^2.0.5
       ts-jest: ^26.0.0
       typescript: ^3.9.2
-  packages/fox-runner:
-    dependencies:
-      '@babel/core': 7.10.2
-      '@rollup/plugin-babel': 5.0.2_@babel+core@7.10.2+rollup@2.13.1
-      babel-plugin-fox-runner: 'link:../babel-plugin-fox-runner'
-      esm: 3.2.25
-      fox-esm: 'link:../fox-esm'
-      rollup: 2.13.1
-    devDependencies:
-      cross-env: 7.0.2
-      fox-types: 'link:../fox-types'
-      ts-jest: 25.5.1_typescript@3.9.5
-      ts-node: 8.10.2_typescript@3.9.5
-      typescript: 3.9.5
-    specifiers:
-      '@babel/core': ^7.10.2
-      '@rollup/plugin-babel': ^5.0.2
-      babel-plugin-fox-runner: 'workspace:^1.0.0'
-      cross-env: ^7.0.2
-      esm: ^3.2.25
-      fox-esm: 'workspace:^0.1.0'
-      fox-types: 'workspace:^0.1.0'
-      rollup: ^2.13.1
-      ts-jest: ^25.5.1
-      ts-node: ^8.10.1
-      typescript: ^3.8.3
   packages/fox-suite:
     dependencies:
       chokidar: 3.4.0
@@ -2572,20 +2546,6 @@ packages:
     dev: false
     resolution:
       integrity: sha512-c6i6OQ2y9kvWeUTrfkwHy+jdJXI3bpO8TT9EoVjJIEAApj5gLtJ/O2D9qthxWXh5zbipngueDEC2CT6tBZzBdA==
-  /@rollup/plugin-babel/5.0.2_@babel+core@7.10.2+rollup@2.13.1:
-    dependencies:
-      '@babel/core': 7.10.2
-      '@babel/helper-module-imports': 7.10.1
-      '@rollup/pluginutils': 3.0.10_rollup@2.13.1
-      rollup: 2.13.1
-    dev: false
-    engines:
-      node: '>= 10.0.0'
-    peerDependencies:
-      '@babel/core': ^7.0.0
-      rollup: ^1.20.0||^2.0.0
-    resolution:
-      integrity: sha512-GiL7jL+FGppzQ1Sn4y2ER4UYXlgXFFEt+sHm4WJEzQwI76Yf9oy2QDqIvcon6xApZWlik3L8fezRGC6Mj2vRXg==
   /@rollup/plugin-babel/5.0.3_@babel+core@7.10.2+rollup@2.13.1:
     dependencies:
       '@babel/core': 7.10.2
@@ -2600,19 +2560,6 @@ packages:
       rollup: ^1.20.0||^2.0.0
     resolution:
       integrity: sha512-NlaPf4E6YFxeOCbqc+A2PTkB1BSy3rfKu6EJuQ1MGhMHpTVvMqKi6Rf0DlwtnEsTNK9LueUgsGEgp5Occ4KDVA==
-  /@rollup/pluginutils/3.0.10_rollup@2.13.1:
-    dependencies:
-      '@types/estree': 0.0.39
-      estree-walker: 1.0.1
-      picomatch: 2.2.2
-      rollup: 2.13.1
-    dev: false
-    engines:
-      node: '>= 8.0.0'
-    peerDependencies:
-      rollup: ^1.20.0||^2.0.0
-    resolution:
-      integrity: sha512-d44M7t+PjmMrASHbhgpSbVgtL6EFyX7J4mYxwQ/c5eoaE6N2VgCgEcWVzNnwycIloti+/MpwFr8qfw+nRw00sw==
   /@rollup/pluginutils/3.1.0_rollup@2.13.1:
     dependencies:
       '@types/estree': 0.0.39
