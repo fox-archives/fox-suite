@@ -31,7 +31,7 @@ export async function transpileConfig({ foxPluginPaths, projectData }: ITranspil
 						templateFile.relativePath.indexOf('/') + 1
 					)
 				)
-				console.log(templateFileLocationOutput)
+				// console.log(templateFileLocationOutput)
 
 				rollup({
 					input: templateFileLocation,
