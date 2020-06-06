@@ -96,35 +96,49 @@ export async function getInstalledFoxPlugins(): Promise<string[]> {
 	}
 }
 
-export function run(script: string): void {
-	const scriptPath = path.join(__dirname, '../node_modules/.bin', script)
-	const scriptPath2 = path.join(__dirname, '../node_modules', script, 'bin', `${script}.js`)
-	const tsNodePath = path.join(__dirname, '../../node_modules/.bin/ts-node')
-
-	debug('spawning script at: %s', scriptPath2)
-	const child = spawn('node', ['--enable-source-maps', scriptPath2], {
-		cwd: process.cwd(),
-		windowsHide: true
-	})
-
-	let output = ""
-	child.stdout.on('data', data => {
-		console.log(data.toString())
-		output += data
-	})
-	child.stderr.on('data', data => {
-		console.info(data.toString())
-		output += data
-	})
-}
-
 type actionFunctions = "bootstrapFunction" | "fixFunction"
 type fns = IAction["actionFunctions"]
-export const pickModuleProperty = (foxPluginModules: IPluginExportIndex[], actionFunctions: actionFunctions): fns => {
+interface ISpecificModuleProperty {
+	foxPlugins: IPluginExportIndex[],
+	specificIndicesToPick: number,
+	actionFunction: actionFunctions
+}
+
+/**
+ * @description Same as above, but only do so for the elements 'i' that we want.
+ * if `-1` is passed to `specificIndicesToPick`, it picks all of them
+ */
+export function pickSpecificModuleProperty({
+	foxPlugins,
+	specificIndicesToPick,
+	actionFunction
+}: ISpecificModuleProperty): fns {
 	const pickedFunctions: fns = []
-	for (const foxPluginModule of foxPluginModules) {
-		// @ts-ignore
-		pickedFunctions.push(foxPluginModule[actionFunctions])
+	for (let i = 0; i < foxPlugins.length; ++i) {
+		const foxPlugin = foxPlugins[i]
+
+		if (specificIndicesToPick === i || specificIndicesToPick === -1) {
+
+			// @ts-ignore
+			pickedFunctions.push(foxPlugin[actionFunction])
+		}
 	}
 	return pickedFunctions
+}
+
+/**
+ * @description slightly better performance than .filter, possibly not worth it
+ */
+export function pickSpecificFoxPluginPath(foxPluginPaths: string[], specificIndicesToPick: number): string[] {
+	const pickedPaths: string[] = []
+	for (let i = 0; i < foxPluginPaths.length; ++i) {
+		const foxPluginPath = foxPluginPaths[i]
+
+		if (specificIndicesToPick === i || specificIndicesToPick === -1) {
+
+			// @ts-ignore
+			pickedPaths.push(foxPluginPath)
+		}
+	}
+	return pickedPaths
 }

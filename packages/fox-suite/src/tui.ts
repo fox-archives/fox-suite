@@ -37,6 +37,8 @@ export async function tui(): Promise<void> {
 
 	const foxPlugins = (await Promise.all(promises)).filter(Boolean)
 
+	// if a plugin exports a bootstrapFunction or fixPlugin (or both), add them
+	// to the selection menu so the user can see
 	for (let i = 0; i < foxPlugins.length; ++i) {
 		const foxPlugin = foxPlugins[i]
 		const foxPluginPath = foxPluginPaths[i]
@@ -53,7 +55,7 @@ export async function tui(): Promise<void> {
 			bootstrapChoices.push({
 				title: foxPlugin.info.tool,
 				description: foxPlugin.info.description,
-				value: foxPlugin.bootstrapFunction
+				value: i
 			})
 		}
 
@@ -61,7 +63,7 @@ export async function tui(): Promise<void> {
 			fixChoices.push({
 				title: foxPlugin.info.tool,
 				description: foxPlugin.info.description,
-				value: foxPlugin.fixFunction
+				value: i
 			})
 		}
 	}
@@ -70,13 +72,13 @@ export async function tui(): Promise<void> {
 	if (bootstrapChoices.length > 2) bootstrapChoices.unshift({
 		title: 'All',
 		description: 'Bootstrap all configuration',
-		value: util.pickModuleProperty(foxPlugins, "bootstrapFunction")
+		value: -1
 	})
 
 	if (fixChoices.length > 2) fixChoices.unshift({
 		title: 'All',
 		description: 'Format files from all config',
-		value: util.pickModuleProperty(foxPlugins, "fixFunction")
+		value: -1
 	})
 
 	const actionChoices: prompts.Choice[] = []
@@ -104,15 +106,25 @@ export async function tui(): Promise<void> {
 	})
 
 	if (action === 'bootstrap') {
-		const { bootstrap }: { bootstrap: IPluginExportIndex["bootstrapFunction"] } = await prompts({
+		const { bootstrapFunctions }: { bootstrapFunctions: IPluginExportIndex["bootstrapFunction"] } = await prompts({
 			type: 'select',
-			name: 'bootstrap',
+			name: 'bootstrapFunctions',
 			message: 'which configuration would you like to bootstrap?',
 			choices: bootstrapChoices
 		})
 
+		if(typeof bootstrapFunctions === void 0) {
+			console.log(c.bold(c.red('value is undefined. exciting')))
+			process.exit(1)
+		}
+
 		await doAction({
-			actionFunctions: bootstrap,
+			actionFunctions: util.pickSpecificModuleProperty({
+				foxPlugins,
+				// @ts-ignore
+				specificIndicesToPick: bootstrapFunctions,
+				actionFunction: "bootstrapFunction"
+			}),
 			projectData
 		})
 
@@ -124,12 +136,23 @@ export async function tui(): Promise<void> {
 			choices: fixChoices
 		})
 
+		if (typeof fixFunctions === void 0) {
+			console.log(c.bold(c.red('value is undefined. exciting')))
+			process.exit(1)
+		}
+
 		await transpileConfig({
-			foxPluginPaths,
+			// @ts-ignore
+			foxPluginPaths: util.pickSpecificFoxPluginPath(foxPluginPaths, fixFunctions),
 			projectData
 		})
 		await doAction({
-			actionFunctions: fixFunctions,
+			actionFunctions: util.pickSpecificModuleProperty({
+				foxPlugins,
+				// @ts-ignore
+				specificIndicesToPick: fixFunctions,
+				actionFunction: "fixFunction"
+			}),
 			projectData
 		})
 	} else if (action === 'watch') {
@@ -140,12 +163,23 @@ export async function tui(): Promise<void> {
 			choices: fixChoices
 		})
 
-		await transpileConfig({
-			foxPluginPaths,
+		if (typeof fixFunctions === void 0) {
+			console.log(c.bold(c.red('value is undefined. exciting')))
+			process.exit(1)
+		}
+
+		let transpile = async () => await transpileConfig({
+			// @ts-ignore
+			foxPluginPaths: util.pickSpecificFoxPluginPath(foxPluginPaths, fixFunctions),
 			projectData
 		})
-		await watchAndDoAction({
-			actionFunctions: fixFunctions,
+		await watchAndDoAction(transpile, {
+			actionFunctions: util.pickSpecificModuleProperty({
+				foxPlugins,
+				// @ts-ignore
+				specificIndicesToPick: fixFunctions,
+				actionFunction: "fixFunction"
+			}),
 			projectData
 		})
 	}

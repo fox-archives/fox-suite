@@ -19,12 +19,13 @@
 	"author": "Edwin Kofler",
 	"license": "MIT",
 	"bin": {
-		"fox-runner": "./bin/fox-runner.js"
+		"fox-transpiler": "./bin/fox-transpiler.js"
 	},
 	"dependencies": {
 		"@babel/core": "^7.10.2",
 		"@rollup/plugin-babel": "^5.0.2",
 		"babel-plugin-fox-runner": "workspace:^1.0.0",
+		"colorette": "^1.2.0",
 		"esm": "^3.2.25",
 		"fox-esm": "workspace:^0.1.0",
 		"fox-utils": "workspace:^0.1.1",

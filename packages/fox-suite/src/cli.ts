@@ -50,7 +50,11 @@ Examples:
 			projectData
 		})
 		await doAction({
-			actionFunctions: util.pickModuleProperty(foxPlugins, "bootstrapFunction"),
+			actionFunctions: util.pickSpecificModuleProperty({
+				foxPlugins,
+				specificIndicesToPick: -1,
+				actionFunction: "bootstrapFunction"
+			}),
 			projectData
 		})
 		console.log(c.bold(c.green('bootstrap complete')))
@@ -60,17 +64,26 @@ Examples:
 			projectData
 		})
 		await doAction({
-			actionFunctions: util.pickModuleProperty(foxPlugins, "fixFunction"),
+			actionFunctions: util.pickSpecificModuleProperty({
+				foxPlugins,
+				specificIndicesToPick: -1,
+				actionFunction: "fixFunction"
+			}),
 			projectData
 		})
 		console.log(c.bold(c.green('fix complete')))
 	} else if (argv.watch) {
-		await transpileConfig({
-			foxPluginPaths,
+		let transpile = async () => await transpileConfig({
+			// @ts-ignore
+			foxPluginPaths: util.pickSpecificFoxPluginPath(foxPluginPaths, fixFunctions),
 			projectData
 		})
-		await watchAndDoAction({
-			actionFunctions: util.pickModuleProperty(foxPlugins, "fixFunction"),
+		await watchAndDoAction(transpile, {
+			actionFunctions: util.pickSpecificModuleProperty({
+				foxPlugins,
+				specificIndicesToPick: -1,
+				actionFunction: "fixFunction"
+			}),
 			projectData
 		})
 	}

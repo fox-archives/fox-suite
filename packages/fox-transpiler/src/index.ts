@@ -1,13 +1,23 @@
 import path from 'path'
+import fs from 'fs'
 import { rollup } from 'rollup'
+import type { OutputOptions } from 'rollup'
 import type { IPlugin, IProject } from 'fox-types'
 import { getPluginData } from 'fox-utils'
-import fs from 'fs'
+import * as c from 'colorette'
 
 // @ts-ignore
 import { babel } from "@rollup/plugin-babel"
 import babelPluginFoxRunner from 'babel-plugin-fox-runner'
 
+let exitIfFileDoesntExist = async (filePath: string, relativePath: string) => {
+	try {
+		await fs.promises.access(filePath, fs.constants.F_OK)
+	} catch {
+		console.log(c.bold(c.red(`${relativePath} doesn't exist. try to bootstrap the plugins's configuration`)))
+		process.exit(1)
+	}
+}
 
 interface ITranspileConfig {
 	foxPluginPaths: string[],
@@ -19,6 +29,7 @@ export async function transpileConfig({ foxPluginPaths, projectData }: ITranspil
 		const pluginData = await getPluginData(foxPluginPath)
 
 		const configBuildDir = path.join(projectData.location, '.config')
+		// create build directory if it doesn't already exist
 		try {
 			await fs.promises.mkdir(configBuildDir, 0o755)
 		} catch {}
@@ -31,18 +42,23 @@ export async function transpileConfig({ foxPluginPaths, projectData }: ITranspil
 						templateFile.relativePath.indexOf('/') + 1
 					)
 				)
-				// console.log(templateFileLocationOutput)
 
-				rollup({
+				await exitIfFileDoesntExist(templateFileLocation, templateFile.relativePath)
+
+				const inputOptions = {
 					input: templateFileLocation,
-					output: {
-						file: templateFileLocationOutput,
-						format: 'cjs'
-					}
-				})
+				}
+				const outputOptions: OutputOptions = {
+					file: templateFileLocationOutput,
+					format: 'cjs'
+				}
+
+				const bundle = await rollup(inputOptions)
+				await bundle.write(outputOptions);
 			}
 
 		}
 	}
+	console.log(c.bold(c.green('done transpiling')))
 }
 

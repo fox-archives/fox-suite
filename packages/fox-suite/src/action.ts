@@ -1,6 +1,7 @@
 import type { IAction } from 'fox-types'
 import chokidar from 'chokidar'
 import throttle from 'lodash.throttle'
+import * as c from 'colorette'
 
 /**
  * @description bootstraps, formats, or lints a project
@@ -18,11 +19,12 @@ export async function doAction({
 	} else if (actionFunctions) {
 		await actionFunctions(projectData.foxConfig)
 	} else {
-		throw new Error('passed parameter was not as expected')
+		console.log(c.bold(c.red('no choice was made. exiting interface')))
+		process.exit(1)
 	}
 }
 
-export async function watchAndDoAction({
+export async function watchAndDoAction(transpile: () => Promise<void>, {
 	actionFunctions,
 	projectData
 }: IAction): Promise<void> {
@@ -42,8 +44,12 @@ export async function watchAndDoAction({
 	watcher.on('add', path => totalFiles++)
 	watcher.on('unlink', path => totalFiles--)
 	watcher.on('change', async path => {
+		if (path.includes('.config/build')) return
+
 		console.log(`${path} of ${totalFiles} files changed. recompiling config files and executing fixers`)
 
+
+		await transpile()
 		await doAction({
 			actionFunctions,
 			projectData

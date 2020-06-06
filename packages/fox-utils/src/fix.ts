@@ -17,6 +17,9 @@ export async function buildFix(opts: IBuildFix): Promise<void> {
 
 	// this will throw if at least 'one' template file
 	// cannot be found in the user project's directory
+	// if the file is a javascript file, we know it'll always
+	// exist since the rollup build step is completed before this
+	// stage
 	try {
 		await Promise.all(templateFilesExistPromises)
 	} catch {

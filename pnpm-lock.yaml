@@ -346,6 +346,7 @@ importers:
       '@babel/core': 7.10.2
       '@rollup/plugin-babel': 5.0.3_@babel+core@7.10.2+rollup@2.13.1
       babel-plugin-fox-runner: 'link:../babel-plugin-fox-runner'
+      colorette: 1.2.0
       esm: 3.2.25
       fox-esm: 'link:../fox-esm'
       fox-utils: 'link:../fox-utils'
@@ -360,6 +361,7 @@ importers:
       '@babel/core': ^7.10.2
       '@rollup/plugin-babel': ^5.0.2
       babel-plugin-fox-runner: 'workspace:^1.0.0'
+      colorette: ^1.2.0
       cross-env: ^7.0.2
       esm: ^3.2.25
       fox-esm: 'workspace:^0.1.0'
