@@ -33,7 +33,7 @@
   "author": "Edwin Kofler",
   "license": "MIT",
   "dependencies": {
-    "fox-types": ^0.1.0",
+    "fox-types": "^0.1.0",
     "lodash.merge": "^4.6.2",
     "stylelint": "^13.5.0"
   }

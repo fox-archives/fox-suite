@@ -24,16 +24,16 @@
 	"dependencies": {
 		"@babel/core": "^7.10.2",
 		"@rollup/plugin-babel": "^5.0.2",
-		"babel-plugin-fox-runner": ^1.0.0",
+		"babel-plugin-fox-runner": "^1.0.0",
 		"colorette": "^1.2.0",
 		"esm": "^3.2.25",
-		"fox-esm": ^0.1.0",
-		"fox-utils": ^0.1.1",
+		"fox-esm": "^0.1.0",
+		"fox-utils": "^0.1.1",
 		"rollup": "^2.13.1"
 	},
 	"devDependencies": {
 		"cross-env": "^7.0.2",
-		"fox-types": ^0.1.0",
+		"fox-types": "^0.1.0",
 		"ts-jest": "^25.5.1",
 		"ts-node": "^8.10.1",
 		"typescript": "^3.8.3"

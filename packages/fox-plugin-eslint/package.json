@@ -25,11 +25,11 @@
   "dependencies": {
     "eslint": "^7.0.0",
     "eslint-config-fox": "^0.1.0",
-     "fox-esm": ^0.1.0",
-    "fox-test": ^1.0.0",
-    "fox-utils": ^0.1.1"
+     "fox-esm": "^0.1.0",
+    "fox-test": "^1.0.0",
+    "fox-utils": "^0.1.1"
   },
   "devDependencies": {
-    "fox-types": ^0.1.0"
+    "fox-types": "^0.1.0"
   }
 }
