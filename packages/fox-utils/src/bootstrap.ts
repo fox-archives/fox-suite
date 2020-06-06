@@ -7,6 +7,7 @@ import handlebars from 'handlebars'
 import { IBuildBootstrap, ITemplateFile } from 'fox-types'
 import { getPluginData } from './plugin.js';
 import debug from './debug'
+import merge from 'lodash.merge'
 
 /**
  * generate boilerpalte configuration in `.config`
@@ -43,7 +44,13 @@ export async function buildBootstrap(opts: IBuildBootstrap): Promise<void> {
 			})
 		} catch (err) {
 			if (err.code === 'EEXIST') {
-				retryFilesToTemplate.push(fileToTemplate)
+				// if the file already exists, but is a json file,
+				// merge the keys instead of throwing
+				if (isJsonFile(fileToTemplate)) {
+					await mergeJsonFiles(fileDest, templatedText)
+				} else {
+					retryFilesToTemplate.push(fileToTemplate)
+				}
 			} else {
 				throw new Error(err)
 			}
@@ -80,4 +87,17 @@ export async function buildBootstrap(opts: IBuildBootstrap): Promise<void> {
 	}
 
 	console.info(c.bold(c.green('bootstrapped files successfully')))
+}
+
+function isJsonFile(templateFile: ITemplateFile): boolean {
+	return path.extname(templateFile.relativePath) === '.json'
+}
+
+async function mergeJsonFiles(fileDest: string, templatedText: string) {
+	const initialJson = JSON.parse(await fs.promises.readFile(fileDest, { encoding: 'utf8' }))
+	const newJson = JSON.parse(templatedText)
+
+	const finalJson = merge(initialJson, newJson)
+
+	await fs.promises.writeFile(fileDest, JSON.stringify(finalJson, null, 2), { mode: 0o644 })
 }

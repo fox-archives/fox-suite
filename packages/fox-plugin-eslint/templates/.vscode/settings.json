@@ -1,0 +1,15 @@
+{
+	"editor.codeActionsOnSave": {
+		"source.fixAll.eslint": true
+	},
+	"eslint.enable": true,
+	"eslint.packageManager": "yarn",
+	"eslint.validate": [
+		"vue",
+		"html",
+		"javacsript"
+	],
+	"eslint.options": {
+		"configFile": ".config/build/eslint.config.js"
+	}
+}

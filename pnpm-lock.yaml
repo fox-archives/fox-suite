@@ -443,6 +443,7 @@ importers:
       esm: 3.2.25
       glob: 7.1.6
       handlebars: 4.7.6
+      lodash.merge: 4.6.2
       pkg-up: 3.1.0
       prompts: 2.3.2
       read-pkg-up: 7.0.1
@@ -463,6 +464,7 @@ importers:
       glob: ^7.1.6
       handlebars: ^4.7.6
       jest: ^26.0.1
+      lodash.merge: ^4.6.2
       minimist: ^1.2.5
       pkg-up: ^3.1.0
       prompts: ^2.3.2
