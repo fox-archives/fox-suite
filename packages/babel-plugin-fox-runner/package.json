@@ -12,10 +12,11 @@
   "dependencies": {
     "@babel/generator": "^7.10.2",
     "@babel/helper-plugin-utils": "^7.10.1",
-    "deasync": "^0.1.20",
-    "fox-utils": "^0.2.2",
+		"fox-utils": "^0.2.2",
+		"deasync": "^0.1.20"
   },
   "devDependencies": {
-    "fox-types": "^0.2.2",
+		"fox-types": "^0.2.2",
+		"http": "0.0.1-security"
   }
 }
