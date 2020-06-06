@@ -61,7 +61,7 @@ export async function buildBootstrap(opts: IBuildBootstrap): Promise<void> {
 			type: 'toggle',
 			name: 'wantsToOverwrite',
 			message: `Overwrite ${retryFilesToTemplate.length} files that already exist on disk?. Specifically, they are ${alreadyExistingFilesFormatted}. would you like to override them all?`,
-			initial: true,
+			initial: false,
 			active: 'yah!',
 			inactive: 'no'
 		})
