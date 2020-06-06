@@ -38,7 +38,7 @@ importers:
       '@types/prettier': ^2.0.1
       '@types/prompts': ^2.0.8
       '@types/stylelint': ^9.10.1
-      lerna: ^3.20.2
+      lerna: ^3.22.0
       ts-node: ^8.10.1
   packages/babel-plugin-fox-runner:
     dependencies:
@@ -2508,13 +2508,13 @@ packages:
       integrity: sha512-1V9XOY4rDW0rehzbrcqAmHnz8e7SKvX27gh8Gt2WgB0+pdzdiLV83p72kZPU+jvMbS1qU5mauP2iOvO8rhmurQ==
   /@octokit/auth-token/2.4.1:
     dependencies:
-      '@octokit/types': 4.1.6
+      '@octokit/types': 4.1.8
     dev: true
     resolution:
       integrity: sha512-NB81O5h39KfHYGtgfWr2booRxp2bWOJoqbWwbyUg2hw6h35ArWYlAST5B3XwAkbdcx13yt84hFXyFP5X0QToWA==
   /@octokit/endpoint/6.0.2:
     dependencies:
-      '@octokit/types': 4.1.6
+      '@octokit/types': 4.1.8
       is-plain-object: 3.0.0
       universal-user-agent: 5.0.0
     dev: true
@@ -2551,7 +2551,7 @@ packages:
       integrity: sha512-+6yDyk1EES6WK+l3viRDElw96MvwfJxCt45GvmjDUKWjYIb3PJZQkq3i46TwGwoPD4h8NmTrENmtyA1FwbmhRA==
   /@octokit/request-error/2.0.1:
     dependencies:
-      '@octokit/types': 4.1.6
+      '@octokit/types': 4.1.8
       deprecation: 2.3.1
       once: 1.4.0
     dev: true
@@ -2561,7 +2561,7 @@ packages:
     dependencies:
       '@octokit/endpoint': 6.0.2
       '@octokit/request-error': 2.0.1
-      '@octokit/types': 4.1.6
+      '@octokit/types': 4.1.8
       deprecation: 2.3.1
       is-plain-object: 3.0.0
       node-fetch: 2.6.0
@@ -2593,16 +2593,16 @@ packages:
       integrity: sha512-gfFKwRT/wFxq5qlNjnW2dh+qh74XgTQ2B179UX5K1HYCluioWj8Ndbgqw2PVqa1NnVJkGHp2ovMpVn/DImlmkw==
   /@octokit/types/2.16.2:
     dependencies:
-      '@types/node': 13.13.9
+      '@types/node': 13.13.10
     dev: true
     resolution:
       integrity: sha512-O75k56TYvJ8WpAakWwYRN8Bgu60KrmX0z1KqFp1kNiFNkgW+JW+9EBKZ+S33PU6SLvbihqd+3drvPxKK68Ee8Q==
-  /@octokit/types/4.1.6:
+  /@octokit/types/4.1.8:
     dependencies:
-      '@types/node': 13.13.9
+      '@types/node': 13.13.10
     dev: true
     resolution:
-      integrity: sha512-/gN/VeZirpFb0GIpbDF6SgtfDp9EQ+ymqPf595wjRkEoRgkrCnJGctGAd8MrynStBvYRmMWF1P64qzZFzhW7Vg==
+      integrity: sha512-TO+vh3IdEfkuYxQ3N3+3U5KtWZy7ay7vC6/9oQJ0R3E1xxaBpO/DU+F0wqtceQuSvcGmsPjNPRI0ctBGCev3lQ==
   /@prettier/plugin-xml/0.7.2:
     dependencies:
       '@xml-tools/parser': 1.0.5
@@ -2843,6 +2843,10 @@ packages:
   /@types/minimist/1.2.0:
     resolution:
       integrity: sha1-aaI6OtKcrwCX8G7aWbNh7i8GOfY=
+  /@types/node/13.13.10:
+    dev: true
+    resolution:
+      integrity: sha512-J+FbkhLTcFstD7E5mVZDjYxa1VppwT2HALE6H3n2AnBSP8uiCQk0Pyr6BkJcP38dFV9WecoVJRJmFnl9ikIW7Q==
   /@types/node/13.13.9:
     dev: true
     resolution:

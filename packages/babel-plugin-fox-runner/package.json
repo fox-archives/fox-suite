@@ -1,6 +1,6 @@
 {
   "name": "babel-plugin-fox-runner",
-  "version": "1.0.0",
+  "version": "0.2.0",
   "description": "",
   "main": "build",
   "scripts": {
