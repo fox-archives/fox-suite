@@ -4,8 +4,7 @@ import anyConfig from './config/lint/any.config';
 import cozyConfig from './config/lint/cozy.config';
 import strictConfig from './config/lint/strict.config';
 import excessiveConfig from './config/lint/excessive.config';
-import { readFoxConfig } from './readConfig';
-
+import type { IFoxConfig } from 'fox-types'
 /**
  * Rule Resolution
  * configs of the lowest priority are added to the rootConfig. first
@@ -16,7 +15,11 @@ import { readFoxConfig } from './readConfig';
  * when editing, keep in mind it is harder to move a rule from a higher
  * priority to a lower priority (if we wish to edit)
  */
-const foxConfig = readFoxConfig()
+
+ // @ts-ignore
+// const foxConfig = getFoxOptionsFromEnv()
+const foxConfig: IFoxConfig = process.env.FOX_SUITE_FOX_OPTIONS
+const severity = 'cozy'
 
 const configVariants: any[] = []
 if (foxConfig.lint === 'off') {
@@ -64,5 +67,7 @@ if (Array.isArray(foxConfig.env)) {
   addEnvConfig(foxConfig.env)
 }
 // Object.assign(bareConfig.env, configVariants2.env)
+
+console.log(bareConfig)
 
 module.exports = bareConfig
