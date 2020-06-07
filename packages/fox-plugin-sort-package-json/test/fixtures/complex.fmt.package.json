@@ -1,0 +1,21 @@
+{
+  "description": "desc",
+  "license": "license",
+  "private": false,
+  "scripts": {},
+  "husky": {},
+  "xo": {},
+  "author": "name",
+  "contributors": [
+    "delta <delta@example.com>",
+    "echo <echo@example.com>"
+  ],
+  "keywords": [],
+  "browser": "file",
+  "engines": ">= 14",
+  "publisher": "name",
+  "flat": true,
+  "resolutions": {},
+  "devDependencies": {},
+  "optionalDependencies": {}
+}

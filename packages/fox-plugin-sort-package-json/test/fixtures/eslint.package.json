@@ -1,0 +1,10 @@
+{
+  "eslintConfig": {
+    "plugins": [],
+    "parser": "myParser",
+    "env": {},
+    "parserOptions": {},
+    "processor": "myProcessor"
+  },
+  "description": "foo"
+}

@@ -1,12 +1,12 @@
 {
-  "name": "babel-plugin-fox-runner",
+  "name": "babel-plugin-fox-transpiler",
   "version": "0.2.4",
   "description": "Test runner for fox plugins",
   "main": "build",
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "test": ""
 	},
-	"homepage": "https://github.com/eankeen/fox-suite/tree/dev/babel-plugin-fox-runner#readme",
+	"homepage": "https://github.com/eankeen/fox-suite/tree//babel-plugin-fox-transpiler#readme",
 	"bugs": {
 		"url": "https://github.com/eankeen/fox-suite/issues"
 	},

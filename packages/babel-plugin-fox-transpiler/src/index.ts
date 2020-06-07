@@ -8,7 +8,7 @@ import gg from '@babel/generator'
 // import { parseExpression } from '@babel/core'
 // @ts-ignore
 import { parseExpression } from '@babel/parser'
-import g from "../../../node_modules/@types/babel-generator/index"
+import g from "babel-generator"
 
 const generate: typeof g = gg
 
