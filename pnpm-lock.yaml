@@ -1,5 +1,7 @@
 importers:
   .:
+    dependencies:
+      fox-suite: 'link:packages/fox-suite'
     devDependencies:
       '@types/babel-generator': 6.25.3
       '@types/babel-types': 7.0.7
@@ -38,9 +40,12 @@ importers:
       '@types/prettier': ^2.0.1
       '@types/prompts': ^2.0.8
       '@types/stylelint': ^9.10.1
+      fox-suite: ^0.2.4
       lerna: ^3.22.0
       ts-node: ^8.10.1
-  packages/babel-plugin-fox-runner:
+  ../../../../.local/opt/n/pnpm-global:
+    specifiers: {}
+  packages/babel-plugin-fox-transpiler:
     dependencies:
       '@babel/generator': 7.10.2
       '@babel/helper-plugin-utils': 7.10.1
@@ -209,24 +214,6 @@ importers:
       npm-package-json-lint-config-fox: 'workspace:^0.2.4'
       ts-node: ^8.10.1
       typescript: ^3.8.3
-  packages/fox-plugin-package-json-sort:
-    dependencies:
-      fox-utils: 'link:../fox-utils'
-      lodash: 4.17.15
-    devDependencies:
-      ava: 3.8.2
-      fox-types: 'link:../fox-types'
-      husky: 4.2.5
-      ts-node: 8.10.2_typescript@3.9.5
-      typescript: 3.9.5
-    specifiers:
-      ava: ^3.8.1
-      fox-types: 'workspace:^0.2.4'
-      fox-utils: 'workspace:^0.2.4'
-      husky: ^4.2.5
-      lodash: ^4.17.15
-      ts-node: ^8.10.1
-      typescript: ^3.8.3
   packages/fox-plugin-prettier:
     dependencies:
       '@prettier/plugin-xml': 0.7.2
@@ -247,6 +234,24 @@ importers:
       prettier: ^2.0.5
       ts-jest: ^26.0.0
       typescript: ^3.9.2
+  packages/fox-plugin-sort-package-json:
+    dependencies:
+      fox-utils: 'link:../fox-utils'
+      lodash: 4.17.15
+    devDependencies:
+      ava: 3.8.2
+      fox-types: 'link:../fox-types'
+      husky: 4.2.5
+      ts-node: 8.10.2_typescript@3.9.5
+      typescript: 3.9.5
+    specifiers:
+      ava: ^3.8.1
+      fox-types: 'workspace:^0.2.4'
+      fox-utils: 'workspace:^0.2.4'
+      husky: ^4.2.5
+      lodash: ^4.17.15
+      ts-node: ^8.10.1
+      typescript: ^3.8.3
   packages/fox-plugin-stylelint:
     dependencies:
       esm: 3.2.25
@@ -276,8 +281,8 @@ importers:
       fox-plugin-htmllint: 'link:../fox-plugin-htmllint'
       fox-plugin-markdownlint: 'link:../fox-plugin-markdownlint'
       fox-plugin-package-json-lint: 'link:../fox-plugin-package-json-lint'
-      fox-plugin-package-json-sort: 'link:../fox-plugin-package-json-sort'
       fox-plugin-prettier: 'link:../fox-plugin-prettier'
+      fox-plugin-sort-package-json: 'link:../fox-plugin-sort-package-json'
       fox-plugin-stylelint: 'link:../fox-plugin-stylelint'
       fox-utils: 'link:../fox-utils'
       prettier: 2.0.5
@@ -295,8 +300,8 @@ importers:
       fox-plugin-htmllint: 'workspace:^0.2.4'
       fox-plugin-markdownlint: 'workspace:^0.2.4'
       fox-plugin-package-json-lint: 'workspace:^0.2.4'
-      fox-plugin-package-json-sort: 'workspace:^0.2.4'
       fox-plugin-prettier: 'workspace:^0.2.4'
+      fox-plugin-sort-package-json: 'workspace:^0.2.4'
       fox-plugin-stylelint: 'workspace:^0.2.4'
       fox-types: 'workspace:^0.2.4'
       fox-utils: 'workspace:^0.2.4'
@@ -315,8 +320,8 @@ importers:
       fox-plugin-eslint: 'link:../fox-plugin-eslint'
       fox-plugin-htmlhint: 'link:../fox-plugin-htmlhint'
       fox-plugin-package-json-lint: 'link:../fox-plugin-package-json-lint'
-      fox-plugin-package-json-sort: 'link:../fox-plugin-package-json-sort'
       fox-plugin-prettier: 'link:../fox-plugin-prettier'
+      fox-plugin-sort-package-json: 'link:../fox-plugin-sort-package-json'
       fox-plugin-stylelint: 'link:../fox-plugin-stylelint'
       fox-transpiler: 'link:../fox-transpiler'
       fox-utils: 'link:../fox-utils'
@@ -341,8 +346,8 @@ importers:
       fox-plugin-eslint: 'workspace:^0.2.4'
       fox-plugin-htmlhint: 'workspace:^0.2.4'
       fox-plugin-package-json-lint: 'workspace:^0.2.4'
-      fox-plugin-package-json-sort: 'workspace:^0.2.4'
       fox-plugin-prettier: 'workspace:^0.2.4'
+      fox-plugin-sort-package-json: 'workspace:^0.2.4'
       fox-plugin-stylelint: 'workspace:^0.2.4'
       fox-transpiler: 'workspace:^0.2.4'
       fox-types: 'workspace:^0.2.4'
@@ -395,7 +400,7 @@ importers:
     dependencies:
       '@babel/core': 7.10.2
       '@rollup/plugin-babel': 5.0.3_@babel+core@7.10.2+rollup@2.13.1
-      babel-plugin-fox-runner: 'link:../babel-plugin-fox-runner'
+      babel-plugin-fox-transpiler: 'link:../babel-plugin-fox-transpiler'
       colorette: 1.2.0
       esm: 3.2.25
       fox-esm: 'link:../fox-esm'
@@ -410,7 +415,7 @@ importers:
     specifiers:
       '@babel/core': ^7.10.2
       '@rollup/plugin-babel': ^5.0.2
-      babel-plugin-fox-runner: 'workspace:^0.2.4'
+      babel-plugin-fox-transpiler: 'workspace:^0.2.4'
       colorette: ^1.2.0
       cross-env: ^7.0.2
       esm: ^3.2.25

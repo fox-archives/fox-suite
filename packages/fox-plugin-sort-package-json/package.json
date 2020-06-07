@@ -1,6 +1,6 @@
 {
   "name": "fox-plugin-sort-package-json",
-  "version": "0.2.6",
+  "version": "0.2.4",
   "license": "MIT",
   "scripts": {
     "test": "ava"
@@ -14,7 +14,7 @@
 		"fox",
 		"fox-suite"
 	],
-	"homepage": "https://github.com/eankeen/fox-suite/tree/dev/fox-plugin-package-json-sort#readme",
+	"homepage": "https://github.com/eankeen/fox-suite/tree/dev/fox-plugin-sort-package-json#readme",
 	"bugs": {
 		"url": "https://github.com/eankeen/fox-suite/issues"
 	},

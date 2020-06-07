@@ -18,7 +18,7 @@
       "path": "../fox-plugin-package-json-lint"
     },
     {
-      "path": "../fox-plugin-package-json-sort"
+      "path": "../fox-plugin-sort-package-json"
     },
     {
       "path": "../npm-package-json-lint-config-fox"

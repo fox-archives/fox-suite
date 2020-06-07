@@ -1,7 +1,7 @@
 import type { IPluginExportInfo } from 'fox-types'
 
 export const info: IPluginExportInfo = {
-	name: 'fox-plugin-package-json-sort',
+	name: 'fox-plugin-sort-package-json',
 	tool: 'packageJsonSort',
 	toolName: 'packageJsonSort',
 	toolConfigSchemaHelpUri: '',

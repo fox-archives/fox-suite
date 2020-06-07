@@ -47,7 +47,7 @@
 		"fox-plugin-htmllint": "workspace:^0.2.4",
 		"fox-plugin-markdownlint": "workspace:^0.2.4",
 		"fox-plugin-package-json-lint": "workspace:^0.2.4",
-		"fox-plugin-package-json-sort": "workspace:^0.2.4",
+		"fox-plugin-sort-package-json": "workspace:^0.2.4",
 		"fox-plugin-prettier": "workspace:^0.2.4",
 		"fox-plugin-stylelint": "workspace:^0.2.4",
 		"fox-utils": "workspace:^0.2.4",

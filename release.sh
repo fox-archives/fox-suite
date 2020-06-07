@@ -45,4 +45,4 @@ for packageJsonFile in $packageJsonFiles; do
 	echo -e "\033[0;94mdone.\033[0m\n"
 done
 
-sed -i "s/\"workspace:/\"/g" packages/fox-plugin-package-json-sort/package.json
+sed -i "s/\"workspace:/\"/g" packages/fox-plugin-sort-package-json/package.json

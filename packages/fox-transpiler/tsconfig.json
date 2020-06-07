@@ -12,7 +12,7 @@
 	],
 	"references": [
 		{
-			"path": "../babel-plugin-fox-runner"
+			"path": "../babel-plugin-fox-transpiler"
 		}
 	]
 }

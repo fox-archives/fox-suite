@@ -21,53 +21,53 @@ import type { IFoxConfig } from 'fox-types'
 const foxConfig: IFoxConfig = process.env.FOX_SUITE_FOX_OPTIONS
 const severity = 'cozy'
 
-const configVariants: any[] = []
-if (foxConfig.lint === 'off') {
-  configVariants.concat([anyConfig])
-} else if (foxConfig.lint === 'cozy') {
-  configVariants.concat([defaultConfig, cozyConfig])
-} else if (foxConfig.lint === 'strict') {
-  configVariants.concat([defaultConfig, cozyConfig, strictConfig])
-} else if (foxConfig.lint === 'excessive') {
-  configVariants.concat([
-    defaultConfig,
-    cozyConfig,
-    strictConfig,
-    excessiveConfig,
-  ])
-}
+// const configVariants: any[] = []
+// if (foxConfig.lint === 'off') {
+//   configVariants.concat([anyConfig])
+// } else if (foxConfig.lint === 'cozy') {
+//   configVariants.concat([defaultConfig, cozyConfig])
+// } else if (foxConfig.lint === 'strict') {
+//   configVariants.concat([defaultConfig, cozyConfig, strictConfig])
+// } else if (foxConfig.lint === 'excessive') {
+//   configVariants.concat([
+//     defaultConfig,
+//     cozyConfig,
+//     strictConfig,
+//     excessiveConfig,
+//   ])
+// }
 
-const isProd = process.env.NODE_ENV === 'production'
-for (const configVariant of configVariants) {
-  Object.assign(bareConfig.rules, configVariant.default.rules)
-  if (isProd) {
-    Object.assign(bareConfig.rules, configVariant.isProd.rules)
-  } else {
-    Object.assign(bareConfig.rules, configVariant.isNotProd.rules)
-  }
-}
+// const isProd = process.env.NODE_ENV === 'production'
+// for (const configVariant of configVariants) {
+//   Object.assign(bareConfig.rules, configVariant.default.rules)
+//   if (isProd) {
+//     Object.assign(bareConfig.rules, configVariant.isProd.rules)
+//   } else {
+//     Object.assign(bareConfig.rules, configVariant.isNotProd.rules)
+//   }
+// }
 
-import browserConfig from './config/env/browser.config'
-import nodeConfig from './config/env/node.config'
-import denoConfig from './config/env/deno.config'
+// import browserConfig from './config/env/browser.config'
+// import nodeConfig from './config/env/node.config'
+// import denoConfig from './config/env/deno.config'
 
-const configVariants2: any[] = []
-function addEnvConfig(string: string) {
-  if (foxConfig.env === 'browser') {
-    configVariants2.push(browserConfig)
-  } else if (foxConfig.env === 'node') {
-    configVariants2.push(nodeConfig)
-  } else if (foxConfig.env === 'deno') {
-    configVariants2.push(denoConfig)
-  }
-}
-if (Array.isArray(foxConfig.env)) {
-  foxConfig.env.forEach(addEnvConfig)
-} else {
-  addEnvConfig(foxConfig.env)
-}
-// Object.assign(bareConfig.env, configVariants2.env)
+// const configVariants2: any[] = []
+// function addEnvConfig(string: string) {
+//   if (foxConfig.env === 'browser') {
+//     configVariants2.push(browserConfig)
+//   } else if (foxConfig.env === 'node') {
+//     configVariants2.push(nodeConfig)
+//   } else if (foxConfig.env === 'deno') {
+//     configVariants2.push(denoConfig)
+//   }
+// }
+// if (Array.isArray(foxConfig.env)) {
+//   foxConfig.env.forEach(addEnvConfig)
+// } else {
+//   addEnvConfig(foxConfig.env)
+// }
+// // Object.assign(bareConfig.env, configVariants2.env)
 
-console.log(bareConfig)
+// console.log(bareConfig)
 
 module.exports = bareConfig

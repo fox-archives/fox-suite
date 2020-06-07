@@ -42,7 +42,7 @@
     "fox-plugin-htmlhint": "workspace:^0.2.4",
     "fox-plugin-markdown-lint": "workspace:^0.2.4",
     "fox-plugin-package-json-lint": "workspace:^0.2.4",
-    "fox-plugin-package-json-sort": "workspace:^0.2.4",
+    "fox-plugin-sort-package-json": "workspace:^0.2.4",
     "fox-plugin-prettier": "workspace:^0.2.4",
     "fox-plugin-stylelint": "workspace:^0.2.4",
     "fox-runner": "workspace:^0.2.4",

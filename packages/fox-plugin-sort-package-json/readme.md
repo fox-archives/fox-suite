@@ -1,4 +1,4 @@
-# fox-plugin-package-json-sort
+# fox-plugin-sort-package-json
 
 ## Deprecated
 

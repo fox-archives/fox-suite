@@ -24,5 +24,8 @@
 	"name": "fox-suite",
 	"engines": {
 		"node": ">=12.17.0 >=v13.14.0 >=14.3.0"
+	},
+	"dependencies": {
+		"fox-suite": "^0.2.4"
 	}
 }
