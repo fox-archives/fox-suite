@@ -8,7 +8,24 @@
   "type": "commonjs",
   "engines": {
     "node": ">=12.17.0 >=v13.14.0 >=14.3.0"
-  },
+	},
+	"keywords": [
+		"package-json-sort",
+		"fox",
+		"fox-suite"
+	],
+	"homepage": "https://github.com/eankeen/fox-suite/tree/dev/fox-plugin-package-json-sort#readme",
+	"bugs": {
+		"url": "https://github.com/eankeen/fox-suite/issues"
+	},
+	"author": {
+		"name": "Edwin Kofler",
+		"url": "https://edwinkofler.com"
+	},
+	"repository": {
+		"type": "git",
+		"url": "https://github.com/eankeen/fox-suite.git"
+	},
   "ava": {
     "extensions": [
       "ts"

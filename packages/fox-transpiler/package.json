@@ -14,9 +14,23 @@
 		"node": ">=12.17.0 >=v13.14.0 >=14.3.0"
 	},
 	"keywords": [
-		"fox"
+		"fox",
+		"fox-suite",
+		"babel",
+		"rollup"
 	],
-	"author": "Edwin Kofler",
+	"homepage": "https://github.com/eankeen/fox-suite/tree/dev/fox-transpiler#readme",
+	"bugs": {
+		"url": "https://github.com/eankeen/fox-suite/issues"
+	},
+	"author": {
+		"name": "Edwin Kofler",
+		"url": "https://edwinkofler.com"
+	},
+	"repository": {
+		"type": "git",
+		"url": "https://github.com/eankeen/fox-suite.git"
+	},
 	"license": "MIT",
 	"bin": {
 		"fox-transpiler": "./bin/fox-transpiler.js"

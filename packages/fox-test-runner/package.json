@@ -9,9 +9,23 @@
   "bin": {
     "fox-test": "./bin/fox-test.js"
   },
-  "keywords": [],
-  "author": "",
-  "license": "ISC",
+  "keywords": [
+		"fox",
+		"fox-suite"
+	],
+	"homepage": "https://github.com/eankeen/fox-suite/tree/dev/fox-test-runner#readme",
+	"bugs": {
+		"url": "https://github.com/eankeen/fox-suite/issues"
+	},
+	"author": {
+		"name": "Edwin Kofler",
+		"url": "https://edwinkofler.com"
+	},
+	"repository": {
+		"type": "git",
+		"url": "https://github.com/eankeen/fox-suite.git"
+	},
+  "license": "MIT",
   "dependencies": {
     "@babel/preset-env": "^7.10.2",
     "@babel/preset-typescript": "^7.10.1",

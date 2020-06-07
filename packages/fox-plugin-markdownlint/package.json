@@ -13,8 +13,24 @@
   "engines": {
     "node": ">=12.17.0 >=v13.14.0 >=14.3.0"
   },
-  "keywords": [],
-  "author": "Edwin Kofler",
+  "keywords": [
+		"fox",
+		"markdown",
+		"lint",
+		"fox-suite"
+	],
+	"homepage": "https://github.com/eankeen/fox-suite/tree/dev/eslint-plugin-markdownlint#readme",
+	"bugs": {
+		"url": "https://github.com/eankeen/fox-suite/issues"
+	},
+	"author": {
+		"name": "Edwin Kofler",
+		"url": "https://edwinkofler.com"
+	},
+	"repository": {
+		"type": "git",
+		"url": "https://github.com/eankeen/fox-suite.git"
+	},
   "license": "MIT",
   "dependencies": {
     "fox-test": "workspace:^0.2.3",

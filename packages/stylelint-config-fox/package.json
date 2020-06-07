@@ -30,7 +30,18 @@
   "peerDependencies": {
     "eslint": "^6.8.0"
   },
-  "author": "Edwin Kofler",
+	"homepage": "https://github.com/eankeen/fox-suite/tree/dev/stylelint-config-fox#readme",
+	"bugs": {
+		"url": "https://github.com/eankeen/fox-suite/issues"
+	},
+	"author": {
+		"name": "Edwin Kofler",
+		"url": "https://edwinkofler.com"
+	},
+	"repository": {
+		"type": "git",
+		"url": "https://github.com/eankeen/fox-suite.git"
+	},
   "license": "MIT",
   "dependencies": {
     "fox-types": "workspace:^0.2.3",

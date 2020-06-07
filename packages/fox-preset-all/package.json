@@ -1,5 +1,5 @@
 {
-	"name": "fox-preset-base",
+	"name": "fox-preset-all",
 	"description": "Base preset",
 	"version": "0.2.3",
 	"keywords": [
@@ -7,7 +7,7 @@
 		"fox",
 		"fox-suite"
 	],
-	"homepage": "https://github.com/eankeen/fox-suite/tree/dev/packages/fox-preset-base#readme",
+	"homepage": "https://github.com/eankeen/fox-suite/tree/dev/packages/fox-preset-all#readme",
 	"bugs": {
 		"url": "https://github.com/eankeen/fox-suite/issues"
 	},

@@ -4,9 +4,21 @@
   "description": "",
   "types": "types.d.ts",
   "keywords": [
-    "fox"
-  ],
-  "author": "Edwin Kofler",
+		"fox",
+		"fox-suite"
+	],
+	"homepage": "https://github.com/eankeen/fox-suite/tree/dev/fox-types#readme",
+	"bugs": {
+		"url": "https://github.com/eankeen/fox-suite/issues"
+	},
+	"author": {
+		"name": "Edwin Kofler",
+		"url": "https://edwinkofler.com"
+	},
+	"repository": {
+		"type": "git",
+		"url": "https://github.com/eankeen/fox-suite.git"
+	},
   "license": "MIT",
   "dependencies": {
     "type-fest": "^0.15.0"

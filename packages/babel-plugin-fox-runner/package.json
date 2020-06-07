@@ -1,14 +1,28 @@
 {
   "name": "babel-plugin-fox-runner",
   "version": "0.2.3",
-  "description": "",
+  "description": "Test runner for fox plugins",
   "main": "build",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1"
-  },
-  "keywords": [],
-  "author": "",
-  "license": "ISC",
+	},
+	"homepage": "https://github.com/eankeen/fox-suite/tree/dev/babel-plugin-fox-runner#readme",
+	"bugs": {
+		"url": "https://github.com/eankeen/fox-suite/issues"
+	},
+	"author": {
+		"name": "Edwin Kofler",
+		"url": "https://edwinkofler.com"
+	},
+	"repository": {
+		"type": "git",
+		"url": "https://github.com/eankeen/fox-suite.git"
+	},
+  "keywords": [
+		"fox",
+		"fox-suite"
+	],
+  "license": "MIT",
   "dependencies": {
     "@babel/generator": "^7.10.2",
     "@babel/helper-plugin-utils": "^7.10.1",

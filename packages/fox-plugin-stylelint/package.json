@@ -16,11 +16,23 @@
     "fox-plugin-stylelint": "./bin/fox-plugin-stylelint.js"
   },
   "keywords": [
-    "fox-suite",
-    "fox",
-    "eslint"
-  ],
-  "author": "Edwin Kofler",
+		"stylelint",
+		"fox",
+		"lint",
+		"fox-suite"
+	],
+	"homepage": "https://github.com/eankeen/fox-suite/tree/dev/fox-plugin-stylelint#readme",
+	"bugs": {
+		"url": "https://github.com/eankeen/fox-suite/issues"
+	},
+	"author": {
+		"name": "Edwin Kofler",
+		"url": "https://edwinkofler.com"
+	},
+	"repository": {
+		"type": "git",
+		"url": "https://github.com/eankeen/fox-suite.git"
+	},
   "license": "MIT",
   "dependencies": {
     "esm": "^3.2.25",

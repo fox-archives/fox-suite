@@ -3,7 +3,22 @@
 	"description": "",
 	"name": "fox-esm",
 	"main": "cjs.js",
-	"author": "Edwin Kofler",
+	"keywords": [
+		"fox",
+		"fox-suite"
+	],
+	"homepage": "https://github.com/eankeen/fox-suite/tree/dev/fox-esm#readme",
+	"bugs": {
+		"url": "https://github.com/eankeen/fox-suite/issues"
+	},
+	"author": {
+		"name": "Edwin Kofler",
+		"url": "https://edwinkofler.com"
+	},
+	"repository": {
+		"type": "git",
+		"url": "https://github.com/eankeen/fox-suite.git"
+	},
 	"license": "MIT",
 	"type": "commonjs",
 	"engines": {

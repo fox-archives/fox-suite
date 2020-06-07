@@ -12,9 +12,22 @@
   },
   "keywords": [
     "npm-package-json-lint",
-    "npm-package-json-lint-config"
+		"npm-package-json-lint-config",
+		"fox",
+		"fox-suite"
   ],
-  "author": "Edwin Kofler",
+	"homepage": "https://github.com/eankeen/fox-suite/tree/dev/npm-package-json-lint-config-fox#readme",
+	"bugs": {
+		"url": "https://github.com/eankeen/fox-suite/issues"
+	},
+	"author": {
+		"name": "Edwin Kofler",
+		"url": "https://edwinkofler.com"
+	},
+	"repository": {
+		"type": "git",
+		"url": "https://github.com/eankeen/fox-suite.git"
+	},
   "license": "MIT",
   "peerDependencies": {
     "npm-package-json-lint": ">= 5"
