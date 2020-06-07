@@ -1,6 +1,6 @@
 {
   "name": "fox-plugin-eslint",
-  "version": "0.2.3",
+  "version": "0.2.4",
   "description": "",
   "main": "build",
   "scripts": {
@@ -34,14 +34,14 @@
   },
   "license": "MIT",
   "dependencies": {
-    "eslint-config-fox": "workspace:^0.2.3",
-     "fox-esm": "workspace:^0.2.3",
-    "fox-test": "workspace:^0.2.3",
-		"fox-utils": "workspace:^0.2.3",
+    "eslint-config-fox": "workspace:^0.2.4",
+     "fox-esm": "workspace:^0.2.4",
+    "fox-test": "workspace:^0.2.4",
+		"fox-utils": "workspace:^0.2.4",
 		"eslint": "^7.0.0"
   },
   "devDependencies": {
-		"fox-types": "workspace:^0.2.3",
+		"fox-types": "workspace:^0.2.4",
 		"http": "0.0.1-security"
   }
 }
