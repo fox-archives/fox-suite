@@ -1,6 +1,6 @@
 {
   "name": "fox-plugin-package-json-lint",
-  "version": "0.2.2",
+  "version": "0.2.3",
   "description": "",
   "main": "build",
   "scripts": {
@@ -19,13 +19,13 @@
   "author": "Edwin Kofler",
   "license": "MIT",
   "dependencies": {
-    "fox-test": "^0.2.2",
-    "fox-utils": "^0.2.2",
+    "fox-test": "workspace:^0.2.3",
+    "fox-utils": "workspace:^0.2.3",
     "npm-package-json-lint": "^5.1.0",
-    "npm-package-json-lint-config-fox": "^0.2.2",
+    "npm-package-json-lint-config-fox": "workspace:^0.2.3",
   },
   "devDependencies": {
-    "fox-types": "^0.2.2",
+    "fox-types": "workspace:^0.2.3",
     "ts-node": "^8.10.1",
     "typescript": "^3.8.3"
   }

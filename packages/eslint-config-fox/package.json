@@ -1,7 +1,7 @@
 {
   "name": "eslint-config-fox",
   "description": "ESLint configuration for Fox Suite",
-  "version": "0.2.2",
+  "version": "0.2.3",
   "keywords": [
     "eslint",
     "fox",
