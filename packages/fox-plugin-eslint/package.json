@@ -23,7 +23,7 @@
   "author": "Edwin Kofler",
   "license": "MIT",
   "dependencies": {
-    "eslint-config-fox": "^0.1.0",
+    "eslint-config-fox": "^0.2.2",
      "fox-esm": "^0.2.2",
     "fox-test": "^0.2.2",
 		"fox-utils": "^0.2.2",

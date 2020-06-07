@@ -36,7 +36,7 @@
 			"path": "../fox-plugin-prettier"
 		},
 		{
-			"path": "../fox-test"
+			"path": "../fox-test-runner"
 		},
 		{
 			"path": "../fox-transpiler"
