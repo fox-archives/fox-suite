@@ -1,6 +1,6 @@
 {
   "name": "fox-plugin-sort-package-json",
-  "version": "0.2.4",
+  "version": "0.3.0",
   "license": "MIT",
   "scripts": {
     "test": "ava"
@@ -44,13 +44,13 @@
     "fox-plugin-sort-package-json": "./bin/fox-plugin-sort-package-json.js"
   },
   "dependencies": {
-    "fox-test": "workspace:^0.2.4",
-    "fox-utils": "workspace:^0.2.4",
+    "fox-test": "workspace:^0.3.0",
+    "fox-utils": "workspace:^0.3.0",
     "lodash": "^4.17.15"
   },
   "devDependencies": {
     "ava":  "^3.8.1",
-    "fox-types": "workspace:^0.2.4",
+    "fox-types": "workspace:^0.3.0",
     "husky": "^4.2.5",
     "ts-node": "^8.10.1",
     "typescript": "^3.8.3"
