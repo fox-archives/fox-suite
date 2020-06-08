@@ -13,7 +13,6 @@ export function excessiveConfig(fox: IFoxConfig, tier: string): Record<string, a
 			'no-unused-expressions': 'error',
 			'no-unused-labels': 'error',
 			'no-useless-backreference': 'error',
-			'valid-jsdoc': 'error',
 
 			/* ------------------- best practices ------------------- */
 			'accessor-pairs': 'error', // see isProd

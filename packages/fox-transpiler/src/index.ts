@@ -28,7 +28,7 @@ interface ITranspileConfig {
  * emite as json file (easier to debug and see what is going on)
  */
 export async function transpileConfig({ foxPluginPaths, projectData}: ITranspileConfig) {
-	console.log(foxPluginPaths)
+	// console.log(foxPluginPaths)
 }
 
 /**

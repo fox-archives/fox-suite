@@ -62,6 +62,7 @@ importers:
   packages/eslint-config-fox:
     dependencies:
       babel-eslint: 10.1.0_eslint@6.8.0
+      colorette: 1.2.0
       eslint-plugin-babel: 5.3.0_eslint@6.8.0
       lodash.merge: 4.6.2
     devDependencies:
@@ -74,6 +75,7 @@ importers:
       typescript: 3.9.5
     specifiers:
       babel-eslint: ^10.1.0
+      colorette: ^1.2.0
       eslint: ^6.8.0
       eslint-plugin-babel: ^5.3.0
       fox-types: 'workspace:^0.2.4'
@@ -90,17 +92,21 @@ importers:
       esm: ^3.2.25
   packages/fox-plugin-eslint:
     dependencies:
+      colorette: 1.2.0
       eslint: 7.2.0
       eslint-config-fox: 'link:../eslint-config-fox'
       fox-esm: 'link:../fox-esm'
+      fox-test-runner: 'link:../fox-test-runner'
       fox-utils: 'link:../fox-utils'
     devDependencies:
       fox-types: 'link:../fox-types'
       http: 0.0.1-security
     specifiers:
+      colorette: ^1.2.0
       eslint: ^7.0.0
       eslint-config-fox: 'workspace:^0.2.4'
       fox-esm: 'workspace:^0.2.4'
+      fox-test-runner: 'workspace:^0.2.4'
       fox-types: 'workspace:^0.2.4'
       fox-utils: 'workspace:^0.2.4'
       http: 0.0.1-security

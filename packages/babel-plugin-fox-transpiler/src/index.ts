@@ -73,7 +73,7 @@ export default declare((api: any, options: any) => {
 						path.replaceWith(astFromPrimitive(runtimeValue))
 					}
 				},
-			}
+			},
 		},
 	}
 })

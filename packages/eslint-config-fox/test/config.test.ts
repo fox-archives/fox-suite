@@ -14,12 +14,10 @@ const setTier = (tier: string) =>
 
 // jest won't execute matched javascript files ending in '.cjs'
 test('config has basic properties', async () => {
-	setOpts({ all: 'cozy' })
+	setOpts({ all: 'cozy', env: [] })
 	setTier('cozy')
 
 	const cfg: Record<string, any> = await import('../src')
-
-	console.info('s', cfg)
 
 	expect(cfg).toBeObject()
 	expect(cfg.parserOptions).toBeObject()
@@ -29,42 +27,47 @@ test('config has basic properties', async () => {
   expect(cfg.rules).toBeObject()
 })
 
-// test('eslint engine evaluates config file', () => {
-// 	setOpts({ all: 'cozy' })
-// 	setTier('cozy')
+test('eslint engine evaluates config file', () => {
+	setOpts({ all: 'cozy', env: [] })
+	setTier('cozy')
 
-//   const CLIEngine = eslint.CLIEngine
+  const CLIEngine = eslint.CLIEngine
 
-//   const cli = new CLIEngine({
-//     useEslintrc: false,
-//     configFile: require.resolve('../'),
-//   })
+  const cli = new CLIEngine({
+    useEslintrc: false,
+    configFile: require.resolve('../'),
+  })
 
-//   const code = 'const foo = 1\n'
+  const code = 'const foo = 1\n'
 
-//   expect(cli.executeOnText(code).errorCount).toBe(0)
-// })
+  expect(cli.executeOnText(code).errorCount).toBe(0)
+})
 
-// describe('first', () => {
-// 	test("'cozy' config", async () => {
-// 		setOpts({ all: 'cozy' })
-// 		setTier('cozy')
+describe('tiers', () => {
+	test("'cozy' config", async () => {
+		setOpts({ all: 'cozy', env: [] })
+		setTier('cozy')
 
-// 		const eslintConfig: Record<string, any> = await import('../src')
-// 	})
+		const eslintConfig: Record<string, any> = await import('../src')
 
-// 	test("'strict' config", async () => {
-// 		setOpts({ all: 'strict' })
-// 		setTier('cozy')
+		expect(eslintConfig.rules['getter-return']).toBe('off')
+	})
 
-// 		const eslintConfig: Record<string, any> = await import('../src')
+	test("'strict' config", async () => {
+		setOpts({ all: 'strict', env: [] })
+		setTier('strict')
 
-// 	})
+		const eslintConfig: Record<string, any> = await import('../src')
 
-// 	test("'excessive' config", async () => {
-// 		setOpts({ all: 'excessive' })
-// 		setTier('cozy')
+		expect(eslintConfig.rules['getter-return']).toMatchObject(['error', { allowImplicit: true }])
+	})
 
-// 		const eslintConfig: Record<string, any> = await import('../src')
-// 	})
-// })
+	test("'excessive' config", async () => {
+		setOpts({ all: 'excessive', env: [] })
+		setTier('excessive')
+
+		const eslintConfig: Record<string, any> = await import('../src')
+
+		expect(eslintConfig.rules['vars-on-top']).toBe('error')
+	})
+})

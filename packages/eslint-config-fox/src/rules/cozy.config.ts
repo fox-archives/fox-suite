@@ -114,8 +114,8 @@ export function cozyConfig(fox: IFoxConfig, tier: string): Record<string, any> {
 			'no-octal-escape': 'error',
 			'no-octal': 'error',
 			'no-param-reassign': 'off',
-			'no-proto': 'true',
-			'no-redeclare': 'true',
+			'no-proto': 'error',
+			'no-redeclare': 'error',
 			'no-restricted-properties': 'off',
 			'no-return-assign': ['error', 'except-parens'],
 			'no-return-await': 'off',
@@ -212,7 +212,6 @@ export function cozyConfig(fox: IFoxConfig, tier: string): Record<string, any> {
 		obj.rules['no-unused-expressions'] = 'error'
 		obj.rules['no-unused-labels'] = 'error'
 	}
-
 
 	return obj
 }

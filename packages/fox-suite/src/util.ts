@@ -68,25 +68,13 @@ export async function getInstalledFoxPlugins(): Promise<string[]> {
 
 			debug('shortened list of plugins: %o', pluginName)
 			return pluginName
-
-			// const i1 = arr.findIndex(el => el.includes(pluginName))
-			// const i2 = arr.length - arr.reverse().findIndex(el => el.includes(pluginName)) - 1
-
-			// const isNotDuplicated = i1 === i2
-			// console.log(isNotDuplicated, pluginName)
-			// return isNotDuplicated
 		})
 
-		const allPluginsCopy = Array.from(allPlugins)
-		const newAllPlugins = []
-		for (let i = 0; i < allPlugins.length; ++i) {
-			const pluginName = allPluginsShort.pop()
-			const pluginPath = allPluginsCopy.pop()
-
-			if(pluginName && allPluginsCopy.find(el => !el.includes(pluginName))) {
-				if (pluginPath) newAllPlugins.push(pluginPath)
-			}
+		const shortToLongPluginName: Record<string, string> = {}
+		for (let i = 0; i < allPluginsShort.length; ++i) {
+			shortToLongPluginName[allPluginsShort[i]] = allPlugins[i]
 		}
+		const newAllPlugins = Object.values(shortToLongPluginName)
 
 		debug('returned value from getInstalledFoxPlugins: %o', newAllPlugins)
 		return newAllPlugins

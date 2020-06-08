@@ -17,6 +17,10 @@ export async function tui(): Promise<void> {
 		foxUtils.getProjectData(), util.getInstalledFoxPlugins()
 	])
 
+	// TODO: less temporary fix
+	foxUtils.setFoxOptionsToEnv(projectData.foxConfig)
+
+
 	debug('projectData: %o', projectData)
 	debug('foxPlugins: %o', foxPluginPaths)
 
