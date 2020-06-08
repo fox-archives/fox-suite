@@ -1,7 +1,7 @@
 import merge from 'lodash.merge'
-import { cozyConfig } from './config/cozy.config'
-import { strictConfig } from './config/strict.config'
-import { excessiveConfig } from './config/excessive.config'
+import { cozyConfig } from './rules/cozy.config'
+import { strictConfig } from './rules/strict.config'
+import { excessiveConfig } from './rules/excessive.config'
 import { IFoxConfig } from 'fox-types'
 
 

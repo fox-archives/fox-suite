@@ -7,7 +7,8 @@ type option = 'off' | 'cozy' | 'strict' | 'excessive'
  */
 export interface IFoxConfig {
   all: option,
-  monorepo: boolean,
+	monorepo: boolean,
+	env: 'browser' | 'node' | 'deno' | 'browser-node' | 'browser-deno'
   plugin: {
 		eslint: option,
 		stylelint: option

@@ -30,8 +30,7 @@
     "start": "ts-node src",
     "watch": "tsc --build --watch",
     "build": "tsc --build",
-    "test": "jest",
-    "lint": "eslint --fix --config eslint.config.cjs ."
+    "test": "jest"
   },
   "devDependencies": {
     "eslint": "^6.8.0",
@@ -47,6 +46,7 @@
   },
   "dependencies": {
     "babel-eslint": "^10.1.0",
-    "eslint-plugin-babel": "^5.3.0"
+    "eslint-plugin-babel": "^5.3.0",
+    "lodash.merge": "^4.6.2"
   }
 }

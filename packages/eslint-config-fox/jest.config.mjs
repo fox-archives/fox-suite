@@ -1,5 +1,5 @@
 export default {
-  preset: 'ts-node',
+  preset: 'ts-jest',
   setupFilesAfterEnv: [
     "jest-extended"
   ],

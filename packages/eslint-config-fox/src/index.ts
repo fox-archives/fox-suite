@@ -1,10 +1,7 @@
-import bareConfig from './config/bare.config';
-import defaultConfig from './config/default.config';
-import anyConfig from './config/lint/any.config';
-import cozyConfig from './config/lint/cozy.config';
-import strictConfig from './config/lint/strict.config';
-import excessiveConfig from './config/lint/excessive.config';
+import merge from 'lodash.merge'
+import { eslintConfigFoxBase } from './eslint-config-fox-base'
 import type { IFoxConfig } from 'fox-types'
+
 /**
  * Rule Resolution
  * configs of the lowest priority are added to the rootConfig. first
@@ -15,59 +12,82 @@ import type { IFoxConfig } from 'fox-types'
  * when editing, keep in mind it is harder to move a rule from a higher
  * priority to a lower priority (if we wish to edit)
  */
+const foxConfig: IFoxConfig = JSON.parse(process.env.FOX_SUITE_FOX_OPTIONS || '{}')
+const tier: string = process.env.FOX_SUITE_TIER || ''
 
- // @ts-ignore
-// const foxConfig = getFoxOptionsFromEnv()
-const foxConfig: IFoxConfig = process.env.FOX_SUITE_FOX_OPTIONS
-const severity = 'cozy'
+const obj2 = eslintConfigFoxBase(foxConfig, tier)
+console.log(obj2)
 
-// const configVariants: any[] = []
-// if (foxConfig.lint === 'off') {
-//   configVariants.concat([anyConfig])
-// } else if (foxConfig.lint === 'cozy') {
-//   configVariants.concat([defaultConfig, cozyConfig])
-// } else if (foxConfig.lint === 'strict') {
-//   configVariants.concat([defaultConfig, cozyConfig, strictConfig])
-// } else if (foxConfig.lint === 'excessive') {
-//   configVariants.concat([
-//     defaultConfig,
-//     cozyConfig,
-//     strictConfig,
-//     excessiveConfig,
-//   ])
-// }
+const obj: Record<string, any> = {
+	parserOptions: {
+		parser: 'babel-eslint',
+		ecmaVersion: 2020,
+		sourceType: 'module',
+		ecmaFeatures: {
+			impliedStrict: true,
+		}
+	},
+	env: {
+		es6: true,
+		es2017: true,
+		es2020: true,
+	},
+	// commonjs: true,
+	// 'shared-node-browser': true,
+	// worker: false,
+	// amd: false,
+	// mocha: false,
+	// jasmine: false,
+	// jest: false,
+	// phantomjs: false,
+	// protractor: false,
+	// qunit: false,
+	// jquery: false,
+	// prototypejs: false,
+	// shelljs: false,
+	// meteor: false,
+	// mongo: false,
+	// applescript: false,
+	// nashorn: false,
+	// serviceworker: false,
+	// atomtest: false,
+	// embertest: false,
+	// webextensions: false,
+	// greasemonkey: false,
+	// },
 
-// const isProd = process.env.NODE_ENV === 'production'
-// for (const configVariant of configVariants) {
-//   Object.assign(bareConfig.rules, configVariant.default.rules)
-//   if (isProd) {
-//     Object.assign(bareConfig.rules, configVariant.isProd.rules)
-//   } else {
-//     Object.assign(bareConfig.rules, configVariant.isNotProd.rules)
-//   }
-// }
+	plugins: [
+		// "simple-import-sort",
+		// "no-use-extend-native",
+		// "no-secrets",
+		// "prettier"
+	],
+  extends: [
+	// "eslint:recommended",
+	// "plugin:promise/recommended",
+	// "plugin:import/errors",
+	// "plugin:import/warnings",
+	// "plugin:jest/recommended",
+	// "plugin:jest/style",
+	// "plugin:monorepo/recommended"
+	],
 
-// import browserConfig from './config/env/browser.config'
-// import nodeConfig from './config/env/node.config'
-// import denoConfig from './config/env/deno.config'
+	overrides: [
+		{
+			files: ['**/test.js'],
+			env: {
+				// "jest": true,
+				// "jest/globals": true
+			},
+		},
+	],
+	rules: {},
 
-// const configVariants2: any[] = []
-// function addEnvConfig(string: string) {
-//   if (foxConfig.env === 'browser') {
-//     configVariants2.push(browserConfig)
-//   } else if (foxConfig.env === 'node') {
-//     configVariants2.push(nodeConfig)
-//   } else if (foxConfig.env === 'deno') {
-//     configVariants2.push(denoConfig)
-//   }
-// }
-// if (Array.isArray(foxConfig.env)) {
-//   foxConfig.env.forEach(addEnvConfig)
-// } else {
-//   addEnvConfig(foxConfig.env)
-// }
-// // Object.assign(bareConfig.env, configVariants2.env)
+	globals: {
+		document: 'readonly',
+		navigator: 'readonly',
+		window: 'readonly',
+	},
+}
 
-// console.log(bareConfig)
-
-module.exports = bareConfig
+module.exports = obj

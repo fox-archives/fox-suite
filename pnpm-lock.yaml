@@ -43,8 +43,6 @@ importers:
       fox-suite: ^0.2.4
       lerna: ^3.22.0
       ts-node: ^8.10.1
-  ../../../../.local/opt/n/pnpm-global:
-    specifiers: {}
   packages/babel-plugin-fox-transpiler:
     dependencies:
       '@babel/generator': 7.10.2
@@ -65,6 +63,7 @@ importers:
     dependencies:
       babel-eslint: 10.1.0_eslint@6.8.0
       eslint-plugin-babel: 5.3.0_eslint@6.8.0
+      lodash.merge: 4.6.2
     devDependencies:
       eslint: 6.8.0
       fox-types: 'link:../fox-types'
@@ -80,6 +79,7 @@ importers:
       fox-types: 'workspace:^0.2.4'
       jest: ^26.0.1
       jest-extended: ^0.11.5
+      lodash.merge: ^4.6.2
       np: ^6.2.3
       ts-jest: ^26.0.0
       typescript: ^3.9.2
