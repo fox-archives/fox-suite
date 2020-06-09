@@ -34,6 +34,19 @@ export default {
 
 with each project, you may want to slightly change the configuration, geared towards *developer satisfaction*. for example, the above config lints javascript such that only the most aggregous errors are caught and that most autofixable rules are enabled. if your project suddenly becomes a bit more serious / big, you can always increase the parameter to 'strict', or 'excessive', to give more guarentees
 
+## Usage
+
+#### _there are problems at the moment_, not ready to be used
+
+in one of your projects, install `fox-suite`, then a `preset` ex. (`fox-preset-recommended`). you can also install plugins by themselves with ex. `fox-plugin-eslint`. open up an interactive menu with `fox`
+
+```sh
+npm i fox-suite fox-preset-recommended
+
+fox
+```
+
+
 ## Options Explanation
 
 ## Behavior
@@ -97,9 +110,16 @@ Another thing, we try to be as explicit as possible. For example, if an API allo
 
 ## Support
 
+some of the support is half baked
+
 - ESlint
 - Stylelint
 - HTMLHint
+- htmllint
+- html-verify
+- prettier
+- sort-package-json
+- package-json-lint
 
 ## Building your own modules
 
