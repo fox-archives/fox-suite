@@ -1,9 +1,8 @@
 import path from 'path'
 import * as foxUtils from "fox-utils";
-import eslintConfigFox from 'eslint-config-fox'
 // @ts-ignore
 import { ESLint } from "eslint";
-import * as c from 'colorette'
+import type { IFoxConfig } from 'fox-types';
 
 export { info } from './info'
 
@@ -17,20 +16,20 @@ export async function fixFunction() {
 	await foxUtils.buildFix({
 		dirname: __dirname,
 		async fn() {
-			const projectData = await foxUtils.getProjectData()
+			const project = await foxUtils.getProjectData()
 
-			const eslintConfigLocation = path.join(projectData.location, '.config/eslint.config.js')
+			const eslintConfigLocation = path.join(project.location, '.config/eslint.config.js')
 
 			const eslint = new ESLint({
-				cwd: projectData.location,
+				cwd: project.location,
 				errorOnUnmatchedPattern: false,
-				ignorePath: path.join(projectData.location, '.config/eslintignore'),
+				ignorePath: path.join(project.location, '.config/eslintignore'),
 				// TODO: use the eslintconfig in `.config/build`
-				overrideConfig: eslintConfigFox,
+				overrideConfig: (await import('eslint-config-fox')).default,
 			  useEslintrc: false,
 				fix: true,
 				cache: true,
-				cacheLocation: path.join(projectData.location, '.config/.cache/eslintcache')
+				cacheLocation: path.join(project.location, '.config/.cache/eslintcache')
 			});
 
 			const results = await eslint.lintFiles(["**/*.js"]);
@@ -41,7 +40,6 @@ export async function fixFunction() {
 			const formatter = await eslint.loadFormatter("stylish");
 			const resultText = formatter.format(results);
 			console.info(resultText);
-			console.info(c.bold(c.red('done')))
 		}
 	})
 }

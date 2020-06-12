@@ -1,5 +1,4 @@
 import minimist from 'minimist'
-import  { setup } from './misc'
 import { IBuildCli } from "fox-types";
 import * as foxUtils from './'
 import * as c from 'colorette'
@@ -10,7 +9,8 @@ export async function buildCli(nodeArgv: NodeJS.Process["argv"], {
 	bootstrapFunction,
 	fixFunction
 }: IBuildCli) {
-	setup()
+	process.on("uncaughtException", (err) => console.error(err));
+	process.on("unhandledRejection", (err) => console.error(err));
 
 	// TODO: change help menu depending on if module has a function for `--bootstrap`
 	const argv = minimist(nodeArgv.slice(2));

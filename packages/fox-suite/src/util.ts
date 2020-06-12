@@ -14,11 +14,11 @@ export async function getFoxPlugins(projectData: IProject): Promise<string[]> {
 		const nodeModules = await fs.promises.readdir(nodeModulesPath, { withFileTypes: true })
 
 		const isFoxPlugin = (nodePackage: Dirent) => {
-			return (nodePackage.isDirectory() || nodePackage.isSymbolicLink()) && nodePackage.name.startsWith("fox-plugin-")
+			return (!nodePackage.isFile()) && nodePackage.name.startsWith("fox-plugin-")
 		}
 
 		const isFoxPreset = (nodePackage: Dirent) => {
-			return (nodePackage.isDirectory() || nodePackage.isSymbolicLink()) && nodePackage.name.startsWith("fox-preset-")
+			return (!nodePackage.isFile()) && nodePackage.name.startsWith("fox-preset-")
 		}
 
 		for (const nodeModule of nodeModules) {
@@ -52,16 +52,6 @@ export async function getFoxPlugins(projectData: IProject): Promise<string[]> {
 }
 
 export async function importFoxPlugins(projectData: IProject, foxPluginPaths: string[]): Promise<IPluginExportIndex[]> {
-	// set the environment before importing
-	process.env.FOX_SUITE_FOX_OPTIONS = JSON.stringify(projectData.foxConfig)
-
-	// TODO: fix this, we have to load each plugin
-	// one by one and change the environment variable
-	// fox-suite-fox-tier for each one or introduce
-	// a helper function for each plugin tool preset to
-	// get this themselves based on the toolName etc.
-	process.env.FOX_SUITE_FOX_TIER = 'cozy'
-
 	const promises: Promise<IPluginExportIndex>[] = []
 	for (const foxPluginPath of foxPluginPaths) {
 		promises.push(import(foxPluginPath))

@@ -1,10 +1,10 @@
 #!/usr/bin/env node
 
-import { setup } from 'fox-utils'
 import { fox } from './index.js'
 
 export async function cli() {
-	setup()
+	process.on("uncaughtException", (err) => console.error(err));
+	process.on("unhandledRejection", (err) => console.error(err));
 
   try {
     await fox()

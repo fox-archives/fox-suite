@@ -16,7 +16,7 @@ import { excessiveConfig } from './rules/excessive.config'
  * priority to a lower priority (if we wish to edit)
  */
 const foxConfig: IFoxConfig = JSON.parse(process.env.FOX_SUITE_FOX_OPTIONS || '{}')
-const tier: string = process.env.FOX_SUITE_FOX_TIER || ''
+const tier: string = process.env.FOX_SUITE_PLUGIN_ESLINT_TIER || ''
 
 let config = {}
 

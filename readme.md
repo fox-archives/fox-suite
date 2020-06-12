@@ -101,7 +101,6 @@ more annoying than helpfull when coding a project
 
 - ex. forcing default to exist at end of switch
 
-
 ## Who is this for?
 
 This is for the _modern_ web devleoper. This "toolchain" aims to be as lightweight as possible, with respect to the generated code and the mental tax on the developer. For example, we always configure stylelint with `value-no-vendor-prefix` and `color-function-notation` to `modern`, since we assume the output will be piped through `autoprefixer` (probably via `fox-postcss`) if the user actually wants better browser support. Another example, we target to `ES2018` with typescript for `node` projects because we assume the code will be run on a supported / LTS node version. Last example, we target `ESNext` when linting with `eslint` to make things more flexable and useless errors pop up less.
@@ -149,13 +148,15 @@ export const info: IPluginExportInfo = {
 	description: 'Lints the HTML files',
 	// used by nothing
 	descriptionLong: 'Lints HTML files'
-
 }
 ```
 
+- within your plugin, you must dynamically importing the `import()` syntax (or `require()`)
+
 #### how to make a `preset`
 
-it's similar to other tools. note that you can use `export default` since your module will be loaded with the `esm` package
+it's similar to other tools. feel free to use esmodules and `export default` since your module will be loaded with the `esm` package. note that you don't want to do this for packages that
+look like `stylelint-config-fox`, `eslint-config-fox`, since they're going to be referenced in the config
 
 ```js
 import { IPresetExportIndex } from 'fox-types'

@@ -9,10 +9,7 @@ export interface IFoxConfig {
   all: option,
 	monorepo: boolean,
 	env: 'browser' | 'node' | 'deno' | 'browser-node' | 'browser-deno'
-  plugin: {
-		eslint: option,
-		stylelint: option
-  }
+  plugin: Record<string, option>
 }
 
 /**

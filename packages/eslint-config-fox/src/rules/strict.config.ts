@@ -132,6 +132,7 @@ export function strictConfig(fox: IFoxConfig, tier: string): Record<string, any>
 			/* ---------------------- variables --------------------- */
 			'no-label-var': 'error',
 			'no-restricted-globals': [
+				'error',
 				'addEventListener',
 				'blur',
 				'close',

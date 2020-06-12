@@ -23,7 +23,8 @@ export async function getPluginData(pluginRootOrSubDir: string): Promise<IPlugin
 	const templateFilesPaths = await util.promisify(glob)(`${templateDir}/**/*`, {
 		dot: true
 	})
-	let templateFilesPromises = templateFilesPaths.map(async (absolutePath: string): Promise<ITemplateFile | undefined> => {
+		let templateFilesPromises = templateFilesPaths.map(async (absolutePath: string):
+			Promise<ITemplateFile | undefined> => {
 		// + 2 to account for extra forward slashes
 		const relativePath = absolutePath.slice(pluginRoot.length + 'templates'.length + 2)
 		const stats = await fs.promises.stat(absolutePath)
@@ -36,7 +37,8 @@ export async function getPluginData(pluginRootOrSubDir: string): Promise<IPlugin
 			stats
 		}
 	})
-	const templateFiles = (await Promise.all(templateFilesPromises)).filter(Boolean) as ITemplateFile[]
+	const templateFiles = (await Promise.all(templateFilesPromises))
+		.filter(Boolean) as ITemplateFile[]
 
 	return {
 		templateDir,
