@@ -12,15 +12,13 @@ import * as c from 'colorette'
  */
 export async function cli(argv: ParsedArgs): Promise<void> {
 	debug('activating cli. passed args: %o', argv)
-	const [projectData, foxPluginPaths] = await Promise.all([
-		foxUtils.getProjectData(), util.getInstalledFoxPlugins()
-	])
+	const projectData = await foxUtils.getProjectData()
+	const foxPluginPaths = await util.getFoxPlugins(projectData)
+	const foxPlugins = await util.importFoxPlugins(projectData, foxPluginPaths)
 
-	const promises: Promise<IPluginExportIndex>[] = []
-	for (const foxPluginPath of foxPluginPaths) {
-		promises.push(import(foxPluginPath))
-	}
-	const foxPlugins = await Promise.all(promises)
+	debug('projectData: %o', projectData)
+	debug('foxPluginPaths: %o', foxPluginPaths)
+	debug('foxPlugins: %o', foxPlugins)
 
 	if (argv.help) {
 		const pluginName = 'fox'

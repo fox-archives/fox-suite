@@ -1,12 +1,12 @@
 import path from 'path'
 import fs from 'fs'
 import type { Dirent } from 'fs'
-import * as foxUtils from 'fox-utils'
-import type { IAction, IPluginExportIndex } from "fox-types";
+import type { IAction, IPluginExportIndex, IProject } from "fox-types";
 import debug from './debug'
+import * as c from 'colorette'
 
-export async function getInstalledFoxPlugins(): Promise<string[]> {
-	const nodeModulesPath = path.join((await foxUtils.getProjectData()).location, 'node_modules')
+export async function getFoxPlugins(projectData: IProject): Promise<string[]> {
+	const nodeModulesPath = path.join(projectData.location, 'node_modules')
 	debug('nodeModulesPath: %s', nodeModulesPath)
 
 	try {
@@ -37,11 +37,37 @@ export async function getInstalledFoxPlugins(): Promise<string[]> {
 		}
 
 		// remove duplicates
-		return Array.from(new Set(pluginList))
+		pluginList = Array.from(new Set(pluginList))
+
+		if (pluginList.length === 0) {
+			console.log(c.bold(c.red('no fox-plugins or fox-presets found. please install some to continue')))
+			process.exit(0)
+		}
+
+		return pluginList
 	} catch (err) {
 		console.error(err)
 		process.exit(1)
 	}
+}
+
+export async function importFoxPlugins(projectData: IProject, foxPluginPaths: string[]): Promise<IPluginExportIndex[]> {
+	// set the environment before importing
+	process.env.FOX_SUITE_FOX_OPTIONS = JSON.stringify(projectData.foxConfig)
+
+	// TODO: fix this, we have to load each plugin
+	// one by one and change the environment variable
+	// fox-suite-fox-tier for each one or introduce
+	// a helper function for each plugin tool preset to
+	// get this themselves based on the toolName etc.
+	process.env.FOX_SUITE_FOX_TIER = 'cozy'
+
+	const promises: Promise<IPluginExportIndex>[] = []
+	for (const foxPluginPath of foxPluginPaths) {
+		promises.push(import(foxPluginPath))
+	}
+
+	return (await Promise.all(promises)).filter(Boolean)
 }
 
 type actionFunctions = "bootstrapFunction" | "fixFunction"

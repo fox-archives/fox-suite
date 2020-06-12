@@ -19,8 +19,6 @@ export async function fixFunction() {
 		dirname: __dirname,
 		async fn() {
 			const projectData = await foxUtils.getProjectData()
-			// this has no effect?
-			foxUtils.setFoxOptionsToEnv(projectData.foxConfig)
 
 			const eslintConfigLocation = path.join(projectData.location, '.config/eslint.config.js')
 

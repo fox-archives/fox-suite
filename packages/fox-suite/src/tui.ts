@@ -13,39 +13,22 @@ import { transpileConfig } from 'fox-transpiler'
  */
 export async function tui(): Promise<void> {
 	debug('activating tui')
-	const [projectData, foxPluginPaths] = await Promise.all([
-		foxUtils.getProjectData(), util.getInstalledFoxPlugins()
-	])
-
-	// TODO: less temporary fix
-	foxUtils.setFoxOptionsToEnv(projectData.foxConfig)
-
+	const projectData = await foxUtils.getProjectData()
+	const foxPluginPaths = await util.getFoxPlugins(projectData)
+	const foxPlugins = await util.importFoxPlugins(projectData, foxPluginPaths)
 
 	debug('projectData: %o', projectData)
-	debug('foxPlugins: %o', foxPluginPaths)
-
-	if (foxPluginPaths.length === 0) {
-		console.log(c.bold(c.red('no fox-plugins or fox-presets found. please install some to continue')))
-		process.exit(0)
-	}
-
-	// convert the array of objects with properties 'bootstrapFunction' and 'fixFunction'
-	// to two arrays, each for either 'bootstrapFunction' or 'fixFunction'
-	const promises: Promise<IPluginExportIndex>[] = []
-	for (const foxPluginPath of foxPluginPaths) {
-		promises.push(import(foxPluginPath))
-	}
+	debug('foxPluginPaths: %o', foxPluginPaths)
+	debug('foxPlugins: %o', foxPlugins)
 
 	const bootstrapChoices: prompts.Choice[] = []
 	const fixChoices: prompts.Choice[] = []
 
-	const foxPlugins = (await Promise.all(promises)).filter(Boolean)
-
-	// if a plugin exports a bootstrapFunction or fixPlugin (or both), add them
-	// to the selection menu so the user can see
+	// if a plugin exports a bootstrapFunction or fixPlugin (or both),
+	// add them to the selection menu so the user can see
 	for (let i = 0; i < foxPlugins.length; ++i) {
-		const foxPlugin = foxPlugins[i]
 		const foxPluginPath = foxPluginPaths[i]
+		const foxPlugin = foxPlugins[i]
 
 		debug('processing foxPluginModule %s', foxPlugin.info.name)
 

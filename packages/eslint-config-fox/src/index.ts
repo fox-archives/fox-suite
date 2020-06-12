@@ -22,7 +22,6 @@ let config = {}
 
 config = merge(config, rootConfig(foxConfig, tier))
 
-
 if (tier === 'cozy') {
 	config = merge(config, cozyConfig(foxConfig, tier))
 } else if (tier === 'strict') {
@@ -32,6 +31,8 @@ if (tier === 'cozy') {
 	config = merge(config, cozyConfig(foxConfig, tier))
 	config = merge(config, strictConfig(foxConfig, tier))
 	config = merge(config, excessiveConfig(foxConfig, tier))
+} else {
+	console.error(`tier: '${tier}' not an expected value`)
 }
 
 module.exports = config
