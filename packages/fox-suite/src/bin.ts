@@ -3,7 +3,7 @@
 import { setup } from 'fox-utils'
 import { fox } from './index.js'
 
-export async function bin() {
+export async function cli() {
 	setup()
 
   try {

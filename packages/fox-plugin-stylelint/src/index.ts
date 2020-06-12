@@ -18,7 +18,6 @@ export async function fixFunction(): Promise<void> {
 		dirname: __dirname,
 		async fn() {
 			const projectData = await foxUtils.getProjectData();
-			foxUtils.setFoxOptionsToEnv(projectData.foxConfig)
 
 			const stylelintConfigLocation = path.join(projectData.location, '.config/stylelint.config.js')
 			const stylelintConfig = (await import(stylelintConfigLocation)).default(projectData.location)

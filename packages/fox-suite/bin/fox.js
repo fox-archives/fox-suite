@@ -2,5 +2,5 @@
 
 require = require("fox-esm")(module)
 
-const { bin } = require('../build/bin')
-bin()
+const { cli } = require('../build/bin')
+cli()

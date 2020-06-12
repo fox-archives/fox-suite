@@ -5,7 +5,6 @@ import eslintConfigFox from 'eslint-config-fox'
 import { ESLint } from "eslint";
 import * as c from 'colorette'
 
-
 export { info } from './info'
 
 export async function bootstrapFunction() {
@@ -45,5 +44,4 @@ export async function fixFunction() {
 			console.info(c.bold(c.red('done')))
 		}
 	})
-
 }

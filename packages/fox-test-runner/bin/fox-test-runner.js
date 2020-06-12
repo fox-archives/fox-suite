@@ -4,7 +4,7 @@ const path = require('path')
 const jest = require('jest')
 const readPkgUp = require('read-pkg-up');
 
-async function bin() {
+async function cli() {
 	const { path: packageJsonPath } = await readPkgUp()
 	const foxPluginPath = path.dirname(packageJsonPath)
 
@@ -13,4 +13,4 @@ async function bin() {
 	jest.run([...process.argv, 'fox.test.ts'])
 }
 
-bin()
+cli()
