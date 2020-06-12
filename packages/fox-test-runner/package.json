@@ -1,5 +1,5 @@
 {
-  "name": "fox-test-runner-runner",
+  "name": "fox-test-runner",
   "version": "0.3.2",
   "description": "",
   "main": "index.js",
@@ -7,13 +7,13 @@
     "test": "echo \"Error: no test specified\" && exit 1"
   },
   "bin": {
-    "fox-test-runner-runner": "./bin/fox-test-runner-runner.js"
+    "fox-test-runner": "./bin/fox-test-runner.js"
   },
   "keywords": [
 		"fox",
 		"fox-suite"
 	],
-	"homepage": "https://github.com/eankeen/fox-suite/tree/dev/fox-test-runner-runner#readme",
+	"homepage": "https://github.com/eankeen/fox-suite/tree/dev/fox-test-runner#readme",
 	"bugs": {
 		"url": "https://github.com/eankeen/fox-suite/issues"
 	},
