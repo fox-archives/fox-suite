@@ -6,7 +6,6 @@ const isProd = process.env.NODE_ENV === 'production'
  * Enable cozy rules
  */
 export function cozyConfig(fox: IFoxConfig, tier: string): Record<string, any> {
-	console.log('fooo')
 	const obj: Record<string, any> = {
 		rules: {
 			/* ------------------- possible errors ------------------ */

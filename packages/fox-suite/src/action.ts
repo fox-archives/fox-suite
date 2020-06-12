@@ -1,30 +1,27 @@
-import type { IAction } from 'fox-types'
+import type { IAction, IPluginExportIndex, IProject } from 'fox-types'
 import chokidar from 'chokidar'
-import throttle from 'lodash.throttle'
 import * as c from 'colorette'
+import * as util from './util'
+import { transpileConfig } from 'fox-transpiler'
+import assert from 'assert'
 
 /**
  * @description bootstraps, formats, or lints a project
  */
-export async function doAction({
+async function doAction({
 	actionFunctions,
 	projectData
 }: IAction): Promise<void> {
-	if (Array.isArray(actionFunctions)) {
-		for (const fixFunction of actionFunctions) {
-			if (!fixFunction) continue
+	assert(Array.isArray(actionFunctions))
 
-			await fixFunction(projectData.foxConfig)
-		}
-	} else if (actionFunctions) {
-		await actionFunctions(projectData.foxConfig)
-	} else {
-		console.log(c.bold(c.red('no choice was made. exiting interface')))
-		process.exit(1)
+	for (const fixFunction of actionFunctions) {
+		if (!fixFunction) continue
+
+		await fixFunction(projectData.foxConfig)
 	}
 }
 
-export async function watchAndDoAction(transpile: () => Promise<void>, {
+async function watchAndDoAction(transpile: () => Promise<void>, {
 	actionFunctions,
 	projectData
 }: IAction): Promise<void> {
@@ -48,7 +45,6 @@ export async function watchAndDoAction(transpile: () => Promise<void>, {
 
 		console.log(`${path} of ${totalFiles} files changed. recompiling config files and executing fixers`)
 
-
 		await transpile()
 		await doAction({
 			actionFunctions,
@@ -57,4 +53,102 @@ export async function watchAndDoAction(transpile: () => Promise<void>, {
 	})
 
 	console.log('starting watcher')
+}
+
+/* --------------------- do[action] --------------------- */
+
+interface IDoBootstrap {
+	foxPlugins: IPluginExportIndex[],
+	pluginSelection: number,
+	projectData: IProject
+}
+
+export async function doBootstrap({
+	foxPlugins,
+	pluginSelection,
+	projectData
+}: IDoBootstrap): Promise<void> {
+	if(pluginSelection === void 0) {
+		console.log(c.bold(c.red('exiting tui')))
+		return
+	}
+
+	await doAction({
+		actionFunctions: util.pickSpecificModuleProperty({
+			foxPlugins,
+			specificIndicesToPick: pluginSelection,
+			actionFunction: "bootstrapFunction"
+		}),
+		projectData
+	})
+
+	console.log(c.bold(c.green('bootstrap complete')))
+}
+
+interface IDoFix {
+	foxPluginPaths: string[],
+	foxPlugins: IPluginExportIndex[],
+	pluginSelection: number,
+	projectData: IProject
+}
+
+export async function doFix({
+	foxPluginPaths,
+	foxPlugins,
+	pluginSelection,
+	projectData
+}: IDoFix): Promise<void> {
+	if (pluginSelection === void 0) {
+		console.log(c.bold(c.red('exiting tui')))
+		return
+	}
+
+	await transpileConfig({
+		foxPluginPaths: util.pickSpecificFoxPluginPath(foxPluginPaths, pluginSelection),
+		projectData
+	})
+
+	await doAction({
+		actionFunctions: util.pickSpecificModuleProperty({
+			foxPlugins,
+			specificIndicesToPick: pluginSelection,
+			actionFunction: "fixFunction"
+		}),
+		projectData
+	})
+
+	console.log(c.bold(c.green('fix complete')))
+}
+
+interface IDoWatch {
+	foxPluginPaths: string[],
+	foxPlugins: IPluginExportIndex[],
+	pluginSelection: number,
+	projectData: IProject
+}
+
+export async function doWatch({
+	foxPluginPaths,
+	foxPlugins,
+	pluginSelection,
+	projectData
+}: IDoWatch): Promise<void> {
+	if (pluginSelection === void 0) {
+		console.log(c.bold(c.red('exiting tui')))
+		return
+	}
+
+	let transpile = async () => await transpileConfig({
+		foxPluginPaths: util.pickSpecificFoxPluginPath(foxPluginPaths, pluginSelection),
+		projectData
+	})
+
+	await watchAndDoAction(transpile, {
+		actionFunctions: util.pickSpecificModuleProperty({
+			foxPlugins,
+			specificIndicesToPick: pluginSelection,
+			actionFunction: "fixFunction"
+		}),
+		projectData
+	})
 }

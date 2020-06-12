@@ -1,9 +1,7 @@
 import * as foxUtils from 'fox-utils'
-import { transpileConfig } from 'fox-transpiler'
 import * as util from './util'
-import { doAction, watchAndDoAction } from './action';
 import type { ParsedArgs } from "minimist"
-import { IPluginExportIndex } from 'fox-types';
+import { doBootstrap, doFix, doWatch } from './action';
 import debug from './debug'
 import * as c from 'colorette'
 
@@ -43,46 +41,26 @@ Examples:
   ${pluginName} --help`;
 	console.info(helpText)
 	} else if(argv.bootstrap) {
-		await transpileConfig({
-			foxPluginPaths,
+		await doBootstrap({
+			foxPlugins,
+			pluginSelection: -1,
 			projectData
 		})
-		await doAction({
-			actionFunctions: util.pickSpecificModuleProperty({
-				foxPlugins,
-				specificIndicesToPick: -1,
-				actionFunction: "bootstrapFunction"
-			}),
-			projectData
-		})
-		console.log(c.bold(c.green('bootstrap complete')))
 	} else if (argv.fix) {
-		await transpileConfig({
+		await doFix({
 			foxPluginPaths,
+			foxPlugins,
+			pluginSelection: -1,
 			projectData
 		})
-		await doAction({
-			actionFunctions: util.pickSpecificModuleProperty({
-				foxPlugins,
-				specificIndicesToPick: -1,
-				actionFunction: "fixFunction"
-			}),
-			projectData
-		})
-		console.log(c.bold(c.green('fix complete')))
 	} else if (argv.watch) {
-		let transpile = async () => await transpileConfig({
-			// @ts-ignore
-			foxPluginPaths: util.pickSpecificFoxPluginPath(foxPluginPaths, fixFunctions),
+		await doWatch({
+			foxPluginPaths,
+			foxPlugins,
+			pluginSelection: -1,
 			projectData
 		})
-		await watchAndDoAction(transpile, {
-			actionFunctions: util.pickSpecificModuleProperty({
-				foxPlugins,
-				specificIndicesToPick: -1,
-				actionFunction: "fixFunction"
-			}),
-			projectData
-		})
+	} else {
+		c.bold(c.red('argument(s) or parameter(s) not understood'))
 	}
 }

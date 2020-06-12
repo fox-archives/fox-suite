@@ -1,11 +1,9 @@
 import prompts from 'prompts'
-import { IPluginExportIndex } from "fox-types";
 import * as foxUtils from 'fox-utils'
-import { doAction, watchAndDoAction } from './action';
+import { doBootstrap, doFix, doWatch } from './action';
 import * as util from './util'
 import debug from './debug'
 import * as c from 'colorette'
-import { transpileConfig } from 'fox-transpiler'
 
 /**
  * @description if no command line arguments were given,
@@ -93,83 +91,49 @@ export async function tui(): Promise<void> {
 	})
 
 	if (action === 'bootstrap') {
-		const { bootstrapFunctions }: { bootstrapFunctions: IPluginExportIndex["bootstrapFunction"] } = await prompts({
+		const { pluginSelection }: { pluginSelection: number } = await prompts({
 			type: 'select',
-			name: 'bootstrapFunctions',
+			name: 'pluginSelection',
 			message: 'which configuration would you like to bootstrap?',
 			choices: bootstrapChoices
 		})
 
-		if(typeof bootstrapFunctions === void 0) {
-			console.log(c.bold(c.red('value is undefined. exciting')))
-			process.exit(1)
-		}
-
-		await doAction({
-			actionFunctions: util.pickSpecificModuleProperty({
-				foxPlugins,
-				// @ts-ignore
-				specificIndicesToPick: bootstrapFunctions,
-				actionFunction: "bootstrapFunction"
-			}),
+		await doBootstrap({
+			foxPlugins,
+			pluginSelection,
 			projectData
 		})
-
 	} else if (action === 'fix') {
-		const { fixFunctions }: { fixFunctions: IPluginExportIndex["fixFunction"] } = await prompts({
+		const { pluginSelection }: { pluginSelection: number } = await prompts({
 			type: 'select',
-			name: 'fixFunctions',
+			name: 'pluginSelection',
 			message: 'Which formatter would you like to use?',
 			choices: fixChoices
 		})
 
-		if (typeof fixFunctions === void 0) {
-			console.log(c.bold(c.red('value is undefined. exciting')))
-			process.exit(1)
-		}
-
-		await transpileConfig({
-			// @ts-ignore
-			foxPluginPaths: util.pickSpecificFoxPluginPath(foxPluginPaths, fixFunctions),
-			projectData
-		})
-		await doAction({
-			actionFunctions: util.pickSpecificModuleProperty({
-				foxPlugins,
-				// @ts-ignore
-				specificIndicesToPick: fixFunctions,
-				actionFunction: "fixFunction"
-			}),
+		await doFix({
+			foxPluginPaths,
+			foxPlugins,
+			pluginSelection,
 			projectData
 		})
 	} else if (action === 'watch') {
-		const { fixFunctions }: { fixFunctions: IPluginExportIndex["fixFunction"] } = await prompts({
+		const { pluginSelection }: { pluginSelection: number } = await prompts({
 			type: 'select',
-			name: 'fixFunctions',
+			name: 'pluginSelection',
 			message: 'Which formatter would you like to use?',
 			choices: fixChoices
 		})
 
-		if (typeof fixFunctions === void 0) {
-			console.log(c.bold(c.red('value is undefined. exciting')))
-			process.exit(1)
-		}
-
-		let transpile = async () => await transpileConfig({
-			// @ts-ignore
-			foxPluginPaths: util.pickSpecificFoxPluginPath(foxPluginPaths, fixFunctions),
+		await doWatch({
+			foxPluginPaths,
+			foxPlugins,
+			pluginSelection,
 			projectData
 		})
-		await watchAndDoAction(transpile, {
-			actionFunctions: util.pickSpecificModuleProperty({
-				foxPlugins,
-				// @ts-ignore
-				specificIndicesToPick: fixFunctions,
-				actionFunction: "fixFunction"
-			}),
-			projectData
-		})
+	} else {
+		console.info(c.bold(c.red('exiting tui')))
 	}
-
-	process.exitCode = 1
 }
+
+

@@ -110,9 +110,9 @@ export function pickSpecificFoxPluginPath(foxPluginPaths: string[], specificIndi
 
 		if (specificIndicesToPick === i || specificIndicesToPick === -1) {
 
-			// @ts-ignore
 			pickedPaths.push(foxPluginPath)
 		}
 	}
 	return pickedPaths
 }
+
