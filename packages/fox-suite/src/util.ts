@@ -7,78 +7,39 @@ import { IPluginExportIndex } from "fox-types";
 import type { IAction } from 'fox-types'
 import debug from './debug'
 
-// HACK: this could be less dirty
 export async function getInstalledFoxPlugins(): Promise<string[]> {
 	const nodeModulesPath = path.join((await foxUtils.getProjectData()).location, 'node_modules')
 	debug('nodeModulesPath: %s', nodeModulesPath)
 
 	try {
-		const getPlugins = async (pluginParentDirectory: string): Promise<string[]> => {
-			const pluginList: string[] = []
-			const nodeModules = await fs.promises.readdir(pluginParentDirectory, { withFileTypes: true })
+		let pluginList: string[] = []
+		const nodeModules = await fs.promises.readdir(nodeModulesPath, { withFileTypes: true })
 
-			const resolveModule = async (...modulePath: string[]): Promise<string> => {
-				const pluginRoot = path.join.apply(null, modulePath)
-				const pluginData = await foxUtils.getPluginData(pluginRoot)
-				const entryPoint = pluginData.packageJson.main || 'build/index.js'
-				return path.join(pluginRoot, entryPoint)
-			}
-
-			const isFoxPlugin = (nodePackage: Dirent) => {
-				return (nodePackage.isDirectory() || nodePackage.isSymbolicLink()) && nodePackage.name.startsWith("fox-plugin-")
-			}
-
-			const isFoxPreset = (nodePackage: Dirent) => {
-				return (nodePackage.isDirectory() || nodePackage.isSymbolicLink()) && nodePackage.name.startsWith("fox-preset-")
-			}
-
-			for (const nodeModule of nodeModules) {
-				if (isFoxPlugin(nodeModule)) {
-					// const pluginPath = require.resolve(nodeModulesPath)
-					const pluginPath = await resolveModule(nodeModulesPath, nodeModule.name)
-					console.debug('dd', pluginPath)
-					pluginList.push(pluginPath)
-				} else if (isFoxPreset(nodeModule)) {
-					const presetPath = path.join(nodeModulesPath, nodeModule.name)
-					const presetPlugins = await fs.promises.readdir(path.join(presetPath, 'node_modules'), { withFileTypes: true })
-					for (const pluginDirent of presetPlugins) {
-						if (isFoxPlugin(pluginDirent)) {
-							const pluginPath = await resolveModule(presetPath, 'node_modules', pluginDirent.name)
-							pluginList.push(pluginPath)
-						}
-					}
-				}
-			}
-
-			return pluginList
+		const isFoxPlugin = (nodePackage: Dirent) => {
+			return (nodePackage.isDirectory() || nodePackage.isSymbolicLink()) && nodePackage.name.startsWith("fox-plugin-")
 		}
 
-		let allPlugins = await getPlugins(nodeModulesPath)
-
-
-		const allPluginsShort = allPlugins.map((el, i, arr) => {
-			const start = el.indexOf("node_modules") + "node_modules".length + 1
-			let pluginName = el.slice(start)
-
-			// pnpm has nested node modules. manually check for one nesting
-			if(pluginName.includes("node_modules")) {
-				const start2 = pluginName.indexOf("node_modules") + "node_modules".length + 1
-				pluginName = pluginName.slice(start2)
-			}
-
-			pluginName = pluginName.slice(0, pluginName.indexOf("/") || pluginName.indexOf(path.delimiter))
-
-			debug('shortened list of plugins: %o', pluginName)
-			return pluginName
-		})
-
-		const shortToLongPluginName: Record<string, string> = {}
-		for (let i = 0; i < allPluginsShort.length; ++i) {
-			shortToLongPluginName[allPluginsShort[i]] = allPlugins[i]
+		const isFoxPreset = (nodePackage: Dirent) => {
+			return (nodePackage.isDirectory() || nodePackage.isSymbolicLink()) && nodePackage.name.startsWith("fox-preset-")
 		}
-		const newAllPlugins = Object.values(shortToLongPluginName)
 
-		return newAllPlugins
+		for (const nodeModule of nodeModules) {
+			if (isFoxPlugin(nodeModule)) {
+				const pluginPath = require.resolve(
+					path.join(nodeModulesPath, nodeModule.name)
+				)
+				pluginList.push(pluginPath)
+			} else if (isFoxPreset(nodeModule)) {
+				const presetPath = require.resolve(
+					path.join(nodeModulesPath, nodeModule.name)
+				)
+				const presetPluginList = (await import(presetPath)).default.plugins
+				pluginList = pluginList.concat(presetPluginList)
+			}
+		}
+
+		// remove duplicates
+		return Array.from(new Set(pluginList))
 	} catch (err) {
 		console.error(err)
 		process.exit(1)

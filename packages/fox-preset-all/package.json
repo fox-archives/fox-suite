@@ -21,7 +21,6 @@
 		"url": "https://github.com/eankeen/fox-suite.git"
 	},
 	"license": "MIT",
-	"type": "module",
 	"engines": {
 		"node": ">=12.17.0 >=v13.14.0 >=14.3.0"
 	},
@@ -33,7 +32,6 @@
 		"lint": "eslint --fix --config eslint.config.cjs ."
 	},
 	"devDependencies": {
-		"fox-types": "workspace:^0.3.1",
 		"jest": "^26.0.1",
 		"jest-extended": "^0.11.5",
 		"ts-jest": "^26.1.0",
@@ -48,5 +46,6 @@
 		"fox-plugin-package-json-lint": "workspace:^0.3.1",
 		"fox-plugin-prettier": "workspace:^0.3.1",
 		"fox-plugin-stylelint": "workspace:^0.3.1",
+		"http": "0.0.1-security"
 	}
 }

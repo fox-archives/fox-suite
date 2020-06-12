@@ -1,8 +1,6 @@
-import { IPresetExportIndex } from 'fox-types'
-
 const r = require.resolve.bind(null)
 
-/** @type {IPresetExportIndex} */
+/** @type {import("fox-types").IPresetExportIndex} */
 const preset = {
 	plugins: [
 		r('fox-plugin-eslint'),
