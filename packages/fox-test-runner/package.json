@@ -4,27 +4,29 @@
   "description": "",
   "main": "index.js",
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "snyk-protect": "snyk protect",
+    "prepublish": "npm run snyk-protect"
   },
   "bin": {
     "fox-test-runner-runner": "./bin/fox-test-runner-runner.js"
   },
   "keywords": [
-		"fox",
-		"fox-suite"
-	],
-	"homepage": "https://github.com/eankeen/fox-suite/tree/dev/fox-test-runner-runner#readme",
-	"bugs": {
-		"url": "https://github.com/eankeen/fox-suite/issues"
-	},
-	"author": {
-		"name": "Edwin Kofler",
-		"url": "https://edwinkofler.com"
-	},
-	"repository": {
-		"type": "git",
-		"url": "https://github.com/eankeen/fox-suite.git"
-	},
+    "fox",
+    "fox-suite"
+  ],
+  "homepage": "https://github.com/eankeen/fox-suite/tree/dev/fox-test-runner-runner#readme",
+  "bugs": {
+    "url": "https://github.com/eankeen/fox-suite/issues"
+  },
+  "author": {
+    "name": "Edwin Kofler",
+    "url": "https://edwinkofler.com"
+  },
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/eankeen/fox-suite.git"
+  },
   "license": "MIT",
   "dependencies": {
     "@babel/preset-env": "^7.10.2",
@@ -37,7 +39,8 @@
     "jest-extended": "^0.11.5",
     "read-pkg-up": "^7.0.1",
     "ts-jest": "^26.1.0",
-    "typescript": "^3.9.5"
+    "typescript": "^3.9.5",
+    "snyk": "^1.339.1"
   },
   "devDependencies": {
     "@babel/core": "^7.10.2",
@@ -45,5 +48,6 @@
     "@babel/types": "^7.10.2",
     "fox-types": "workspace:^0.3.1",
     "type-fest": "^0.15.1"
-  }
+  },
+  "snyk": true
 }
