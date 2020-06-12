@@ -41,7 +41,7 @@
     "fox-test": "workspace:^0.3.0",
     "fox-test-runner": "workspace:^0.3.0",
 		"fox-utils": "workspace:^0.3.0",
-		"eslint": "^7.0.0"
+		"eslint": "^7.2.0"
   },
   "devDependencies": {
     "fox-types": "workspace:^0.3.0",

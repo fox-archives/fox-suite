@@ -37,19 +37,19 @@
 	},
 	"dependencies": {
 		"@babel/core": "^7.10.2",
-		"@rollup/plugin-babel": "^5.0.2",
+		"@rollup/plugin-babel": "^5.0.3",
 		"babel-plugin-fox-transpiler": "workspace:^0.3.0",
 		"colorette": "^1.2.0",
 		"esm": "^3.2.25",
 		"fox-esm": "workspace:^0.3.0",
 		"fox-utils": "workspace:^0.3.0",
-		"rollup": "^2.13.1"
+		"rollup": "^2.15.0"
 	},
 	"devDependencies": {
 		"cross-env": "^7.0.2",
 		"fox-types": "workspace:^0.3.0",
-		"ts-jest": "^25.5.1",
-		"ts-node": "^8.10.1",
-		"typescript": "^3.8.3"
+		"ts-jest": "^26.1.0",
+		"ts-node": "^8.10.2",
+		"typescript": "^3.9.5"
 	}
 }

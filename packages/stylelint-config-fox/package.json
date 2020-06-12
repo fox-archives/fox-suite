@@ -21,14 +21,14 @@
     "fox-suite"
   ],
   "devDependencies": {
-    "eslint": "^6.8.0",
+    "eslint": "^7.2.0",
     "jest": "^26.0.1",
     "jest-extended": "^0.11.5",
-    "ts-jest": "^26.0.0",
-    "typescript": "^3.9.2"
+    "ts-jest": "^26.1.0",
+    "typescript": "^3.9.5"
   },
   "peerDependencies": {
-    "eslint": "^6.8.0"
+    "eslint": "^7.2.0"
   },
 	"homepage": "https://github.com/eankeen/fox-suite/tree/dev/stylelint-config-fox#readme",
 	"bugs": {
@@ -46,6 +46,6 @@
   "dependencies": {
     "fox-types": "workspace:^0.3.0",
     "lodash.merge": "^4.6.2",
-    "stylelint": "^13.5.0"
+    "stylelint": "^13.6.0"
   }
 }

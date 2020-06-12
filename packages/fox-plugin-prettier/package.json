@@ -36,8 +36,8 @@
     "fox-types": "workspace:^0.3.0",
     "jest": "^26.0.1",
     "jest-extended": "^0.11.5",
-    "ts-jest": "^26.0.0",
-    "typescript": "^3.9.2"
+    "ts-jest": "^26.1.0",
+    "typescript": "^3.9.5"
   },
   "dependencies": {
     "@prettier/plugin-xml": "^0.7.2",

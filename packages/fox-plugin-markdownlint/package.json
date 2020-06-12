@@ -42,7 +42,7 @@
     "remark-cli": "^8.0.0",
     "remark-lint": "^7.0.0",
     "remark-preset-lint-recommended": "^4.0.0",
-    "unified-args": "^8.0.0"
+    "unified-args": "^8.1.0"
   },
   "devDependencies": {
 		"fox-types": "workspace:^0.3.0",

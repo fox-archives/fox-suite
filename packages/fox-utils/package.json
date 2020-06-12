@@ -36,9 +36,9 @@
     "fox-types": "workspace:^0.3.0",
     "jest": "^26.0.1",
     "minimist": "^1.2.5",
-    "ts-jest": "^25.5.1",
-    "ts-node": "^8.10.1",
-    "typescript": "^3.8.3"
+    "ts-jest": "^26.1.0",
+    "ts-node": "^8.10.2",
+    "typescript": "^3.9.5"
   },
   "dependencies": {
     "colorette": "^1.2.0",

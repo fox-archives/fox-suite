@@ -138,8 +138,8 @@ it's kind of simple. you have to make sure you fork the template, since everythi
 ```js
 import { IPluginExportInfo } from 'fox-types'
 
-// info.js
-export const info /* @type {IPluginExportInfo} */ = {
+// info.ts
+export const info: IPluginExportInfo = {
 	// used by buildCli. must be the same name as what's in your package.json
 	name: 'fox-plugin-htmlhint',
 	// used by prompts in fox-suite

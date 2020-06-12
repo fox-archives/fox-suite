@@ -2,11 +2,11 @@
   "extends": "../tsconfig.plugin.json",
   "compilerOptions": {
     "rootDir": "src",
-    "outDir": "build"
+    "outDir": "build",
+		"lib": [
+			"DOM"
+		]
 	},
-	"lib": [
-		"DOM"
-	],
   "include": [
     "src/**/*"
   ]
