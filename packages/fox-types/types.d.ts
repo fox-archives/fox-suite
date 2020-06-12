@@ -205,7 +205,7 @@ export interface IPluginExportInfo {
 	 * the property of an object, so just use alphanumerics. more specifically, this will be your
 	 * key in `fox.config.js` (under foxConfig.plugins[tool])
 	 * @example this would be `Stylelint` for `fox-plugin-stylelint`
-	 * @todo ensure there is a `fox-test` test (read desc) for that case
+	 * @todo ensure there is a `fox-test-runner` test (read desc) for that case
 	 */
 	tool: string,
 

@@ -18,7 +18,7 @@ beforeEach(async () => {
 	]) as [ { info: IPluginExportInfo }, IPluginExportIndex ]
 })
 
-describe(`testing module: '${pluginName}' using the 'fox-test' jest autorunner`, () => {
+describe(`testing module: '${pluginName}' using the 'fox-test-runner' jest autorunner`, () => {
 	test("`src/info.ts` exports an 'info' object that conforms to the IPluginExportInfo schema", async () => {
 		expect(infoModule).toBeObject()
 		// src/info.ts must include `export const info = { name: '' }'`

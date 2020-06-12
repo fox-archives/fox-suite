@@ -37,7 +37,7 @@
 	"dependencies": {
 		"colorette": "^1.2.0",
 		"fox-esm": "workspace:^0.3.1",
-		"fox-test": "workspace:^0.3.1",
+		"fox-test-runner": "workspace:^0.3.1",
 		"fox-utils": "workspace:^0.3.1",
 		"glob": "^7.1.6",
 		"html-validate": "^2.23.0"

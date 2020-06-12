@@ -33,7 +33,7 @@
 	},
   "license": "MIT",
   "dependencies": {
-    "fox-test": "workspace:^0.3.1",
+    "fox-test-runner": "workspace:^0.3.1",
     "fox-utils": "workspace:^0.3.1",
     "glob": "^7.1.6",
     "markdown-extensions": "^1.1.1",

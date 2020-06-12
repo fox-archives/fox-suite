@@ -2,9 +2,7 @@ import path from 'path'
 import fs from 'fs'
 import type { Dirent } from 'fs'
 import * as foxUtils from 'fox-utils'
-import { spawn } from 'child_process'
-import { IPluginExportIndex } from "fox-types";
-import type { IAction } from 'fox-types'
+import type { IAction, IPluginExportIndex } from "fox-types";
 import debug from './debug'
 
 export async function getInstalledFoxPlugins(): Promise<string[]> {

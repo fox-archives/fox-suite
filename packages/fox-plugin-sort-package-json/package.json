@@ -44,7 +44,7 @@
     "fox-plugin-sort-package-json": "./bin/fox-plugin-sort-package-json.js"
   },
   "dependencies": {
-    "fox-test": "^0.3.0",
+    "fox-test-runner": "^0.3.0",
     "fox-utils": "^0.3.0",
     "lodash": "^4.17.15"
   },

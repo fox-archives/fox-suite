@@ -44,7 +44,7 @@
 		"http": "0.0.1-security"
   },
   "devDependencies": {
-    "fox-test": "workspace:^0.3.1",
+    "fox-test-runner": "workspace:^0.3.1",
 		"fox-types": "workspace:^0.3.1",
 		"http": "0.0.1-security"
   }
