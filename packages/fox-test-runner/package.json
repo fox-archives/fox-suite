@@ -4,7 +4,9 @@
   "description": "",
   "main": "index.js",
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "snyk-protect": "snyk protect",
+    "prepublish": "npm run snyk-protect"
   },
   "bin": {
     "fox-test-runner": "./bin/fox-test-runner.js"
@@ -40,10 +42,12 @@
     "jest-extended": "^0.11.5",
     "read-pkg-up": "^7.0.1",
     "ts-jest": "^26.1.0",
-    "typescript": "^3.9.5"
+    "typescript": "^3.9.5",
+    "snyk": "^1.339.1"
   },
   "devDependencies": {
     "fox-types": "workspace:^0.3.3",
     "type-fest": "^0.15.1"
-  }
+  },
+  "snyk": true
 }
