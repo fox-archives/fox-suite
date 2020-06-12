@@ -3,29 +3,31 @@
   "version": "0.3.3",
   "license": "MIT",
   "scripts": {
-    "test": "ava"
+    "test": "ava",
+    "snyk-protect": "snyk protect",
+    "prepublish": "npm run snyk-protect"
   },
   "type": "commonjs",
   "engines": {
     "node": ">=12.17.0 >=v13.14.0 >=14.3.0"
-	},
-	"keywords": [
-		"package-json-sort",
-		"fox",
-		"fox-suite"
-	],
-	"homepage": "https://github.com/eankeen/fox-suite/tree/dev/fox-plugin-sort-package-json#readme",
-	"bugs": {
-		"url": "https://github.com/eankeen/fox-suite/issues"
-	},
-	"author": {
-		"name": "Edwin Kofler",
-		"url": "https://edwinkofler.com"
-	},
-	"repository": {
-		"type": "git",
-		"url": "https://github.com/eankeen/fox-suite.git"
-	},
+  },
+  "keywords": [
+    "package-json-sort",
+    "fox",
+    "fox-suite"
+  ],
+  "homepage": "https://github.com/eankeen/fox-suite/tree/dev/fox-plugin-sort-package-json#readme",
+  "bugs": {
+    "url": "https://github.com/eankeen/fox-suite/issues"
+  },
+  "author": {
+    "name": "Edwin Kofler",
+    "url": "https://edwinkofler.com"
+  },
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/eankeen/fox-suite.git"
+  },
   "ava": {
     "extensions": [
       "ts"
@@ -46,7 +48,8 @@
   "dependencies": {
     "fox-test-runner": "^0.3.0",
     "fox-utils": "^0.3.0",
-    "lodash": "^4.17.15"
+    "lodash": "^4.17.15",
+    "snyk": "^1.339.1"
   },
   "devDependencies": {
     "ava": "^3.8.2",
@@ -54,5 +57,6 @@
     "husky": "^4.2.5",
     "ts-node": "^8.10.2",
     "typescript": "^3.9.5"
-  }
+  },
+  "snyk": true
 }
