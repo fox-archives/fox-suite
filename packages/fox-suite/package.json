@@ -40,12 +40,11 @@
     "fox-esm": "workspace:^0.3.0",
     "fox-plugin-eslint": "workspace:^0.3.0",
     "fox-plugin-htmlhint": "workspace:^0.3.0",
-    "fox-plugin-markdown-lint": "workspace:^0.3.0",
+    "fox-plugin-markdownlint": "workspace:^0.3.0",
     "fox-plugin-package-json-lint": "workspace:^0.3.0",
     "fox-plugin-sort-package-json": "workspace:^0.3.0",
     "fox-plugin-prettier": "workspace:^0.3.0",
     "fox-plugin-stylelint": "workspace:^0.3.0",
-    "fox-runner": "workspace:^0.3.0",
     "fox-transpiler": "workspace:^0.3.0",
     "fox-utils": "workspace:^0.3.0",
     "lodash.throttle": "^4.1.1",
@@ -57,8 +56,8 @@
     "cross-env": "^7.0.2",
     "fox-types": "workspace:^0.3.0",
     "jest": "^26.0.1",
-    "ts-jest": "^25.5.1",
-    "ts-node": "^8.10.1",
-    "typescript": "^3.8.3"
+    "ts-jest": "^26.1.0",
+    "ts-node": "^8.10.2",
+    "typescript": "^3.9.5"
   }
 }

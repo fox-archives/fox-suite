@@ -97,17 +97,31 @@ Another thing, we try to be as explicit as possible. For example, if an API allo
 
 ## Support
 
-- ESlint
-- Stylelint
-- HTMLHint
+most of this support is half-baked and not finished
+
+- eslint
+- html-validate
+- htmlhint
+- htmllint
+- markdownlint
+- stylelint
+
+- boilerplating babel, typescript etc configs are probably out of the scope of this project
+
+
+## Supported Versions
+
+right now we support running on node versions `>=12.17.0 >=v13.14.0 >=14.3.0`, but the version requirements are probably supposed to be lower (but same major versions)
 
 ## Building your own modules
 
 it's kind of simple. you have to make sure you fork the template, since everything is setup there already. if you try to set it up yourself right now at the moment, you'll run into troubles (ex. since we load directly from `build/index.js` of package, completely bypassing node's module resolution algorithm). sometime in the future this will probably be improved
 
-`info.ts`
-```ts
-export const info = {
+```js
+import { IPluginExportInfo } from 'fox-types'
+
+// info.js
+export const info /* @type {IPluginExportInfo} */ = {
 	// used by buildCli. must be the same name as what's in your package.json
 	name: 'fox-plugin-htmlhint',
 	// used by prompts in fox-suite
@@ -121,22 +135,37 @@ export const info = {
 }
 ```
 
+#### how to make a `preset`
+
+it's similar to other tools. note that you can use `export default` since your module will be loaded with the `esm` package
+
+```js
+import { IPresetExportIndex } from 'fox-types'
+
+/** @type {IPresetExportIndex} */
+const preset = {
+	plugins: [
+		require.resolve('fox-plugin-stylelint'),
+		require.resolve('fox-plugin-eslint')
+	]
+}
+
+export default preset
+```
+
 ### Treatment of `template` files
+
 Files are copied over from your plugin's `template` directly to the project's root directory, templated with `handlebars`. right now, no extra variables are passed to handlebars
 
 When your config is rebuild for consumption by tools, this is how it works. We only rebuild javascript files. javascript files _must_ be placed in the `.config` folder. they will be rebuild to `.config/build` under the same name
 
 ## FAQ
 
-### Supported Versions
-
-right now we support running on node versions `>=12.17.0 >=v13.14.0 >=14.3.0`, but realistically speaking it only works for node `>=14.3.0` since there are issues with loading es modules with node versions 12 and 13 (not to mention lack of non-exclusive `.mjs` support for node 10). Not using ECMAScript modules, even for a compilation feels really dirty in 2020, so I'll try to automatically invoke node 14 through `nvm` and `n` to have better compatability or whatever
-
 ### What about Rome?
 
 Rome solves a lot of problems related to tooling interoperability. However, there are some features that Rome will likely not have (such as markdown file linting or easy package release flow). Those seem out of the scope of the project (at least for now). `fox-suite` uses the apis of these somewhat niche tools to help improve your code. Eventually, `fox-suite` will hopefully include a module for easy integration with Rome.
 
-# What about Rush?
+### What about Rush?
 
 Ruch Stack is a great and usefull tool, but I wanted something a but more customizable and lighterweight - something that was able to integrate with existing tooling a bit easier
 

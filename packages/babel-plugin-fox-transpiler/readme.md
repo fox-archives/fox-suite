@@ -1,5 +1,1 @@
-# babel-plugin-fox-runner
-
-## Deprecated
-
-Deprecated in favor of `babel-plugin-fox-transpiler`
+# babel-plugin-fox-transpiler

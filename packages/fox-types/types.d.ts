@@ -162,6 +162,13 @@ export interface IPlugin {
 }
 
 /**
+ * @description found in a preset's `index.js` file
+ */
+export interface IPresetExportIndex {
+	plugins: string[]
+}
+
+/**
  * @description found in a plugin's `src/index.ts` file
  */
 export interface IPluginExportIndex {

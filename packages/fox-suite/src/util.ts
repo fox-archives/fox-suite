@@ -34,7 +34,9 @@ export async function getInstalledFoxPlugins(): Promise<string[]> {
 
 			for (const nodeModule of nodeModules) {
 				if (isFoxPlugin(nodeModule)) {
+					// const pluginPath = require.resolve(nodeModulesPath)
 					const pluginPath = await resolveModule(nodeModulesPath, nodeModule.name)
+					console.debug('dd', pluginPath)
 					pluginList.push(pluginPath)
 				} else if (isFoxPreset(nodeModule)) {
 					const presetPath = path.join(nodeModulesPath, nodeModule.name)
@@ -76,7 +78,6 @@ export async function getInstalledFoxPlugins(): Promise<string[]> {
 		}
 		const newAllPlugins = Object.values(shortToLongPluginName)
 
-		debug('returned value from getInstalledFoxPlugins: %o', newAllPlugins)
 		return newAllPlugins
 	} catch (err) {
 		console.error(err)

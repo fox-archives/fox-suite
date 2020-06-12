@@ -1,4 +1,4 @@
-# fox-plugin-markdown-lint
+# fox-plugin-markdownlint
 
 ## Awknowledgements
 

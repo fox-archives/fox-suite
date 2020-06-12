@@ -4,7 +4,7 @@
 	"description": "",
 	"main": "build",
 	"scripts": {
-		"start": "node bin/fox-runner",
+		"start": "node bin/fox-transpiler",
 		"watch": "cross-env tsc --build --watch",
 		"build": "cross-env NODE_ENV=development tsc --build",
 		"test": "cross-env jest"

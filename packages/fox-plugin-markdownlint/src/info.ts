@@ -1,7 +1,7 @@
 import type { IPluginExportInfo } from 'fox-types'
 
 export const info: IPluginExportInfo = {
-	name: 'fox-plugin-markdown-lint',
+	name: 'fox-plugin-markdownlint',
 	tool: 'markdownlint',
 	toolName: 'MarkdownLint',
 	toolConfigSchemaHelpUri: '',
