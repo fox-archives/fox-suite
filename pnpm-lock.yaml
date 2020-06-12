@@ -73,7 +73,7 @@ importers:
       colorette: ^1.2.0
       eslint: ^7.2.0
       eslint-plugin-babel: ^5.3.0
-      fox-types: 'workspace:^0.3.1'
+      fox-types: 'workspace:^0.3.3'
       jest: ^26.0.1
       jest-extended: ^0.11.5
       lodash.merge: ^4.6.2
@@ -91,19 +91,19 @@ importers:
       eslint: 7.2.0
       eslint-config-fox: 'link:../eslint-config-fox'
       fox-esm: 'link:../fox-esm'
-      fox-test-runner: 'link:../fox-test-runner'
       fox-utils: 'link:../fox-utils'
     devDependencies:
+      fox-test-runner: 'link:../fox-test-runner'
       fox-types: 'link:../fox-types'
       http: 0.0.1-security
     specifiers:
       colorette: ^1.2.0
       eslint: ^7.2.0
-      eslint-config-fox: 'workspace:^0.3.1'
-      fox-esm: 'workspace:^0.3.1'
-      fox-test-runner: 'workspace:^0.3.1'
-      fox-types: 'workspace:^0.3.1'
-      fox-utils: 'workspace:^0.3.1'
+      eslint-config-fox: 'workspace:^0.3.3'
+      fox-esm: 'workspace:^0.3.3'
+      fox-test-runner: 'workspace:^0.3.3'
+      fox-types: 'workspace:^0.3.3'
+      fox-utils: 'workspace:^0.3.3'
       http: 0.0.1-security
   packages/fox-plugin-html-validate:
     dependencies:
@@ -357,8 +357,11 @@ importers:
       typescript: ^3.9.5
   packages/fox-test-runner:
     dependencies:
+      '@babel/core': 7.10.2
+      '@babel/plugin-transform-modules-commonjs': 7.10.1_@babel+core@7.10.2
       '@babel/preset-env': 7.10.2_@babel+core@7.10.2
       '@babel/preset-typescript': 7.10.1_@babel+core@7.10.2
+      '@babel/types': 7.10.2
       esm: 3.2.25
       fox-esm: 'link:../fox-esm'
       fox-utils: 'link:../fox-utils'
@@ -369,9 +372,6 @@ importers:
       ts-jest: 26.1.0_jest@26.0.1+typescript@3.9.5
       typescript: 3.9.5
     devDependencies:
-      '@babel/core': 7.10.2
-      '@babel/plugin-transform-modules-commonjs': 7.10.1_@babel+core@7.10.2
-      '@babel/types': 7.10.2
       fox-types: 'link:../fox-types'
       type-fest: 0.15.1
     specifiers:
@@ -381,9 +381,9 @@ importers:
       '@babel/preset-typescript': ^7.10.1
       '@babel/types': ^7.10.2
       esm: ^3.2.25
-      fox-esm: 'workspace:^0.3.1'
-      fox-types: 'workspace:^0.3.1'
-      fox-utils: 'workspace:^0.3.1'
+      fox-esm: 'workspace:^0.3.3'
+      fox-types: 'workspace:^0.3.3'
+      fox-utils: 'workspace:^0.3.3'
       jest: ^26.0.1
       jest-esm-transformer: ^1.0.0
       jest-extended: ^0.11.5
@@ -450,7 +450,7 @@ importers:
       cross-env: ^7.0.2
       debug: ^4.1.1
       esm: ^3.2.25
-      fox-types: 'workspace:^0.3.1'
+      fox-types: 'workspace:^0.3.3'
       glob: ^7.1.6
       handlebars: ^4.7.6
       jest: ^26.0.1
@@ -1107,6 +1107,7 @@ packages:
       '@babel/helper-plugin-utils': 7.10.1
       '@babel/helper-simple-access': 7.10.1
       babel-plugin-dynamic-import-node: 2.3.3
+    dev: false
     peerDependencies:
       '@babel/core': ^7.0.0-0
     resolution:
@@ -3370,6 +3371,7 @@ packages:
   /babel-plugin-dynamic-import-node/2.3.3:
     dependencies:
       object.assign: 4.1.0
+    dev: false
     resolution:
       integrity: sha512-jZVI+s9Zg3IqA/kdi0i6UDCybUI3aSBLnglhYbSSjKlV7yF1F/5LWv8MakQmvYpnbJDS6fcBL2KzHSxNCMtWSQ==
   /babel-plugin-istanbul/6.0.0:

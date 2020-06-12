@@ -10,25 +10,28 @@
     "fox-test-runner": "./bin/fox-test-runner.js"
   },
   "keywords": [
-		"fox",
-		"fox-suite"
-	],
-	"homepage": "https://github.com/eankeen/fox-suite/tree/dev/fox-test-runner#readme",
-	"bugs": {
-		"url": "https://github.com/eankeen/fox-suite/issues"
-	},
-	"author": {
-		"name": "Edwin Kofler",
-		"url": "https://edwinkofler.com"
-	},
-	"repository": {
-		"type": "git",
-		"url": "https://github.com/eankeen/fox-suite.git"
-	},
+    "fox",
+    "fox-suite"
+  ],
+  "homepage": "https://github.com/eankeen/fox-suite/tree/dev/fox-test-runner#readme",
+  "bugs": {
+    "url": "https://github.com/eankeen/fox-suite/issues"
+  },
+  "author": {
+    "name": "Edwin Kofler",
+    "url": "https://edwinkofler.com"
+  },
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/eankeen/fox-suite.git"
+  },
   "license": "MIT",
   "dependencies": {
+    "@babel/core": "^7.10.2",
+    "@babel/plugin-transform-modules-commonjs": "^7.10.1",
     "@babel/preset-env": "^7.10.2",
     "@babel/preset-typescript": "^7.10.1",
+    "@babel/types": "^7.10.2",
     "esm": "^3.2.25",
     "fox-esm": "workspace:^0.3.3",
     "fox-utils": "workspace:^0.3.3",
@@ -40,9 +43,6 @@
     "typescript": "^3.9.5"
   },
   "devDependencies": {
-    "@babel/core": "^7.10.2",
-    "@babel/plugin-transform-modules-commonjs": "^7.10.1",
-    "@babel/types": "^7.10.2",
     "fox-types": "workspace:^0.3.3",
     "type-fest": "^0.15.1"
   }
