@@ -1,6 +1,6 @@
 {
   "name": "fox-utils",
-  "version": "0.3.2",
+  "version": "0.3.3",
   "description": "",
   "main": "build",
   "license": "MIT",
@@ -33,7 +33,7 @@
 	},
   "devDependencies": {
     "cross-env": "^7.0.2",
-    "fox-types": "workspace:^0.3.2",
+    "fox-types": "workspace:^0.3.3",
     "jest": "^26.0.1",
     "minimist": "^1.2.5",
     "ts-jest": "^26.1.0",
