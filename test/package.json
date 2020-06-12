@@ -1,7 +1,7 @@
 {
   "name": "test",
   "description": "For testing",
-  "version": "0.3.1",
+  "version": "0.3.2",
   "license": "MIT",
   "scripts": {
     "test": "jest"
@@ -10,8 +10,8 @@
   "keywords": [],
   "main": "index.js",
   "devDependencies": {
-    "fox-suite": "workspace:^0.3.1",
-		"npm-package-json-lint-config-fox": "workspace:^0.3.1",
+    "fox-suite": "workspace:^0.3.2",
+		"npm-package-json-lint-config-fox": "workspace:^0.3.2",
 		"http": "0.0.1-security"
   }
 }
