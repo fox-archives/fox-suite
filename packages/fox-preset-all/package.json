@@ -1,7 +1,7 @@
 {
 	"name": "fox-preset-all",
 	"description": "Base preset",
-	"version": "0.3.0",
+	"version": "0.3.1",
 	"keywords": [
 		"fox-preset",
 		"fox",
@@ -33,20 +33,20 @@
 		"lint": "eslint --fix --config eslint.config.cjs ."
 	},
 	"devDependencies": {
-		"fox-types": "workspace:^0.3.0",
+		"fox-types": "workspace:^0.3.1",
 		"jest": "^26.0.1",
 		"jest-extended": "^0.11.5",
 		"ts-jest": "^26.1.0",
 		"typescript": "^3.9.5"
 	},
 	"dependencies": {
-		"fox-plugin-eslint": "workspace:^0.3.0",
-		"fox-plugin-html-validate": "workspace:^0.3.0",
-		"fox-plugin-htmlhint": "workspace:^0.3.0",
-		"fox-plugin-htmllint": "workspace:^0.3.0",
-		"fox-plugin-markdownlint": "workspace:^0.3.0",
-		"fox-plugin-package-json-lint": "workspace:^0.3.0",
-		"fox-plugin-prettier": "workspace:^0.3.0",
-		"fox-plugin-stylelint": "workspace:^0.3.0"
+		"fox-plugin-eslint": "workspace:^0.3.1",
+		"fox-plugin-html-validate": "workspace:^0.3.1",
+		"fox-plugin-htmlhint": "workspace:^0.3.1",
+		"fox-plugin-htmllint": "workspace:^0.3.1",
+		"fox-plugin-markdownlint": "workspace:^0.3.1",
+		"fox-plugin-package-json-lint": "workspace:^0.3.1",
+		"fox-plugin-prettier": "workspace:^0.3.1",
+		"fox-plugin-stylelint": "workspace:^0.3.1",
 	}
 }

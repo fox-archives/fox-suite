@@ -1,6 +1,6 @@
 {
   "name": "fox-test-runner",
-  "version": "0.3.0",
+  "version": "0.3.1",
   "description": "",
   "main": "index.js",
   "scripts": {
@@ -30,8 +30,8 @@
     "@babel/preset-env": "^7.10.2",
     "@babel/preset-typescript": "^7.10.1",
     "esm": "^3.2.25",
-    "fox-esm": "workspace:^0.3.0",
-    "fox-utils": "workspace:^0.3.0",
+    "fox-esm": "workspace:^0.3.1",
+    "fox-utils": "workspace:^0.3.1",
     "jest": "^26.0.1",
     "jest-esm-transformer": "^1.0.0",
     "jest-extended": "^0.11.5",
@@ -43,7 +43,7 @@
     "@babel/core": "^7.10.2",
     "@babel/plugin-transform-modules-commonjs": "^7.10.1",
     "@babel/types": "^7.10.2",
-    "fox-types": "workspace:^0.3.0",
+    "fox-types": "workspace:^0.3.1",
     "type-fest": "^0.15.1"
   }
 }
