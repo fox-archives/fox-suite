@@ -30,7 +30,7 @@ export async function getProjectData(): Promise<IProject> {
 		foxConfig = (await import(foxConfigPath)).default
 	} catch {
 		// default foxConfig options
-		const defaultFoxConfig = JSON.parse(await fs.promises.readFile(path.join(__dirname, 'default.json'), { encoding: 'utf8' }))
+		const defaultFoxConfig = JSON.parse(await fs.promises.readFile(path.join(__dirname, '../src/default.json'), { encoding: 'utf8' }))
 		foxConfig = defaultFoxConfig
 	}
 

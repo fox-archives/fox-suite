@@ -40,9 +40,12 @@
     "typescript": "^3.9.5"
   },
   "dependencies": {
+    "@prettier/plugin-ruby": "^0.18.2",
     "@prettier/plugin-xml": "^0.7.2",
     "fox-test-runner": "workspace:^0.3.4",
     "fox-utils": "workspace:^0.3.4",
-    "prettier": "^2.0.5"
+    "prettier": "^2.0.5",
+    "prettier-plugin-elm": "^0.7.0",
+    "prettier-plugin-java": "^0.8.0"
   }
 }
