@@ -19,17 +19,6 @@ export async function fixFunction(): Promise<void> {
 		async fn() {
 			const projectData = await foxUtils.getProjectData();
 
-			const stylelintConfigLocation = path.join(projectData.location, '.config/stylelint.config.js')
-			const stylelintConfig = (await import(stylelintConfigLocation)).default(projectData.location)
-
-			const resolve = (module: string) =>
-				path.join(__dirname, `../node_modules/${module}`)
-			const stylelintConfigFoxPath =
-				path.join(__dirname, '../node_modules/stylelint-config-fox')
-
-			// stylelintConfig.extends = stylelintConfig.extends || [],
-			// stylelintConfig.extends.unshift(stylelintConfigFoxPath)
-
 			const sharedOptions: Partial<stylelintType.i> | undefined = {
 				globbyOptions: {
 					cwd: projectData.location,
@@ -50,27 +39,12 @@ export async function fixFunction(): Promise<void> {
 			}
 
 			const result = await stylelint.lint({
-				config: stylelintConfig,
+				config: ((await import('stylelint-config-fox')).default),
 				files: '**/*.css',
 				...sharedOptions
 			})
 
-			const config2: Partial<stylelint.Configuration> = stylelintConfig
-			const i = resolve("postcss-scss/lib/scss-syntax.js");
-			console.log('i', i)
-			const j = (await import(i)).default
-			console.log(j)
-			config2.processors = [ j ];
-
-			// config2.plugins = [ postcssScss ]
-			// @ts-ignore
-			const result2 = await stylelint.lint({
-			  config: config2,
-			  files: '**/*.css',
-			  ...sharedOptions
-			})
-
-			console.log('a', result.output)
+			console.info(result.output)
 		}
 	})
 }

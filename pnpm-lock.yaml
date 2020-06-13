@@ -509,6 +509,7 @@ importers:
     dependencies:
       fox-types: 'link:../fox-types'
       lodash.merge: 4.6.2
+      lodash.mergewith: 4.6.2
       stylelint: 13.6.0
     devDependencies:
       eslint: 7.2.0
@@ -522,6 +523,7 @@ importers:
       jest: ^26.0.1
       jest-extended: ^0.11.5
       lodash.merge: ^4.6.2
+      lodash.mergewith: ^4.6.2
       stylelint: ^13.6.0
       ts-jest: ^26.1.0
       typescript: ^3.9.5

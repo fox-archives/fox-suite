@@ -20,7 +20,6 @@ export async function fixFunction() {
 
 			const eslintConfigLocation = path.join(project.location, '.config/eslint.config.js')
 
-			console.debug('aaaa', path.join(__dirname, '../node_modules'))
 			const eslint = new ESLint({
 				cwd: project.location,
 				errorOnUnmatchedPattern: false,

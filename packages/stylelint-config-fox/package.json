@@ -30,22 +30,23 @@
   "peerDependencies": {
     "eslint": "^7.2.0"
   },
-	"homepage": "https://github.com/eankeen/fox-suite/tree/dev/stylelint-config-fox#readme",
-	"bugs": {
-		"url": "https://github.com/eankeen/fox-suite/issues"
-	},
-	"author": {
-		"name": "Edwin Kofler",
-		"url": "https://edwinkofler.com"
-	},
-	"repository": {
-		"type": "git",
-		"url": "https://github.com/eankeen/fox-suite.git"
-	},
+  "homepage": "https://github.com/eankeen/fox-suite/tree/dev/stylelint-config-fox#readme",
+  "bugs": {
+    "url": "https://github.com/eankeen/fox-suite/issues"
+  },
+  "author": {
+    "name": "Edwin Kofler",
+    "url": "https://edwinkofler.com"
+  },
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/eankeen/fox-suite.git"
+  },
   "license": "MIT",
   "dependencies": {
     "fox-types": "workspace:^0.3.4",
     "lodash.merge": "^4.6.2",
+    "lodash.mergewith": "^4.6.2",
     "stylelint": "^13.6.0"
   }
 }
