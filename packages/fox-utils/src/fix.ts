@@ -18,6 +18,8 @@ export async function buildFix(opts: IBuildFix): Promise<void> {
 	// set the environment properly
 	{
 		process.env.FOX_SUITE_FOX_OPTIONS = JSON.stringify(projectData.foxConfig)
+		// TODO: this performs an extra import, not ideal, but refactoring
+		// to pass in extra parameter may not be worth it
 		const info = (<IPluginExportIndex> await import(require.resolve(pluginData.pluginRoot))).info
 		const pluginEnvTierName =
   `FOX_SUITE_PLUGIN_${info.tool.toLocaleUpperCase()}_TIER`;

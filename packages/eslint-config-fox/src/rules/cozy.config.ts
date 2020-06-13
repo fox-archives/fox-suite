@@ -108,7 +108,7 @@ export function cozyConfig(fox: IFoxConfig, tier: string): Record<string, any> {
 			'no-magic-numbers': 'off',
 			'no-multi-spaces': 'off',
 			'no-multi-str': 'off',
-			'no-new-function': 'off',
+			'no-new-func': 'off',
 			'no-new-wrappers': 'off',
 			'no-new': 'off',
 			'no-octal-escape': 'error',

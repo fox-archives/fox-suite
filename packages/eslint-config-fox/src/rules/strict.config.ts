@@ -52,7 +52,6 @@ export function strictConfig(fox: IFoxConfig, tier: string): Record<string, any>
 			'no-lone-blocks': 'off', // see isProd
 			'no-multi-spaces': 'error',
 			'no-new-func': 'error',
-			'no-new-function': 'error',
 			'no-new-wrappers': 'error',
 			'no-new': 'error',
 			'no-restricted-properties': [
@@ -114,7 +113,7 @@ export function strictConfig(fox: IFoxConfig, tier: string): Record<string, any>
 			'no-script-url': 'error',
 			'no-self-assign': ['error', { props: true }],
 			'no-self-compare': 'error',
-			'no-unused-label': 'error',
+			'no-unused-labels': 'error',
 			'no-useless-call': 'error',
 			'no-useless-catch': 'error',
 			'no-useless-escape': 'error',
@@ -207,7 +206,7 @@ export function strictConfig(fox: IFoxConfig, tier: string): Record<string, any>
 			'prefer-exponentiation-operator': 'error',
 
 			/* -------------------- ecmascript 6 -------------------- */
-			'no-useless-comuted-key': 'error',
+			'no-useless-computed-key': 'error',
 			'no-useless-constructor': 'off', // see isProd
 			'require-yield': 'off', // see isProd
 			'symbol-description': 'error',
@@ -235,10 +234,10 @@ export function strictConfig(fox: IFoxConfig, tier: string): Record<string, any>
 		/* --------------------- strict mode -------------------- */
 
 		/* ---------------------- variables --------------------- */
-		obj.rules['no-unused-vars'] = [
-			'error',
-			{ vars: 'all', args: 'none', ignoreRestSiblings: true },
-		]
+		// obj.rules['no-unused-vars'] = [
+		// 	'error',
+		// 	{ vars: 'all', args: 'none', ignoreRestSiblings: true },
+		// ]
 
 		/* -------------------- ecmascript 6 -------------------- */
 		obj.rules['no-useless-constructor'] = 'error'

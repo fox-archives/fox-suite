@@ -178,6 +178,10 @@ Files are copied over from your plugin's `template` directly to the project's ro
 
 When your config is rebuild for consumption by tools, this is how it works. We only rebuild javascript files. javascript files _must_ be placed in the `.config` folder. they will be rebuild to `.config/build` under the same name
 
+## notes
+
+- if something requires a path directory, use `(await getProjectData()).location`, but if that isn't available use `path.dirname((await import('read-pkg-up')()).path)`-ish, or it's corresponding sync method (but _not_ `process.cwd()`.
+
 ## FAQ
 
 ### What about Rome?

@@ -20,13 +20,15 @@ export async function fixFunction() {
 
 			const eslintConfigLocation = path.join(project.location, '.config/eslint.config.js')
 
+			console.debug('aaaa', path.join(__dirname, '../node_modules'))
 			const eslint = new ESLint({
 				cwd: project.location,
 				errorOnUnmatchedPattern: false,
 				ignorePath: path.join(project.location, '.config/eslintignore'),
 				// TODO: use the eslintconfig in `.config/build`
 				overrideConfig: (await import('eslint-config-fox')).default,
-			  useEslintrc: false,
+				resolvePluginsRelativeTo: path.join(__dirname, '../node_modules/eslint-config-fox'),
+				useEslintrc: false,
 				fix: true,
 				cache: true,
 				cacheLocation: path.join(project.location, '.config/.cache/eslintcache')
