@@ -1,8 +1,9 @@
+import path from 'path'
 import markdownlint from 'markdownlint'
 import type { IFoxConfig } from 'fox-types'
 import * as foxUtils from 'fox-utils'
-import util from 'util'
-import glob from 'glob'
+
+const { debug, glob, c } = foxUtils
 
 export { info } from './info'
 
@@ -16,8 +17,16 @@ export async function fixFunction(fox: IFoxConfig): Promise<void> {
 	await foxUtils.buildFix({
 		dirname: __dirname,
 		async fn() {
-			const projectData = await foxUtils.getProjectData()
-			const htmlFiles = await util.promisify(glob)(`${projectData.location}/**/*.md`, {
+			const project = await foxUtils.getProjectData()
+
+			const config = {}
+
+			await foxUtils.writeFile(
+				path.join(project.location, '.config/build/htmllint.config.json'),
+				config
+			)
+
+			const htmlFiles = await glob(`${project.location}/**/*.md`, {
 				ignore: "**/node_modules/**"
 			})
 

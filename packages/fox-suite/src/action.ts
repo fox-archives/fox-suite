@@ -4,10 +4,6 @@ import * as c from 'colorette'
 import * as util from './util'
 import assert from 'assert'
 
-function transpileConfig() {
-	console.log('transpile')
-}
-
 /**
  * @description bootstraps, formats, or lints a project
  */
@@ -22,40 +18,6 @@ async function doAction({
 
 		await fixFunction(projectData.foxConfig)
 	}
-}
-
-async function watchAndDoAction(transpile: () => Promise<void>, {
-	actionFunctions,
-	projectData
-}: IAction): Promise<void> {
-	// test for watchers and then do action
-	const watcher = await chokidar.watch('**/**', {
-		ignored: [
-			'**/node_modules/**',
-			'**/web_modules/**',
-			'**/.git/**',
-			'**/.hg/**'
-		],
-		persistent: true,
-		cwd: projectData.location
-	})
-
-	let totalFiles = 0
-	watcher.on('add', path => totalFiles++)
-	watcher.on('unlink', path => totalFiles--)
-	watcher.on('change', async path => {
-		if (path.includes('.config/build')) return
-
-		console.log(`${path} of ${totalFiles} files changed. recompiling config files and executing fixers`)
-
-		await transpile()
-		await doAction({
-			actionFunctions,
-			projectData
-		})
-	})
-
-	console.log('starting watcher')
 }
 
 /* --------------------- do[action] --------------------- */
@@ -106,11 +68,6 @@ export async function doFix({
 		return
 	}
 
-	await transpileConfig({
-		foxPluginPaths: util.pickSpecificFoxPluginPath(foxPluginPaths, pluginSelection),
-		projectData
-	})
-
 	await doAction({
 		actionFunctions: util.pickSpecificModuleProperty({
 			foxPlugins,
@@ -141,17 +98,35 @@ export async function doWatch({
 		return
 	}
 
-	let transpile = async () => await transpileConfig({
-		foxPluginPaths: util.pickSpecificFoxPluginPath(foxPluginPaths, pluginSelection),
-		projectData
+	// test for watchers and then do action
+	const watcher = await chokidar.watch('**/**', {
+		ignored: [
+			'**/node_modules/**',
+			'**/web_modules/**',
+			'**/.git/**',
+			'**/.hg/**'
+		],
+		persistent: true,
+		cwd: projectData.location
 	})
 
-	await watchAndDoAction(transpile, {
-		actionFunctions: util.pickSpecificModuleProperty({
-			foxPlugins,
-			specificIndicesToPick: pluginSelection,
-			actionFunction: "fixFunction"
-		}),
-		projectData
+	let totalFiles = 0
+	watcher.on('add', path => totalFiles++)
+	watcher.on('unlink', path => totalFiles--)
+	watcher.on('change', async path => {
+		if (path.includes('.config/build')) return
+
+		console.log(`${path} of ${totalFiles} files changed. recompiling config files and executing fixers`)
+
+		await doAction({
+			actionFunctions: util.pickSpecificModuleProperty({
+				foxPlugins,
+				specificIndicesToPick: pluginSelection,
+				actionFunction: "fixFunction"
+			}),
+			projectData
+		})
 	})
+
+	console.log('starting watcher')
 }

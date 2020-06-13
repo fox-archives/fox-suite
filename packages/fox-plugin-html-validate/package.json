@@ -35,15 +35,13 @@
 	},
 	"license": "MIT",
 	"dependencies": {
-		"colorette": "^1.2.0",
 		"fox-esm": "workspace:^0.3.4",
-		"fox-test-runner": "workspace:^0.3.4",
 		"fox-utils": "workspace:^0.3.4",
-		"glob": "^7.1.6",
 		"html-validate": "^2.23.0"
 	},
 	"devDependencies": {
 		"@types/htmlhint": "^0.9.1",
+		"fox-test-runner": "workspace:^0.3.4",
 		"fox-types": "workspace:^0.3.4",
 		"ts-node": "^8.10.2",
 		"typescript": "^3.9.5"

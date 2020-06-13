@@ -4,6 +4,9 @@ import * as foxUtils from "fox-utils";
 import { IFoxConfig } from "fox-types";
 import postcssScss from 'postcss-scss'
 import type stylelintType from '../../../@types/stylelint'
+import fs from 'fs'
+
+const { debug, c } = foxUtils
 
 export { info } from './info'
 
@@ -17,29 +20,38 @@ export async function fixFunction(): Promise<void> {
 	await foxUtils.buildFix({
 		dirname: __dirname,
 		async fn() {
-			const projectData = await foxUtils.getProjectData();
+			const project = await foxUtils.getProjectData();
+
+			const config = (await import('stylelint-config-fox')).default
+
+			// rebuild config
+			debug('rebuilding config')
+			await foxUtils.writeFile(
+				path.join(project.location, '.config/build/stylelint.config.json'),
+				config
+			)
 
 			const sharedOptions: Partial<stylelintType.i> | undefined = {
 				globbyOptions: {
-					cwd: projectData.location,
+					cwd: project.location,
 					ignore: [],
 					caseSensitiveMatch: true, // default
 					dot: false, // default
 					gitignore: false // default
 				},
-				configBasedir: projectData.location,
+				configBasedir: project.location,
 				fix: true,
 				formatter: "string",
 				cache: true,
-				cacheLocation: path.join(projectData.location, '.config/.cache/.stylelintcache'),
+				cacheLocation: path.join(project.location, '.config/.cache/.stylelintcache'),
 				disableDefaultIgnores: true,
-				ignorePath: path.join(projectData.location, '.config/stylelintignore'),
+				ignorePath: path.join(project.location, '.config/stylelintignore'),
 				reportNeedlessDisables: true,
 				reportInvalidScopeDisables: true
 			}
 
 			const result = await stylelint.lint({
-				config: ((await import('stylelint-config-fox')).default),
+				config,
 				files: '**/*.css',
 				...sharedOptions
 			})

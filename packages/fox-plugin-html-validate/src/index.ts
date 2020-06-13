@@ -3,9 +3,8 @@ import fs from 'fs'
 import { HtmlValidate } from "html-validate";
 import type { IFoxConfig } from "fox-types";
 import * as foxUtils from "fox-utils";
-import glob from 'glob'
-import util from 'util'
-import * as c from 'colorette'
+
+const { c, debug, glob } = foxUtils
 
 export { info } from './info'
 
@@ -19,8 +18,20 @@ export async function fixFunction(): Promise<void> {
 	await foxUtils.buildFix({
 		dirname: __dirname,
 		async fn() {
-			const projectData = await foxUtils.getProjectData()
-			const htmlFiles = await util.promisify(glob)(`${projectData.location}/**/*.html`)
+			const project = await foxUtils.getProjectData()
+
+
+			const config = {}
+
+			{
+				debug('rebuilding config')
+				await foxUtils.writeFile(
+					path.join(project.location, '.config/build/html-validate.config.json'),
+					config
+				)
+			}
+
+			const htmlFiles = await glob(`${project.location}/**/*.html`)
 
 			for (const htmlFile of htmlFiles) {
 				// const htmlFileContent = await fs.promises.readFile(htmlFile, { encoding: 'utf8' })

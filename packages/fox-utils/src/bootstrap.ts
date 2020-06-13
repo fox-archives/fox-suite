@@ -38,6 +38,9 @@ export async function buildBootstrap(opts: IBuildBootstrap): Promise<void> {
 	for (const fileToTemplate of pluginData.templateFiles) {
 		const { fileDest, templatedText } = await doTemplate(fileToTemplate)
 		try {
+			try {
+				await fs.promises.mkdir(path.dirname(fileDest), { mode: 0o755 });
+			} catch {}
 			await fs.promises.writeFile(fileDest, templatedText, {
 				mode: 0o644,
 				flag: 'wx+'

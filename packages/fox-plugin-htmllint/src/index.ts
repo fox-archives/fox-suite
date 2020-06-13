@@ -20,8 +20,16 @@ export async function fixFunction(): Promise<void> {
 	await foxUtils.buildFix({
 		dirname: __dirname,
 		async fn() {
-			const projectData = await foxUtils.getProjectData()
-			const htmlFiles = await util.promisify(glob)(`${projectData.location}/**/*.html`)
+			const project = await foxUtils.getProjectData()
+
+			const config = {}
+
+			await foxUtils.writeFile(
+				path.join(project.location, '.config/build/htmllint.config.json'),
+				config
+			)
+
+			const htmlFiles = await util.promisify(glob)(`${project.location}/**/*.html`)
 
 			for (const htmlFile of htmlFiles) {
 				const htmlFileContent = await fs.promises.readFile(htmlFile, { encoding: 'utf8' })

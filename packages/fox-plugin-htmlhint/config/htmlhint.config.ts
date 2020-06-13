@@ -1,11 +1,6 @@
-// this is a non-standard htmlhint configuration file
-// (meaning only .htmlhintrc is usually valid)
+import { IFoxConfig } from "fox-types";
 
-/**
- * @param {import("fox-types/types").IFoxConfig} [fox] - `fox.config.js` configuration object
- * @return {Record<string, any>}
- */
-export default function(fox) {
+export default function(fox: IFoxConfig): Record<string, any> {
 	return {
 		// TODO: ensure preset
 		'doctype-first': true,

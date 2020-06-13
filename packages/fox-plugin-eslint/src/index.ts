@@ -3,6 +3,9 @@ import * as foxUtils from "fox-utils";
 // @ts-ignore
 import { ESLint } from "eslint";
 import type { IFoxConfig } from 'fox-types';
+import fs from 'fs'
+
+const { debug, c } = foxUtils
 
 export { info } from './info'
 
@@ -18,14 +21,20 @@ export async function fixFunction() {
 		async fn() {
 			const project = await foxUtils.getProjectData()
 
-			const eslintConfigLocation = path.join(project.location, '.config/eslint.config.js')
+			const config = (await import('eslint-config-fox')).default
+
+			// rebuild config
+			debug('rebuilding config')
+			await foxUtils.writeFile(
+				path.join(project.location, '.config/build/eslint.config.json'),
+				config
+			)
 
 			const eslint = new ESLint({
 				cwd: project.location,
 				errorOnUnmatchedPattern: false,
 				ignorePath: path.join(project.location, '.config/eslintignore'),
-				// TODO: use the eslintconfig in `.config/build`
-				overrideConfig: (await import('eslint-config-fox')).default,
+				overrideConfig: config,
 				resolvePluginsRelativeTo: path.join(__dirname, '../node_modules/eslint-config-fox'),
 				useEslintrc: false,
 				fix: true,

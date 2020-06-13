@@ -1,3 +1,8 @@
+import { IFoxConfig } from 'fox-types'
+
+const foxConfig: IFoxConfig = JSON.parse(process.env.FOX_SUITE_FOX_OPTIONS || '{}')
+const tier: string = process.env.FOX_SUITE_PLUGIN_STYLELINT_TIER || ''
+
 const npmPackageJsonLintConfig = {
   rules: {
     'require-name': 'error',

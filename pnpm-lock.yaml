@@ -119,25 +119,21 @@ importers:
       http: 0.0.1-security
   packages/fox-plugin-html-validate:
     dependencies:
-      colorette: 1.2.0
       fox-esm: 'link:../fox-esm'
-      fox-test-runner: 'link:../fox-test-runner'
       fox-utils: 'link:../fox-utils'
-      glob: 7.1.6
       html-validate: 2.23.0
     devDependencies:
       '@types/htmlhint': 0.9.1
+      fox-test-runner: 'link:../fox-test-runner'
       fox-types: 'link:../fox-types'
       ts-node: 8.10.2_typescript@3.9.5
       typescript: 3.9.5
     specifiers:
       '@types/htmlhint': ^0.9.1
-      colorette: ^1.2.0
       fox-esm: 'workspace:^0.3.4'
       fox-test-runner: 'workspace:^0.3.4'
       fox-types: 'workspace:^0.3.4'
       fox-utils: 'workspace:^0.3.4'
-      glob: ^7.1.6
       html-validate: ^2.23.0
       ts-node: ^8.10.2
       typescript: ^3.9.5
@@ -497,12 +493,14 @@ importers:
   packages/npm-package-json-lint-config-fox:
     devDependencies:
       '@types/jest': 26.0.0
+      fox-types: 'link:../fox-types'
       jest: 26.0.1
       npm-package-json-lint: 5.1.0
       ts-node: 8.10.2_typescript@3.9.5
       typescript: 3.9.5
     specifiers:
       '@types/jest': ^26.0.0
+      fox-types: 'workspace:^0.3.4'
       jest: ^26.0.1
       npm-package-json-lint: ^5.1.0
       ts-node: ^8.10.2

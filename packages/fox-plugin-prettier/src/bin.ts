@@ -1,4 +1,4 @@
-import { bootstrapFunction, formatFunction } from ".";
+import { bootstrapFunction, fixFunction } from ".";
 import * as foxUtils from "fox-utils";
 import { info } from './info'
 
@@ -7,6 +7,6 @@ export async function cli() {
 		pluginName: info.name,
 		pluginDescription: info.description,
 		bootstrapFunction,
-		fixFunction: formatFunction
+		fixFunction
 	});
 }
