@@ -39,9 +39,6 @@
 			"path": "../fox-test-runner"
 		},
 		{
-			"path": "../fox-transpiler"
-		},
-		{
 			"path": "../fox-plugin-htmllint"
 		},
 		{

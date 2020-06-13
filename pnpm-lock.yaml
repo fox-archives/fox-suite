@@ -19,6 +19,7 @@ importers:
       '@types/prettier': 2.0.1
       '@types/prompts': 2.0.8
       '@types/stylelint': 9.10.1
+      fox-preset-all: 'link:packages/fox-preset-all'
       fox-suite: 'link:packages/fox-suite'
       lerna: 3.22.1
     specifiers:
@@ -40,6 +41,7 @@ importers:
       '@types/prettier': ^2.0.1
       '@types/prompts': ^2.0.8
       '@types/stylelint': ^9.10.1
+      fox-preset-all: 'workspace:^0.3.4'
       fox-suite: 'workspace:^0.3.4'
       lerna: ^3.22.1
   packages/babel-plugin-fox-transpiler:
@@ -276,7 +278,7 @@ importers:
       fox-utils: ^0.3.0
       husky: ^4.2.5
       lodash: ^4.17.15
-      snyk: ^1.339.1
+      snyk: ^1.339.2
       ts-node: ^8.10.2
       typescript: ^3.9.5
   packages/fox-plugin-stylelint:
@@ -3142,6 +3144,14 @@ packages:
   /acorn-jsx/5.2.0_acorn@7.2.0:
     dependencies:
       acorn: 7.2.0
+    dev: false
+    peerDependencies:
+      acorn: ^6.0.0 || ^7.0.0
+    resolution:
+      integrity: sha512-HiUX/+K2YpkpJ+SzBffkM/AQ2YE03S0U1kjTLVpoJdhZMOWy8qvXVN9JdLqv2QsaQ6MPYQIuNmwD8zOiYUofLQ==
+  /acorn-jsx/5.2.0_acorn@7.3.1:
+    dependencies:
+      acorn: 7.3.1
     peerDependencies:
       acorn: ^6.0.0 || ^7.0.0
     resolution:
@@ -5342,7 +5352,7 @@ packages:
     dependencies:
       '@babel/code-frame': 7.10.1
       ajv: 6.12.2
-      chalk: 4.0.0
+      chalk: 4.1.0
       cross-spawn: 7.0.3
       debug: 4.1.1
       doctrine: 3.0.0
@@ -5399,8 +5409,8 @@ packages:
       integrity: sha512-ysCxRQY3WaXJz9tdbWOwuWr5Y/XrPTGX9Kiz3yoUXwW0VZ4w30HTkQLaGx/+ttFjF8i+ACbArnB4ce68a9m5hw==
   /espree/7.1.0:
     dependencies:
-      acorn: 7.2.0
-      acorn-jsx: 5.2.0_acorn@7.2.0
+      acorn: 7.3.1
+      acorn-jsx: 5.2.0_acorn@7.3.1
       eslint-visitor-keys: 1.2.0
     engines:
       node: ^10.12.0 || >=12.0.0

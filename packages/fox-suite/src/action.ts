@@ -2,8 +2,11 @@ import type { IAction, IPluginExportIndex, IProject } from 'fox-types'
 import chokidar from 'chokidar'
 import * as c from 'colorette'
 import * as util from './util'
-import { transpileConfig } from 'fox-transpiler'
 import assert from 'assert'
+
+function transpileConfig() {
+	console.log('transpile')
+}
 
 /**
  * @description bootstraps, formats, or lints a project
