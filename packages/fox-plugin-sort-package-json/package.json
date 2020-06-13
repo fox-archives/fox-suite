@@ -49,7 +49,7 @@
     "fox-test-runner": "^0.3.0",
     "fox-utils": "^0.3.0",
     "lodash": "^4.17.15",
-    "snyk": "^1.339.1"
+    "snyk": "^1.339.2"
   },
   "devDependencies": {
     "ava": "^3.8.2",
