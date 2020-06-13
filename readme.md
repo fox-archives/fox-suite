@@ -5,7 +5,7 @@ A sly suite of tools for web development
 Do you ever...
 
 - Get tired of setting up common tools and files (`.editorconfig`, `.prettierrc`, `.eslintconfig.js`, `.lint-stagedrc.json`, `husky.json`, etc.) over and over for each project?
-- Want sane defaults for all of these tools without having to think?
+- Want the same defaults for all of these tools without having to think?
 - Allow to easily change the settings to something more strict if the project ends up being a bit more serious (and you want to focus on correctness rather than iterability)
 
 If you feel similar, this package is likely for you!
