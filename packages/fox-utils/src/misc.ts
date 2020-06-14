@@ -10,7 +10,7 @@ export async function writeFile(filePath: string, content: string | Record<strin
 		content = JSON.stringify(content, null, 2)
 	}
 	try {
-		await fs.promises.mkdir(path.basename(filePath))
+		await fs.promises.mkdir(path.dirname(filePath))
 	} catch (err) {
 		if (err.code !== 'EEXIST') console.error(err)
 	}
