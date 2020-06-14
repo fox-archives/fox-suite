@@ -14,3 +14,6 @@ for packageJsonFile in $packageJsonFiles; do
 	sed -Ei "s/(.*-fox\": \")(workspace.*)/\1workspace:\^${1}\",/g" "$packageJsonFile"
 	sed -Ei "s/(babel-plugin-fox-.*\")(workspace.*)/\1workspace:^${1}\",/g" "$packageJsonFile"
 done
+
+git commit -a -m "release: v{$1-}"
+git push origin dev
