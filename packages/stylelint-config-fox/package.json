@@ -1,6 +1,6 @@
 {
 	"name": "stylelint-config-fox",
-	"version": "1.0.2",
+	"version": "1.0.3",
 	"description": "",
 	"main": "build",
 	"scripts": {
@@ -43,7 +43,7 @@
 	},
 	"license": "MIT",
 	"dependencies": {
-		"fox-types": "workspace:^1.0.2",
+		"fox-types": "workspace:^1.0.3",
 		"lodash.merge": "^4.6.2",
 		"lodash.mergewith": "^4.6.2",
 		"stylelint": "^13.6.0",
