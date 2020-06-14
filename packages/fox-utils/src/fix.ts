@@ -36,9 +36,8 @@ export async function buildFix(opts: IBuildFix): Promise<void> {
 		)).info
 		const pluginEnvTierName = `FOX_SUITE_PLUGIN_${info.tool.toLocaleUpperCase()}_TIER`
 		process.env[pluginEnvTierName] =
-			projectData?.foxConfig?.plugin?.[info.tool] ||
-			projectData.foxConfig.all ||
-			'cozy'
+			projectData.foxConfig.plugin[info.tool] ||
+			projectData.foxConfig.all
 	}
 
 	// this will throw if at least 'one' template file

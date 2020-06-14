@@ -29,7 +29,7 @@ export default {
 	plugin: {
 		eslint: 'cozy',
 		stylelint: 'excessive',
-		[pluginName]: 'mode',
+		[pluginName]: '$tier',
 	},
 }
 ```
