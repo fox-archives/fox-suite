@@ -1,21 +1,21 @@
 {
-  "name": "fox-plugin-stylelint",
-  "version": "0.3.4",
-  "description": "",
-  "main": "build",
-  "scripts": {
-    "start": "ts-node src",
-    "watch": "tsc --build --watch",
-    "build": "tsc --build"
-  },
-  "type": "commonjs",
-  "engines": {
-    "node": ">=12.17.0 >=v13.14.0 >=14.3.0"
-  },
-  "bin": {
-    "fox-plugin-stylelint": "./bin/fox-plugin-stylelint.js"
-  },
-  "keywords": [
+	"name": "fox-plugin-stylelint",
+	"version": "0.3.4",
+	"description": "",
+	"main": "build",
+	"scripts": {
+		"start": "ts-node src",
+		"watch": "tsc --build --watch",
+		"build": "tsc --build"
+	},
+	"type": "commonjs",
+	"engines": {
+		"node": ">=12.17.0 >=v13.14.0 >=14.3.0"
+	},
+	"bin": {
+		"fox-plugin-stylelint": "./bin/fox-plugin-stylelint.js"
+	},
+	"keywords": [
 		"stylelint",
 		"fox",
 		"lint",
@@ -33,19 +33,19 @@
 		"type": "git",
 		"url": "https://github.com/eankeen/fox-suite.git"
 	},
-  "license": "MIT",
-  "dependencies": {
-    "esm": "^3.2.25",
-    "fox-esm": "workspace:^0.3.4",
-    "fox-utils": "workspace:^0.3.4",
-    "postcss-scss": "^2.1.1",
-    "stylelint": "^13.6.0",
+	"license": "MIT",
+	"dependencies": {
+		"esm": "^3.2.25",
+		"fox-esm": "workspace:^0.3.4",
+		"fox-utils": "workspace:^0.3.4",
+		"postcss-scss": "^2.1.1",
+		"stylelint": "^13.6.0",
 		"stylelint-config-fox": "workspace:^0.3.4",
 		"http": "0.0.1-security"
-  },
-  "devDependencies": {
-    "fox-test-runner": "workspace:^0.3.4",
+	},
+	"devDependencies": {
+		"fox-test-runner": "workspace:^0.3.4",
 		"fox-types": "workspace:^0.3.4",
 		"http": "0.0.1-security"
-  }
+	}
 }

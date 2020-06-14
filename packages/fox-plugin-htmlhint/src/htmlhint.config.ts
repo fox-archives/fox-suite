@@ -1,6 +1,6 @@
-import { IFoxConfig } from "fox-types";
+import { IFoxConfig } from 'fox-types';
 
-export default function(fox: IFoxConfig): Record<string, any> {
+export default function (fox: IFoxConfig): Record<string, any> {
 	return {
 		// TODO: ensure preset
 		'doctype-first': true,
@@ -38,6 +38,6 @@ export default function(fox: IFoxConfig): Record<string, any> {
 
 		// formatting
 		'space-tab-mixed-disabled': true,
-		'spec-char-escape': true
-	}
+		'spec-char-escape': true,
+	};
 }

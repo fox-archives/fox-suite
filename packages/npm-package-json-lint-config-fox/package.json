@@ -1,43 +1,43 @@
 {
-  "name": "npm-package-json-lint-config-fox",
-  "version": "0.3.4",
-  "description": "",
-  "main": "build",
-  "scripts": {
-    "test": "jest"
-  },
-  "type": "commonjs",
-  "engines": {
-    "node": ">=12.17.0 >=v13.14.0 >=14.3.0"
-  },
-  "keywords": [
-    "npm-package-json-lint",
-    "npm-package-json-lint-config",
-    "fox",
-    "fox-suite"
-  ],
-  "homepage": "https://github.com/eankeen/fox-suite/tree/dev/npm-package-json-lint-config-fox#readme",
-  "bugs": {
-    "url": "https://github.com/eankeen/fox-suite/issues"
-  },
-  "author": {
-    "name": "Edwin Kofler",
-    "url": "https://edwinkofler.com"
-  },
-  "repository": {
-    "type": "git",
-    "url": "https://github.com/eankeen/fox-suite.git"
-  },
-  "license": "MIT",
-  "peerDependencies": {
-    "npm-package-json-lint": ">= 5"
-  },
-  "devDependencies": {
-    "@types/jest": "^26.0.0",
-    "fox-types": "workspace:^0.3.4",
-    "jest": "^26.0.1",
-    "npm-package-json-lint": "^5.1.0",
-    "ts-node": "^8.10.2",
-    "typescript": "^3.9.5"
-  }
+	"name": "npm-package-json-lint-config-fox",
+	"version": "0.3.4",
+	"description": "",
+	"main": "build",
+	"scripts": {
+		"test": "jest"
+	},
+	"type": "commonjs",
+	"engines": {
+		"node": ">=12.17.0 >=v13.14.0 >=14.3.0"
+	},
+	"keywords": [
+		"npm-package-json-lint",
+		"npm-package-json-lint-config",
+		"fox",
+		"fox-suite"
+	],
+	"homepage": "https://github.com/eankeen/fox-suite/tree/dev/npm-package-json-lint-config-fox#readme",
+	"bugs": {
+		"url": "https://github.com/eankeen/fox-suite/issues"
+	},
+	"author": {
+		"name": "Edwin Kofler",
+		"url": "https://edwinkofler.com"
+	},
+	"repository": {
+		"type": "git",
+		"url": "https://github.com/eankeen/fox-suite.git"
+	},
+	"license": "MIT",
+	"peerDependencies": {
+		"npm-package-json-lint": ">= 5"
+	},
+	"devDependencies": {
+		"@types/jest": "^26.0.0",
+		"fox-types": "workspace:^0.3.4",
+		"jest": "^26.0.1",
+		"npm-package-json-lint": "^5.1.0",
+		"ts-node": "^8.10.2",
+		"typescript": "^3.9.5"
+	}
 }

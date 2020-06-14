@@ -1,17 +1,14 @@
-import assert from 'assert'
+import assert from 'assert';
 // import { fileURLToPath } from 'url'
-import _ from 'lodash'
+import _ from 'lodash';
 
 export const is = {
-	string: (val: any): boolean =>
-		typeof val === 'string',
-	array: (val: any): boolean =>
-		Array.isArray(val),
+	string: (val: any): boolean => typeof val === 'string',
+	array: (val: any): boolean => Array.isArray(val),
 	object: (val: any): boolean =>
 		typeof val === 'object' && !Array.isArray(val),
-	function: (val: any): boolean =>
-		typeof val === 'function'
-}
+	function: (val: any): boolean => typeof val === 'function',
+};
 
 /**
  * @description alphabetically sorts array
@@ -19,7 +16,7 @@ export const is = {
  * @return {array} array with sorted keys
  */
 export function sortAlphabetical(arr: Array<string>) {
-  return arr.sort(new Intl.Collator('en').compare)
+	return arr.sort(new Intl.Collator('en').compare);
 }
 
 /**
@@ -28,23 +25,21 @@ export function sortAlphabetical(arr: Array<string>) {
  * properly each time. it skips formatting if array is heterogenous
  */
 interface IContributors {
-  name?: string,
-  email?: string,
-  url?: string
+	name?: string;
+	email?: string;
+	url?: string;
 }
 export function sortContributors(arr: Array<string | IContributors>) {
-  if (arr.every(is.object)) {
-    return _.sortBy(arr, 'name')
-
-  }
-  else if (arr.every(is.string)) {
-    return sortAlphabetical(arr as Array<string>)
-  }
-  return arr
+	if (arr.every(is.object)) {
+		return _.sortBy(arr, 'name');
+	} else if (arr.every(is.string)) {
+		return sortAlphabetical(arr as Array<string>);
+	}
+	return arr;
 }
 
 interface ISortObject {
-  [key: string]: string | object
+	[key: string]: string | object;
 }
 /**
  * @description meta sort function that converts object
@@ -54,47 +49,48 @@ interface ISortObject {
  * @return {object} object with sorted keys
  */
 export function sortObject(obj: ISortObject, sortFn: Function) {
-  const sortedKeys = sortFn(Object.keys(obj))
+	const sortedKeys = sortFn(Object.keys(obj));
 
-  const sortedObject: ISortObject = {}
-  for (const sortedKey of sortedKeys) {
-    sortedObject[sortedKey] = obj[sortedKey]
-  }
-  return sortedObject
+	const sortedObject: ISortObject = {};
+	for (const sortedKey of sortedKeys) {
+		sortedObject[sortedKey] = obj[sortedKey];
+	}
+	return sortedObject;
 }
 
 interface ISurface {
-  [key: string]: string | object
+	[key: string]: string | object;
 }
 
 /**
  * @description processes each group
  */
 export function processGroup(input: any, group: any) {
-  const surface: ISurface = {}
-  for (const key of group.keys) {
-    // ensure key meets schema requirements
-    assert(is.string(key.name), "keys must have a 'name' property of type string")
+	const surface: ISurface = {};
+	for (const key of group.keys) {
+		// ensure key meets schema requirements
+		assert(
+			is.string(key.name),
+			"keys must have a 'name' property of type string"
+		);
 
-    // ensure the key actually exists in package.json. if not,
-    // 'continue' (skip) to next element in loop
-    if (!input.hasOwnProperty(key.name)) continue
+		// ensure the key actually exists in package.json. if not,
+		// 'continue' (skip) to next element in loop
+		if (!input.hasOwnProperty(key.name)) continue;
 
-    // do the reassigning. different behavior dependent if the key
-    // value is a 'array', or 'object', or anything else
-    const keyName = key.name
-    const keyValue = input[keyName]
-    if (!key.hasOwnProperty('sortMethod')) {
-      surface[keyName] = keyValue
-    }
-    else if (is.array(keyValue)) {
-      surface[keyName] = key.sortMethod(keyValue)
-    }
-    else if (is.object(keyValue)) {
-      surface[keyName] = sortObject(keyValue, key.sortMethod)
-    }
-  }
-  return surface
+		// do the reassigning. different behavior dependent if the key
+		// value is a 'array', or 'object', or anything else
+		const keyName = key.name;
+		const keyValue = input[keyName];
+		if (!key.hasOwnProperty('sortMethod')) {
+			surface[keyName] = keyValue;
+		} else if (is.array(keyValue)) {
+			surface[keyName] = key.sortMethod(keyValue);
+		} else if (is.object(keyValue)) {
+			surface[keyName] = sortObject(keyValue, key.sortMethod);
+		}
+	}
+	return surface;
 }
 
 /**
@@ -107,24 +103,34 @@ export function processGroup(input: any, group: any) {
  *  @param {function} [sortingFunction] - function to sort all unrecognized keys by. defualts to alphabetical
  *  @return {object} object with all keys intact
  */
-export function ensureUnecognizedKeys(oldSurface: any, sortedSurface: any, sortingFunction?: Function) {
-  // ensure parameters are expected
-  assert(is.object(oldSurface))
-  assert(is.object(sortedSurface))
-  sortingFunction && assert(is.function(sortingFunction))
+export function ensureUnecognizedKeys(
+	oldSurface: any,
+	sortedSurface: any,
+	sortingFunction?: Function
+) {
+	// ensure parameters are expected
+	assert(is.object(oldSurface));
+	assert(is.object(sortedSurface));
+	sortingFunction && assert(is.function(sortingFunction));
 
-  let surfaceTemp: ISurface = {}
-  for (const entryName in oldSurface) {
-    // add all unknown elements to 'finalOutput' first
-    if(oldSurface.hasOwnProperty(entryName) && !sortedSurface.hasOwnProperty(entryName)) {
-      surfaceTemp[entryName] = oldSurface[entryName]
-    }
-  }
+	let surfaceTemp: ISurface = {};
+	for (const entryName in oldSurface) {
+		// add all unknown elements to 'finalOutput' first
+		if (
+			oldSurface.hasOwnProperty(entryName) &&
+			!sortedSurface.hasOwnProperty(entryName)
+		) {
+			surfaceTemp[entryName] = oldSurface[entryName];
+		}
+	}
 
-  const sortedSurfaceTemp = sortObject(surfaceTemp, sortingFunction || sortAlphabetical)
+	const sortedSurfaceTemp = sortObject(
+		surfaceTemp,
+		sortingFunction || sortAlphabetical
+	);
 
-  return {
-    ...sortedSurfaceTemp,
-    ...sortedSurface
-  }
+	return {
+		...sortedSurfaceTemp,
+		...sortedSurface,
+	};
 }

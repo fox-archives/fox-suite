@@ -1,25 +1,25 @@
-import { PackageJson } from 'type-fest'
-import type { Stats } from 'fs'
-type option = 'off' | 'cozy' | 'strict' | 'excessive'
+import { PackageJson } from 'type-fest';
+import type { Stats } from 'fs';
+type option = 'off' | 'cozy' | 'strict' | 'excessive';
 
 /**
  * @description format of the `fox.config.js` file
  */
 export interface IFoxConfig {
-  all: option,
-	monorepo: boolean,
-	env: 'browser' | 'node' | 'deno' | 'browser-node' | 'browser-deno'
-  plugin: Record<string, option>
+	all: option;
+	monorepo: boolean;
+	env: 'browser' | 'node' | 'deno' | 'browser-node' | 'browser-deno';
+	plugin: Record<string, option>;
 }
 
 /**
  * @description used when building a cli
  */
 export interface IBuildCli {
-	pluginName: string,
-	pluginDescription: string,
-	bootstrapFunction?: () => Promise<void>,
-	fixFunction: (fox: IFoxConfig) => Promise<void>
+	pluginName: string;
+	pluginDescription: string;
+	bootstrapFunction?: () => Promise<void>;
+	fixFunction: (fox: IFoxConfig) => Promise<void>;
 }
 
 /**
@@ -31,7 +31,7 @@ export interface IBuildBootstrap {
 	 * so as long as the dirname is at or under where `package.json` is at,
 	 * it will be valid
 	 */
-	dirname: string
+	dirname: string;
 }
 
 /**
@@ -43,7 +43,7 @@ export interface IBuildFix {
 	 * so as long as the dirname is at or under where `package.json` is at,
 	 * it will be valid
 	 */
-	dirname: string,
+	dirname: string;
 
 	/**
 	 * @description the actual linting function that is executed
@@ -52,7 +52,7 @@ export interface IBuildFix {
 	 * is ran. for example, we check to make sure _all_ the necessary config files for your tool exist
 	 * before invoking the tool
 	 */
-	fn: () => Promise<void>
+	fn: () => Promise<void>;
 }
 
 /**
@@ -70,13 +70,13 @@ export interface IProject {
 	 * }
 	 * ```
 	 */
-	packageJson: PackageJson
+	packageJson: PackageJson;
 
 	/**
 	 * @description absolute path to location of project's json file
 	 * @example `/abs/my-react-app/package.json`
 	 */
-	packageJsonPath: string,
+	packageJsonPath: string;
 
 	/**
 	 * @description the actual evaluated `fox.config.js` file of your project
@@ -91,28 +91,28 @@ export interface IProject {
 	 * }
 	 * ```
 	 */
-	foxConfig: IFoxConfig
+	foxConfig: IFoxConfig;
 
 	/**
 	 * @description absolute path of the project's `fox.config.js`
 	 * @example `/abs/my-react-app/fox.config.js`
 	 */
-	foxConfigPath: string,
+	foxConfigPath: string;
 
 	/**
 	 * @description absolute path of the project root
 	 * @example `/abs/my-react-app`
 	 */
-	location: string
+	location: string;
 }
 
 /**
  * @private
  */
 export interface ITemplateFile {
-	absolutePath: string,
-	relativePath: string,
-	stats: Stats
+	absolutePath: string;
+	relativePath: string;
+	stats: Stats;
 }
 
 /**
@@ -124,7 +124,7 @@ export interface IPlugin {
 	 * @description absolute path of template directory
 	 * @example `/abs/fox-plugin-stylelint/templates`
 	 */
-	templateDir: string,
+	templateDir: string;
 
 	/**
 	 * @description absolute path of files that need to be templated, and
@@ -137,13 +137,13 @@ export interface IPlugin {
 	 * ]
 	 * ```
 	 */
-	templateFiles: ITemplateFile[],
+	templateFiles: ITemplateFile[];
 
 	/**
 	 * @description the absolute path of the plugin root
 	 * @example `/abs/fox-plugin-stylelint`
 	 */
-	pluginRoot: string,
+	pluginRoot: string;
 
 	/**
 	 * @description the actual object representing the `package.json` file of the fox plugin
@@ -155,14 +155,14 @@ export interface IPlugin {
 	 * }
 	 * ```
 	 */
-	packageJson: PackageJson
+	packageJson: PackageJson;
 }
 
 /**
  * @description found in a preset's `index.js` file
  */
 export interface IPresetExportIndex {
-	plugins: string[]
+	plugins: string[];
 }
 
 /**
@@ -172,19 +172,19 @@ export interface IPluginExportIndex {
 	/**
 	 * the plugin's exported `info` object
 	 */
-	info: IPluginExportInfo,
+	info: IPluginExportInfo;
 
 	/**
 	 * @description the function that is executed when the user wants your
 	 * project's tooling to be 'bootstrapped'
 	 */
-	bootstrapFunction?: () => Promise<void>
+	bootstrapFunction?: () => Promise<void>;
 
 	/**
 	 * @description the function that does the thing that your
 	 * plugin says it does
 	 */
-	fixFunction?: (fox: IFoxConfig) => Promise<void>
+	fixFunction?: (fox: IFoxConfig) => Promise<void>;
 }
 
 /**
@@ -195,7 +195,7 @@ export interface IPluginExportInfo {
 	 * @description literally the name of your project. _must_ be the same as
 	 * in your `package.json`
 	 */
-	name: string,
+	name: string;
 
 	/**
 	 * @description name of the tool that is being abstracted over. _important_, this will be
@@ -204,14 +204,14 @@ export interface IPluginExportInfo {
 	 * @example this would be `Stylelint` for `fox-plugin-stylelint`
 	 * @todo ensure there is a `fox-test-runner` test (read desc) for that case
 	 */
-	tool: string,
+	tool: string;
 
 	/**
 	 * @description name of the tool that is being abstracted over. note that this text
 	 * will be shown to the user, so having correct casing will make things look better
 	 * @example this would be `stylelint` for `fox-plugin-stylelint`
 	 */
-	toolName: string,
+	toolName: string;
 
 	/**
 	 * @description website url that shows more information about
@@ -219,18 +219,18 @@ export interface IPluginExportInfo {
 	 * @example for `fox-plugin-stylelint`, you may want to link to the documentation
 	 * that shows all the rules that can be placed in the `stylelint.config.js` file
 	 */
-	toolConfigSchemaHelpUri: string,
+	toolConfigSchemaHelpUri: string;
 
 	/**
 	 * @description description of your plugin. what tool does it abstract over
 	 */
-	description: string,
+	description: string;
 
 	/**
 	 * an extended description. you probably want to include more details here,
 	 * like caveats with the plugin
 	 */
-	descriptionLong: string
+	descriptionLong: string;
 }
 
 /**
@@ -239,13 +239,17 @@ export interface IPluginExportInfo {
  * @todo make this only an array and handle that
  */
 interface IActionBootstrap {
-	actionFunctions: IPluginExportIndex["bootstrapFunction"] | IPluginExportIndex["bootstrapFunction"][]
-	projectData: IProject
+	actionFunctions:
+		| IPluginExportIndex['bootstrapFunction']
+		| IPluginExportIndex['bootstrapFunction'][];
+	projectData: IProject;
 }
 
 interface IActionFix {
-	actionFunctions: IPluginExportIndex["fixFunction"] | IPluginExportIndex["fixFunction"][],
-	projectData: IProject
+	actionFunctions:
+		| IPluginExportIndex['fixFunction']
+		| IPluginExportIndex['fixFunction'][];
+	projectData: IProject;
 }
 
-export type IAction = IActionBootstrap | IActionFix
+export type IAction = IActionBootstrap | IActionFix;

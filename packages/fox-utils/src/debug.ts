@@ -1,6 +1,6 @@
-import debug from 'debug'
+import debug from 'debug';
 
-const d = debug('fox-suite:fox-utils')
+const d = debug('fox-suite:fox-utils');
 
-export default d
-export { debug }
+export default d;
+export { debug };

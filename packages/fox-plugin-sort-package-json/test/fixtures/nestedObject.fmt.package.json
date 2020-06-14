@@ -1,7 +1,7 @@
 {
-  "name": "name",
-  "config": {
-    "key": "value",
-    "port": 3000
-  }
+	"name": "name",
+	"config": {
+		"key": "value",
+		"port": 3000
+	}
 }

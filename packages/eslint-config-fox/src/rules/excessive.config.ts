@@ -1,12 +1,15 @@
-import { IFoxConfig } from "fox-types";
+import { IFoxConfig } from 'fox-types';
 
 /**
  * Enable rules that could prevent
  * potentially misinterpreted code
  */
-export function excessiveConfig(fox: IFoxConfig, tier: string): Record<string, any> {
-  const obj: Record<string, any> = {
-    rules: {
+export function excessiveConfig(
+	fox: IFoxConfig,
+	tier: string
+): Record<string, any> {
+	const obj: Record<string, any> = {
+		rules: {
 			/* ------------------- possible errors ------------------ */
 			// these are duplicated in cozy.config.ts isProd
 			'getter-return': 'error',
@@ -24,16 +27,20 @@ export function excessiveConfig(fox: IFoxConfig, tier: string): Record<string, a
 			'no-else-return': ['error', { allowElseIf: false }],
 			'no-implicit-coercion': 'error',
 			'no-multi-str': 'error',
-      'consistent-return': 'error',
+			'consistent-return': 'error',
 			'no-alert': 'error',
 			'no-param-reassign': [
-        'error',
-        {
-          props: true,
-          ignorePropertyModificationsFor: [
-            'ctx', 'req', 'request', 'res', 'response'
-          ],
-        },
+				'error',
+				{
+					props: true,
+					ignorePropertyModificationsFor: [
+						'ctx',
+						'req',
+						'request',
+						'res',
+						'response',
+					],
+				},
 			],
 			'no-magic-numbers': 'error',
 			'no-return-await': 'error',
@@ -42,7 +49,6 @@ export function excessiveConfig(fox: IFoxConfig, tier: string): Record<string, a
 			'no-unmodified-loop-condition': 'error',
 			'radix': ['error', 'always'],
 			'vars-on-top': 'error',
-
 
 			/* --------------------- strict mode -------------------- */
 
@@ -57,12 +63,11 @@ export function excessiveConfig(fox: IFoxConfig, tier: string): Record<string, a
 			'no-var': 'error',
 			'prefer-named-capture-group': 'error',
 
-
 			/* -------------------- ecmascript 6 -------------------- */
 			'no-duplicate-imports': 'error',
 			'prefer-numeric-literals': 'error',
-    },
-	}
+		},
+	};
 
-	return obj
+	return obj;
 }

@@ -1,15 +1,12 @@
-import { IFoxConfig} from 'fox-types'
+import { IFoxConfig } from 'fox-types';
 
-export default function(fox: IFoxConfig): Record<string, any> {
+export default function (fox: IFoxConfig): Record<string, any> {
 	return {
-		"extends": [
-			"htmlvalidate:recommended"
-		],
+		extends: ['htmlvalidate:recommended'],
 
-		"rules": {
-			"close-order": "error",
-    	"void": ["warn", { "style": "omit" }]
-		}
-	}
-
+		rules: {
+			'close-order': 'error',
+			'void': ['warn', { style: 'omit' }],
+		},
+	};
 }

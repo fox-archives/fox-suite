@@ -1,49 +1,49 @@
 {
-  "name": "fox-plugin-eslint",
-  "version": "0.3.4",
-  "description": "",
-  "main": "build",
-  "scripts": {
-    "start": "ts-node src",
-    "test": "fox-test-runner",
-    "watch": "tsc --build --watch",
-    "build": "tsc --build"
-  },
-  "bin": {
-    "fox-plugin-eslint": "./bin/fox-plugin-eslint.js"
-  },
-  "keywords": [
-    "eslint",
-    "fox",
-    "fox-suite"
-  ],
-  "homepage": "https://github.com/eankeen/fox-suite/tree/dev/fox-plugin-eslint#readme",
-  "bugs": {
-    "url": "https://github.com/eankeen/fox-suite/issues"
-  },
-  "author": {
-    "name": "Edwin Kofler",
-    "url": "https://edwinkofler.com"
-  },
-  "repository": {
-    "type": "git",
-    "url": "https://github.com/eankeen/fox-suite.git"
-  },
-  "type": "commonjs",
-  "engines": {
-    "node": ">=12.17.0 >=v13.14.0 >=14.3.0"
-  },
-  "license": "MIT",
-  "dependencies": {
-    "eslint": "^7.2.0",
-    "eslint-config-fox": "workspace:^0.3.4",
-    "fox-esm": "workspace:^0.3.4",
+	"name": "fox-plugin-eslint",
+	"version": "0.3.4",
+	"description": "",
+	"main": "build",
+	"scripts": {
+		"start": "ts-node src",
+		"test": "fox-test-runner",
+		"watch": "tsc --build --watch",
+		"build": "tsc --build"
+	},
+	"bin": {
+		"fox-plugin-eslint": "./bin/fox-plugin-eslint.js"
+	},
+	"keywords": [
+		"eslint",
+		"fox",
+		"fox-suite"
+	],
+	"homepage": "https://github.com/eankeen/fox-suite/tree/dev/fox-plugin-eslint#readme",
+	"bugs": {
+		"url": "https://github.com/eankeen/fox-suite/issues"
+	},
+	"author": {
+		"name": "Edwin Kofler",
+		"url": "https://edwinkofler.com"
+	},
+	"repository": {
+		"type": "git",
+		"url": "https://github.com/eankeen/fox-suite.git"
+	},
+	"type": "commonjs",
+	"engines": {
+		"node": ">=12.17.0 >=v13.14.0 >=14.3.0"
+	},
+	"license": "MIT",
+	"dependencies": {
+		"eslint": "^7.2.0",
+		"eslint-config-fox": "workspace:^0.3.4",
+		"fox-esm": "workspace:^0.3.4",
 		"fox-utils": "workspace:^0.3.4",
 		"colorette": "^1.2.0"
-  },
-  "devDependencies": {
-    "fox-test-runner": "workspace:^0.3.4",
-    "fox-types": "workspace:^0.3.4",
-    "http": "0.0.1-security"
-  }
+	},
+	"devDependencies": {
+		"fox-test-runner": "workspace:^0.3.4",
+		"fox-types": "workspace:^0.3.4",
+		"http": "0.0.1-security"
+	}
 }

@@ -1,16 +1,14 @@
-import minimist from 'minimist'
-import { IBuildCli } from "fox-types";
-import * as foxUtils from './'
-import * as c from 'colorette'
+import minimist from 'minimist';
+import { IBuildCli } from 'fox-types';
+import * as foxUtils from './';
+import * as c from 'colorette';
 
-export async function buildCli(nodeArgv: NodeJS.Process["argv"], {
-	pluginName,
-	pluginDescription,
-	bootstrapFunction,
-	fixFunction
-}: IBuildCli) {
-	process.on("uncaughtException", (err) => console.error(err));
-	process.on("unhandledRejection", (err) => console.error(err));
+export async function buildCli(
+	nodeArgv: NodeJS.Process['argv'],
+	{ pluginName, pluginDescription, bootstrapFunction, fixFunction }: IBuildCli
+) {
+	process.on('uncaughtException', (err) => console.error(err));
+	process.on('unhandledRejection', (err) => console.error(err));
 
 	// TODO: change help menu depending on if module has a function for `--bootstrap`
 	const argv = minimist(nodeArgv.slice(2));
@@ -30,30 +28,34 @@ Examples:
   ${pluginName} --bootstrap
   ${pluginName} --help`;
 
-  if (argv.help || Object.keys(argv).length === 1) {
-    console.info(helpText)
-    process.exitCode = 0
-  } else if (argv.bootstrap) {
+	if (argv.help || Object.keys(argv).length === 1) {
+		console.info(helpText);
+		process.exitCode = 0;
+	} else if (argv.bootstrap) {
 		try {
 			if (!bootstrapFunction) {
-				console.info(c.bold(c.blue('this module does not have a bootstrap function')))
-				return
+				console.info(
+					c.bold(
+						c.blue('this module does not have a bootstrap function')
+					)
+				);
+				return;
 			}
-			await bootstrapFunction()
+			await bootstrapFunction();
 		} catch (err) {
-			console.error(err)
-			process.exitCode = 1
+			console.error(err);
+			process.exitCode = 1;
 		}
-  } else if (argv.action) {
+	} else if (argv.action) {
 		try {
-			const projectData = await foxUtils.getProjectData()
-			await fixFunction(projectData.foxConfig)
+			const projectData = await foxUtils.getProjectData();
+			await fixFunction(projectData.foxConfig);
 		} catch (err) {
-			console.error(err)
-			process.exitCode = 1
+			console.error(err);
+			process.exitCode = 1;
 		}
 	} else {
-		console.log(`Invalid Options. See \`${pluginName} --help\``)
-		process.exitCode = 1
+		console.log(`Invalid Options. See \`${pluginName} --help\``);
+		process.exitCode = 1;
 	}
 }

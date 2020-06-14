@@ -1,17 +1,17 @@
 {
-  "name": "test",
-  "description": "For testing",
-  "version": "0.3.4",
-  "license": "MIT",
-  "scripts": {
-    "test": "jest"
-  },
-  "author": "Edwin Kofler",
-  "keywords": [],
-  "main": "index.js",
-  "devDependencies": {
-    "fox-suite": "workspace:^0.3.4",
+	"name": "test",
+	"description": "For testing",
+	"version": "0.3.4",
+	"license": "MIT",
+	"scripts": {
+		"test": "jest"
+	},
+	"author": "Edwin Kofler",
+	"keywords": [],
+	"main": "index.js",
+	"devDependencies": {
+		"fox-suite": "workspace:^0.3.4",
 		"npm-package-json-lint-config-fox": "workspace:^0.3.4",
 		"http": "0.0.1-security"
-  }
+	}
 }

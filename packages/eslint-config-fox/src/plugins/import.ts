@@ -1,29 +1,36 @@
-import path from 'path'
-import { IFoxConfig } from "fox-types";
-import readPkgUp from 'read-pkg-up'
+import path from 'path';
+import { IFoxConfig } from 'fox-types';
+import readPkgUp from 'read-pkg-up';
 
-export function importPlugin(fox: IFoxConfig, tier: string): Record<string, any> {
+export function importPlugin(
+	fox: IFoxConfig,
+	tier: string
+): Record<string, any> {
 	// requires sourceType: 'module' and ecmaVersion: 2018
 	const obj: Record<string, any> = {
-		plugins: [
-			'eslint-plugin-import'
-		],
+		plugins: ['eslint-plugin-import'],
 		settings: {},
 		rules: {
 			/* ------------------ static analyasis ------------------ */
-			'import/no-unresolved': ['error', {
-				commonjs: true,
-				amd: false
-			}],
+			'import/no-unresolved': [
+				'error',
+				{
+					commonjs: true,
+					amd: false,
+				},
+			],
 			'import/named': 'error',
 			'import/default': 'error',
 			'import/namespace': 'error',
 			'import/no-restricted-paths': 'off',
-			'import/no-absolute-path': ['error', {
-				esmodule: true,
-				commonjs: true,
-				amd: false
-			}],
+			'import/no-absolute-path': [
+				'error',
+				{
+					esmodule: true,
+					commonjs: true,
+					amd: false,
+				},
+			],
 			'import/no-dynamic-require': 'off',
 			'import/no-internal-modules': 'error',
 			'import/no-webpack-loader-syntax': 'error',
@@ -31,7 +38,6 @@ export function importPlugin(fox: IFoxConfig, tier: string): Record<string, any>
 			'import/no-cycle': 'error', // see strict
 			'import/no-useless-path-segments': 'off', // see strict
 			'import/no-relative-parent-imports': 'off',
-
 
 			/* ------------------ helpful warnings ------------------ */
 			'import/export': 'error',
@@ -55,9 +61,12 @@ export function importPlugin(fox: IFoxConfig, tier: string): Record<string, any>
 			'import/no-namespace': 'off',
 			'import/extensions': 'off',
 			'import/order': 'off',
-			'import/newline-after-import': ['error', {
-				count: 1
-			}],
+			'import/newline-after-import': [
+				'error',
+				{
+					count: 1,
+				},
+			],
 			'import/prefer-default-export': 'off',
 			'import-max-dependencies': 'off',
 			'import/no-unassigned-import': 'off',
@@ -67,84 +76,98 @@ export function importPlugin(fox: IFoxConfig, tier: string): Record<string, any>
 			'import/no-anonymous-default-export': 'off',
 			'import/group-exports': 'off',
 			// TODO: webpack
-			'import/dynamic-import-chunkname': 'off'
-		}
-	}
+			'import/dynamic-import-chunkname': 'off',
+		},
+	};
 
 	if (tier === 'strict' || tier === 'excessive') {
 		/* ------------------- static analysis ------------------ */
-		obj.rules['import/no-self-import'] = 'error',
-		obj.rules['import/no-cycle'] = 'error',
-		obj.rules['import/no-useless-path-segments'] = ['error', {
-			noUselessIndex: false,
-			commonjs: true
-		}]
+		(obj.rules['import/no-self-import'] = 'error'),
+			(obj.rules['import/no-cycle'] = 'error'),
+			(obj.rules['import/no-useless-path-segments'] = [
+				'error',
+				{
+					noUselessIndex: false,
+					commonjs: true,
+				},
+			]);
 
 		/* ------------------ helpful warnings ------------------ */
-		obj.rules['import/no-mutable-exports'] = 'error'
+		obj.rules['import/no-mutable-exports'] = 'error';
 
 		/* --------------------- style guide -------------------- */
 		// TODO: move these up to 'cozy'
-		obj.rules['import/first'] = 'error',
-		obj.rules['import/exports-last'] = 2,
-		obj.rules['import/no-duplicates'] = 'error'
+		(obj.rules['import/first'] = 'error'),
+			(obj.rules['import/exports-last'] = 2),
+			(obj.rules['import/no-duplicates'] = 'error');
 	}
 
 	if (tier === 'excessive') {
 		/* ------------------- static analysis ------------------ */
-		obj.rules['import/no-unresolved'] = ['error', {
-			commonjs: true,
-			amd: false,
-			caseSensitive: true
-		}]
-		obj.rules['import/no-useless-path-segments'] = ['error', {
-			noUselessIndex: true,
-			commonjs: true
-		}]
+		obj.rules['import/no-unresolved'] = [
+			'error',
+			{
+				commonjs: true,
+				amd: false,
+				caseSensitive: true,
+			},
+		];
+		obj.rules['import/no-useless-path-segments'] = [
+			'error',
+			{
+				noUselessIndex: true,
+				commonjs: true,
+			},
+		];
 
 		/* ------------------ helpful warnings ------------------ */
-		obj.rules['import/no-named-as-default'] = 'error'
-		obj.rules['import/no-deprecated'] = 'error'
-		obj.settings['import/doctyle'] = ['jsdoc', /*'tomdoc'*/]
-		obj.rules['import/no-extraneous-dependencies'] = ['error', {
-			devDependencies: true,
-			optionalDependencies: true,
-			peerDependencies: true,
-			bundledDependencies: true
-		}]
+		obj.rules['import/no-named-as-default'] = 'error';
+		obj.rules['import/no-deprecated'] = 'error';
+		obj.settings['import/doctyle'] = ['jsdoc' /*'tomdoc'*/];
+		obj.rules['import/no-extraneous-dependencies'] = [
+			'error',
+			{
+				devDependencies: true,
+				optionalDependencies: true,
+				peerDependencies: true,
+				bundledDependencies: true,
+			},
+		];
 		// obj.rules['import/no-unused-modules'] = ['error', {
-			// missingExports: true,
-			// unusedExports: true,
-			/*src: [
+		// missingExports: true,
+		// unusedExports: true,
+		/*src: [
 				path.dirname(readPkgUp.sync()!.path) || process.cwd() ] */
 		// }]
 
-
 		/* --------------------- style guide -------------------- */
-		obj.rules['import/order'] = ['error', {
-			groups: ['builtin', 'external', 'parent', 'sibling', 'index']
-		}]
+		obj.rules['import/order'] = [
+			'error',
+			{
+				groups: ['builtin', 'external', 'parent', 'sibling', 'index'],
+			},
+		];
 	}
 
 	if (false) {
-		obj.rules['import/named'] = 'off'
+		obj.rules['import/named'] = 'off';
 
-		const allExtensions = ['.ts', '.tsx', '.d.ts', '.js', '.jsx']
+		const allExtensions = ['.ts', '.tsx', '.d.ts', '.js', '.jsx'];
 		// typescript
-		obj.rules['import/extensions'] = allExtensions,
-    obj.rules['import/external-module-folders'] = ['node_modules', 'node_modules/@types'],
-    obj.rules['import/parsers'] = {
-      '@typescript-eslint/parser': ['.ts', '.tsx', '.d.ts'],
-    },
-    obj.rules['import/resolver'] = {
-      'node': {
-        'extensions': allExtensions,
-      },
-    }
+		(obj.rules['import/extensions'] = allExtensions),
+			(obj.rules['import/external-module-folders'] = [
+				'node_modules',
+				'node_modules/@types',
+			]),
+			(obj.rules['import/parsers'] = {
+				'@typescript-eslint/parser': ['.ts', '.tsx', '.d.ts'],
+			}),
+			(obj.rules['import/resolver'] = {
+				node: {
+					extensions: allExtensions,
+				},
+			});
 	}
 
-
-
-	return obj
+	return obj;
 }
-

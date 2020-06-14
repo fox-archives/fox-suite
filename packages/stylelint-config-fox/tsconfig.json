@@ -1,16 +1,14 @@
 {
-  "extends": "../tsconfig.plugin.json",
-  "compilerOptions": {
-    "module": "CommonJS",
-    "rootDir": "src",
-    "outDir": "build"
-  },
-  "include": [
-    "src/**/*"
-  ],
-  "references": [
-    {
-      "path": "../fox-utils"
-    }
-  ]
+	"extends": "../tsconfig.plugin.json",
+	"compilerOptions": {
+		"module": "CommonJS",
+		"rootDir": "src",
+		"outDir": "build"
+	},
+	"include": ["src/**/*"],
+	"references": [
+		{
+			"path": "../fox-utils"
+		}
+	]
 }

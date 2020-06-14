@@ -1,12 +1,12 @@
 interface ILintOptions {
-  cwd?: string,
-  packageJsonObject?: any,
-  packageJsonFile?: string,
-  config?: any,
-  configFile?: string,
-  patterns?: string[]
-  quiet?: boolean
-  ignorePath?: string
+	cwd?: string;
+	packageJsonObject?: any;
+	packageJsonFile?: string;
+	config?: any;
+	configFile?: string;
+	patterns?: string[];
+	quiet?: boolean;
+	ignorePath?: string;
 }
 
 // declare module 'npm-package-json-lint' {
@@ -17,4 +17,4 @@ interface ILintOptions {
 //   }
 // }
 
-declare module 'npm-package-json-lint'
+declare module 'npm-package-json-lint';

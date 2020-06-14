@@ -1,15 +1,13 @@
 {
-  "extends": "../tsconfig.plugin.json",
-  "compilerOptions": {
-    "rootDir": "src",
-    "outDir": "build"
-  },
-  "include": [
-    "src/**/*", "templates"
-  ],
-  "references": [
-    {
-      "path": "../stylelint-config-fox"
-    }
-  ]
+	"extends": "../tsconfig.plugin.json",
+	"compilerOptions": {
+		"rootDir": "src",
+		"outDir": "build"
+	},
+	"include": ["src/**/*", "templates"],
+	"references": [
+		{
+			"path": "../stylelint-config-fox"
+		}
+	]
 }

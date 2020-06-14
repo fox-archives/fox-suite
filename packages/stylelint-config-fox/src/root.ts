@@ -1,6 +1,9 @@
-import { IFoxConfig } from 'fox-types'
+import { IFoxConfig } from 'fox-types';
 
-export function rootConfig(foxConfig: IFoxConfig, tier: string): Record<string, any> {
+export function rootConfig(
+	foxConfig: IFoxConfig,
+	tier: string
+): Record<string, any> {
 	const root: Record<string, any> = {
 		parser: require.resolve('babel-eslint'),
 		parserOptions: {
@@ -11,36 +14,36 @@ export function rootConfig(foxConfig: IFoxConfig, tier: string): Record<string, 
 				globalReturn: false,
 				impliedStrict: true,
 				jsx: true,
-			}
+			},
 		},
 		env: {
-			browser: false, // see below
-			node: false, // see below
-			commonjs: false, // see below
+			'browser': false, // see below
+			'node': false, // see below
+			'commonjs': false, // see below
 			'shared-node-browser': false, // see below
-			es6: true,
-			es2017: true,
-			es2020: true,
-			worker: false,
-			amd: false,
-			mocha: false,
-			jasmine: false,
-			jest: false,
-			phantomjs: false,
-			protractor: false,
-			qunit: false,
-			jquery: false,
-			prototypejs: false,
-			shelljs: false,
-			meteor: false,
-			mongo: false,
-			applescript: false,
-			nashorn: false,
-			serviceworker: false,
-			atomtest: false,
-			embertest: false,
-			webextensions: false,
-			greasemonkey: false,
+			'es6': true,
+			'es2017': true,
+			'es2020': true,
+			'worker': false,
+			'amd': false,
+			'mocha': false,
+			'jasmine': false,
+			'jest': false,
+			'phantomjs': false,
+			'protractor': false,
+			'qunit': false,
+			'jquery': false,
+			'prototypejs': false,
+			'shelljs': false,
+			'meteor': false,
+			'mongo': false,
+			'applescript': false,
+			'nashorn': false,
+			'serviceworker': false,
+			'atomtest': false,
+			'embertest': false,
+			'webextensions': false,
+			'greasemonkey': false,
 		},
 		globals: {
 			document: 'readonly',
@@ -66,22 +69,22 @@ export function rootConfig(foxConfig: IFoxConfig, tier: string): Record<string, 
 			{
 				files: ['**/*.test.js', '**/*.spec.js'],
 				env: {
-					"jest": true,
+					jest: true,
 					// "jest/globals": true
 				},
 			},
 		],
-		rules: { },
-	}
+		rules: {},
+	};
 
 	if (foxConfig.env.includes('browser')) {
-		root.env.browser = true
+		root.env.browser = true;
 	}
 
 	if (foxConfig.env.includes('node')) {
-		root.env.node = true
-		root.env.commonjs = true
+		root.env.node = true;
+		root.env.commonjs = true;
 	}
 
-	return root
+	return root;
 }

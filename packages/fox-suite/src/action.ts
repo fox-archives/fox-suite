@@ -1,101 +1,101 @@
-import type { IAction, IPluginExportIndex, IProject } from 'fox-types'
-import chokidar from 'chokidar'
-import * as c from 'colorette'
-import * as util from './util'
-import assert from 'assert'
+import type { IAction, IPluginExportIndex, IProject } from 'fox-types';
+import chokidar from 'chokidar';
+import * as c from 'colorette';
+import * as util from './util';
+import assert from 'assert';
 
 /**
  * @description bootstraps, formats, or lints a project
  */
 async function doAction({
 	actionFunctions,
-	projectData
+	projectData,
 }: IAction): Promise<void> {
-	assert(Array.isArray(actionFunctions))
+	assert(Array.isArray(actionFunctions));
 
 	for (const fixFunction of actionFunctions) {
-		if (!fixFunction) continue
+		if (!fixFunction) continue;
 
-		await fixFunction(projectData.foxConfig)
+		await fixFunction(projectData.foxConfig);
 	}
 }
 
 /* --------------------- do[action] --------------------- */
 
 interface IDoBootstrap {
-	foxPlugins: IPluginExportIndex[],
-	pluginSelection: number,
-	projectData: IProject
+	foxPlugins: IPluginExportIndex[];
+	pluginSelection: number;
+	projectData: IProject;
 }
 
 export async function doBootstrap({
 	foxPlugins,
 	pluginSelection,
-	projectData
+	projectData,
 }: IDoBootstrap): Promise<void> {
-	if(pluginSelection === void 0) {
-		console.log(c.bold(c.red('exiting tui')))
-		return
+	if (pluginSelection === void 0) {
+		console.log(c.bold(c.red('exiting tui')));
+		return;
 	}
 
 	await doAction({
 		actionFunctions: util.pickSpecificModuleProperty({
 			foxPlugins,
 			specificIndicesToPick: pluginSelection,
-			actionFunction: "bootstrapFunction"
+			actionFunction: 'bootstrapFunction',
 		}),
-		projectData
-	})
+		projectData,
+	});
 
-	console.log(c.bold(c.green('bootstrap complete')))
+	console.log(c.bold(c.green('bootstrap complete')));
 }
 
 interface IDoFix {
-	foxPluginPaths: string[],
-	foxPlugins: IPluginExportIndex[],
-	pluginSelection: number,
-	projectData: IProject
+	foxPluginPaths: string[];
+	foxPlugins: IPluginExportIndex[];
+	pluginSelection: number;
+	projectData: IProject;
 }
 
 export async function doFix({
 	foxPluginPaths,
 	foxPlugins,
 	pluginSelection,
-	projectData
+	projectData,
 }: IDoFix): Promise<void> {
 	if (pluginSelection === void 0) {
-		console.log(c.bold(c.red('exiting tui')))
-		return
+		console.log(c.bold(c.red('exiting tui')));
+		return;
 	}
 
 	await doAction({
 		actionFunctions: util.pickSpecificModuleProperty({
 			foxPlugins,
 			specificIndicesToPick: pluginSelection,
-			actionFunction: "fixFunction"
+			actionFunction: 'fixFunction',
 		}),
-		projectData
-	})
+		projectData,
+	});
 
-	console.log(c.bold(c.green('fix complete')))
+	console.log(c.bold(c.green('fix complete')));
 }
 
 interface IDoWatch {
-	foxPluginPaths: string[],
-	foxPlugins: IPluginExportIndex[],
-	pluginSelection: number,
-	projectData: IProject
+	foxPluginPaths: string[];
+	foxPlugins: IPluginExportIndex[];
+	pluginSelection: number;
+	projectData: IProject;
 }
 
 export async function doWatch({
 	foxPluginPaths,
 	foxPlugins,
 	pluginSelection,
-	projectData
+	projectData,
 }: IDoWatch): Promise<void> {
 	if (pluginSelection === void 0) {
-		console.log(c.bold(c.red('exiting tui')))
-		return
+		console.log(c.bold(c.red('exiting tui')));
+		return;
 	}
 
 	// test for watchers and then do action
@@ -104,29 +104,31 @@ export async function doWatch({
 			'**/node_modules/**',
 			'**/web_modules/**',
 			'**/.git/**',
-			'**/.hg/**'
+			'**/.hg/**',
 		],
 		persistent: true,
-		cwd: projectData.location
-	})
+		cwd: projectData.location,
+	});
 
-	let totalFiles = 0
-	watcher.on('add', path => totalFiles++)
-	watcher.on('unlink', path => totalFiles--)
-	watcher.on('change', async path => {
-		if (path.includes('.config/build')) return
+	let totalFiles = 0;
+	watcher.on('add', (path) => totalFiles++);
+	watcher.on('unlink', (path) => totalFiles--);
+	watcher.on('change', async (path) => {
+		if (path.includes('.config/build')) return;
 
-		console.log(`${path} of ${totalFiles} files changed. recompiling config files and executing fixers`)
+		console.log(
+			`${path} of ${totalFiles} files changed. recompiling config files and executing fixers`
+		);
 
 		await doAction({
 			actionFunctions: util.pickSpecificModuleProperty({
 				foxPlugins,
 				specificIndicesToPick: pluginSelection,
-				actionFunction: "fixFunction"
+				actionFunction: 'fixFunction',
 			}),
-			projectData
-		})
-	})
+			projectData,
+		});
+	});
 
-	console.log('starting watcher')
+	console.log('starting watcher');
 }

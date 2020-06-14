@@ -1,21 +1,21 @@
 {
-  "name": "fox-plugin-package-json-lint",
-  "version": "0.3.4",
-  "description": "",
-  "main": "build",
-  "scripts": {
-    "start": "ts-node src",
-    "watch": "tsc --build --watch",
-    "build": "tsc --build"
-  },
-  "bin": {
-    "fox-plugin-package-json-lint": "./bin/fox-plugin-package-json-lint.js"
-  },
-  "type": "commonjs",
-  "engines": {
-    "node": ">=12.17.0 >=v13.14.0 >=14.3.0"
-  },
-  "keywords": [
+	"name": "fox-plugin-package-json-lint",
+	"version": "0.3.4",
+	"description": "",
+	"main": "build",
+	"scripts": {
+		"start": "ts-node src",
+		"watch": "tsc --build --watch",
+		"build": "tsc --build"
+	},
+	"bin": {
+		"fox-plugin-package-json-lint": "./bin/fox-plugin-package-json-lint.js"
+	},
+	"type": "commonjs",
+	"engines": {
+		"node": ">=12.17.0 >=v13.14.0 >=14.3.0"
+	},
+	"keywords": [
 		"lint",
 		"fox",
 		"package-json-lint",
@@ -33,17 +33,17 @@
 		"type": "git",
 		"url": "https://github.com/eankeen/fox-suite.git"
 	},
-  "license": "MIT",
-  "dependencies": {
-    "fox-test-runner": "workspace:^0.3.4",
-    "fox-utils": "workspace:^0.3.4",
-    "npm-package-json-lint": "^5.1.0",
+	"license": "MIT",
+	"dependencies": {
+		"fox-test-runner": "workspace:^0.3.4",
+		"fox-utils": "workspace:^0.3.4",
+		"npm-package-json-lint": "^5.1.0",
 		"npm-package-json-lint-config-fox": "workspace:^0.3.4",
 		"http": "0.0.1-security"
-  },
-  "devDependencies": {
-    "fox-types": "workspace:^0.3.4",
-    "ts-node": "^8.10.2",
-    "typescript": "^3.9.5"
-  }
+	},
+	"devDependencies": {
+		"fox-types": "workspace:^0.3.4",
+		"ts-node": "^8.10.2",
+		"typescript": "^3.9.5"
+	}
 }

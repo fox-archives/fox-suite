@@ -1,4 +1,4 @@
-import type { IPluginExportInfo } from 'fox-types'
+import type { IPluginExportInfo } from 'fox-types';
 
 export const info: IPluginExportInfo = {
 	name: 'fox-plugin-sort-package-json',
@@ -6,5 +6,5 @@ export const info: IPluginExportInfo = {
 	toolName: 'packageJsonSort',
 	toolConfigSchemaHelpUri: '',
 	description: 'Sorts the pacakge.json file',
-	descriptionLong: 'Lints the package.json file. Has autofix?'
-}
+	descriptionLong: 'Lints the package.json file. Has autofix?',
+};

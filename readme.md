@@ -4,17 +4,17 @@ A sly suite of tools for web development
 
 Do you ever...
 
-- Get tired of setting up common tools and files (`.editorconfig`, `.prettierrc`, `.eslintconfig.js`, `.lint-stagedrc.json`, `husky.json`, etc.) over and over for each project?
-- Want sane defaults for all of these tools without having to think?
-- Allow to easily change the settings to something more strict if the project ends up being a bit more serious (and you want to focus on correctness rather than iterability)
+-   Get tired of setting up common tools and files (`.editorconfig`, `.prettierrc`, `.eslintconfig.js`, `.lint-stagedrc.json`, `husky.json`, etc.) over and over for each project?
+-   Want sane defaults for all of these tools without having to think?
+-   Allow to easily change the settings to something more strict if the project ends up being a bit more serious (and you want to focus on correctness rather than iterability)
 
 If you feel similar, this package is likely for you!
 
 Fox suite provides a unified interface for all formatting, linting, and boilerplate needs. It ensures these independent tools behave as epected and match behavior as closely as possible (ex. file globbing, tty output).
 
-- nearly all configuration is placed in `.config`, to prevent clutter of project directory and `package.json`. rather than trying to abstract over this, you can just edit the files directly if you want to change a setting
+-   nearly all configuration is placed in `.config`, to prevent clutter of project directory and `package.json`. rather than trying to abstract over this, you can just edit the files directly if you want to change a setting
 
-- `.editorconfig` is the only other config file placed at root
+-   `.editorconfig` is the only other config file placed at root
 
 Most of these third party tools are not invoked directly. This would mean we would have to depend on how the third party tool searches the fs for its config file, and probably other things.
 
@@ -23,16 +23,16 @@ Most of these third party tools are not invoked directly. This would mean we wou
 ```js
 // fox.config.js
 export default {
-  all: 'cozy',
-  monorepo: true,
-  plugin: {
-    eslint: 'cozy',
-    stylelint: 'excessive'
-  }
-}
+	all: 'cozy',
+	monorepo: true,
+	plugin: {
+		eslint: 'cozy',
+		stylelint: 'excessive',
+	},
+};
 ```
 
-with each project, you may want to slightly change the configuration, geared towards *developer satisfaction*. for example, the above config lints javascript such that only the most aggregous errors are caught and that most autofixable rules are enabled. if your project suddenly becomes a bit more serious / big, you can always increase the parameter to 'strict', or 'excessive', to give more guarentees
+with each project, you may want to slightly change the configuration, geared towards _developer satisfaction_. for example, the above config lints javascript such that only the most aggregous errors are caught and that most autofixable rules are enabled. if your project suddenly becomes a bit more serious / big, you can always increase the parameter to 'strict', or 'excessive', to give more guarentees
 
 ## Usage
 
@@ -46,15 +46,14 @@ npm i fox-suite fox-preset-recommended
 fox
 ```
 
-
 ## Options Explanation
 
 ## Behavior
 
-- Styling issues are always _warnings_ and auto-fixable
-- Syntax issues are usually _errors_ when either auto-fixable or not
-  - Exceptions include obviously temporary errors (ex. `no-lone-blocks` (`{}`)) (which may be _off_ or \_warning)
-- Extra syntax issues may be _error_ on `NODE_ENV === production` (ex. loggers)
+-   Styling issues are always _warnings_ and auto-fixable
+-   Syntax issues are usually _errors_ when either auto-fixable or not
+    -   Exceptions include obviously temporary errors (ex. `no-lone-blocks` (`{}`)) (which may be _off_ or \_warning)
+-   Extra syntax issues may be _error_ on `NODE_ENV === production` (ex. loggers)
 
 ## Options
 
@@ -63,8 +62,8 @@ fox
 ```js
 // fox.config.js
 export default {
-  lint: 'off | cozy (default) || strict || excessive',
-}
+	lint: 'off | cozy (default) || strict || excessive',
+};
 ```
 
 ### Description
@@ -77,29 +76,29 @@ Turns of all functionality
 
 Catches code that has / is
 
-- aggregous errors
-- non-aggregous auto-fixable errors
-- hard to debug / easy to be buggy
-- isn't obviously buggy (but is buggy)
-- not unobviously buggy (and isn't)
-- deprecated syntax
+-   aggregous errors
+-   non-aggregous auto-fixable errors
+-   hard to debug / easy to be buggy
+-   isn't obviously buggy (but is buggy)
+-   not unobviously buggy (and isn't)
+-   deprecated syntax
 
 ### strict
 
 Catches code that has / is
 
-- not up to best practices
-- unecessarily verbose / unecessarily misleading
-  - ex. needlessly using `.bind()`
-- ambiguous
-- essentially similar to what you would expect from `eslint-config-airbnr`, `stylelint-config-standard`, etc. but a bit looser
+-   not up to best practices
+-   unecessarily verbose / unecessarily misleading
+    -   ex. needlessly using `.bind()`
+-   ambiguous
+-   essentially similar to what you would expect from `eslint-config-airbnr`, `stylelint-config-standard`, etc. but a bit looser
 
 ### excessive
 
 Essentially the same as `strict`, but includes options that are
 more annoying than helpfull when coding a project
 
-- ex. forcing default to exist at end of switch
+-   ex. forcing default to exist at end of switch
 
 ## Who is this for?
 
@@ -111,20 +110,20 @@ Another thing, we try to be as explicit as possible. For example, if an API allo
 
 most of this support is half-baked and not finished
 
-- html-validate
-- markdownlint
-- ESlint
-- Stylelint
-- HTMLHint
-- htmllint
-- html-verify
-- prettier
-- sort-package-json
-- package-json-lint
+-   html-validate
+-   markdownlint
+-   ESlint
+-   Stylelint
+-   HTMLHint
+-   htmllint
+-   html-verify
+-   prettier
+-   sort-package-json
+-   package-json-lint
 
 stuff like commit-convention might be added later
 
-- boilerplating babel, typescript etc configs are probably out of the scope of this project
+-   boilerplating babel, typescript etc configs are probably out of the scope of this project
 
 ## Supported Versions
 
@@ -135,7 +134,7 @@ right now we support running on node versions `>=12.17.0 >=v13.14.0 >=14.3.0`, b
 it's kind of simple. you have to make sure you fork the template, since everything is setup there already. if you try to set it up yourself right now at the moment, you'll run into troubles (ex. since we load directly from `build/index.js` of package, completely bypassing node's module resolution algorithm). sometime in the future this will probably be improved
 
 ```js
-import { IPluginExportInfo } from 'fox-types'
+import { IPluginExportInfo } from 'fox-types';
 
 // info.ts
 export const info: IPluginExportInfo = {
@@ -147,11 +146,11 @@ export const info: IPluginExportInfo = {
 	// used by prompts in fox-suite and buildCli
 	description: 'Lints the HTML files',
 	// used by nothing
-	descriptionLong: 'Lints HTML files'
-}
+	descriptionLong: 'Lints HTML files',
+};
 ```
 
-- within your plugin, you must dynamically importing the `import()` syntax (or `require()`)
+-   within your plugin, you must dynamically importing the `import()` syntax (or `require()`)
 
 #### how to make a `preset`
 
@@ -159,17 +158,17 @@ it's similar to other tools. feel free to use esmodules and `export default` sin
 look like `stylelint-config-fox`, `eslint-config-fox`, since they're going to be referenced in the config
 
 ```js
-import { IPresetExportIndex } from 'fox-types'
+import { IPresetExportIndex } from 'fox-types';
 
 /** @type {IPresetExportIndex} */
 const preset = {
 	plugins: [
 		require.resolve('fox-plugin-stylelint'),
-		require.resolve('fox-plugin-eslint')
-	]
-}
+		require.resolve('fox-plugin-eslint'),
+	],
+};
 
-export default preset
+export default preset;
 ```
 
 ### Treatment of `template` files
@@ -180,7 +179,7 @@ When your config is rebuild for consumption by tools, this is how it works. We o
 
 ## notes
 
-- if something requires a path directory, use `(await getProjectData()).location`, but if that isn't available use `path.dirname((await import('read-pkg-up')()).path)`-ish, or it's corresponding sync method (but _not_ `process.cwd()`.
+-   if something requires a path directory, use `(await getProjectData()).location`, but if that isn't available use `path.dirname((await import('read-pkg-up')()).path)`-ish, or it's corresponding sync method (but _not_ `process.cwd()`.
 
 ## FAQ
 
