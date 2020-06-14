@@ -41,8 +41,8 @@
 		"ts-jest": "^26.1.0",
 		"typescript": "^3.9.5"
 	},
-	"peerDependencies": {
-		"eslint": "^7.2.0"
+	"optionalDependencies": {
+		"prettier": "^2.0.0"
 	},
 	"dependencies": {
 		"babel-eslint": "^10.1.0",
