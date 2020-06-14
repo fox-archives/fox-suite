@@ -43,6 +43,7 @@
 	},
 	"license": "MIT",
 	"dependencies": {
+		"babel-eslint": "^10.1.0",
 		"fox-types": "workspace:^1.0.3",
 		"lodash.merge": "^4.6.2",
 		"lodash.mergewith": "^4.6.2",
