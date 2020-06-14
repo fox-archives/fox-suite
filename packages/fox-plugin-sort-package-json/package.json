@@ -3,9 +3,7 @@
 	"version": "1.0.2",
 	"license": "MIT",
 	"scripts": {
-		"test": "ava",
-		"snyk-protect": "snyk protect",
-		"prepublish": "npm run snyk-protect"
+		"test": "ava"
 	},
 	"type": "commonjs",
 	"engines": {
@@ -48,8 +46,7 @@
 	"dependencies": {
 		"fox-test-runner": "^0.3.0",
 		"fox-utils": "^0.3.0",
-		"lodash.sortby": "^4.7.0",
-		"snyk": "^1.339.2"
+		"lodash.sortby": "^4.7.0"
 	},
 	"devDependencies": {
 		"ava": "^3.8.2",
@@ -57,6 +54,5 @@
 		"husky": "^4.2.5",
 		"ts-node": "^8.10.2",
 		"typescript": "^3.9.5"
-	},
-	"snyk": true
+	}
 }
