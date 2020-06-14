@@ -131,6 +131,11 @@ Files are copied over from your plugin's `template` directly to the project's ro
 
 -   opt to use `(await getProjectData()).location` over `path.dirname((await import('read-pkg-up')()).path)`-ish over `process.cwd()` where applicable
 
+```
+projectLocation: projectData.location,
+projectFoxConfigPath: projectData.foxConfigPath,
+projectPackageJsonPath: projectData.packageJsonPath
+```
 ## FAQ
 
 ### What about Rome?

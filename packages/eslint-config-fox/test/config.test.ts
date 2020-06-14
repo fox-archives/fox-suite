@@ -27,7 +27,7 @@ test('config has basic properties', async () => {
 });
 
 test('eslint engine evaluates config file', () => {
-	setOpts({ all: 'cozy', env: [] });
+	setOpts({ all: 'cozy' });
 	setTier('cozy');
 
 	const CLIEngine = eslint.CLIEngine;
@@ -42,9 +42,9 @@ test('eslint engine evaluates config file', () => {
 	expect(cli.executeOnText(code).errorCount).toBe(0);
 });
 
-describe('tiers', () => {
+describe('tiers are configured properly', () => {
 	test("'cozy' config", async () => {
-		setOpts({ all: 'cozy', env: [] });
+		setOpts({ all: 'cozy' });
 		setTier('cozy');
 
 		const eslintConfig: Record<string, any> = await import('../src');
@@ -53,7 +53,7 @@ describe('tiers', () => {
 	});
 
 	test("'strict' config", async () => {
-		setOpts({ all: 'strict', env: [] });
+		setOpts({ all: 'strict' });
 		setTier('strict');
 
 		const eslintConfig: Record<string, any> = await import('../src');
@@ -65,7 +65,7 @@ describe('tiers', () => {
 	});
 
 	test("'excessive' config", async () => {
-		setOpts({ all: 'excessive', env: [] });
+		setOpts({ all: 'excessive' });
 		setTier('excessive');
 
 		const eslintConfig: Record<string, any> = await import('../src');
@@ -73,3 +73,7 @@ describe('tiers', () => {
 		expect(eslintConfig.rules['vars-on-top']).toBe('error');
 	});
 });
+
+describe('plugins work', () => {
+
+})

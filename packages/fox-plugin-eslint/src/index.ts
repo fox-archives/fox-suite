@@ -18,7 +18,7 @@ export async function bootstrapFunction() {
 export async function fixFunction() {
 	await foxUtils.buildFix({
 		dirname: __dirname,
-		async fn() {
+		async fn(): Promise<void> {
 			const project = await foxUtils.getProjectData();
 
 			const config = (await import('eslint-config-fox')).default;

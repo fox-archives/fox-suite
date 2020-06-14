@@ -48,7 +48,7 @@
 	"dependencies": {
 		"fox-test-runner": "^0.3.0",
 		"fox-utils": "^0.3.0",
-		"lodash": "^4.17.15",
+		"lodash.sortby": "^4.7.0",
 		"snyk": "^1.339.2"
 	},
 	"devDependencies": {

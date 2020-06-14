@@ -18,24 +18,20 @@ export async function bootstrapFunction(): Promise<void> {
 export async function fixFunction(): Promise<void> {
 	await foxUtils.buildFix({
 		dirname: __dirname,
-		async fn() {
+		async fn(): Promise<void> {
 			const project = await foxUtils.getProjectData();
 
 			const config = (
 				await import(
-					path.join(__dirname, '../config/prettier.config.js')
+					require.resolve(path.join(__dirname, './prettier.config'))
 				)
 			).default;
 			d('config/prettier.config.js config: %o', config);
 
 			await foxUtils.writeFile(
-				path.join(project.location, '.config/build/eslint.config.json'),
+				path.join(project.location, '.config/build/prettier.config.json'),
 				config
 			);
-			// xml file endings: https://github.com/prettier/plugin-xml/blob/master/src/plugin.js
-			// let fileEndings = 'jsx,tsx,ts,js,json,vue,less,'
-			// fileEndings += 'scss,sass,css,postcss,pcss,graphql,md,mdx,yaml,yml,'
-			// fileEndings += 'xml,dita,ditamap,ditaval,svg,xsd,'
 
 			const files = await glob(`**/*`, {
 				cwd: project.location,

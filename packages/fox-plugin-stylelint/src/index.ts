@@ -19,7 +19,7 @@ export async function bootstrapFunction(): Promise<void> {
 export async function fixFunction(): Promise<void> {
 	await foxUtils.buildFix({
 		dirname: __dirname,
-		async fn() {
+		async fn(): Promise<void> {
 			const project = await foxUtils.getProjectData();
 
 			const config = (await import('stylelint-config-fox')).default;
