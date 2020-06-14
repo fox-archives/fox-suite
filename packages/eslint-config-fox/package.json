@@ -1,7 +1,7 @@
 {
 	"name": "eslint-config-fox",
 	"description": "ESLint configuration for Fox Suite",
-	"version": "0.3.4",
+	"version": "1.0.0",
 	"keywords": [
 		"eslint",
 		"fox",
@@ -34,7 +34,7 @@
 	},
 	"devDependencies": {
 		"eslint": "^7.2.0",
-		"fox-types": "workspace:^0.3.4",
+		"fox-types": "workspace:^1.0.0",
 		"jest": "^26.0.1",
 		"jest-extended": "^0.11.5",
 		"np": "^6.2.4",
