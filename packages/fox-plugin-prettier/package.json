@@ -30,7 +30,9 @@
     "watch": "tsc --build --watch",
     "build": "tsc --build",
     "test": "jest",
-    "lint": "eslint --fix --config eslint.config.cjs ."
+    "lint": "eslint --fix --config eslint.config.cjs .",
+    "snyk-protect": "snyk protect",
+    "prepublish": "npm run snyk-protect"
   },
   "devDependencies": {
     "fox-types": "workspace:^0.3.4",
@@ -46,6 +48,8 @@
     "fox-utils": "workspace:^0.3.4",
     "prettier": "^2.0.5",
     "prettier-plugin-elm": "^0.7.0",
-    "prettier-plugin-java": "^0.8.0"
-  }
+    "prettier-plugin-java": "^0.8.0",
+    "snyk": "^1.339.2"
+  },
+  "snyk": true
 }
