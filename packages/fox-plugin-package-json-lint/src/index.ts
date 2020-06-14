@@ -1,15 +1,15 @@
 // @ts-ignore
-import { NpmPackageJsonLint } from 'npm-package-json-lint';
-import * as foxUtils from 'fox-utils';
-import { IFoxConfig } from 'fox-types';
-import path from 'path';
+import { NpmPackageJsonLint } from 'npm-package-json-lint'
+import * as foxUtils from 'fox-utils'
+import { IFoxConfig } from 'fox-types'
+import path from 'path'
 
-export { info } from './info';
+export { info } from './info'
 
 export async function bootstrapFunction(): Promise<void> {
 	await foxUtils.buildBootstrap({
 		dirname: __dirname,
-	});
+	})
 }
 
 export async function lintFunction(fox: IFoxConfig): Promise<void> {

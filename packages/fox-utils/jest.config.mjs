@@ -3,6 +3,6 @@ export default {
 	globals: {
 		'ts-jest': {
 			packageJson: 'package.json',
-  	},
+		},
 	},
-};
+}

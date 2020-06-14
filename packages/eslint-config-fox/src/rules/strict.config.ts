@@ -1,19 +1,19 @@
-import merge from 'lodash.merge';
-import type { IFoxConfig } from 'fox-types';
+import merge from 'lodash.merge'
+import type { IFoxConfig } from 'fox-types'
 
 /**
  * Enable rules that could prevent
  * potentially buggy code
  */
 
-const isProd = process.env.NODE_ENV === 'production';
+const isProd = process.env.NODE_ENV === 'production'
 
 /**
  * Strict config rules
  */
 export function strictConfig(
 	fox: IFoxConfig,
-	tier: string
+	tier: string,
 ): Record<string, any> {
 	const obj: Record<string, any> = {
 		rules: {
@@ -225,23 +225,23 @@ export function strictConfig(
 			'require-yield': 'off', // see isProd
 			'symbol-description': 'error',
 		},
-	};
+	}
 
 	if (isProd) {
 		/* ------------------- possible errors ------------------ */
-		obj.rules['no-empty'] = ['error', { allowEmptyCatch: false }];
-		obj.rules['no-console'] = 'error';
+		obj.rules['no-empty'] = ['error', { allowEmptyCatch: false }]
+		obj.rules['no-console'] = 'error'
 
 		/* ------------------- best practices ------------------- */
-		obj.rules['array-callback-return'] = ['error', { allowImplicit: true }];
+		obj.rules['array-callback-return'] = ['error', { allowImplicit: true }]
 		obj.rules['no-empty-function'] = [
 			'error',
 			{
 				allow: ['arrow-functions'],
 			},
-		];
-		obj.rules['no-extra-label'] = 'error';
-		obj.rules['no-lone-blocks'] = 'error';
+		]
+		obj.rules['no-extra-label'] = 'error'
+		obj.rules['no-lone-blocks'] = 'error'
 
 		/* --------------------- strict mode -------------------- */
 
@@ -252,9 +252,9 @@ export function strictConfig(
 		// ]
 
 		/* -------------------- ecmascript 6 -------------------- */
-		obj.rules['no-useless-constructor'] = 'error';
-		obj.rules['require-yield'] = 'off'; // see isProd
+		obj.rules['no-useless-constructor'] = 'error'
+		obj.rules['require-yield'] = 'off' // see isProd
 	}
 
-	return obj;
+	return obj
 }

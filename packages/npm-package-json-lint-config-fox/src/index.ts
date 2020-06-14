@@ -1,9 +1,9 @@
-import { IFoxConfig } from 'fox-types';
+import { IFoxConfig } from 'fox-types'
 
 const foxConfig: IFoxConfig = JSON.parse(
-	process.env.FOX_SUITE_FOX_OPTIONS || '{}'
-);
-const tier: string = process.env.FOX_SUITE_PLUGIN_STYLELINT_TIER || '';
+	process.env.FOX_SUITE_FOX_OPTIONS || '{}',
+)
+const tier: string = process.env.FOX_SUITE_PLUGIN_STYLELINT_TIER || ''
 
 const npmPackageJsonLintConfig = {
 	rules: {
@@ -35,6 +35,6 @@ const npmPackageJsonLintConfig = {
 		'scripts-type': 'error',
 		'version-type': 'error',
 	},
-};
+}
 
-export default npmPackageJsonLintConfig;
+export default npmPackageJsonLintConfig

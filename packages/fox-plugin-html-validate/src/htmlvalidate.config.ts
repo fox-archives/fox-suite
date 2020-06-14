@@ -1,4 +1,4 @@
-import { IFoxConfig } from 'fox-types';
+import { IFoxConfig } from 'fox-types'
 
 export default function (fox: IFoxConfig): Record<string, any> {
 	return {
@@ -8,5 +8,5 @@ export default function (fox: IFoxConfig): Record<string, any> {
 			'close-order': 'error',
 			'void': ['warn', { style: 'omit' }],
 		},
-	};
+	}
 }

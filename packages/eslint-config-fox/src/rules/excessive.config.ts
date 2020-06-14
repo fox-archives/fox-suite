@@ -1,4 +1,4 @@
-import { IFoxConfig } from 'fox-types';
+import { IFoxConfig } from 'fox-types'
 
 /**
  * Enable rules that could prevent
@@ -6,7 +6,7 @@ import { IFoxConfig } from 'fox-types';
  */
 export function excessiveConfig(
 	fox: IFoxConfig,
-	tier: string
+	tier: string,
 ): Record<string, any> {
 	const obj: Record<string, any> = {
 		rules: {
@@ -67,7 +67,7 @@ export function excessiveConfig(
 			'no-duplicate-imports': 'error',
 			'prefer-numeric-literals': 'error',
 		},
-	};
+	}
 
-	return obj;
+	return obj
 }

@@ -1,10 +1,10 @@
-import { sortPackageJsonFileAuto } from 'fox-plugin-sort-package-json';
+import { sortPackageJsonFileAuto } from 'fox-plugin-sort-package-json'
 
-(async () => {
+;(async () => {
 	try {
-		sortPackageJsonFileAuto();
+		sortPackageJsonFileAuto()
 	} catch (err) {
-		console.error(err);
-		process.exitCode = 1;
+		console.error(err)
+		process.exitCode = 1
 	}
-})();
+})()

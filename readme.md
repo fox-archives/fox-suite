@@ -14,11 +14,9 @@ Fox suite provides a unified interface for formatting and linting. It ensures th
 
 ## Who is this for?
 
-- the _modern_ web developer
-  - stylelint `color-function-notation` and `value-no-vendor-prefix` are set to modern values
-  - target the highest possible ECMAScript when parsing with `eslint`
-	- ensure PostCSS and Sass syntax is parsable by `stylelint` (TODO)
-
+-   the _modern_ web developer
+    -   stylelint `color-function-notation` and `value-no-vendor-prefix` are set to modern values
+    -   target the highest possible ECMAScript when parsing with `eslint` - ensure PostCSS and Sass syntax is parsable by `stylelint` (TODO)
 
 ## Configuration
 
@@ -31,9 +29,9 @@ export default {
 	plugin: {
 		eslint: 'cozy',
 		stylelint: 'excessive',
-		[pluginName]: 'mode'
+		[pluginName]: 'mode',
 	},
-};
+}
 ```
 
 Some other config files are automatically generated, like `.editorconfig` (TODO)
@@ -93,7 +91,6 @@ more annoying than helpfull when coding a project
 
 -   ex. forcing default to exist at end of switch
 
-
 ## Support
 
 Not everything has been tested generally and with regards to interop
@@ -115,27 +112,32 @@ stuff like commit-convention might be added later
 
 ## Building your own modules
 
-
-
-#### How to make a `preset`
+### How to make a `preset`
 
 TODO: make a template repo so it's actualy clear
 
-it's similar to other tools. feel free to use esmodules and `export default`, since everything (including non-plugin code) is loaded with the `esm` package. within your plugin, you must dynamically import with the `import()` any  syntax (or `require()`) any modules that require on `FOX_SUITE` environment variables
+it's similar to other tools. feel free to use esmodules and `export default`, since everything (including non-plugin code) is loaded with the `esm` package. within your plugin, you must dynamically import with the `import()` any syntax (or `require()`) any modules that require on `FOX_SUITE` environment variables
 
 ### Treatment of `template` files
 
-Files are copied over from your plugin's `template` directly to the project's root directory
-	- templated with `handlebars` (with no extra variables passed right now)
-	- json files are merged with existing json files
+Files are copied over from your plugin's `template` directly to the project's root directory - templated with `handlebars` (see variables below) - json files are merged with existing json files
 
 -   opt to use `(await getProjectData()).location` over `path.dirname((await import('read-pkg-up')()).path)`-ish over `process.cwd()` where applicable
 
+```sh
+these are the variables and options passd to handlebars
+{
+	noEscape: true,
+	data: {
+		projectLocation: projectData.location,
+		projectFoxConfigPath: projectData.foxConfigPath,
+		projectPackageJsonPath: projectData.packageJsonPath,
+		pluginRoot: pluginData.pluginRoot,
+		pluginTemplateDir: pluginData.templateDir
+	}
+}
 ```
-projectLocation: projectData.location,
-projectFoxConfigPath: projectData.foxConfigPath,
-projectPackageJsonPath: projectData.packageJsonPath
-```
+
 ## FAQ
 
 ### What about Rome?

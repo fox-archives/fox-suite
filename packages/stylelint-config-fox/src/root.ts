@@ -1,8 +1,8 @@
-import { IFoxConfig } from 'fox-types';
+import { IFoxConfig } from 'fox-types'
 
 export function rootConfig(
 	foxConfig: IFoxConfig,
-	tier: string
+	tier: string,
 ): Record<string, any> {
 	const root: Record<string, any> = {
 		parser: require.resolve('babel-eslint'),
@@ -75,16 +75,16 @@ export function rootConfig(
 			},
 		],
 		rules: {},
-	};
+	}
 
 	if (foxConfig.env.includes('browser')) {
-		root.env.browser = true;
+		root.env.browser = true
 	}
 
 	if (foxConfig.env.includes('node')) {
-		root.env.node = true;
-		root.env.commonjs = true;
+		root.env.node = true
+		root.env.commonjs = true
 	}
 
-	return root;
+	return root
 }

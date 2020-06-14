@@ -1,6 +1,6 @@
-import { IFoxConfig } from 'fox-types';
+import { IFoxConfig } from 'fox-types'
 
-const isProd = process.env.NODE_ENV === 'production';
+const isProd = process.env.NODE_ENV === 'production'
 
 /**
  * Enable cozy rules
@@ -206,15 +206,15 @@ export function cozyConfig(fox: IFoxConfig, tier: string): Record<string, any> {
 			'symbol-description': 'off',
 			'yield-star-spacing': ['error', { before: false, after: true }],
 		},
-	};
+	}
 
 	if (isProd) {
 		/* ------------------- possible errors ------------------ */
 		// these are duplicated in excessive.config.ts
-		obj.rules['getter-return'] = 'error';
-		obj.rules['no-unused-expressions'] = 'error';
-		obj.rules['no-unused-labels'] = 'error';
+		obj.rules['getter-return'] = 'error'
+		obj.rules['no-unused-expressions'] = 'error'
+		obj.rules['no-unused-labels'] = 'error'
 	}
 
-	return obj;
+	return obj
 }

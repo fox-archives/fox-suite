@@ -1,10 +1,10 @@
-import { IFoxConfig } from 'fox-types';
+import { IFoxConfig } from 'fox-types'
 
-const isProd = process.env.NODE_ENV === 'production';
+const isProd = process.env.NODE_ENV === 'production'
 
 export function excessiveConfig(
 	fox: IFoxConfig,
-	tier: string
+	tier: string,
 ): Record<string, any> {
 	const obj: Record<string, any> = {
 		rules: {
@@ -27,13 +27,13 @@ export function excessiveConfig(
 			'selector-max-type': 4,
 			'selector-max-universal': 2,
 		},
-	};
+	}
 
 	if (isProd) {
 		/* ------------------- possible errors ------------------ */
 		// comment
-		obj.rules['comment-no-empty'] = true;
+		obj.rules['comment-no-empty'] = true
 	}
 
-	return obj;
+	return obj
 }

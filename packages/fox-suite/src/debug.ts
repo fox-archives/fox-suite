@@ -1,5 +1,5 @@
-import debug from 'debug';
+import debug from 'debug'
 
-const d = debug('fox-suite:fox-suite');
+const d = debug('fox-suite:fox-suite')
 
-export default d;
+export default d

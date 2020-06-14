@@ -1,8 +1,8 @@
-import type { IAction, IPluginExportIndex, IProject } from 'fox-types';
-import chokidar from 'chokidar';
-import * as c from 'colorette';
-import * as util from './util';
-import assert from 'assert';
+import type { IAction, IPluginExportIndex, IProject } from 'fox-types'
+import chokidar from 'chokidar'
+import * as c from 'colorette'
+import * as util from './util'
+import assert from 'assert'
 
 /**
  * @description bootstraps, formats, or lints a project
@@ -11,21 +11,21 @@ async function doAction({
 	actionFunctions,
 	projectData,
 }: IAction): Promise<void> {
-	assert(Array.isArray(actionFunctions));
+	assert(Array.isArray(actionFunctions))
 
 	for (const fixFunction of actionFunctions) {
-		if (!fixFunction) continue;
+		if (!fixFunction) continue
 
-		await fixFunction(projectData.foxConfig);
+		await fixFunction(projectData.foxConfig)
 	}
 }
 
 /* --------------------- do[action] --------------------- */
 
 interface IDoBootstrap {
-	foxPlugins: IPluginExportIndex[];
-	pluginSelection: number;
-	projectData: IProject;
+	foxPlugins: IPluginExportIndex[]
+	pluginSelection: number
+	projectData: IProject
 }
 
 export async function doBootstrap({
@@ -34,8 +34,8 @@ export async function doBootstrap({
 	projectData,
 }: IDoBootstrap): Promise<void> {
 	if (pluginSelection === void 0) {
-		console.log(c.bold(c.red('exiting tui')));
-		return;
+		console.log(c.bold(c.red('exiting tui')))
+		return
 	}
 
 	await doAction({
@@ -45,16 +45,16 @@ export async function doBootstrap({
 			actionFunction: 'bootstrapFunction',
 		}),
 		projectData,
-	});
+	})
 
-	console.log(c.bold(c.green('bootstrap complete')));
+	console.log(c.bold(c.green('bootstrap complete')))
 }
 
 interface IDoFix {
-	foxPluginPaths: string[];
-	foxPlugins: IPluginExportIndex[];
-	pluginSelection: number;
-	projectData: IProject;
+	foxPluginPaths: string[]
+	foxPlugins: IPluginExportIndex[]
+	pluginSelection: number
+	projectData: IProject
 }
 
 export async function doFix({
@@ -64,8 +64,8 @@ export async function doFix({
 	projectData,
 }: IDoFix): Promise<void> {
 	if (pluginSelection === void 0) {
-		console.log(c.bold(c.red('exiting tui')));
-		return;
+		console.log(c.bold(c.red('exiting tui')))
+		return
 	}
 
 	await doAction({
@@ -75,16 +75,16 @@ export async function doFix({
 			actionFunction: 'fixFunction',
 		}),
 		projectData,
-	});
+	})
 
-	console.log(c.bold(c.green('fix complete')));
+	console.log(c.bold(c.green('fix complete')))
 }
 
 interface IDoWatch {
-	foxPluginPaths: string[];
-	foxPlugins: IPluginExportIndex[];
-	pluginSelection: number;
-	projectData: IProject;
+	foxPluginPaths: string[]
+	foxPlugins: IPluginExportIndex[]
+	pluginSelection: number
+	projectData: IProject
 }
 
 export async function doWatch({
@@ -94,8 +94,8 @@ export async function doWatch({
 	projectData,
 }: IDoWatch): Promise<void> {
 	if (pluginSelection === void 0) {
-		console.log(c.bold(c.red('exiting tui')));
-		return;
+		console.log(c.bold(c.red('exiting tui')))
+		return
 	}
 
 	// test for watchers and then do action
@@ -108,17 +108,17 @@ export async function doWatch({
 		],
 		persistent: true,
 		cwd: projectData.location,
-	});
+	})
 
-	let totalFiles = 0;
-	watcher.on('add', (path) => totalFiles++);
-	watcher.on('unlink', (path) => totalFiles--);
+	let totalFiles = 0
+	watcher.on('add', (path) => totalFiles++)
+	watcher.on('unlink', (path) => totalFiles--)
 	watcher.on('change', async (path) => {
-		if (path.includes('.config/build')) return;
+		if (path.includes('.config/build')) return
 
 		console.log(
-			`${path} of ${totalFiles} files changed. recompiling config files and executing fixers`
-		);
+			`${path} of ${totalFiles} files changed. recompiling config files and executing fixers`,
+		)
 
 		await doAction({
 			actionFunctions: util.pickSpecificModuleProperty({
@@ -127,8 +127,8 @@ export async function doWatch({
 				actionFunction: 'fixFunction',
 			}),
 			projectData,
-		});
-	});
+		})
+	})
 
-	console.log('starting watcher');
+	console.log('starting watcher')
 }

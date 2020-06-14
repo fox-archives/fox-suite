@@ -1,4 +1,4 @@
-import type { IPluginExportInfo } from 'fox-types';
+import type { IPluginExportInfo } from 'fox-types'
 
 export const info: IPluginExportInfo = {
 	name: 'fox-plugin-prettier',
@@ -7,4 +7,4 @@ export const info: IPluginExportInfo = {
 	toolConfigSchemaHelpUri: 'https://prettier.io/docs/en/options.html',
 	description: 'Formats common files',
 	descriptionLong: 'Formats common files?',
-};
+}

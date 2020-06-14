@@ -1,10 +1,10 @@
-import path from 'path';
-import { IFoxConfig } from 'fox-types';
-import readPkgUp from 'read-pkg-up';
+import path from 'path'
+import { IFoxConfig } from 'fox-types'
+import readPkgUp from 'read-pkg-up'
 
 export function importPlugin(
 	fox: IFoxConfig,
-	tier: string
+	tier: string,
 ): Record<string, any> {
 	// requires sourceType: 'module' and ecmaVersion: 2018
 	const obj: Record<string, any> = {
@@ -78,11 +78,11 @@ export function importPlugin(
 			// TODO: webpack
 			'import/dynamic-import-chunkname': 'off',
 		},
-	};
+	}
 
 	if (tier === 'strict' || tier === 'excessive') {
 		/* ------------------- static analysis ------------------ */
-		(obj.rules['import/no-self-import'] = 'error'),
+		;(obj.rules['import/no-self-import'] = 'error'),
 			(obj.rules['import/no-cycle'] = 'error'),
 			(obj.rules['import/no-useless-path-segments'] = [
 				'error',
@@ -90,16 +90,16 @@ export function importPlugin(
 					noUselessIndex: false,
 					commonjs: true,
 				},
-			]);
+			])
 
 		/* ------------------ helpful warnings ------------------ */
-		obj.rules['import/no-mutable-exports'] = 'error';
+		obj.rules['import/no-mutable-exports'] = 'error'
 
 		/* --------------------- style guide -------------------- */
 		// TODO: move these up to 'cozy'
-		(obj.rules['import/first'] = 'error'),
+		;(obj.rules['import/first'] = 'error'),
 			(obj.rules['import/exports-last'] = 2),
-			(obj.rules['import/no-duplicates'] = 'error');
+			(obj.rules['import/no-duplicates'] = 'error')
 	}
 
 	if (tier === 'excessive') {
@@ -111,19 +111,19 @@ export function importPlugin(
 				amd: false,
 				caseSensitive: true,
 			},
-		];
+		]
 		obj.rules['import/no-useless-path-segments'] = [
 			'error',
 			{
 				noUselessIndex: true,
 				commonjs: true,
 			},
-		];
+		]
 
 		/* ------------------ helpful warnings ------------------ */
-		obj.rules['import/no-named-as-default'] = 'error';
-		obj.rules['import/no-deprecated'] = 'error';
-		obj.settings['import/doctyle'] = ['jsdoc' /*'tomdoc'*/];
+		obj.rules['import/no-named-as-default'] = 'error'
+		obj.rules['import/no-deprecated'] = 'error'
+		obj.settings['import/doctyle'] = ['jsdoc' /*'tomdoc'*/]
 		obj.rules['import/no-extraneous-dependencies'] = [
 			'error',
 			{
@@ -132,7 +132,7 @@ export function importPlugin(
 				peerDependencies: true,
 				bundledDependencies: true,
 			},
-		];
+		]
 		// obj.rules['import/no-unused-modules'] = ['error', {
 		// missingExports: true,
 		// unusedExports: true,
@@ -146,15 +146,15 @@ export function importPlugin(
 			{
 				groups: ['builtin', 'external', 'parent', 'sibling', 'index'],
 			},
-		];
+		]
 	}
 
 	if (false) {
-		obj.rules['import/named'] = 'off';
+		obj.rules['import/named'] = 'off'
 
-		const allExtensions = ['.ts', '.tsx', '.d.ts', '.js', '.jsx'];
+		const allExtensions = ['.ts', '.tsx', '.d.ts', '.js', '.jsx']
 		// typescript
-		(obj.rules['import/extensions'] = allExtensions),
+		;(obj.rules['import/extensions'] = allExtensions),
 			(obj.rules['import/external-module-folders'] = [
 				'node_modules',
 				'node_modules/@types',
@@ -166,8 +166,8 @@ export function importPlugin(
 				node: {
 					extensions: allExtensions,
 				},
-			});
+			})
 	}
 
-	return obj;
+	return obj
 }

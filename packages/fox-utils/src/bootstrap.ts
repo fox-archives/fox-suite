@@ -1,24 +1,24 @@
-import path from 'path';
-import fs from 'fs';
-import prompts from 'prompts';
-import * as c from 'colorette';
-import { getProjectData } from './project.js';
+import path from 'path'
+import fs from 'fs'
+import prompts from 'prompts'
+import * as c from 'colorette'
+import { getProjectData } from './project.js'
 // @ts-ignore
 import handlebars from 'handlebars'
-import { IBuildBootstrap, ITemplateFile, IPlugin, IProject } from 'fox-types';
-import { getPluginData } from './plugin.js';
-import debug from './debug';
-import merge from 'lodash.merge';
+import { IBuildBootstrap, ITemplateFile, IPlugin, IProject } from 'fox-types'
+import { getPluginData } from './plugin.js'
+import debug from './debug'
+import merge from 'lodash.merge'
 
 /**
  * generate boilerpalte configuration in `.config`
  * folder of local projet
  */
 
-async function doHandlebarsTemplate(fileContents: string, {
-	pluginData,
-	projectData
-}: { pluginData: IPlugin, projectData: IProject}): Promise<string> {
+async function doHandlebarsTemplate(
+	fileContents: string,
+	{ pluginData, projectData }: { pluginData: IPlugin; projectData: IProject },
+): Promise<string> {
 	return handlebars.compile(fileContents)({
 		noEscape: true,
 		data: {
@@ -26,9 +26,9 @@ async function doHandlebarsTemplate(fileContents: string, {
 			projectFoxConfigPath: projectData.foxConfigPath,
 			projectPackageJsonPath: projectData.packageJsonPath,
 			pluginRoot: pluginData.pluginRoot,
-			pluginTemplateDir: pluginData.templateDir
-		}
-	});
+			pluginTemplateDir: pluginData.templateDir,
+		},
+	})
 }
 
 /**
@@ -39,42 +39,42 @@ export async function buildBootstrap(opts: IBuildBootstrap): Promise<void> {
 	const [pluginData, projectData] = await Promise.all([
 		getPluginData(opts.dirname),
 		getProjectData(),
-	]);
+	])
 	const doTemplate = async (
-		fileToTemplate: ITemplateFile
+		fileToTemplate: ITemplateFile,
 	): Promise<{ fileDest: string; templatedText: string }> => {
 		const fileContent = await fs.promises.readFile(
 			fileToTemplate.absolutePath,
-			{ encoding: 'utf8' }
-		);
+			{ encoding: 'utf8' },
+		)
 		const templatedText = await doHandlebarsTemplate(fileContent, {
 			pluginData,
-			projectData
+			projectData,
 		})
 		const fileDest = path.join(
 			projectData.location,
-			fileToTemplate.relativePath
-		);
+			fileToTemplate.relativePath,
+		)
 
 		return {
 			fileDest,
 			templatedText,
-		};
-	};
+		}
+	}
 
-	const retryFilesToTemplate: ITemplateFile[] = [];
+	const retryFilesToTemplate: ITemplateFile[] = []
 	for (const fileToTemplate of pluginData.templateFiles) {
-		const { fileDest, templatedText } = await doTemplate(fileToTemplate);
+		const { fileDest, templatedText } = await doTemplate(fileToTemplate)
 		try {
 			try {
 				await fs.promises.mkdir(path.dirname(fileDest), {
 					mode: 0o755,
-				});
+				})
 			} catch {}
 			await fs.promises.writeFile(fileDest, templatedText, {
 				mode: 0o644,
 				flag: 'wx+',
-			});
+			})
 		} catch (err) {
 			if (err.code === 'EEXIST') {
 				// if the file already exists, but is a json file,
@@ -82,13 +82,13 @@ export async function buildBootstrap(opts: IBuildBootstrap): Promise<void> {
 				if (isJsonFile(fileToTemplate)) {
 					await mergeJsonFiles(fileDest, templatedText, {
 						projectData,
-						pluginData
-					});
+						pluginData,
+					})
 				} else {
-					retryFilesToTemplate.push(fileToTemplate);
+					retryFilesToTemplate.push(fileToTemplate)
 				}
 			} else {
-				throw new Error(err);
+				throw new Error(err)
 			}
 		}
 	}
@@ -98,9 +98,9 @@ export async function buildBootstrap(opts: IBuildBootstrap): Promise<void> {
 	if (retryFilesToTemplate.length > 0) {
 		const alreadyExistingFilesFormatted = JSON.stringify(
 			retryFilesToTemplate.map(
-				(el: ITemplateFile): string => el.relativePath
-			)
-		);
+				(el: ITemplateFile): string => el.relativePath,
+			),
+		)
 
 		const { wantsToOverwrite } = await prompts({
 			type: 'toggle',
@@ -109,43 +109,46 @@ export async function buildBootstrap(opts: IBuildBootstrap): Promise<void> {
 			initial: false,
 			active: 'yah!',
 			inactive: 'no',
-		});
+		})
 
 		if (wantsToOverwrite) {
 			for (const fileToTemplate of retryFilesToTemplate) {
 				const { fileDest, templatedText } = await doTemplate(
-					fileToTemplate
-				);
+					fileToTemplate,
+				)
 				await fs.promises.writeFile(fileDest, templatedText, {
 					mode: 0o644,
-				});
+				})
 			}
 		} else {
-			console.info(c.bold(c.red('exiting tui')));
-			process.exit(1);
+			console.info(c.bold(c.red('exiting tui')))
+			process.exit(1)
 		}
 	}
 
-	console.info(c.bold(c.green('bootstrapped files successfully')));
+	console.info(c.bold(c.green('bootstrapped files successfully')))
 }
 
 function isJsonFile(templateFile: ITemplateFile): boolean {
-	return path.extname(templateFile.relativePath) === '.json';
+	return path.extname(templateFile.relativePath) === '.json'
 }
 
 /**
  * @param {string} templatedText - strinified json to merge final destrination with
  */
-async function mergeJsonFiles(fileDest: string, templatedText: string, {
-	pluginData,
-	projectData
-}: { pluginData: IPlugin, projectData: IProject}) {
-	const fileContent = await fs.promises.readFile(fileDest, { encoding: 'utf8' })
+async function mergeJsonFiles(
+	fileDest: string,
+	templatedText: string,
+	{ pluginData, projectData }: { pluginData: IPlugin; projectData: IProject },
+) {
+	const fileContent = await fs.promises.readFile(fileDest, {
+		encoding: 'utf8',
+	})
 
 	// final json supposed to be valid
 	const jsonText = await doHandlebarsTemplate(fileContent, {
 		pluginData,
-		projectData
+		projectData,
 	})
 
 	// test objectifying the json
@@ -153,22 +156,32 @@ async function mergeJsonFiles(fileDest: string, templatedText: string, {
 		try {
 			JSON.parse(jsonText)
 		} catch (err) {
-			console.error(c.bold(c.red(`your templated json file (read from its respective cnofig) with destination ${fileDest} failed to be parsed`)))
+			console.error(
+				c.bold(
+					c.red(
+						`your templated json file (read from its respective cnofig) with destination ${fileDest} failed to be parsed`,
+					),
+				),
+			)
 			console.error(jsonText)
 			console.error(err)
 		}
 		try {
 			JSON.parse(templatedText)
 		} catch (err) {
-			console.error(c.bold(c.red(`the json file at ${fileDest} could not be parsed`)))
+			console.error(
+				c.bold(
+					c.red(`the json file at ${fileDest} could not be parsed`),
+				),
+			)
 			console.error(templatedText)
 			console.error(err)
 		}
 	}
 
-	const finalJson = merge(JSON.parse(jsonText), JSON.parse(templatedText));
+	const finalJson = merge(JSON.parse(jsonText), JSON.parse(templatedText))
 
 	await fs.promises.writeFile(fileDest, JSON.stringify(finalJson, null, 2), {
 		mode: 0o644,
-	});
+	})
 }

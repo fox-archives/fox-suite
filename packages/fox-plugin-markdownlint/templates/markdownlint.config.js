@@ -38,5 +38,5 @@ export default function (fox) {
 		'no-space-in-emphasis': true,
 		'no-space-in-links': true,
 		'fenced-code-language': true,
-	};
+	}
 }

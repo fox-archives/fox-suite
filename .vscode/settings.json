@@ -12,5 +12,8 @@
   ],
   "eslint.options": {
     "configFile": ".config/build/eslint.config.js"
-  }
+  },
+  "prettier.configPath": "./config/build/prettier.config.json",
+  "prettier.ignorePath": "./config/prettierignore",
+  "prettier.prettierPath": "/home/edwin/docs/programming/repos/fox-suite/packages/fox-plugin-prettier/node_modules/prettier"
 }

@@ -5,5 +5,5 @@ module.exports = function (m) {
 		await: false,
 		cache: true,
 		sourceMap: process.env.NODE_ENV === 'development',
-	});
-};
+	})
+}

@@ -18,4 +18,4 @@ export default {
 	htmlWhitespaceSensitivity: 'css',
 	vueIndentScriptAndStyle: false,
 	endOfLine: 'lf',
-};
+}

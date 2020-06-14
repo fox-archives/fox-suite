@@ -1,6 +1,6 @@
-import * as foxUtils from 'fox-utils';
-import { bootstrapFunction, lintFunction } from '.';
-import { info } from './info';
+import * as foxUtils from 'fox-utils'
+import { bootstrapFunction, lintFunction } from '.'
+import { info } from './info'
 
 export async function cli() {
 	await foxUtils.buildCli(process.argv, {
@@ -8,5 +8,5 @@ export async function cli() {
 		pluginDescription: info.description,
 		bootstrapFunction,
 		fixFunction: lintFunction,
-	});
+	})
 }

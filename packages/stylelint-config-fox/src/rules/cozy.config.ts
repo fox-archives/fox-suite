@@ -1,4 +1,4 @@
-import { IFoxConfig } from 'fox-types';
+import { IFoxConfig } from 'fox-types'
 
 export function cozyConfig(fox: IFoxConfig, tier: string): Record<string, any> {
 	return {
@@ -210,5 +210,5 @@ export function cozyConfig(fox: IFoxConfig, tier: string): Record<string, any> {
 			// at-rule
 			'at-rule-name-case': 'lower',
 		},
-	};
+	}
 }

@@ -1,4 +1,4 @@
-import type stylelint from 'stylelint';
+import type stylelint from 'stylelint'
 
 // declare module "stylelint" {
 // 	export interface LinterOptionsOverride extends stylelint.LinterOptions {
@@ -8,6 +8,6 @@ import type stylelint from 'stylelint';
 
 // HACK: could be less ugly
 export interface i extends stylelint.LinterOptions {
-	globbyOptions: Record<string, any>;
-	reportInvalidScopeDisables: boolean;
+	globbyOptions: Record<string, any>
+	reportInvalidScopeDisables: boolean
 }

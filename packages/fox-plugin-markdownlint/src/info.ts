@@ -1,4 +1,4 @@
-import type { IPluginExportInfo } from 'fox-types';
+import type { IPluginExportInfo } from 'fox-types'
 
 export const info: IPluginExportInfo = {
 	name: 'fox-plugin-markdownlint',
@@ -7,4 +7,4 @@ export const info: IPluginExportInfo = {
 	toolConfigSchemaHelpUri: '',
 	description: 'Lints markdown files',
 	descriptionLong: 'Lints markdown files. Has autofix capabilities?',
-};
+}

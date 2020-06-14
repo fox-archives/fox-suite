@@ -1,8 +1,8 @@
-import { IFoxConfig } from 'fox-types';
+import { IFoxConfig } from 'fox-types'
 
 export function rootConfig(
 	foxConfig: IFoxConfig,
-	tier: string
+	tier: string,
 ): Record<string, any> {
 	const config: Record<string, any> = {
 		parser: require.resolve('babel-eslint'),
@@ -18,11 +18,11 @@ export function rootConfig(
 			},
 		},
 		extends: [require.resolve('eslint-config-prettier')],
-	};
-
-	if (foxConfig.env.includes('node')) {
-		config.env.node = true;
 	}
 
-	return config;
+	if (foxConfig.env.includes('node')) {
+		config.env.node = true
+	}
+
+	return config
 }

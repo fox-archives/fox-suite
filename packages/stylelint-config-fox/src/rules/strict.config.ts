@@ -1,10 +1,10 @@
-import { IFoxConfig } from 'fox-types';
+import { IFoxConfig } from 'fox-types'
 
-const isProd = process.env.NODE_ENV === 'production';
+const isProd = process.env.NODE_ENV === 'production'
 
 export function strictConfig(
 	fox: IFoxConfig,
-	tier: string
+	tier: string,
 ): Record<string, any> {
 	const obj: Record<string, any> = {
 		rules: {
@@ -44,16 +44,16 @@ export function strictConfig(
 			// general / sheet
 			'max-nesting-depth': 4,
 		},
-	};
+	}
 
 	if (isProd) {
 		/* ------------------- possible errors ------------------ */
 		// block
-		obj.rules['block-no-empty'] = true;
+		obj.rules['block-no-empty'] = true
 
 		// general-sheet
-		obj.rules['no-empty-source'] = true;
+		obj.rules['no-empty-source'] = true
 	}
 
-	return obj;
+	return obj
 }

@@ -1,20 +1,20 @@
-import path from 'path';
-import url from 'url';
+import path from 'path'
+import url from 'url'
 
 /**
  * @description Resolves an absolute path relative to the current working
  * directory. prepends a './' if it doesn't already exist
  */
 export function toRelativePath(absolutePath: string): string {
-	let relativePath = path.relative(process.cwd(), absolutePath);
+	let relativePath = path.relative(process.cwd(), absolutePath)
 
 	if (relativePath.slice(0, 2) !== './' && relativePath.slice(0, 3) !== '../')
-		relativePath = './' + relativePath;
-	return relativePath;
+		relativePath = './' + relativePath
+	return relativePath
 }
 
 export function __dirname(importMeta: ImportMeta): string {
-	return path.dirname(url.fileURLToPath(importMeta.url));
+	return path.dirname(url.fileURLToPath(importMeta.url))
 }
 
 /**
@@ -24,16 +24,16 @@ export function __dirname(importMeta: ImportMeta): string {
  */
 describe('toRelativePath()', () => {
 	beforeEach(() => {
-		const spy = jest.spyOn(process, 'cwd');
-		spy.mockReturnValue(__dirname);
-	});
+		const spy = jest.spyOn(process, 'cwd')
+		spy.mockReturnValue(__dirname)
+	})
 
 	test('relative path two dirs up', () => {
-		const absolute = path.resolve(__dirname, '../../file');
-		const relativePath = toRelativePath(absolute);
+		const absolute = path.resolve(__dirname, '../../file')
+		const relativePath = toRelativePath(absolute)
 
-		expect(relativePath).toBe('../../file');
-	});
+		expect(relativePath).toBe('../../file')
+	})
 
 	/**
 	 * toRelativePath uses path.relative internally and by defualt
@@ -41,9 +41,9 @@ describe('toRelativePath()', () => {
 	 * we test to ensure the './' gets prepended
 	 */
 	test('relative path to current directory', () => {
-		const absolute = path.resolve(__dirname, './file.json');
-		const relativePath = toRelativePath(absolute);
+		const absolute = path.resolve(__dirname, './file.json')
+		const relativePath = toRelativePath(absolute)
 
-		expect(relativePath).toBe('./file.json');
-	});
-});
+		expect(relativePath).toBe('./file.json')
+	})
+})
