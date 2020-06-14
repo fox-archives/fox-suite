@@ -1,4 +1,5 @@
 import merge from 'lodash.mergewith'
+import { rootConfig } from './root'
 import { cozyConfig } from './rules/cozy.config'
 import { strictConfig } from './rules/strict.config'
 import { excessiveConfig } from './rules/excessive.config'
@@ -20,6 +21,7 @@ const foxConfig: IFoxConfig = JSON.parse(process.env.FOX_SUITE_FOX_OPTIONS || '{
 const tier: string = process.env.FOX_SUITE_PLUGIN_STYLELINT_TIER || ''
 
 let config = {}
+config = merge(config, rootConfig(foxConfig, tier), customizer)
 
 if (tier === "off") {
 
@@ -35,5 +37,7 @@ if (tier === "off") {
 } else {
 	console.error(`tier: '${tier}' not an expected value`)
 }
+
+// prettier is in index.ts
 
 module.exports = config

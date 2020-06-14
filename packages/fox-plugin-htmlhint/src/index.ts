@@ -27,7 +27,7 @@ export async function fixFunction(): Promise<void> {
 				config
 			)
 
-			const htmlFiles = await glob(`${project.location}/**/*.html`)
+			const htmlFiles = await glob(`${project.location}/**/*.{html,htm}`)
 
 			for (const htmlFile of htmlFiles) {
 				const htmlFileContent = await fs.promises.readFile(htmlFile, { encoding: 'utf8' })

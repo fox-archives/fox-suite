@@ -6,6 +6,7 @@ import { strictConfig } from './rules/strict.config'
 import { excessiveConfig } from './rules/excessive.config'
 import { importPlugin } from './plugins/import'
 import { simpleImportSortPlugin } from './plugins/simple-import-sort'
+import { prettierPlugin } from './plugins/prettier'
 
 const customizer = (destObj: Record<string, any>, srcObj: Record<string, any>): any => {
 	// for arrays that are not rules, merge them
@@ -51,5 +52,6 @@ if (tier === 'cozy') {
 
 config = merge(config, importPlugin(foxConfig, tier), customizer)
 config = merge(config, simpleImportSortPlugin(foxConfig, tier), customizer)
+config = merge(config, prettierPlugin(foxConfig, tier), customizer)
 
 module.exports = config

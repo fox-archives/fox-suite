@@ -47,6 +47,7 @@
     "fox-types": "workspace:^0.3.4",
     "lodash.merge": "^4.6.2",
     "lodash.mergewith": "^4.6.2",
-    "stylelint": "^13.6.0"
+    "stylelint": "^13.6.0",
+    "stylelint-config-prettier": "^8.0.1"
   }
 }

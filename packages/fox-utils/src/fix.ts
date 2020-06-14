@@ -23,8 +23,7 @@ export async function buildFix(opts: IBuildFix): Promise<void> {
 		const info = (<IPluginExportIndex> await import(require.resolve(pluginData.pluginRoot))).info
 		const pluginEnvTierName =
   `FOX_SUITE_PLUGIN_${info.tool.toLocaleUpperCase()}_TIER`;
-		process.env[pluginEnvTierName] = projectData.foxConfig.plugin[info.tool] || projectData.foxConfig.all ||
-  "cozy";
+		process.env[pluginEnvTierName] = projectData?.foxConfig?.plugin?.[info.tool] || projectData.foxConfig.all || "cozy";
 	}
 
 	// this will throw if at least 'one' template file
