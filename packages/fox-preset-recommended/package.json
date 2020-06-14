@@ -1,0 +1,51 @@
+{
+	"name": "fox-preset-recommended",
+	"description": "Recommended preset",
+	"version": "1.0.0",
+	"keywords": [
+		"fox-preset",
+		"fox",
+		"fox-suite"
+	],
+	"homepage": "https://github.com/eankeen/fox-suite/tree/dev/packages/fox-preset-all#readme",
+	"bugs": {
+		"url": "https://github.com/eankeen/fox-suite/issues"
+	},
+	"author": {
+		"name": "Edwin Kofler",
+		"url": "https://edwinkofler.com"
+	},
+	"main": "index.js",
+	"repository": {
+		"type": "git",
+		"url": "https://github.com/eankeen/fox-suite.git"
+	},
+	"license": "MIT",
+	"engines": {
+		"node": ">=12.17.0 >=v13.14.0 >=14.3.0"
+	},
+	"scripts": {
+		"start": "ts-node src",
+		"watch": "tsc --build --watch",
+		"build": "tsc --build",
+		"test": "jest",
+		"lint": "eslint --fix --config eslint.config.cjs ."
+	},
+	"devDependencies": {
+		"jest": "^26.0.1",
+		"jest-extended": "^0.11.5",
+		"ts-jest": "^26.1.0",
+		"typescript": "^3.9.5"
+	},
+	"dependencies": {
+		"fox-plugin-eslint": "workspace:^1.0.0",
+		"fox-plugin-html-validate": "workspace:^1.0.0",
+		"fox-plugin-htmlhint": "workspace:^1.0.0",
+		"fox-plugin-htmllint": "workspace:^1.0.0",
+		"fox-plugin-markdownlint": "workspace:^1.0.0",
+		"fox-plugin-package-json-lint": "workspace:^1.0.0",
+		"fox-plugin-prettier": "workspace:^1.0.0",
+		"fox-plugin-stylelint": "workspace:^1.0.0",
+		"http": "0.0.1-security"
+	}
+}
