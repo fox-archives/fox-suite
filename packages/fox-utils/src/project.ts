@@ -51,7 +51,7 @@ export async function getProjectData(): Promise<IProject> {
 	try {
 		await fs.promises.access(foxConfigPath, fs.constants.F_OK)
 		foxConfig = (await import(foxConfigPath)).default
-	} catch {
+
 		// default foxConfig options
 		const defaultFoxConfig = {
 			all: 'cozy',
@@ -63,6 +63,8 @@ export async function getProjectData(): Promise<IProject> {
 		foxConfig = mergeWith(defaultFoxConfig, foxConfig, customizer)
 		debug('defaultFoxConfig: %o', defaultFoxConfig)
 		debug('foxConfig: %o', foxConfig)
+	} catch (err) {
+		console.error(err)
 	}
 
 	return {
