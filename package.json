@@ -25,6 +25,7 @@
 		"@types/node": "^14.0.13",
 		"@types/prettier": "^2.0.1",
 		"@types/prompts": "^2.0.8",
+		"@types/rimraf": "^3.0.0",
 		"@types/stylelint": "^9.10.1",
 		"fox-preset-all": "workspace:^1.0.6",
 		"fox-suite": "workspace:^1.0.6",

@@ -50,7 +50,8 @@
 		"lodash.throttle": "^4.1.1",
 		"lodash.uniq": "^4.5.0",
 		"minimist": "^1.2.5",
-		"prompts": "^2.3.2"
+		"prompts": "^2.3.2",
+		"rimraf": "^3.0.2"
 	},
 	"devDependencies": {
 		"cross-env": "^7.0.2",

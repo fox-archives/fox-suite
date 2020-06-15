@@ -4,6 +4,8 @@ import type { ParsedArgs } from 'minimist'
 import { doAction, doWatch } from './action'
 import debug from './debug'
 import * as c from 'colorette'
+import rimraf from 'rimraf'
+import path from 'path'
 
 /**
  * @description start `fox` based on cli arguments if any were given
@@ -27,10 +29,10 @@ Description:
   A sly suite of tools for web development
 
 Options:
-  --boostrap   Bootstrap all configuration
-  --format     Format files with all formatters
-  --lint       Lint files with all linters
-  --help       Show help
+  --boostrap    Bootstrap all configuration
+  --fix         Fixes all files with all formatters
+	--clearCache  Nukes cache in \`.config/.cache\`
+  --help        Show help
 
 Notes:
   Not passing any options opens the tui
@@ -62,6 +64,16 @@ Examples:
 			foxPlugins,
 			pluginSelection: -1,
 			projectData,
+		})
+	} else if (argv.clearCache) {
+		const cacheDir = path.join(projectData.location, '.config', '.cache')
+		rimraf(cacheDir, (err) => {
+			if (err) {
+				console.error(c.bold(c.red('there was an error removing the cache directory')))
+				console.error(err)
+				return
+			}
+			console.log(c.bold(c.green('cache directory nuked')))
 		})
 	} else {
 		c.bold(c.red('argument(s) or parameter(s) not understood'))
