@@ -32,7 +32,6 @@
 		"@babel/preset-env": "^7.10.2",
 		"@babel/preset-typescript": "^7.10.1",
 		"@babel/types": "^7.10.2",
-		"esm": "^3.2.25",
 		"fox-esm": "workspace:^1.0.6",
 		"fox-utils": "workspace:^1.0.6",
 		"jest": "^26.0.1",

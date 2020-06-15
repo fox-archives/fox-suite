@@ -35,13 +35,11 @@
 	},
 	"license": "MIT",
 	"dependencies": {
-		"esm": "^3.2.25",
 		"fox-esm": "workspace:^1.0.6",
 		"fox-utils": "workspace:^1.0.6",
-		"postcss-scss": "^2.1.1",
 		"stylelint": "^13.6.0",
 		"stylelint-config-fox": "workspace:^1.0.6",
-		"http": "0.0.1-security"
+		"postcss-scss": "^2.1.1"
 	},
 	"devDependencies": {
 		"fox-test-runner": "workspace:^1.0.6",

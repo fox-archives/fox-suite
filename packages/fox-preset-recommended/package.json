@@ -39,11 +39,7 @@
 	},
 	"dependencies": {
 		"fox-plugin-eslint": "workspace:^1.0.6",
-		"fox-plugin-html-validate": "workspace:^1.0.6",
-		"fox-plugin-htmlhint": "workspace:^1.0.6",
-		"fox-plugin-htmllint": "workspace:^1.0.6",
 		"fox-plugin-markdownlint": "workspace:^1.0.6",
-		"fox-plugin-package-json-lint": "workspace:^1.0.6",
 		"fox-plugin-prettier": "workspace:^1.0.6",
 		"fox-plugin-stylelint": "workspace:^1.0.6",
 		"http": "0.0.1-security"

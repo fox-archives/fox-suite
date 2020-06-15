@@ -37,12 +37,12 @@
 		"jest": "^26.0.1",
 		"jest-extended": "^0.11.5",
 		"ts-jest": "^26.1.0",
+		"fox-test-runner": "workspace:^1.0.6",
 		"typescript": "^3.9.5"
 	},
 	"dependencies": {
 		"@prettier/plugin-ruby": "^0.18.2",
 		"@prettier/plugin-xml": "^0.7.2",
-		"fox-test-runner": "workspace:^1.0.6",
 		"fox-utils": "workspace:^1.0.6",
 		"prettier": "^2.0.5",
 		"prettier-plugin-elm": "^0.7.0",
