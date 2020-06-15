@@ -16,4 +16,5 @@ for packageJsonFile in $packageJsonFiles; do
 done
 
 git commit -a -m "release: v${1-}"
+git tag "v$1"
 git push origin dev
