@@ -5,6 +5,11 @@ import type { IPluginExportIndex, IProject } from 'fox-types'
 import debug from './debug'
 import * as c from 'colorette'
 
+export function getPluginNameFromPath(pluginPath: string): string {
+	let str = pluginPath.slice(pluginPath.lastIndexOf('fox-plugin-'))
+	return str.slice(0, str.indexOf('/'))
+}
+
 export async function getFoxPlugins(projectData: IProject): Promise<string[]> {
 	const nodeModulesPath = path.join(projectData.location, 'node_modules')
 	debug('nodeModulesPath: %s', nodeModulesPath)

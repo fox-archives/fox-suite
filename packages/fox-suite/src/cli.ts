@@ -29,6 +29,8 @@ Description:
   A sly suite of tools for web development
 
 Options:
+	--list        List all installed plugins. Note that plugins
+	              installed multiple times may only be shown once
   --boostrap    Bootstrap all configuration
   --fix         Fixes all files with all formatters
 	--clearCache  Nukes cache in \`.config/.cache\`
@@ -42,6 +44,8 @@ Examples:
   ${pluginName} --bootstrap
   ${pluginName} --help`
 		console.info(helpText)
+	} else if (argv.list) {
+		console.info(c.bold(c.blue(foxPluginPaths.map(util.getPluginNameFromPath).join('\n'))))
 	} else if (argv.bootstrap) {
 		await doAction({
 			foxPlugins,
