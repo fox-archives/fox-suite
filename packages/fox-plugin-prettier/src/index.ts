@@ -51,12 +51,22 @@ export async function fixFunction(): Promise<void> {
 							.then(
 								async (content: string): Promise<any> => {
 									try {
+										const formatOptions = {
+											...config,
+											filepath: file,
+										}
+
+										// TODO: make more robust
+										if (file === 'license' || file === 'LICENSE') {
+											return
+										}
+										if (new Set(['.log', '.sh']).has(path.extname(file))) {
+											return
+										}
+
 										const formatedContent = prettier.format(
 											content,
-											{
-												...config,
-												filepath: file,
-											},
+											formatOptions
 										)
 
 										const stats = await fs.promises.stat(file)
@@ -70,10 +80,10 @@ export async function fixFunction(): Promise<void> {
 										)
 									} catch (err) {
 										if (err.message.includes('No parser could be inferred')) {
-											console.info(c.bold(c.yellow('non-fatal error:')))
+											console.info(c.bold(c.yellow(`non-fatal error for file ${file}:`)))
 											console.error(err)
 										} else {
-											console.info(c.bold(c.red('error occured:')))
+											console.info(c.bold(c.red(`error occured for file ${file}:`)))
 											console.error(err)
 										}
 									}
