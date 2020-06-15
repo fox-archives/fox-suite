@@ -7,81 +7,44 @@ import assert from 'assert'
 /**
  * @description bootstraps, formats, or lints a project
  */
-async function doAction({
-	projectData,
+export async function doAction({
 	foxPlugins,
+	foxPluginPaths,
+	projectData,
 	pluginSelection,
-	actionFunctionName
+	actionFunctionName,
 }: IAction): Promise<void> {
+	if (pluginSelection === void 0) {
+		console.log(c.bold(c.red("exiting tui")));
+		return;
+	}
+
+	let name =
+		actionFunctionName === "bootstrapFunction"
+			? "bootstrap"
+			: actionFunctionName === "fixFunction"
+			? "fix"
+			: "unknown";
+
+	console.log(foxPlugins);
+
+	console.log(c.bold(c.blue(`${name} start`)));
+
 	const actionFunctions = util.pickSpecificModuleProperty({
 		foxPlugins,
 		specificIndicesToPick: pluginSelection,
 		actionFunction: actionFunctionName,
-	})
+	});
 
-	assert(Array.isArray(actionFunctions))
+	assert(Array.isArray(actionFunctions));
 
 	for (const fixFunction of actionFunctions) {
-		if (!fixFunction) continue
+		if (!fixFunction) continue;
 
-		await fixFunction(projectData.foxConfig)
-	}
-}
-
-/* --------------------- do[action] --------------------- */
-
-interface IDoBootstrap {
-	foxPlugins: IPluginExportIndex[]
-	pluginSelection: number
-	projectData: IProject
-}
-
-export async function doBootstrap({
-	foxPlugins,
-	pluginSelection,
-	projectData,
-}: IDoBootstrap): Promise<void> {
-	if (pluginSelection === void 0) {
-		console.log(c.bold(c.red('exiting tui')))
-		return
+		await fixFunction(projectData.foxConfig);
 	}
 
-	await doAction({
-		projectData,
-		foxPlugins,
-		pluginSelection,
-		actionFunctionName: 'bootstrapFunction'
-	})
-
-	console.log(c.bold(c.green('bootstrap complete')))
-}
-
-interface IDoFix {
-	foxPluginPaths: string[]
-	foxPlugins: IPluginExportIndex[]
-	pluginSelection: number
-	projectData: IProject
-}
-
-export async function doFix({
-	foxPluginPaths,
-	foxPlugins,
-	pluginSelection,
-	projectData,
-}: IDoFix): Promise<void> {
-	if (pluginSelection === void 0) {
-		console.log(c.bold(c.red('exiting tui')))
-		return
-	}
-
-	await doAction({
-		projectData,
-		foxPlugins,
-		pluginSelection,
-		actionFunctionName: 'fixFunction'
-	})
-
-	console.log(c.bold(c.green('fix complete')))
+	console.log(c.bold(c.blue(`${name} complete`)));
 }
 
 interface IDoWatch {
@@ -91,6 +54,10 @@ interface IDoWatch {
 	projectData: IProject
 }
 
+/**
+ * @description watch files and perform fixFunction on all files
+ * if changes are detected
+ */
 export async function doWatch({
 	foxPluginPaths,
 	foxPlugins,
@@ -125,11 +92,12 @@ export async function doWatch({
 		)
 
 		await doAction({
-			projectData,
 			foxPlugins,
+			foxPluginPaths,
+			projectData,
 			pluginSelection,
-			actionFunctionName: 'fixFunction'
-		})
+			actionFunctionName: "fixFunction",
+		});
 	})
 
 	console.log('starting watcher')

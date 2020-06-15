@@ -1,6 +1,6 @@
 import prompts from 'prompts'
 import * as foxUtils from 'fox-utils'
-import { doBootstrap, doFix, doWatch } from './action'
+import { doAction, doWatch } from './action'
 import * as util from './util'
 import debug from './debug'
 import * as c from 'colorette'
@@ -104,10 +104,12 @@ export async function tui(): Promise<void> {
 			choices: bootstrapChoices,
 		})
 
-		await doBootstrap({
+		await doAction({
 			foxPlugins,
+			foxPluginPaths,
 			pluginSelection,
 			projectData,
+			actionFunctionName: 'bootstrapFunction'
 		})
 	} else if (action === 'fix') {
 		const { pluginSelection }: { pluginSelection: number } = await prompts({
@@ -117,11 +119,12 @@ export async function tui(): Promise<void> {
 			choices: fixChoices,
 		})
 
-		await doFix({
-			foxPluginPaths,
+		await doAction({
 			foxPlugins,
+			foxPluginPaths,
 			pluginSelection,
 			projectData,
+			actionFunctionName: 'fixFunction'
 		})
 	} else if (action === 'watch') {
 		const { pluginSelection }: { pluginSelection: number } = await prompts({

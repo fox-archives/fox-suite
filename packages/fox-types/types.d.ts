@@ -238,8 +238,9 @@ export interface IPluginExportInfo {
  * about the stuff we want to do to a specific project
  */
 export interface IAction {
-	projectData: IProject
-	foxPlugins: IPluginExportIndex[]
-	pluginSelection: number
-	actionFunctionName:'bootstrapFunction' | 'fixFunction'
+	foxPlugins: IPluginExportIndex[];
+	foxPluginPaths: string[];
+	projectData: IProject;
+	pluginSelection: number;
+	actionFunctionName: "bootstrapFunction" | "fixFunction";
 }

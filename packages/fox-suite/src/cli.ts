@@ -1,7 +1,7 @@
 import * as foxUtils from 'fox-utils'
 import * as util from './util'
 import type { ParsedArgs } from 'minimist'
-import { doBootstrap, doFix, doWatch } from './action'
+import { doAction, doWatch } from './action'
 import debug from './debug'
 import * as c from 'colorette'
 
@@ -41,17 +41,20 @@ Examples:
   ${pluginName} --help`
 		console.info(helpText)
 	} else if (argv.bootstrap) {
-		await doBootstrap({
+		await doAction({
 			foxPlugins,
+			foxPluginPaths,
 			pluginSelection: -1,
 			projectData,
+			actionFunctionName: 'bootstrapFunction'
 		})
 	} else if (argv.fix) {
-		await doFix({
-			foxPluginPaths,
+		await doAction({
 			foxPlugins,
+			foxPluginPaths,
 			pluginSelection: -1,
 			projectData,
+			actionFunctionName: 'fixFunction'
 		})
 	} else if (argv.watch) {
 		await doWatch({
