@@ -125,8 +125,6 @@ export async function buildBootstrap(opts: IBuildBootstrap): Promise<void> {
 			process.exit(1)
 		}
 	}
-
-	console.info(c.bold(c.green('bootstrapped files successfully')))
 }
 
 function isJsonFile(templateFile: ITemplateFile): boolean {

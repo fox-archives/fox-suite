@@ -14,6 +14,11 @@ export async function doAction({
 	pluginSelection,
 	actionFunctionName,
 }: IAction): Promise<void> {
+	const getPluginName = (pluginPath: string) =>  {
+		let str = pluginPath.slice(pluginPath.lastIndexOf('fox-plugin-'))
+		return str.slice(0, str.indexOf('/'))
+	}
+
 	if (pluginSelection === void 0) {
 		console.log(c.bold(c.red("exiting tui")));
 		return;
@@ -24,11 +29,7 @@ export async function doAction({
 			? "bootstrap"
 			: actionFunctionName === "fixFunction"
 			? "fix"
-			: "unknown";
-
-	console.log(foxPlugins);
-
-	console.log(c.bold(c.blue(`${name} start`)));
+			: "action";
 
 	const actionFunctions = util.pickSpecificModuleProperty({
 		foxPlugins,
@@ -38,9 +39,10 @@ export async function doAction({
 
 	assert(Array.isArray(actionFunctions));
 
-	for (const fixFunction of actionFunctions) {
+	for (let i = 0; i < actionFunctions.length; ++i) {
+		const fixFunction = actionFunctions[i]
 		if (!fixFunction) continue;
-
+		console.log(c.bold(c.blue(`running ${getPluginName(foxPluginPaths[i])}`)))
 		await fixFunction(projectData.foxConfig);
 	}
 
