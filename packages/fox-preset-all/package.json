@@ -1,7 +1,7 @@
 {
 	"name": "fox-preset-all",
 	"description": "Base preset",
-	"version": "1.0.6",
+	"version": "1.1.0",
 	"keywords": [
 		"fox-preset",
 		"fox",
@@ -38,14 +38,14 @@
 		"typescript": "^3.9.5"
 	},
 	"dependencies": {
-		"fox-plugin-eslint": "workspace:^1.0.6",
-		"fox-plugin-html-validate": "workspace:^1.0.6",
-		"fox-plugin-htmlhint": "workspace:^1.0.6",
-		"fox-plugin-htmllint": "workspace:^1.0.6",
-		"fox-plugin-markdownlint": "workspace:^1.0.6",
-		"fox-plugin-package-json-lint": "workspace:^1.0.6",
-		"fox-plugin-prettier": "workspace:^1.0.6",
-		"fox-plugin-stylelint": "workspace:^1.0.6",
+		"fox-plugin-eslint": "workspace:^1.1.0",
+		"fox-plugin-html-validate": "workspace:^1.1.0",
+		"fox-plugin-htmlhint": "workspace:^1.1.0",
+		"fox-plugin-htmllint": "workspace:^1.1.0",
+		"fox-plugin-markdownlint": "workspace:^1.1.0",
+		"fox-plugin-package-json-lint": "workspace:^1.1.0",
+		"fox-plugin-prettier": "workspace:^1.1.0",
+		"fox-plugin-stylelint": "workspace:^1.1.0",
 		"http": "0.0.1-security"
 	}
 }
