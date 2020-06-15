@@ -41,7 +41,6 @@
 		"fox-plugin-eslint": "workspace:^1.1.0",
 		"fox-plugin-markdownlint": "workspace:^1.1.0",
 		"fox-plugin-prettier": "workspace:^1.1.0",
-		"fox-plugin-stylelint": "workspace:^1.1.0",
-		"http": "0.0.1-security"
+		"fox-plugin-stylelint": "workspace:^1.1.0"
 	}
 }
