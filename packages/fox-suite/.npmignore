@@ -3,3 +3,5 @@ node_modules/
 tsconfig.*
 test/**
 src/**
+jest.config.*
+*.log
