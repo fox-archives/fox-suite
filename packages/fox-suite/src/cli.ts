@@ -52,36 +52,10 @@ Examples:
 	} else if (argv.bootstrap) {
 		if (argv.bootstrap !== "") {
 			const plugins = argv.bootstrap.split(',')
-			console.error('ee', plugins)
-			const pluginSelection: number[] = []
-			const foxPluginNames = foxPluginPaths.map(util.getPluginNameFromPath)
-			pluginLoop: for (const plugin of plugins) {
-				let found = false
-				for (let i = 0; i < foxPluginNames.length; ++i) {
-					const foxPluginName = foxPluginNames[i]
-					const name = foxPluginName.slice('fox-plugin-'.length)
-					if (name === plugin) {
-						pluginSelection.push(i)
-						found = true
-					}
-				}
-
-				if (found === false) {
-					console.error(c.bold(c.red(`plugin ${plugin} not found`)))
-					process.exitCode = 1
-					break pluginLoop
-				}
-			}
-
-			if (pluginSelection.length === 0) {
-				console.info(c.bold(c.red('no plugin selections were made')))
-				return
-			}
-
 			await doAction({
 				foxPlugins,
 				foxPluginPaths,
-				pluginSelection,
+				pluginSelection: getPluginSelectionFromList(foxPluginPaths, plugins),
 				projectData,
 				actionFunctionName: 'bootstrapFunction'
 			})
@@ -97,6 +71,17 @@ Examples:
 			actionFunctionName: 'bootstrapFunction'
 		})
 	} else if (argv.fix) {
+		if (argv.fix !== "") {
+			const plugins = argv.fix.split(',')
+			await doAction({
+				foxPlugins,
+				foxPluginPaths,
+				pluginSelection: getPluginSelectionFromList(foxPluginPaths, plugins),
+				projectData,
+				actionFunctionName: 'fixFunction'
+			})
+			return
+		}
 		await doAction({
 			foxPlugins,
 			foxPluginPaths,
@@ -105,6 +90,16 @@ Examples:
 			actionFunctionName: 'fixFunction'
 		})
 	} else if (argv.watch) {
+		if (argv.watch !== "") {
+			const plugins = argv.watch.split(',')
+			await doWatch({
+				foxPlugins,
+				foxPluginPaths,
+				pluginSelection: getPluginSelectionFromList(foxPluginPaths, plugins),
+				projectData
+			})
+			return
+		}
 		await doWatch({
 			foxPluginPaths,
 			foxPlugins,
@@ -124,4 +119,42 @@ Examples:
 	} else {
 		console.info(c.bold(c.red('argument(s) or parameter(s) not understood')))
 	}
+}
+
+/**
+ * @description this gets the plugin selection from a human readable list
+ * @example
+ * ```
+ * getPluginSelectionFromList(['fox-plugin-eslint'])
+ * ```
+ */
+function getPluginSelectionFromList(foxPluginPaths: string[], plugins: string): number[] {
+	debug('pluginSelectionFromList: foxPluginPaths: %o', foxPluginPaths)
+	debug('pluginSelectionFromList: plugins: %o', plugins)
+	const pluginSelection: number[] = []
+	const foxPluginNames = foxPluginPaths.map(util.getPluginNameFromPath)
+	for (const plugin of plugins) {
+		let found = false
+		for (let i = 0; i < foxPluginNames.length; ++i) {
+			const foxPluginName = foxPluginNames[i]
+			const name = foxPluginName.slice('fox-plugin-'.length)
+			if (name === plugin) {
+				pluginSelection.push(i)
+				found = true
+			}
+		}
+
+		if (found === false) {
+			console.error(c.bold(c.red(`plugin ${plugin} not found`)))
+			process.exit(1)
+		}
+	}
+
+	if (pluginSelection.length === 0) {
+		console.info(c.bold(c.red('no plugin selections were made')))
+		process.exit(1)
+	}
+
+	debug('pluginSelectionFromList: pluginSelection: %o', pluginSelection)
+	return pluginSelection
 }

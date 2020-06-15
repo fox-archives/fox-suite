@@ -3,6 +3,7 @@ import chokidar from 'chokidar'
 import * as c from 'colorette'
 import * as util from './util'
 import assert from 'assert'
+import debug from './debug'
 
 /**
  * @description bootstraps, formats, or lints a project
@@ -26,20 +27,54 @@ export async function doAction({
 			? "fix"
 			: "action";
 
-	const actionFunctions = util.pickSpecificModuleProperty({
-		foxPlugins,
-		specificIndicesToPick: pluginSelection,
-		actionFunction: actionFunctionName,
-	});
+	// console.log(foxPlugins)
+	// const actionFunctions = util.pickSpecificModuleProperty({
+	// 	foxPlugins,
+	// 	specificIndicesToPick: pluginSelection,
+	// 	actionFunction: actionFunctionName,
+	// });
 
-	assert(Array.isArray(actionFunctions));
+	// debug('actionFunctions: %o', actionFunctions)
 
-	for (let i = 0; i < actionFunctions.length; ++i) {
-		const fixFunction = actionFunctions[i]
-		if (!fixFunction) continue;
-		console.log(c.bold(c.blue(`running ${util.getPluginNameFromPath(foxPluginPaths[i])}`)))
-		await fixFunction(projectData.foxConfig);
+	// assert(Array.isArray(actionFunctions));
+
+	type fn = IPluginExportIndex["bootstrapFunction"] | IPluginExportIndex["fixFunction"]
+	const pickedFunctions: { fn: fn, name: string }[] = []
+	for (let i = 0; i < foxPlugins.length; ++i) {
+		const foxPlugin = foxPlugins[i]
+		if (Array.isArray(pluginSelection)) {
+
+			for(const indice of pluginSelection) {
+				if (indice === i) {
+					pickedFunctions.push({
+						fn: foxPlugin[actionFunctionName],
+						name: foxPlugin.info.toolName
+					})
+				}
+			}
+		} else {
+			if (pluginSelection === i || pluginSelection === -1) {
+				pickedFunctions.push({
+					fn: foxPlugin[actionFunctionName],
+					name: foxPlugin.info.toolName
+				})
+			}
+		}
 	}
+
+	for(const obj of pickedFunctions) {
+		if (!obj.fn) continue
+
+		console.log(c.bold(c.blue(`running ${obj.name}`)))
+		await obj.fn(projectData.foxConfig)
+	}
+
+	// for (let i = 0; i < actionFunctions.length; ++i) {
+	// 	const fixFunction = actionFunctions[i]
+	// 	if (!fixFunction) continue;
+	// 	// console.log(c.bold(c.blue(`running ${util.getPluginNameFromPath(pluginSelection[i])}`)))
+	// 	await fixFunction(projectData.foxConfig);
+	// }
 
 	console.log(c.bold(c.blue(`${name} complete`)));
 }
@@ -47,7 +82,7 @@ export async function doAction({
 interface IDoWatch {
 	foxPluginPaths: string[]
 	foxPlugins: IPluginExportIndex[]
-	pluginSelection: number
+	pluginSelection: number | number[]
 	projectData: IProject
 }
 
