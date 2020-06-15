@@ -87,7 +87,7 @@ type actionFunctions = 'bootstrapFunction' | 'fixFunction'
 type fns = IPluginExportIndex["bootstrapFunction"][] | IPluginExportIndex["fixFunction"][]
 interface ISpecificModuleProperty {
 	foxPlugins: IPluginExportIndex[]
-	specificIndicesToPick: number
+	specificIndicesToPick: number | number[]
 	actionFunction: actionFunctions
 }
 
@@ -104,10 +104,21 @@ export function pickSpecificModuleProperty({
 	for (let i = 0; i < foxPlugins.length; ++i) {
 		const foxPlugin = foxPlugins[i]
 
-		if (specificIndicesToPick === i || specificIndicesToPick === -1) {
-			// @ts-ignore
-			pickedFunctions.push(foxPlugin[actionFunction])
+		if (Array.isArray(specificIndicesToPick)) {
+			for(const indice of specificIndicesToPick) {
+				// if array, don't accept -1 as 'select all'
+				if (indice === i) {
+					// @ts-ignore
+					pickedFunctions.push(foxPlugin[actionFunction])
+				}
+			}
+		} else {
+			if (specificIndicesToPick === i || specificIndicesToPick === -1) {
+				// @ts-ignore
+				pickedFunctions.push(foxPlugin[actionFunction])
+			}
 		}
+
 	}
 	return pickedFunctions
 }

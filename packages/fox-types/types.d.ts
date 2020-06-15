@@ -241,6 +241,6 @@ export interface IAction {
 	foxPlugins: IPluginExportIndex[];
 	foxPluginPaths: string[];
 	projectData: IProject;
-	pluginSelection: number;
+	pluginSelection: number | number[];
 	actionFunctionName: "bootstrapFunction" | "fixFunction";
 }

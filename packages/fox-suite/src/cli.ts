@@ -29,24 +29,66 @@ Description:
   A sly suite of tools for web development
 
 Options:
-	--list        List all installed plugins. Note that plugins
-	              installed multiple times may only be shown once
-  --boostrap    Bootstrap all configuration
-  --fix         Fixes all files with all formatters
-	--clearCache  Nukes cache in \`.config/.cache\`
-  --help        Show help
+	--listPlugins  List all installed plugins. Note that plugins
+	               installed multiple times may only be shown once
+  --bootstrap    Bootstraps configuration
+  --fix          Fixes all files with all formatters
+	--clearCache   Nukes cache in \`.config/.cache\`
+  --help         Show help
 
 Notes:
   Not passing any options opens the tui
 
 Examples:
-  ${pluginName}
-  ${pluginName} --bootstrap
+	${pluginName}
+    this opens the terminal user interface
+	${pluginName} --bootstrap
+    this bootstraps configuration of all plugins
+  ${pluginName} --bootstrap eslint,stylelint
   ${pluginName} --help`
 		console.info(helpText)
 	} else if (argv.list) {
 		console.info(c.bold(c.blue(foxPluginPaths.map(util.getPluginNameFromPath).join('\n'))))
 	} else if (argv.bootstrap) {
+		if (argv.bootstrap !== "") {
+			const plugins = argv.bootstrap.split(',')
+			console.error('ee', plugins)
+			const pluginSelection: number[] = []
+			const foxPluginNames = foxPluginPaths.map(util.getPluginNameFromPath)
+			pluginLoop: for (const plugin of plugins) {
+				let found = false
+				for (let i = 0; i < foxPluginNames.length; ++i) {
+					const foxPluginName = foxPluginNames[i]
+					const name = foxPluginName.slice('fox-plugin-'.length)
+					if (name === plugin) {
+						pluginSelection.push(i)
+						found = true
+					}
+				}
+
+				if (found === false) {
+					console.error(c.bold(c.red(`plugin ${plugin} not found`)))
+					process.exitCode = 1
+					break pluginLoop
+				}
+			}
+
+			if (pluginSelection.length === 0) {
+				console.info(c.bold(c.red('no plugin selections were made')))
+				return
+			}
+
+			await doAction({
+				foxPlugins,
+				foxPluginPaths,
+				pluginSelection,
+				projectData,
+				actionFunctionName: 'bootstrapFunction'
+			})
+
+			return
+		}
+
 		await doAction({
 			foxPlugins,
 			foxPluginPaths,
@@ -80,6 +122,6 @@ Examples:
 			console.log(c.bold(c.green('cache directory nuked')))
 		})
 	} else {
-		c.bold(c.red('argument(s) or parameter(s) not understood'))
+		console.info(c.bold(c.red('argument(s) or parameter(s) not understood')))
 	}
 }
