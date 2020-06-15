@@ -8,9 +8,17 @@ import assert from 'assert'
  * @description bootstraps, formats, or lints a project
  */
 async function doAction({
-	actionFunctions,
 	projectData,
+	foxPlugins,
+	pluginSelection,
+	actionFunctionName
 }: IAction): Promise<void> {
+	const actionFunctions = util.pickSpecificModuleProperty({
+		foxPlugins,
+		specificIndicesToPick: pluginSelection,
+		actionFunction: actionFunctionName,
+	})
+
 	assert(Array.isArray(actionFunctions))
 
 	for (const fixFunction of actionFunctions) {
@@ -39,12 +47,10 @@ export async function doBootstrap({
 	}
 
 	await doAction({
-		actionFunctions: util.pickSpecificModuleProperty({
-			foxPlugins,
-			specificIndicesToPick: pluginSelection,
-			actionFunction: 'bootstrapFunction',
-		}),
 		projectData,
+		foxPlugins,
+		pluginSelection,
+		actionFunctionName: 'bootstrapFunction'
 	})
 
 	console.log(c.bold(c.green('bootstrap complete')))
@@ -69,12 +75,10 @@ export async function doFix({
 	}
 
 	await doAction({
-		actionFunctions: util.pickSpecificModuleProperty({
-			foxPlugins,
-			specificIndicesToPick: pluginSelection,
-			actionFunction: 'fixFunction',
-		}),
 		projectData,
+		foxPlugins,
+		pluginSelection,
+		actionFunctionName: 'fixFunction'
 	})
 
 	console.log(c.bold(c.green('fix complete')))
@@ -121,12 +125,10 @@ export async function doWatch({
 		)
 
 		await doAction({
-			actionFunctions: util.pickSpecificModuleProperty({
-				foxPlugins,
-				specificIndicesToPick: pluginSelection,
-				actionFunction: 'fixFunction',
-			}),
 			projectData,
+			foxPlugins,
+			pluginSelection,
+			actionFunctionName: 'fixFunction'
 		})
 	})
 

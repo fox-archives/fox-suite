@@ -9,7 +9,7 @@ export interface IFoxConfig {
 	all: option
 	monorepo: boolean
 	env: 'browser' | 'node' | 'deno' | 'browser-node' | 'browser-deno'
-	plugin: Record<string, option>
+	plugins: Record<string, option>
 }
 
 /**
@@ -236,20 +236,10 @@ export interface IPluginExportInfo {
 /**
  * @description basically a single unit that has information
  * about the stuff we want to do to a specific project
- * @todo make this only an array and handle that
  */
-interface IActionBootstrap {
-	actionFunctions:
-		| IPluginExportIndex['bootstrapFunction']
-		| IPluginExportIndex['bootstrapFunction'][]
+export interface IAction {
 	projectData: IProject
+	foxPlugins: IPluginExportIndex[]
+	pluginSelection: number
+	actionFunctionName:'bootstrapFunction' | 'fixFunction'
 }
-
-interface IActionFix {
-	actionFunctions:
-		| IPluginExportIndex['fixFunction']
-		| IPluginExportIndex['fixFunction'][]
-	projectData: IProject
-}
-
-export type IAction = IActionBootstrap | IActionFix

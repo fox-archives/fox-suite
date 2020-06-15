@@ -64,6 +64,7 @@ export async function getProjectData(): Promise<IProject> {
 		debug('defaultFoxConfig: %o', defaultFoxConfig)
 		debug('foxConfig: %o', foxConfig)
 	} catch (err) {
+		console.log(c.bold(c.red('fox.config.js file missing?')))
 		console.error(err)
 	}
 

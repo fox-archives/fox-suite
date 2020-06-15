@@ -40,12 +40,14 @@ with each project, you may want to slightly change the configuration, geared tow
 
 ## Usage
 
-Right now it's _beta-ish quality_. Soon there'll be a `fox-preset-recommended` preset pack to use
+Right now it's _beta-ish quality_
 
 ```sh
-npm i fox-suite fox-preset-all
+npm i fox-suite fox-preset-recommended
 
 fox
+# or
+fox --help
 ```
 
 When using with preexisting tools that depend on path to config file (ex. if you're using `eslint-webpack-plugin`), you may need to use `fox > lint` manually to regenerate json config

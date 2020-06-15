@@ -1,7 +1,7 @@
 import path from 'path'
 import fs from 'fs'
 import type { Dirent } from 'fs'
-import type { IAction, IPluginExportIndex, IProject } from 'fox-types'
+import type { IPluginExportIndex, IProject } from 'fox-types'
 import debug from './debug'
 import * as c from 'colorette'
 
@@ -79,7 +79,7 @@ export async function importFoxPlugins(
 }
 
 type actionFunctions = 'bootstrapFunction' | 'fixFunction'
-type fns = IAction['actionFunctions']
+type fns = IPluginExportIndex["bootstrapFunction"][] | IPluginExportIndex["fixFunction"][]
 interface ISpecificModuleProperty {
 	foxPlugins: IPluginExportIndex[]
 	specificIndicesToPick: number
