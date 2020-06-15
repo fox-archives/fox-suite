@@ -64,7 +64,17 @@ export async function getProjectData(): Promise<IProject> {
 		debug('defaultFoxConfig: %o', defaultFoxConfig)
 		debug('foxConfig: %o', foxConfig)
 	} catch (err) {
-		console.log(c.bold(c.red('fox.config.js file missing?')))
+		if (err.code === 'ENOENT' && err.syscall === 'access') {
+			console.log(
+				c.bold(
+					c.red(
+						"fox.config.js file missing. see details: https://github.com/eankeen/fox-suite#fox-suite"
+					)
+				)
+			);
+			process.exit(1)
+		}
+
 		console.error(err)
 	}
 
