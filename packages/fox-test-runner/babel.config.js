@@ -1,7 +1,7 @@
 module.exports = {
 	presets: [
 		[
-			'@babel/env',
+			"@babel/env",
 			{
 				targets: {
 					node: process.versions.node,
@@ -11,5 +11,5 @@ module.exports = {
 			},
 		],
 	],
-	plugins: ['@babel/transform-modules-commonjs'],
-}
+	plugins: ["@babel/transform-modules-commonjs"],
+};

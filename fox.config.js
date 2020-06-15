@@ -1,4 +1,4 @@
 export default {
-	all: 'strict',
-	env: ['node'],
-}
+	all: "strict",
+	env: ["node"],
+};
