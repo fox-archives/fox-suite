@@ -42,46 +42,66 @@ export async function fixFunction(): Promise<void> {
 				ignore: ['**/node_modules/**'],
 			})
 
-			for (const file of files) {
-				fs.promises
-					.readFile(file, { encoding: 'utf8' })
-					.then(
-						async (content: string): Promise<any> => {
-							try {
-								const formatedContent = prettier.format(
-									content,
-									{
-										...config,
-										filepath: file,
-									},
-								)
+			function format(): Promise<void> {
+				return new Promise((resolve, reject) => {
+					for (let i = 0; i < files.length; ++i) {
+						const file = files[i]
+						fs.promises
+							.readFile(file, { encoding: 'utf8' })
+							.then(
+								async (content: string): Promise<any> => {
+									try {
+										const formatedContent = prettier.format(
+											content,
+											{
+												...config,
+												filepath: file,
+											},
+										)
 
-								const stats = await fs.promises.stat(file)
+										const stats = await fs.promises.stat(file)
 
-								return fs.promises.writeFile(
-									file,
-									formatedContent,
-									{
-										mode: stats.mode,
-									},
-								)
-							} catch (err) {
-								throw new Error(err)
-							}
-						},
-					)
-					.catch((err: any) => {
-						if (
-							!err
-								.toString()
-								.includes(
-									'Error: No parser could be inferred for file',
-								)
-						) {
-							console.error(err)
-						}
-					})
+										return fs.promises.writeFile(
+											file,
+											formatedContent,
+											{
+												mode: stats.mode,
+											},
+										)
+									} catch (err) {
+										if (err.message.includes('No parser could be inferred')) {
+											console.info(c.bold(c.yellow('non-fatal error:')))
+											console.error(err)
+										} else {
+											console.info(c.bold(c.red('error occured:')))
+											console.error(err)
+										}
+									}
+								},
+							)
+							.then(() => {
+								if (i === files.length - 1) {
+									d('promise resolving')
+									resolve()
+								}
+							})
+							.catch((err: any) => {
+								if (
+									!err
+										.toString()
+										.includes(
+											'Error: No parser could be inferred for file',
+										)
+								) {
+									console.error(err)
+								}
+							})
+					}
+				})
+
 			}
+
+			await format()
 		},
 	})
 }

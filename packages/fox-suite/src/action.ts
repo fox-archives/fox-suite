@@ -69,13 +69,6 @@ export async function doAction({
 		await obj.fn(projectData.foxConfig)
 	}
 
-	// for (let i = 0; i < actionFunctions.length; ++i) {
-	// 	const fixFunction = actionFunctions[i]
-	// 	if (!fixFunction) continue;
-	// 	// console.log(c.bold(c.blue(`running ${util.getPluginNameFromPath(pluginSelection[i])}`)))
-	// 	await fixFunction(projectData.foxConfig);
-	// }
-
 	console.log(c.bold(c.blue(`${name} complete`)));
 }
 
