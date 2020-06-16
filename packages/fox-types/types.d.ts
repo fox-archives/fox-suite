@@ -8,7 +8,8 @@ type option = 'off' | 'cozy' | 'strict' | 'excessive'
 export interface IFoxConfig {
 	all: option
 	monorepo: boolean
-	env: 'browser' | 'node' | 'deno' | 'browser-node' | 'browser-deno'
+	env: [ 'browser' ] | [ 'node' ] | [ 'deno' ] | ['browser', 'node' ]
+		| ['browser', 'deno'] | ['node', 'deno'] | ['browser', 'deno', 'node'] | []
 	plugins: Record<string, option>
 }
 
