@@ -9,6 +9,11 @@ export function importPlugin(
 	// requires sourceType: 'module' and ecmaVersion: 2018
 	const obj: Record<string, any> = {
 		plugins: ['eslint-plugin-import'],
+		extends: [
+			// we override all of these (i'm pretty sure)
+			'plugin:import/errors',
+  			'plugin:import/warnings'
+		],
 		settings: {},
 		rules: {
 			/* ------------------ static analyasis ------------------ */
@@ -147,26 +152,6 @@ export function importPlugin(
 				groups: ['builtin', 'external', 'parent', 'sibling', 'index'],
 			},
 		]
-	}
-
-	if (false) {
-		obj.rules['import/named'] = 'off'
-
-		const allExtensions = ['.ts', '.tsx', '.d.ts', '.js', '.jsx']
-		// typescript
-		;(obj.rules['import/extensions'] = allExtensions),
-			(obj.rules['import/external-module-folders'] = [
-				'node_modules',
-				'node_modules/@types',
-			]),
-			(obj.rules['import/parsers'] = {
-				'@typescript-eslint/parser': ['.ts', '.tsx', '.d.ts'],
-			}),
-			(obj.rules['import/resolver'] = {
-				node: {
-					extensions: allExtensions,
-				},
-			})
 	}
 
 	return obj

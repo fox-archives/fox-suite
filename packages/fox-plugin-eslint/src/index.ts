@@ -41,11 +41,11 @@ export async function fixFunction() {
 				),
 				useEslintrc: false,
 				fix: true,
-				cache: true,
-				cacheLocation: path.join(
-					project.location,
-					'.config/.cache/eslintcache',
-				),
+				cache: false,
+				// cacheLocation: path.join(
+				// 	project.location,
+				// 	'.config/.cache/eslintcache',
+				// ),
 			})
 
 			const results = await eslint.lintFiles(['**/*.js'])

@@ -1,5 +1,5 @@
 module.exports = function (m) {
-	return require("esm")(m, {
+	return require(require.resolve("esm"))(m, {
 		cjs: true,
 		mode: "auto",
 		await: false,
