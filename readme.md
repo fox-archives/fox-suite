@@ -50,7 +50,9 @@ fox
 fox --help
 ```
 
-When using with preexisting tools that depend on path to config file (ex. if you're using `eslint-webpack-plugin`), you may need to use `fox > lint` manually to regenerate json config
+Listed plugins styleling and eslint are separately codependent on fox-plugin-prettier
+
+When using with preexisting tools that depend on path to config file (ex. if you're using `eslint-webpack-plugin`), you may need to use `fox > lint` (TODO: create command for this) manually to regenerate json config
 
 ## Options
 

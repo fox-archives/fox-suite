@@ -59,9 +59,10 @@ importers:
       eslint-config-prettier: 6.11.0_eslint@7.2.0
       eslint-plugin-babel: 5.3.0_eslint@7.2.0
       eslint-plugin-import: 2.21.2_eslint@7.2.0
-      eslint-plugin-prettier: 3.1.3_eslint@7.2.0+prettier@2.0.5
+      eslint-plugin-prettier: 3.1.4_eslint@7.2.0+prettier@2.0.5
       eslint-plugin-simple-import-sort: 5.0.3_eslint@7.2.0
       lodash.mergewith: 4.6.2
+      prettier: 2.0.5
       read-pkg-up: 7.0.1
     devDependencies:
       eslint: 7.2.0
@@ -70,8 +71,6 @@ importers:
       jest-extended: 0.11.5
       ts-jest: 26.1.0_jest@26.0.1+typescript@3.9.5
       typescript: 3.9.5
-    optionalDependencies:
-      prettier: 2.0.5
     specifiers:
       '@typescript-eslint/eslint-plugin': ^3.3.0
       '@typescript-eslint/parser': ^3.3.0
@@ -81,13 +80,13 @@ importers:
       eslint-config-prettier: ^6.11.0
       eslint-plugin-babel: ^5.3.0
       eslint-plugin-import: ^2.21.2
-      eslint-plugin-prettier: ^3.1.3
+      eslint-plugin-prettier: ^3.1.4
       eslint-plugin-simple-import-sort: ^5.0.3
       fox-types: 'workspace:^1.1.3'
       jest: ^26.0.1
       jest-extended: ^0.11.5
       lodash.mergewith: ^4.6.2
-      prettier: ^2.0.0
+      prettier: ^2.0.5
       read-pkg-up: ^7.0.1
       ts-jest: ^26.1.0
       typescript: ^3.9.5
@@ -5208,7 +5207,7 @@ packages:
       eslint: ^2 || ^3 || ^4 || ^5 || ^6 || ^7.2.0
     resolution:
       integrity: sha512-FEmxeGI6yaz+SnEB6YgNHlQK1Bs2DKLM+YF+vuTk5H8J9CLbJLtlPvRFgZZ2+sXiKAlN5dpdlrWOjK8ZoZJpQA==
-  /eslint-plugin-prettier/3.1.3_eslint@7.2.0+prettier@2.0.5:
+  /eslint-plugin-prettier/3.1.4_eslint@7.2.0+prettier@2.0.5:
     dependencies:
       eslint: 7.2.0
       prettier: 2.0.5
@@ -5217,10 +5216,10 @@ packages:
     engines:
       node: '>=6.0.0'
     peerDependencies:
-      eslint: '>= 5.0.0'
-      prettier: '>= 1.13.0'
+      eslint: '>=5.0.0'
+      prettier: '>=1.13.0'
     resolution:
-      integrity: sha512-+HG5jmu/dN3ZV3T6eCD7a4BlAySdN7mLIbJYo0z1cFQuI+r2DiTJEFeF68ots93PsnrMxbzIZ2S/ieX+mkrBeQ==
+      integrity: sha512-jZDa8z76klRqo+TdGDTFJSavwbnWK2ZpqGKNZ+VvweMW516pDUMmQ2koXvxEE4JhzNvTv+radye/bWGBmA6jmg==
   /eslint-plugin-simple-import-sort/5.0.3_eslint@7.2.0:
     dependencies:
       eslint: 7.2.0

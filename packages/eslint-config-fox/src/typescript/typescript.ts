@@ -51,8 +51,9 @@ export function typescriptConfig(
 			// typescript handles this already
 			'import/named': 'off',
 
-			'import/extensions': allExtensions,
+			// 'import/extensions': [ 'error', allExtensions ],
 			'import/external-module-folders': [
+				'error',
 				'node_modules',
 				'node_modules/@types',
 			],

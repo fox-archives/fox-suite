@@ -22,6 +22,9 @@ export async function fixFunction() {
 			const project = await foxUtils.getProjectData()
 
 			const config = (await import('eslint-config-fox')).default
+			// @ts-ignore
+			// const tsConfig = (await import('../node_modules/eslint-config-fox/build/typescript/index.js')).default.default
+			// const tsConfig = require('../node_modules/eslint-config-fox/build/typescript/index.js').default
 
 			// rebuild config
 			debug('rebuilding config')
@@ -48,14 +51,40 @@ export async function fixFunction() {
 				// ),
 			})
 
-			const results = await eslint.lintFiles(['**/*.js'])
+			// const tsEslint = new ESLint({
+			// 	cwd: project.location,
+			// 	errorOnUnmatchedPattern: false,
+			// 	ignorePath: path.join(project.location, '.config/eslintignore'),
+			// 	overrideConfig: tsConfig,
+			// 	resolvePluginsRelativeTo: path.join(
+			// 		__dirname,
+			// 		'../node_modules/eslint-config-fox',
+			// 	),
+			// 	useEslintrc: false,
+			// 	fix: true,
+			// 	cache: false,
+			// 	// cacheLocation: path.join(
+			// 	// 	project.location,
+			// 	// 	'.config/.cache/eslintcache',
+			// 	// ),
+			// })
 
-			await ESLint.outputFixes(results)
+			const resultsJs = await eslint.lintFiles(['**/*.{js,cjs,mjs,jsx}'])
+			const resultsTs = await eslint.lintFiles(['**/*.{ts,tsx}'])
+
+			// faster
+			const [ ,,formatter ] = await Promise.all([
+				ESLint.outputFixes(resultsJs),
+				ESLint.outputFixes(resultsTs),
+				eslint.loadFormatter('stylish')
+			])
 
 			// format and print results
-			const formatter = await eslint.loadFormatter('stylish')
-			const resultText = formatter.format(results)
-			console.info(resultText)
+			const resultsJsText = formatter.format(resultsJs)
+			const resultsTsText = formatter.format(resultsJs)
+
+			console.info(resultsJsText)
+			console.info(resultsTsText)
 		},
 	})
 }

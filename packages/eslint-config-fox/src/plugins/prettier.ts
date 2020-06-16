@@ -9,14 +9,14 @@ export function prettierPlugin(
 	const obj: Record<string, any> = {
 		plugins: ['eslint-plugin-prettier'],
 		extends: [
-			"prettier",
-			"prettier/@typescript-eslint",
-			"prettier/babel",
-			"prettier/flowtype",
-			"prettier/react",
-			"prettier/standard",
-			"prettier/unicorn",
-			"prettier/vue"
+			// "prettier",
+			// "prettier/@typescript-eslint",
+			// "prettier/babel",
+			// "prettier/flowtype",
+			// "prettier/react",
+			// "prettier/standard",
+			// "prettier/unicorn",
+			// "prettier/vue"
 		],
 		rules: {
 			'prettier/prettier': 'off',
