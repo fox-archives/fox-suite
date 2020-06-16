@@ -1,7 +1,14 @@
 import path from 'path'
 import fs from 'fs'
 import { IPluginExportIndex, IPluginExportInfo } from 'fox-types'
-import { getPluginInfo, loadModule, readPackageJson, getBinDirents, readBinFile, babelTraverse } from './test.util'
+import {
+	getPluginInfo,
+	loadModule,
+	readPackageJson,
+	getBinDirents,
+	readBinFile,
+	babelTraverse,
+} from './test.util'
 import 'jest-extended'
 import type { Node } from '@babel/core'
 // TODO: fix type integration
@@ -12,13 +19,13 @@ const { pluginName } = getPluginInfo()
 let infoModule: { info: IPluginExportInfo }
 let pluginModule: IPluginExportIndex
 beforeEach(async () => {
-	[ infoModule, pluginModule ] = await Promise.all([
-	 	loadModule('src/info.ts'),
-	 	loadModule('src/index.ts')
-	]) as [ { info: IPluginExportInfo }, IPluginExportIndex ]
+	;[infoModule, pluginModule] = (await Promise.all([
+		loadModule('src/info.ts'),
+		loadModule('src/index.ts'),
+	])) as [{ info: IPluginExportInfo }, IPluginExportIndex]
 })
 
-describe(`testing module: '${pluginName}' using the 'fox-test' jest autorunner`, () => {
+describe(`testing module: '${pluginName}' using the 'fox-test-runner' jest autorunner`, () => {
 	test("`src/info.ts` exports an 'info' object that conforms to the IPluginExportInfo schema", async () => {
 		expect(infoModule).toBeObject()
 		// src/info.ts must include `export const info = { name: '' }'`
@@ -60,7 +67,7 @@ describe(`testing module: '${pluginName}' using the 'fox-test' jest autorunner`,
 		const packageJson = await readPackageJson(pluginPath)
 
 		let binDirHasFilename = false
-		for (const dirent of (await getBinDirents(pluginPath))) {
+		for (const dirent of await getBinDirents(pluginPath)) {
 			if (dirent.name === `${packageJson.name}.js`) {
 				binDirHasFilename = true
 			}
@@ -69,13 +76,11 @@ describe(`testing module: '${pluginName}' using the 'fox-test' jest autorunner`,
 		expect(binDirHasFilename).toBe(true)
 	})
 
-	test("`bin/fox-plugin-*.js` has a shebang", async () => {
+	test('`bin/fox-plugin-*.js` has a shebang', async () => {
 		const { pluginPath } = getPluginInfo()
 		const binFileContents = await readBinFile(pluginPath)
 
-		expect(
-			binFileContents.startsWith('#!/usr/bin/env node\n')
-		).toBe(true)
+		expect(binFileContents.startsWith('#!/usr/bin/env node\n')).toBe(true)
 	})
 
 	test("`bin/fox-plugin-*.js` requires 'fox-esm'", async () => {
@@ -83,8 +88,12 @@ describe(`testing module: '${pluginName}' using the 'fox-test' jest autorunner`,
 		const binFileContents = await readBinFile(pluginPath)
 
 		expect(
-			binFileContents.includes("\nrequire = require('fox-esm')(module)") ||
-			binFileContents.includes(`\nrequire = require("fox-esm")(module)`)
+			binFileContents.includes(
+				"\nrequire = require('fox-esm')(module)",
+			) ||
+				binFileContents.includes(
+					`\nrequire = require("fox-esm")(module)`,
+				),
 		).toBe(true)
 		// bin/fox-plugin-*.js must include `require = require('fox-esm')(module)`
 	})
@@ -108,13 +117,13 @@ describe(`testing module: '${pluginName}' using the 'fox-test' jest autorunner`,
 
 	test("ensure `src/index.ts` exports a buildTemplates function if a 'templates' folder exists", async () => {
 		const { pluginPath } = getPluginInfo()
-			const templateFileLocation = path.join(pluginPath, 'templates')
-			if (fs.existsSync(templateFileLocation)) {
-				expect(pluginModule).toHaveProperty('bootstrapFunction')
-			}
+		const templateFileLocation = path.join(pluginPath, 'templates')
+		if (fs.existsSync(templateFileLocation)) {
+			expect(pluginModule).toHaveProperty('bootstrapFunction')
+		}
 	})
 
-	test("ensure {bootstrap,fix}Functions are async", async () => {
+	test('ensure {bootstrap,fix}Functions are async', async () => {
 		await babelTraverse({
 			ExportDeclaration(path: any) {
 				const { node } = path
@@ -124,23 +133,26 @@ describe(`testing module: '${pluginName}' using the 'fox-test' jest autorunner`,
 
 				const declaration = node.declaration
 
-				if (!declaration.id) throw new Error ('ndoe does not have id')
+				if (!declaration.id) throw new Error('ndoe does not have id')
 				if (declaration.id.type !== 'Identifier') return
 
 				const fnsNames = new Set(['bootstrapFunction', 'fixFunction'])
 				if (fnsNames.has(declaration.id.name)) {
 					expect(declaration.async).toBe(true)
 				}
-			}
+			},
 		})
 	})
 
-	test("ensure foxUtils.build{Bootstrap,Fix} are awaited", async () => {
+	test('ensure foxUtils.build{Bootstrap,Fix} are awaited', async () => {
 		await babelTraverse({
 			ExpressionStatement(path: any) {
 				const { node } = path
 
-				if (node.expression.type == 'AwaitExpression' || node.expression.type == 'CallExpression') {
+				if (
+					node.expression.type == 'AwaitExpression' ||
+					node.expression.type == 'CallExpression'
+				) {
 					// valid
 				} else {
 					return
@@ -152,25 +164,33 @@ describe(`testing module: '${pluginName}' using the 'fox-test' jest autorunner`,
 				} else if (node.expression.type === 'CallExpression') {
 					callExpression = node.expression
 				} else {
-					throw new Error('this shouldn\'t happen')
+					throw new Error("this shouldn't happen")
 				}
 
 				// this call expression will be checked to be only specific to:
 				// foxUtils.buildBootstrap()
 				// buildBootstrap()
-				const callExpressionIsAwaited = node.expression.type === 'AwaitExpression'
-
+				const callExpressionIsAwaited =
+					node.expression.type === 'AwaitExpression'
 
 				const identifierNames = new Set(['buildBootstrap', 'buildFix'])
 
-				const isValidCallExpression = (callExpression: any): boolean => {
+				const isValidCallExpression = (
+					callExpression: any,
+				): boolean => {
 					if (callExpression.callee.type === 'Identifier') {
-						if (identifierNames.has(callExpression.callee.name)) return true
-					} else if (callExpression.callee.type === 'MemberExpression') {
+						if (identifierNames.has(callExpression.callee.name))
+							return true
+					} else if (
+						callExpression.callee.type === 'MemberExpression'
+					) {
 						const memberExpression = callExpression.callee
 
-						if(memberExpression.object.name === 'foxUtils' &&
-							identifierNames.has(memberExpression.property.name)) return true
+						if (
+							memberExpression.object.name === 'foxUtils' &&
+							identifierNames.has(memberExpression.property.name)
+						)
+							return true
 					}
 					return false
 				}
@@ -181,7 +201,7 @@ describe(`testing module: '${pluginName}' using the 'fox-test' jest autorunner`,
 				// if the call expression is valid (meaning it looks something like
 				// foxUtils.buildBootstrap() or buildBootstrap(), it must be awaited
 				expect(isValidCallExp).toBe(callExpressionIsAwaited)
-			}
+			},
 		})
 	})
 })

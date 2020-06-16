@@ -1,0 +1,5 @@
+{
+	"prettier.configPath": "./config/build/prettier.config.json",
+	"prettier.ignorePath": "./config/prettierignore",
+	"prettier.prettierPath": "{{ data.pluginRoot }}/node_modules/prettier"
+}

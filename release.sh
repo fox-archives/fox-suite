@@ -31,17 +31,18 @@ require_clean_work_tree () {
 	fi
 }
 
+# shellcheck disable=SC1001
 require_clean_work_tree \continue
 
-packageJsonFiles=$(ls **/**/package.json | grep -v node_modules)
+packageJsonFiles=$(ls -- **/**/package.json | grep -v node_modules)
 for packageJsonFile in $packageJsonFiles; do
-	echo $packageJsonFile
-	sed -i "s/\"workspace:/\"/g" $packageJsonFile
-	pushd $(dirname $packageJsonFile)
-	echo $PWD
+	echo "$packageJsonFile"
+	sed -i "s/\"workspace:/\"/g" "$packageJsonFile"
+	pushd "$(dirname "$packageJsonFile")" || exit
+	echo "$PWD"
 	npm publish
-	popd 1>/dev/null
-	git checkout HEAD -- $packageJsonFile
+	popd 1>/dev/null || exit
+	git checkout HEAD -- "$packageJsonFile"
 	echo -e "\033[0;94mdone.\033[0m\n"
 done
 

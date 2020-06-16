@@ -8,6 +8,6 @@ import type stylelint from 'stylelint'
 
 // HACK: could be less ugly
 export interface i extends stylelint.LinterOptions {
-	globbyOptions: Record<string, any>,
+	globbyOptions: Record<string, any>
 	reportInvalidScopeDisables: boolean
 }

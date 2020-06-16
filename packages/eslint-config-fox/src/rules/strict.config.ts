@@ -1,5 +1,5 @@
 import merge from 'lodash.merge'
-import type { IFoxConfig } from "fox-types"
+import type { IFoxConfig } from 'fox-types'
 
 /**
  * Enable rules that could prevent
@@ -11,9 +11,12 @@ const isProd = process.env.NODE_ENV === 'production'
 /**
  * Strict config rules
  */
-export function strictConfig(fox: IFoxConfig, tier: string): Record<string, any> {
-  const obj: Record<string, any> = {
-    rules: {
+export function strictConfig(
+	fox: IFoxConfig,
+	tier: string,
+): Record<string, any> {
+	const obj: Record<string, any> = {
+		rules: {
 			/* ------------------- possible errors ------------------ */
 			'for-direction': 'error',
 			'getter-return': ['error', { allowImplicit: true }],
@@ -52,7 +55,6 @@ export function strictConfig(fox: IFoxConfig, tier: string): Record<string, any>
 			'no-lone-blocks': 'off', // see isProd
 			'no-multi-spaces': 'error',
 			'no-new-func': 'error',
-			'no-new-function': 'error',
 			'no-new-wrappers': 'error',
 			'no-new': 'error',
 			'no-restricted-properties': [
@@ -114,24 +116,32 @@ export function strictConfig(fox: IFoxConfig, tier: string): Record<string, any>
 			'no-script-url': 'error',
 			'no-self-assign': ['error', { props: true }],
 			'no-self-compare': 'error',
-			'no-unused-label': 'error',
+			'no-unused-labels': 'error',
 			'no-useless-call': 'error',
 			'no-useless-catch': 'error',
 			'no-useless-escape': 'error',
 			'no-useless-return': 'error',
 			'no-with': 'error',
-			'prefer-promise-reject-errors': ['error', { allowEmptyReject: false }],
+			'prefer-promise-reject-errors': [
+				'error',
+				{ allowEmptyReject: false },
+			],
 			'prefer-regex-literals': 'error',
-			complexity: ['error', { max: 18 }],
-      'default-case-last': 'error',
-      'default-case': ['error', { commentPattern: '^no default$' }],
-      'yoda': ['error', 'never', { exceptRange: true, onlyEquality: false }],
+			'complexity': ['error', { max: 18 }],
+			'default-case-last': 'error',
+			'default-case': ['error', { commentPattern: '^no default$' }],
+			'yoda': [
+				'error',
+				'never',
+				{ exceptRange: true, onlyEquality: false },
+			],
 
 			/* --------------------- strict mode -------------------- */
 
 			/* ---------------------- variables --------------------- */
 			'no-label-var': 'error',
 			'no-restricted-globals': [
+				'error',
 				'addEventListener',
 				'blur',
 				'close',
@@ -200,24 +210,27 @@ export function strictConfig(fox: IFoxConfig, tier: string): Record<string, any>
 				'error',
 				{ functions: false, classes: true, variables: true },
 			],
-			'wrap-iife': ['error', 'inside', { functionPrototypeMethods: false }],
+			'wrap-iife': [
+				'error',
+				'inside',
+				{ functionPrototypeMethods: false },
+			],
 
 			/* ------------------- stylistic issue ------------------ */
 			'prefer-exponentiation-operator': 'error',
 
 			/* -------------------- ecmascript 6 -------------------- */
-			'no-useless-comuted-key': 'error',
+			'no-useless-computed-key': 'error',
 			'no-useless-constructor': 'off', // see isProd
 			'require-yield': 'off', // see isProd
 			'symbol-description': 'error',
-    },
-  }
+		},
+	}
 
 	if (isProd) {
 		/* ------------------- possible errors ------------------ */
 		obj.rules['no-empty'] = ['error', { allowEmptyCatch: false }]
 		obj.rules['no-console'] = 'error'
-
 
 		/* ------------------- best practices ------------------- */
 		obj.rules['array-callback-return'] = ['error', { allowImplicit: true }]
@@ -230,14 +243,13 @@ export function strictConfig(fox: IFoxConfig, tier: string): Record<string, any>
 		obj.rules['no-extra-label'] = 'error'
 		obj.rules['no-lone-blocks'] = 'error'
 
-
 		/* --------------------- strict mode -------------------- */
 
 		/* ---------------------- variables --------------------- */
-		obj.rules['no-unused-vars'] = [
-			'error',
-			{ vars: 'all', args: 'none', ignoreRestSiblings: true },
-		]
+		// obj.rules['no-unused-vars'] = [
+		// 	'error',
+		// 	{ vars: 'all', args: 'none', ignoreRestSiblings: true },
+		// ]
 
 		/* -------------------- ecmascript 6 -------------------- */
 		obj.rules['no-useless-constructor'] = 'error'

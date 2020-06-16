@@ -6,5 +6,5 @@ export const info: IPluginExportInfo = {
 	toolName: 'MarkdownLint',
 	toolConfigSchemaHelpUri: '',
 	description: 'Lints markdown files',
-	descriptionLong: 'Lints markdown files. Has autofix capabilities?'
+	descriptionLong: 'Lints markdown files. Has autofix capabilities?',
 }

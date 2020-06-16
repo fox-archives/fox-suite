@@ -1,38 +1,50 @@
-import merge from 'lodash.merge'
+import merge from 'lodash.mergewith'
+import { rootConfig } from './root'
 import { cozyConfig } from './rules/cozy.config'
 import { strictConfig } from './rules/strict.config'
 import { excessiveConfig } from './rules/excessive.config'
 import { IFoxConfig } from 'fox-types'
 
-
-/**
- * @todo remove duplicate function (can't
- * import from `fox-utils` because `fox-types`
- * is an ECMAScript module and `stylelint-config-fox`
- * is emitted as a CommonJS module for
- * compatability with stylelint)
- */
-function getFoxOptionsFromEnv(): IFoxConfig {
-  let foxOptions = process.env.FOX_SUITE_FOX_OPTIONS
-  foxOptions = foxOptions || "{ error: 'process.env.FOX_SUITE_FOX_OPTIONS is falsey' }"
-  return JSON.parse(foxOptions)
+const customizer = (
+	destObj: Record<string, any>,
+	srcObj: Record<string, any>,
+): any => {
+	// for arrays that are not rules, merge them
+	// 'extends', 'plugins', etc.
+	if (
+		Array.isArray(destObj) &&
+		Array.isArray(srcObj) &&
+		!destObj.includes('error') &&
+		!srcObj.includes('error') &&
+		!destObj.includes('off') &&
+		!srcObj.includes('off')
+	) {
+		return destObj.concat(srcObj)
+	}
 }
 
-const fox = getFoxOptionsFromEnv()
+const foxConfig: IFoxConfig = JSON.parse(
+	process.env.FOX_SUITE_FOX_OPTIONS || '{}',
+)
+const tier: string = process.env.FOX_SUITE_PLUGIN_STYLELINT_TIER || ''
 
-let stylelintConfigFox = {}
-if (fox.plugin.stylelint === "off" || fox.all === "off") {
+let config = {}
+config = merge(config, rootConfig(foxConfig, tier), customizer)
 
-} else if (fox.plugin.stylelint === "cozy" || fox.all === "cozy") {
-	stylelintConfigFox = merge(cozyConfig(fox))
-} else if (fox.plugin.stylelint === "strict" || fox.all === "strict") {
-	stylelintConfigFox = merge(cozyConfig(fox))
-	stylelintConfigFox = merge(strictConfig(fox))
-} else if (fox.plugin.stylelint === "excessive" || fox.all === "excessive") {
-	stylelintConfigFox = merge(cozyConfig(fox))
-	stylelintConfigFox = merge(strictConfig(fox))
-	stylelintConfigFox = merge(excessiveConfig(fox))
+if (tier === 'off') {
+} else if (tier === 'cozy') {
+	config = merge(config, cozyConfig(foxConfig, tier), customizer)
+} else if (tier === 'strict') {
+	config = merge(config, cozyConfig(foxConfig, tier), customizer)
+	config = merge(config, strictConfig(foxConfig, tier), customizer)
+} else if (tier === 'excessive') {
+	config = merge(config, cozyConfig(foxConfig, tier), customizer)
+	config = merge(config, strictConfig(foxConfig, tier), customizer)
+	config = merge(config, excessiveConfig(foxConfig, tier), customizer)
+} else {
+	console.error(`tier: '${tier}' not an expected value`)
 }
 
+// prettier is in index.ts
 
-module.exports = stylelintConfigFox
+module.exports = config

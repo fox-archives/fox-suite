@@ -6,5 +6,5 @@ export const info: IPluginExportInfo = {
 	toolName: 'Stylelint',
 	toolConfigSchemaHelpUri: 'https://stylelint.io/user-guide/rules/list',
 	description: 'Formats CSS files',
-	descriptionLong: 'Formats CSS files, and performs some autofixing'
+	descriptionLong: 'Formats CSS files, and performs some autofixing',
 }

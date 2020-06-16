@@ -1,37 +1,32 @@
 {
-  "compileOnSave": true,
-  "compilerOptions": {
-    "outDir": "build",
-    "sourceMap": true,
-    "target": "ES2019",
-    "module": "ESNext",
+	"compileOnSave": true,
+	"compilerOptions": {
+		"outDir": "build",
+		"sourceMap": true,
+		"target": "ES2019",
+		"module": "ESNext",
 		"esModuleInterop": true,
 		"isolatedModules": true,
-    "strict": true,
-    "noImplicitAny": true,
-    "noImplicitThis": true,
-    "typeRoots": [
-      "./node_modules/@types",
-      "./@types",
-    ],
-    "lib": [
-      "ESNext"
-    ],
+		"strict": true,
+		"noImplicitAny": true,
+		"noImplicitThis": true,
+		"typeRoots": ["./node_modules/@types", "./@types"],
+		"lib": ["ESNext"],
 		"moduleResolution": "node",
-    "composite": true,
-    // ensure this is on for composite and project references
-    "declaration": true,
-    "declarationMap": true,
-    "incremental": true,
-    "baseUrl": ".",
+		"composite": true,
+		// ensure this is on for composite and project references
+		"declaration": true,
+		"declarationMap": true,
+		"incremental": true,
+		"baseUrl": ".",
 
-    // linter checks / etc
-    "noFallthroughCasesInSwitch": false, // default
-    "noImplicitReturns": true,
-    "noUnusedLocals": false, // default
-    "noUnusedParameters": false,
-    "allowUnusedLabels": false, // default
-    "forceConsistentCasingInFileNames": true,
+		// linter checks / etc
+		"noFallthroughCasesInSwitch": false, // default
+		"noImplicitReturns": true,
+		"noUnusedLocals": false, // default
+		"noUnusedParameters": false,
+		"allowUnusedLabels": false, // default
+		"forceConsistentCasingInFileNames": true,
 		"useDefineForClassFields": true
-  }
+	}
 }

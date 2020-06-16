@@ -1,4 +1,4 @@
-import { IFoxConfig } from "fox-types"
+import { IFoxConfig } from 'fox-types'
 
 const isProd = process.env.NODE_ENV === 'production'
 
@@ -38,7 +38,7 @@ export function cozyConfig(fox: IFoxConfig, tier: string): Record<string, any> {
 					enforceForArrowConditionals: false,
 					enforceForSequenceExpressions: false,
 					enforceForNewInMemberExpressions: false,
-					enforceForFunctionPrototypeMethods: false
+					enforceForFunctionPrototypeMethods: false,
 				},
 			],
 			'no-extra-semi': 'error',
@@ -108,7 +108,7 @@ export function cozyConfig(fox: IFoxConfig, tier: string): Record<string, any> {
 			'no-magic-numbers': 'off',
 			'no-multi-spaces': 'off',
 			'no-multi-str': 'off',
-			'no-new-function': 'off',
+			'no-new-func': 'off',
 			'no-new-wrappers': 'off',
 			'no-new': 'off',
 			'no-octal-escape': 'error',
@@ -178,7 +178,10 @@ export function cozyConfig(fox: IFoxConfig, tier: string): Record<string, any> {
 			'no-restricted-exports': 'off',
 			'no-restricted-imports': 'off',
 			'no-this-before-super': 'off',
-			'no-useless-computed-key': ['error', { enforceForClassMembers: true }],
+			'no-useless-computed-key': [
+				'error',
+				{ enforceForClassMembers: true },
+			],
 			'no-useless-constructor': 'off',
 			'no-useless-rename': [
 				'error',
@@ -202,7 +205,7 @@ export function cozyConfig(fox: IFoxConfig, tier: string): Record<string, any> {
 			'sort-imports': 'error',
 			'symbol-description': 'off',
 			'yield-star-spacing': ['error', { before: false, after: true }],
-		}
+		},
 	}
 
 	if (isProd) {
@@ -215,5 +218,3 @@ export function cozyConfig(fox: IFoxConfig, tier: string): Record<string, any> {
 
 	return obj
 }
-
-

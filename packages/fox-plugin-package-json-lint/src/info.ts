@@ -6,5 +6,5 @@ export const info: IPluginExportInfo = {
 	toolName: 'npm-package-json-lint',
 	toolConfigSchemaHelpUri: 'https://npmpackagejsonlint.org/docs/en/rules',
 	description: 'Lints the pacakge.json file',
-	descriptionLong: 'Lints the package.json file. Has autofix?'
+	descriptionLong: 'Lints the package.json file. Has autofix?',
 }

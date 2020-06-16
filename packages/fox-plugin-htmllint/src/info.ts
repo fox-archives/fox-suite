@@ -6,5 +6,5 @@ export const info: IPluginExportInfo = {
 	toolName: 'htmllint',
 	toolConfigSchemaHelpUri: 'https://htmlhint.com/docs/user-guide/list-rules',
 	description: 'Lints the html files of current project',
-	descriptionLong: 'pending'
+	descriptionLong: 'pending',
 }

@@ -1,9 +1,9 @@
 {
-  "name": "fox-types",
-  "version": "0.3.0",
-  "description": "",
-  "types": "types.d.ts",
-  "keywords": [
+	"name": "fox-types",
+	"version": "1.1.3",
+	"description": "",
+	"types": "types.d.ts",
+	"keywords": [
 		"fox",
 		"fox-suite"
 	],
@@ -19,8 +19,8 @@
 		"type": "git",
 		"url": "https://github.com/eankeen/fox-suite.git"
 	},
-  "license": "MIT",
-  "dependencies": {
-    "type-fest": "^0.15.1"
-  }
+	"license": "MIT",
+	"dependencies": {
+		"type-fest": "^0.15.1"
+	}
 }

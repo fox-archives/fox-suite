@@ -1,0 +1,7 @@
+node_modules/
+*.tsbuildinfo
+tsconfig.*
+test/**
+src/**
+jest.config.*
+*.log

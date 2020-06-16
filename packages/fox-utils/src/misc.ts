@@ -1,41 +1,21 @@
-import * as c from 'colorette';
-import { IFoxConfig } from "fox-types";
+import path from 'path'
+import fs from 'fs'
 
 /**
- * functions that can't be put in other categories
+ * @description `fs.promises.mkdir()`, but ensures folder structure
+ * exists and writes with consistent mode
  */
-
-/**
- * @deprecate ? use AOC on getProjectData
- * @description serialize foxOptions to and from the environment
- * @summary in some cases, we don't have control of when
- * a module is executed (ex. we pass in the path of `stylelint-config-fox`
- * in our `fox-plugin-stylelint` package directly to `stylelint` (we don't execute)
- * the module outselves and pass _that_ to `stylelint`). so do ensure
- * the module gets access to all `IFoxConfig` fox options, we pass it as an environment
- * variable
- */
-export function setFoxOptionsToEnv(fox: IFoxConfig): void {
-	process.env.FOX_SUITE_FOX_OPTIONS = JSON.stringify(fox)
-}
-
-/**
- * @deprecate ? use AOC getProjectData
- * @description serialize foxOptions to and from the environment
- * @summary see foxUtils.setFoxOptionsToEnv for details on when to use this
- */
-export function getFoxOptionsFromEnv(): IFoxConfig {
-	let foxOptions = process.env.FOX_SUITE_FOX_OPTIONS
-	foxOptions = foxOptions || "{ error: 'process.env.FOX_SUITE_FOX_OPTIONS is falsey' }"
-	console.error(c.bold(c.red('process.env.FOX_SUITE_FOX_OPTIONS is falsey. your configuration may not be what you expect')))
-	return JSON.parse(foxOptions)
-}
-
-/**
- * @description create handlers for uncaughtException
- * and unhandledRejections
- */
-export function setup() {
-	process.on('uncaughtException', (err) => console.error(err))
-	process.on('unhandledRejection', (err) => console.error(err))
+export async function writeFile(
+	filePath: string,
+	content: string | Record<string, any>,
+): Promise<void> {
+	if (typeof content === 'object' && content !== null) {
+		content = JSON.stringify(content, null, 2)
+	}
+	try {
+		await fs.promises.mkdir(path.dirname(filePath))
+	} catch (err) {
+		if (err.code !== 'EEXIST') console.error(err)
+	}
+	await fs.promises.writeFile(path.join(filePath), content, { mode: 0o644 })
 }

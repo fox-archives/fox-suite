@@ -1,13 +1,13 @@
 {
-  "name": "fox-plugin-sort-package-json",
-  "version": "0.3.0",
-  "license": "MIT",
-  "scripts": {
-    "test": "ava"
-  },
-  "type": "commonjs",
-  "engines": {
-    "node": ">=12.17.0 >=v13.14.0 >=14.3.0"
+	"name": "fox-plugin-sort-package-json",
+	"version": "1.1.3",
+	"license": "MIT",
+	"scripts": {
+		"test": "ava"
+	},
+	"type": "commonjs",
+	"engines": {
+		"node": ">=12.17.0 >=v13.14.0 >=14.3.0"
 	},
 	"keywords": [
 		"package-json-sort",
@@ -26,33 +26,32 @@
 		"type": "git",
 		"url": "https://github.com/eankeen/fox-suite.git"
 	},
-  "ava": {
-    "extensions": [
-      "ts"
-    ],
-    "require": [
-      "ts-node/register"
-    ]
-  },
-  "husky": {
-    "hooks": {
-      "pre-commit": "pnpm run test"
-    }
-  },
-  "main": "build",
-  "bin": {
-    "fox-plugin-sort-package-json": "./bin/fox-plugin-sort-package-json.js"
-  },
-  "dependencies": {
-    "fox-test": "^0.3.0",
-    "fox-utils": "^0.3.0",
-    "lodash": "^4.17.15"
-  },
-  "devDependencies": {
-    "ava": "^3.8.2",
-    "fox-types": "^0.3.0",
-    "husky": "^4.2.5",
-    "ts-node": "^8.10.2",
-    "typescript": "^3.9.5"
-  }
+	"ava": {
+		"extensions": [
+			"ts"
+		],
+		"require": [
+			"ts-node/register"
+		]
+	},
+	"husky": {
+		"hooks": {
+			"pre-commit": "pnpm run test"
+		}
+	},
+	"main": "build",
+	"bin": {
+		"fox-plugin-sort-package-json": "./bin/fox-plugin-sort-package-json.js"
+	},
+	"dependencies": {
+		"fox-utils": "^0.3.0",
+		"lodash.sortby": "^4.7.0"
+	},
+	"devDependencies": {
+		"fox-test-runner": "^0.3.0",
+		"ava": "^3.8.2",
+		"fox-types": "^0.3.0",
+		"ts-node": "^8.10.2",
+		"typescript": "^3.9.5"
+	}
 }

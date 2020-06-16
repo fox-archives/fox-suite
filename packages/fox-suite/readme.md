@@ -1,6 +1,5 @@
 # fox-suite
 
-# Description
+## Description
 
-Single package to install to do everything
-
+Single package that contains the main cli, tui, and loads and executes plugins

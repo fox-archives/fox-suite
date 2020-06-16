@@ -6,5 +6,5 @@ export const info: IPluginExportInfo = {
 	toolName: 'Prettier',
 	toolConfigSchemaHelpUri: 'https://prettier.io/docs/en/options.html',
 	description: 'Formats common files',
-	descriptionLong: 'Formats common files?'
+	descriptionLong: 'Formats common files?',
 }

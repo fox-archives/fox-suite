@@ -1,33 +1,29 @@
 {
-  "extends": "../tsconfig.plugin.json",
-  "compilerOptions": {
-    "rootDir": "src",
-    "outDir": "build"
+	"extends": "../tsconfig.plugin.json",
+	"compilerOptions": {
+		"rootDir": "src",
+		"outDir": "build"
 	},
-	"typeRoots": [
-		"./@types"
-	],
-  "include": [
-    "src/**/*"
-  ],
-  "references": [
-    {
-      "path": "../fox-plugin-markdownlint"
-    },
-    {
-      "path": "../fox-plugin-package-json-lint"
-    },
-    {
-      "path": "../fox-plugin-sort-package-json"
-    },
-    {
-      "path": "../npm-package-json-lint-config-fox"
-    },
-    {
-      "path": "../fox-plugin-eslint"
-    },
-    {
-      "path": "../fox-plugin-stylelint"
+	"typeRoots": ["./@types"],
+	"include": ["src/**/*"],
+	"references": [
+		{
+			"path": "../fox-plugin-markdownlint"
+		},
+		{
+			"path": "../fox-plugin-package-json-lint"
+		},
+		{
+			"path": "../fox-plugin-sort-package-json"
+		},
+		{
+			"path": "../npm-package-json-lint-config-fox"
+		},
+		{
+			"path": "../fox-plugin-eslint"
+		},
+		{
+			"path": "../fox-plugin-stylelint"
 		},
 		{
 			"path": "../fox-plugin-htmlhint"
@@ -39,13 +35,10 @@
 			"path": "../fox-test-runner"
 		},
 		{
-			"path": "../fox-transpiler"
-		},
-		{
 			"path": "../fox-plugin-htmllint"
 		},
 		{
 			"path": "../fox-plugin-html-validate"
 		}
-  ]
+	]
 }

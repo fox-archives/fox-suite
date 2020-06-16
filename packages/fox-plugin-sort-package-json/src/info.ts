@@ -6,5 +6,5 @@ export const info: IPluginExportInfo = {
 	toolName: 'packageJsonSort',
 	toolConfigSchemaHelpUri: '',
 	description: 'Sorts the pacakge.json file',
-	descriptionLong: 'Lints the package.json file. Has autofix?'
+	descriptionLong: 'Lints the package.json file. Has autofix?',
 }

@@ -1,26 +1,24 @@
 import * as foxUtils from 'fox-utils'
-import { transpileConfig } from 'fox-transpiler'
 import * as util from './util'
-import { doAction, watchAndDoAction } from './action';
-import type { ParsedArgs } from "minimist"
-import { IPluginExportIndex } from 'fox-types';
+import type { ParsedArgs } from 'minimist'
+import { doAction, doWatch } from './action'
 import debug from './debug'
 import * as c from 'colorette'
+import rimraf from 'rimraf'
+import path from 'path'
 
 /**
  * @description start `fox` based on cli arguments if any were given
  */
 export async function cli(argv: ParsedArgs): Promise<void> {
 	debug('activating cli. passed args: %o', argv)
-	const [projectData, foxPluginPaths] = await Promise.all([
-		foxUtils.getProjectData(), util.getInstalledFoxPlugins()
-	])
+	const projectData = await foxUtils.getProjectData()
+	const foxPluginPaths = await util.getFoxPlugins(projectData)
+	const foxPlugins = await util.importFoxPlugins(projectData, foxPluginPaths)
 
-	const promises: Promise<IPluginExportIndex>[] = []
-	for (const foxPluginPath of foxPluginPaths) {
-		promises.push(import(foxPluginPath))
-	}
-	const foxPlugins = await Promise.all(promises)
+	debug('projectData: %o', projectData)
+	debug('foxPluginPaths: %o', foxPluginPaths)
+	debug('foxPlugins: %o', foxPlugins)
 
 	if (argv.help) {
 		const pluginName = 'fox'
@@ -31,60 +29,132 @@ Description:
   A sly suite of tools for web development
 
 Options:
-  --boostrap   Bootstrap all configuration
-  --format     Format files with all formatters
-  --lint       Lint files with all linters
-  --help       Show help
+	--listPlugins  List all installed plugins. Note that plugins
+	               installed multiple times may only be shown once
+  --bootstrap    Bootstraps configuration
+  --fix          Fixes all files with all formatters
+	--clearCache   Nukes cache in \`.config/.cache\`
+  --help         Show help
 
 Notes:
   Not passing any options opens the tui
 
 Examples:
-  ${pluginName}
-  ${pluginName} --bootstrap
-  ${pluginName} --help`;
-	console.info(helpText)
-	} else if(argv.bootstrap) {
-		await transpileConfig({
-			foxPluginPaths,
-			projectData
-		})
-		await doAction({
-			actionFunctions: util.pickSpecificModuleProperty({
+	${pluginName}
+    this opens the terminal user interface
+	${pluginName} --bootstrap
+    this bootstraps configuration of all plugins
+  ${pluginName} --bootstrap eslint,stylelint
+  ${pluginName} --help`
+		console.info(helpText)
+	} else if (argv.list) {
+		console.info(c.bold(c.blue(foxPluginPaths.map(util.getPluginNameFromPath).join('\n'))))
+	} else if (argv.bootstrap) {
+		if (argv.bootstrap !== "") {
+			const plugins = argv.bootstrap.split(',')
+			await doAction({
 				foxPlugins,
-				specificIndicesToPick: -1,
-				actionFunction: "bootstrapFunction"
-			}),
-			projectData
+				foxPluginPaths,
+				pluginSelection: getPluginSelectionFromList(foxPluginPaths, plugins),
+				projectData,
+				actionFunctionName: 'bootstrapFunction'
+			})
+
+			return
+		}
+
+		await doAction({
+			foxPlugins,
+			foxPluginPaths,
+			pluginSelection: -1,
+			projectData,
+			actionFunctionName: 'bootstrapFunction'
 		})
-		console.log(c.bold(c.green('bootstrap complete')))
 	} else if (argv.fix) {
-		await transpileConfig({
-			foxPluginPaths,
-			projectData
-		})
+		if (argv.fix !== "") {
+			const plugins = argv.fix.split(',')
+			await doAction({
+				foxPlugins,
+				foxPluginPaths,
+				pluginSelection: getPluginSelectionFromList(foxPluginPaths, plugins),
+				projectData,
+				actionFunctionName: 'fixFunction'
+			})
+			return
+		}
 		await doAction({
-			actionFunctions: util.pickSpecificModuleProperty({
-				foxPlugins,
-				specificIndicesToPick: -1,
-				actionFunction: "fixFunction"
-			}),
-			projectData
+			foxPlugins,
+			foxPluginPaths,
+			pluginSelection: -1,
+			projectData,
+			actionFunctionName: 'fixFunction'
 		})
-		console.log(c.bold(c.green('fix complete')))
 	} else if (argv.watch) {
-		let transpile = async () => await transpileConfig({
-			// @ts-ignore
-			foxPluginPaths: util.pickSpecificFoxPluginPath(foxPluginPaths, fixFunctions),
-			projectData
-		})
-		await watchAndDoAction(transpile, {
-			actionFunctions: util.pickSpecificModuleProperty({
+		if (argv.watch !== "") {
+			const plugins = argv.watch.split(',')
+			await doWatch({
 				foxPlugins,
-				specificIndicesToPick: -1,
-				actionFunction: "fixFunction"
-			}),
-			projectData
+				foxPluginPaths,
+				pluginSelection: getPluginSelectionFromList(foxPluginPaths, plugins),
+				projectData
+			})
+			return
+		}
+		await doWatch({
+			foxPluginPaths,
+			foxPlugins,
+			pluginSelection: -1,
+			projectData,
 		})
+	} else if (argv.clearCache) {
+		const cacheDir = path.join(projectData.location, '.config', '.cache')
+		rimraf(cacheDir, (err) => {
+			if (err) {
+				console.error(c.bold(c.red('there was an error removing the cache directory')))
+				console.error(err)
+				return
+			}
+			console.log(c.bold(c.green('cache directory nuked')))
+		})
+	} else {
+		console.info(c.bold(c.red('argument(s) or parameter(s) not understood')))
 	}
+}
+
+/**
+ * @description this gets the plugin selection from a human readable list
+ * @example
+ * ```
+ * getPluginSelectionFromList(['fox-plugin-eslint'])
+ * ```
+ */
+function getPluginSelectionFromList(foxPluginPaths: string[], plugins: string): number[] {
+	debug('pluginSelectionFromList: foxPluginPaths: %o', foxPluginPaths)
+	debug('pluginSelectionFromList: plugins: %o', plugins)
+	const pluginSelection: number[] = []
+	const foxPluginNames = foxPluginPaths.map(util.getPluginNameFromPath)
+	for (const plugin of plugins) {
+		let found = false
+		for (let i = 0; i < foxPluginNames.length; ++i) {
+			const foxPluginName = foxPluginNames[i]
+			const name = foxPluginName.slice('fox-plugin-'.length)
+			if (name === plugin) {
+				pluginSelection.push(i)
+				found = true
+			}
+		}
+
+		if (found === false) {
+			console.error(c.bold(c.red(`plugin ${plugin} not found`)))
+			process.exit(1)
+		}
+	}
+
+	if (pluginSelection.length === 0) {
+		console.info(c.bold(c.red('no plugin selections were made')))
+		process.exit(1)
+	}
+
+	debug('pluginSelectionFromList: pluginSelection: %o', pluginSelection)
+	return pluginSelection
 }
