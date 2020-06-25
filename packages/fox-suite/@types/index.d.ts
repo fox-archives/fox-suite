@@ -10,14 +10,12 @@ export type actionFunction =
  */
 export interface IDoAction {
 	foxPlugins: IPluginExportIndex[];
-	foxPluginPaths: string[];
-	projectData: IProject;
 	pluginSelection: -1 | number[];
+	projectData: IProject;
 	actionFunctionName: "bootstrapFunction" | "fixFunction";
 }
 
 export interface IDoWatch {
-	foxPluginPaths: string[]
 	foxPlugins: IPluginExportIndex[]
 	pluginSelection: -1 | number[]
 	projectData: IProject

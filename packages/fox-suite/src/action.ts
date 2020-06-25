@@ -12,9 +12,8 @@ const { log } = foxUtils
  */
 export async function doAction({
 	foxPlugins,
-	foxPluginPaths,
-	projectData,
 	pluginSelection,
+	projectData,
 	actionFunctionName,
 }: IDoAction): Promise<void> {
 	if (pluginSelection === void 0) {
@@ -67,7 +66,6 @@ export async function doAction({
  * if changes are detected
  */
 export async function doWatch({
-	foxPluginPaths,
 	foxPlugins,
 	pluginSelection,
 	projectData,
@@ -101,9 +99,8 @@ export async function doWatch({
 
 		await doAction({
 			foxPlugins,
-			foxPluginPaths,
-			projectData,
 			pluginSelection,
+			projectData,
 			actionFunctionName: "fixFunction",
 		});
 	})

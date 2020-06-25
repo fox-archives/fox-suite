@@ -41,7 +41,6 @@ export async function tui(): Promise<void> {
 
 		await doAction({
 			foxPlugins,
-			foxPluginPaths,
 			pluginSelection,
 			projectData,
 			actionFunctionName: 'bootstrapFunction'
@@ -56,7 +55,6 @@ export async function tui(): Promise<void> {
 
 		await doAction({
 			foxPlugins,
-			foxPluginPaths,
 			pluginSelection,
 			projectData,
 			actionFunctionName: 'fixFunction'
@@ -70,7 +68,6 @@ export async function tui(): Promise<void> {
 		})
 
 		await doWatch({
-			foxPluginPaths,
 			foxPlugins,
 			pluginSelection,
 			projectData,

@@ -23,6 +23,18 @@ export async function getFoxPlugins(projectData: IProject): Promise<string[]> {
 			withFileTypes: true,
 		})
 
+		const addPlugin = (pluginPath: string) => {
+			const pluginNameLong = getPluginNameFromPath(pluginPath)
+			const pluginName = pluginNameLong.slice('fox-plugin-'.length)
+
+			if (projectData.foxConfig.plugins[pluginName] !== 'off')
+				pluginList.push(pluginPath)
+			else
+				log.warn(
+					`skipping plugin '${pluginName}' as it's set to 'off' in fox.config.js`
+				);
+		}
+
 		const isFoxPlugin = (nodePackage: Dirent) => {
 			return (
 				!nodePackage.isFile() &&
@@ -42,14 +54,18 @@ export async function getFoxPlugins(projectData: IProject): Promise<string[]> {
 				const pluginPath = require.resolve(
 					path.join(nodeModulesPath, nodeModule.name),
 				)
-				pluginList.push(pluginPath)
+				addPlugin(pluginPath);
 			} else if (isFoxPreset(nodeModule)) {
 				const presetPath = require.resolve(
 					path.join(nodeModulesPath, nodeModule.name),
 				)
-				const presetPluginList = (await import(presetPath)).default
+				const presetPluginList = (await import(presetPath))
+					.default
 					.plugins
-				pluginList = pluginList.concat(presetPluginList)
+
+				for (const presetPluginPath of presetPluginList) {
+					addPlugin(presetPluginPath)
+				}
 			}
 		}
 

@@ -53,62 +53,67 @@ Examples:
 	} else if (argv.list) {
 		console.info(foxPluginPaths.map(util.getPluginNameFromPath).join('\n'))
 	} else if (argv.bootstrap) {
-		if (argv.bootstrap !== "") {
-			const plugins = argv.bootstrap.split(',')
+		if (argv.bootstrap === "") {
 			await doAction({
 				foxPlugins,
-				foxPluginPaths,
-				pluginSelection: getPluginSelectionFromList(foxPluginPaths, plugins),
+				pluginSelection: -1,
 				projectData,
-				actionFunctionName: 'bootstrapFunction'
-			})
+				actionFunctionName: "bootstrapFunction",
+			});
 
 			return
 		}
 
+		const foxPluginNames = argv.bootstrap.split(",");
 		await doAction({
 			foxPlugins,
-			foxPluginPaths,
-			pluginSelection: -1,
+			pluginSelection: getPluginSelectionFromList(foxPluginPaths, foxPluginNames),
 			projectData,
-			actionFunctionName: 'bootstrapFunction'
-		})
+			actionFunctionName: "bootstrapFunction",
+		});
 	} else if (argv.fix) {
-		if (argv.fix !== "") {
-			const plugins = argv.fix.split(',')
+		if (argv.fix === "") {
 			await doAction({
 				foxPlugins,
-				foxPluginPaths,
-				pluginSelection: getPluginSelectionFromList(foxPluginPaths, plugins),
+				pluginSelection: -1,
 				projectData,
-				actionFunctionName: 'fixFunction'
-			})
+				actionFunctionName: "fixFunction",
+			});
+
 			return
 		}
+
+		const foxPluginNames = argv.fix.split(",");
 		await doAction({
 			foxPlugins,
-			foxPluginPaths,
-			pluginSelection: -1,
+			pluginSelection: getPluginSelectionFromList(
+				foxPluginPaths,
+				foxPluginNames
+			),
 			projectData,
-			actionFunctionName: 'fixFunction'
-		})
+			actionFunctionName: "fixFunction",
+		});
+
 	} else if (argv.watch) {
-		if (argv.watch !== "") {
-			const plugins = argv.watch.split(',')
+		if (argv.watch === "") {
 			await doWatch({
 				foxPlugins,
-				foxPluginPaths,
-				pluginSelection: getPluginSelectionFromList(foxPluginPaths, plugins),
-				projectData
-			})
+				pluginSelection: -1,
+				projectData,
+			});
+
 			return
 		}
+
+		const foxPluginNames = argv.watch.split(",");
 		await doWatch({
-			foxPluginPaths,
 			foxPlugins,
-			pluginSelection: -1,
+			pluginSelection: getPluginSelectionFromList(
+				foxPluginPaths,
+				foxPluginNames
+			),
 			projectData,
-		})
+		});
 	} else if (argv.clearCache) {
 		rimraf(projectData.cachePath, (err) => {
 			if (err) {
