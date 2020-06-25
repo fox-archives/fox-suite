@@ -38,7 +38,7 @@ export async function tui(): Promise<void> {
 
 		if (foxPlugin.bootstrapFunction) {
 			bootstrapChoices.push({
-				title: foxPlugin.info.tool,
+				title: foxPlugin.info.toolName,
 				description: foxPlugin.info.description,
 				value: i,
 			})
@@ -46,7 +46,7 @@ export async function tui(): Promise<void> {
 
 		if (foxPlugin.fixFunction) {
 			fixChoices.push({
-				title: foxPlugin.info.tool,
+				title: foxPlugin.info.toolName,
 				description: foxPlugin.info.description,
 				value: i,
 			})
