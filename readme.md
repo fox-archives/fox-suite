@@ -109,6 +109,7 @@ Not everything has been tested generally and with regards to interop
 -   prettier
 -   sort-package-json
 -   package-json-lint
+-   editorconfig
 
 stuff like commit-convention might be added later
 

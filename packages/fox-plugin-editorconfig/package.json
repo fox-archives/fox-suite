@@ -1,0 +1,42 @@
+{
+	"name": "fox-plugin-editorconfig",
+	"version": "1.2.0",
+	"description": "",
+	"main": "build",
+	"scripts": {
+		"start": "ts-node src",
+		"test": "fox-test-runner",
+		"watch": "tsc --build --watch",
+		"build": "tsc --build"
+	},
+	"keywords": [
+		"editorconfig",
+		"fox",
+		"fox-suite"
+	],
+	"homepage": "https://github.com/eankeen/fox-suite/tree/dev/fox-plugin-editorconfig#readme",
+	"bugs": {
+		"url": "https://github.com/eankeen/fox-suite/issues"
+	},
+	"author": {
+		"name": "Edwin Kofler",
+		"url": "https://edwinkofler.com"
+	},
+	"repository": {
+		"type": "git",
+		"url": "https://github.com/eankeen/fox-suite.git"
+	},
+	"type": "commonjs",
+	"engines": {
+		"node": ">=12.17.0 >=v13.14.0 >=14.3.0"
+	},
+	"license": "MIT",
+	"dependencies": {
+		"fox-esm": "workspace:^1.2.0",
+		"fox-utils": "workspace:^1.2.0"
+	},
+	"devDependencies": {
+		"fox-test-runner": "workspace:^1.2.0",
+		"fox-types": "workspace:^1.2.0"
+	}
+}

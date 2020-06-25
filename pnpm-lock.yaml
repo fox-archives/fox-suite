@@ -50,6 +50,8 @@ importers:
       fox-preset-all: 'workspace:^1.2.0'
       fox-suite: 'workspace:^1.2.0'
       lerna: ^3.22.1
+  ../../../../.local/opt/n/pnpm-global:
+    specifiers: {}
   packages/eslint-config-fox:
     dependencies:
       '@typescript-eslint/eslint-plugin': 3.3.0_6fdb627c501e2fa3b09caaebf419fee9
@@ -95,6 +97,18 @@ importers:
       esm: 3.2.25
     specifiers:
       esm: ^3.2.25
+  packages/fox-plugin-editorconfig:
+    dependencies:
+      fox-esm: 'link:../fox-esm'
+      fox-utils: 'link:../fox-utils'
+    devDependencies:
+      fox-test-runner: 'link:../fox-test-runner'
+      fox-types: 'link:../fox-types'
+    specifiers:
+      fox-esm: 'workspace:^1.2.0'
+      fox-test-runner: 'workspace:^1.2.0'
+      fox-types: 'workspace:^1.2.0'
+      fox-utils: 'workspace:^1.2.0'
   packages/fox-plugin-eslint:
     dependencies:
       eslint: 7.2.0
@@ -273,6 +287,7 @@ importers:
       stylelint-config-fox: 'workspace:^1.2.0'
   packages/fox-preset-all:
     dependencies:
+      fox-plugin-editorconfig: 'link:../fox-plugin-editorconfig'
       fox-plugin-eslint: 'link:../fox-plugin-eslint'
       fox-plugin-html-validate: 'link:../fox-plugin-html-validate'
       fox-plugin-htmlhint: 'link:../fox-plugin-htmlhint'
@@ -287,6 +302,7 @@ importers:
       ts-jest: 26.1.0_jest@26.0.1+typescript@3.9.5
       typescript: 3.9.5
     specifiers:
+      fox-plugin-editorconfig: 'workspace:^1.2.0'
       fox-plugin-eslint: 'workspace:^1.2.0'
       fox-plugin-html-validate: 'workspace:^1.2.0'
       fox-plugin-htmlhint: 'workspace:^1.2.0'
@@ -301,6 +317,7 @@ importers:
       typescript: ^3.9.5
   packages/fox-preset-recommended:
     dependencies:
+      fox-plugin-editorconfig: 'link:../fox-plugin-editorconfig'
       fox-plugin-eslint: 'link:../fox-plugin-eslint'
       fox-plugin-markdownlint: 'link:../fox-plugin-markdownlint'
       fox-plugin-prettier: 'link:../fox-plugin-prettier'
@@ -311,6 +328,7 @@ importers:
       ts-jest: 26.1.0_jest@26.0.1+typescript@3.9.5
       typescript: 3.9.5
     specifiers:
+      fox-plugin-editorconfig: 'workspace:^1.2.0'
       fox-plugin-eslint: 'workspace:^1.2.0'
       fox-plugin-markdownlint: 'workspace:^1.2.0'
       fox-plugin-prettier: 'workspace:^1.2.0'

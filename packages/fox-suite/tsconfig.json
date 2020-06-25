@@ -39,6 +39,9 @@
 		},
 		{
 			"path": "../fox-plugin-html-validate"
+		},
+		{
+			"path": "../fox-plugin-editorconfig"
 		}
 	]
 }

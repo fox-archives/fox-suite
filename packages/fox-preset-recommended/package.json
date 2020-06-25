@@ -38,6 +38,7 @@
 		"typescript": "^3.9.5"
 	},
 	"dependencies": {
+		"fox-plugin-editorconfig": "workspace:^1.2.0",
 		"fox-plugin-eslint": "workspace:^1.2.0",
 		"fox-plugin-markdownlint": "workspace:^1.2.0",
 		"fox-plugin-prettier": "workspace:^1.2.0",
