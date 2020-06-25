@@ -27,8 +27,8 @@
 		"@types/prompts": "^2.0.8",
 		"@types/rimraf": "^3.0.0",
 		"@types/stylelint": "^9.10.1",
-		"fox-preset-all": "workspace:^1.1.4",
-		"fox-suite": "workspace:^1.1.4",
+		"fox-preset-all": "workspace:^1.2.0",
+		"fox-suite": "workspace:^1.2.0",
 		"lerna": "^3.22.1"
 	}
 }
