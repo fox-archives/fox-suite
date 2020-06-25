@@ -17,8 +17,13 @@ export async function doAction({
 	actionFunctionName,
 }: IDoAction): Promise<void> {
 	if (pluginSelection === void 0) {
-		log.info("exiting tui");
+		log.info("closed early. exiting.");
 		return;
+	}
+
+	if ((Array.isArray(pluginSelection) && pluginSelection.length === 0)) {
+		log.warn("no choices made. exiting.")
+		return
 	}
 
 	const pickedFunctions: { fn: actionFunction, name: string }[] = []
