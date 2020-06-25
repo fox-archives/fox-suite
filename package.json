@@ -1,5 +1,6 @@
 {
 	"name": "fox-suite-root",
+	"version": "1.2.1",
 	"engines": {
 		"node": ">=12.17.0 >=v13.14.0 >=14.3.0"
 	},
