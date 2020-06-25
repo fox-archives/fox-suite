@@ -50,7 +50,7 @@ Examples:
     runs the linter for stylelint
   ${pluginName} --help`
 		console.info(helpText)
-	} else if (argv.list) {
+	} else if (argv.listPlugins) {
 		console.info(foxPluginPaths.map(util.getPluginNameFromPath).join('\n'))
 	} else if (argv.bootstrap) {
 		if (argv.bootstrap === "") {
