@@ -80,6 +80,11 @@ export async function doWatch({
 		return
 	}
 
+	if ((Array.isArray(pluginSelection) && pluginSelection.length === 0)) {
+		log.warn("no choices made. exiting.")
+		return
+	}
+
 	// test for watchers and then do action
 	const watcher = await chokidar.watch('**/**', {
 		ignored: [
