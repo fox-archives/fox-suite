@@ -3,7 +3,7 @@ import { getProjectData } from './project'
 import { getPluginData } from './plugin'
 import path from 'path'
 import fs from 'fs'
-import * as c from 'colorette'
+import { log } from './misc'
 
 export async function buildFix(opts: IBuildFix): Promise<void> {
 	const [projectData, pluginData] = await Promise.all([
@@ -49,14 +49,10 @@ export async function buildFix(opts: IBuildFix): Promise<void> {
 	try {
 		await Promise.all(templateFilesExistPromises)
 	} catch {
-		console.log(
-			c.bold(
-				c.red(
-					`skipping ${path.basename(
-						pluginData.pluginRoot,
-					)}. not all config files were found. do you need to bootstrap?`,
-				),
-			),
+		log.error(
+			`skipping ${path.basename(
+				pluginData.pluginRoot,
+			)}. not all config files were found. do you need to bootstrap?`,
 		)
 		process.exit(1)
 	}

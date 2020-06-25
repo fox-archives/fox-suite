@@ -3,7 +3,8 @@ import * as foxUtils from 'fox-utils'
 import { doAction, doWatch } from './action'
 import * as util from './util'
 import debug from './debug'
-import * as c from 'colorette'
+
+const { log } = foxUtils
 
 /**
  * @description if no command line arguments were given,
@@ -126,6 +127,6 @@ export async function tui(): Promise<void> {
 			projectData,
 		})
 	} else {
-		console.info(c.bold(c.red('exiting tui')))
+		log.info('exiting tui')
 	}
 }

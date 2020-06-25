@@ -6,7 +6,8 @@ import type { IFoxConfig } from 'fox-types'
 import * as foxUtils from 'fox-utils'
 import glob from 'glob'
 import util from 'util'
-import * as c from 'colorette'
+
+const { c } = foxUtils
 
 export { info } from './info'
 

@@ -1,7 +1,6 @@
 import path from 'path'
 import fs from 'fs'
 import prompts from 'prompts'
-import * as c from 'colorette'
 import { getProjectData } from './project.js'
 // @ts-ignore
 import handlebars from 'handlebars'
@@ -9,6 +8,7 @@ import { IBuildBootstrap, ITemplateFile, IPlugin, IProject } from 'fox-types'
 import { getPluginData } from './plugin.js'
 import debug from './debug'
 import merge from 'lodash.merge'
+import { log } from './misc'
 
 /**
  * generate boilerpalte configuration in `.config`
@@ -121,7 +121,7 @@ export async function buildBootstrap(opts: IBuildBootstrap): Promise<void> {
 				})
 			}
 		} else {
-			console.info(c.bold(c.red('exiting tui')))
+			log.info('exiting tui')
 			process.exit(1)
 		}
 	}
@@ -154,24 +154,14 @@ async function mergeJsonFiles(
 		try {
 			JSON.parse(jsonText)
 		} catch (err) {
-			console.error(
-				c.bold(
-					c.red(
-						`your templated json file (read from its respective cnofig) with destination ${fileDest} failed to be parsed`,
-					),
-				),
-			)
+			log.error(`your templated json file (read from its respective config) with destination ${fileDest} failed to be parsed`)
 			console.error(jsonText)
 			console.error(err)
 		}
 		try {
 			JSON.parse(templatedText)
 		} catch (err) {
-			console.error(
-				c.bold(
-					c.red(`the json file at ${fileDest} could not be parsed`),
-				),
-			)
+			log.error(`the json file at ${fileDest} could not be parsed`)
 			console.error(templatedText)
 			console.error(err)
 		}

@@ -3,7 +3,6 @@ import fs from 'fs'
 import type { Dirent } from 'fs'
 import type { IPluginExportIndex, IProject } from 'fox-types'
 import debug from './debug'
-import * as c from 'colorette'
 
 export function getPluginNameFromPath(pluginPath: string): string {
 	let str = pluginPath.slice(pluginPath.lastIndexOf('fox-plugin-'))
@@ -54,13 +53,7 @@ export async function getFoxPlugins(projectData: IProject): Promise<string[]> {
 		pluginList = Array.from(new Set(pluginList))
 
 		if (pluginList.length === 0) {
-			console.log(
-				c.bold(
-					c.red(
-						'no fox-plugins or fox-presets found. please install some to continue',
-					),
-				),
-			)
+			log.error('no fox-plugins or fox-presets found. please install some to continue')
 			process.exit(0)
 		}
 

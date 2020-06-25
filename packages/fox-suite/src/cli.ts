@@ -3,9 +3,10 @@ import * as util from './util'
 import type { ParsedArgs } from 'minimist'
 import { doAction, doWatch } from './action'
 import debug from './debug'
-import * as c from 'colorette'
 import rimraf from 'rimraf'
 import path from 'path'
+
+const { log } = foxUtils
 
 /**
  * @description start `fox` based on cli arguments if any were given
@@ -48,7 +49,7 @@ Examples:
   ${pluginName} --help`
 		console.info(helpText)
 	} else if (argv.list) {
-		console.info(c.bold(c.blue(foxPluginPaths.map(util.getPluginNameFromPath).join('\n'))))
+		console.info(foxPluginPaths.map(util.getPluginNameFromPath).join('\n'))
 	} else if (argv.bootstrap) {
 		if (argv.bootstrap !== "") {
 			const plugins = argv.bootstrap.split(',')
@@ -110,14 +111,14 @@ Examples:
 		const cacheDir = path.join(projectData.location, '.config', '.cache')
 		rimraf(cacheDir, (err) => {
 			if (err) {
-				console.error(c.bold(c.red('there was an error removing the cache directory')))
+				log.error('there was an error removing the cache directory')
 				console.error(err)
 				return
 			}
-			console.log(c.bold(c.green('cache directory nuked')))
+			log.success('cache directory nuked')
 		})
 	} else {
-		console.info(c.bold(c.red('argument(s) or parameter(s) not understood')))
+		log.warn('argument(s) or parameter(s) not understood')
 	}
 }
 
@@ -145,13 +146,13 @@ function getPluginSelectionFromList(foxPluginPaths: string[], plugins: string): 
 		}
 
 		if (found === false) {
-			console.error(c.bold(c.red(`plugin ${plugin} not found`)))
+			log.error(`plugin ${plugin} not found`)
 			process.exit(1)
 		}
 	}
 
 	if (pluginSelection.length === 0) {
-		console.info(c.bold(c.red('no plugin selections were made')))
+		log.info('no plugin selections were made')
 		process.exit(1)
 	}
 

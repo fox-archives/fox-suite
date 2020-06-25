@@ -1,9 +1,11 @@
 import type { IAction, IPluginExportIndex, IProject } from 'fox-types'
+import * as foxUtils from 'fox-utils'
 import chokidar from 'chokidar'
-import * as c from 'colorette'
 import * as util from './util'
 import assert from 'assert'
 import debug from './debug'
+
+const { log } = foxUtils
 
 /**
  * @description bootstraps, formats, or lints a project
@@ -16,7 +18,8 @@ export async function doAction({
 	actionFunctionName,
 }: IAction): Promise<void> {
 	if (pluginSelection === void 0) {
-		console.log(c.bold(c.red("exiting tui")));
+		log.info("exiting tui");
+
 		return;
 	}
 
@@ -65,11 +68,11 @@ export async function doAction({
 	for(const obj of pickedFunctions) {
 		if (!obj.fn) continue
 
-		console.log(c.bold(c.blue(`running ${obj.name}`)))
+		log.info(`running ${obj.name}`)
 		await obj.fn(projectData.foxConfig)
 	}
 
-	console.log(c.bold(c.blue(`${name} complete`)));
+	log.info(`${name} complete`)
 }
 
 interface IDoWatch {
@@ -90,7 +93,7 @@ export async function doWatch({
 	projectData,
 }: IDoWatch): Promise<void> {
 	if (pluginSelection === void 0) {
-		console.log(c.bold(c.red('exiting tui')))
+		log.info('exiting tui')
 		return
 	}
 
@@ -125,5 +128,5 @@ export async function doWatch({
 		});
 	})
 
-	console.log('starting watcher')
+	log.info('starting watcher')
 }

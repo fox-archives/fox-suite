@@ -4,7 +4,7 @@ import { IFoxConfig } from 'fox-types'
 import * as foxUtils from 'fox-utils'
 import fs from 'fs'
 
-const { debug, c, glob } = foxUtils
+const { debug, log, glob } = foxUtils
 const d = debug('fox-suite:fox-plugin-prettier')
 
 export { info } from './info'
@@ -32,9 +32,7 @@ export async function fixFunction(): Promise<void> {
 				)
 			)
 			if (typeof userConfigModule.default !== 'function') {
-				console.error(
-					c.bold(c.red('default export is not a function. skipping prettier'))
-				)
+				log.error('default export is not a function. skipping prettier')
 				return
 			}
 			const userConfig = userConfigModule.default(project.foxConfig)
@@ -97,10 +95,11 @@ export async function fixFunction(): Promise<void> {
 										)
 									} catch (err) {
 										if (err.message.includes('No parser could be inferred')) {
-											console.info(c.bold(c.yellow(`non-fatal error for file ${file}:`)))
+
+											log.warn(`non-fatal error for file ${file}:`)
 											console.error(err)
 										} else {
-											console.info(c.bold(c.red(`error occured for file ${file}:`)))
+											log.info(`error occured for file ${file}:`)
 											console.error(err)
 										}
 									}

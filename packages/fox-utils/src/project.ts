@@ -2,9 +2,9 @@ import path from 'path'
 import fs from 'fs'
 import readPkgUp from 'read-pkg-up'
 import { IProject, IFoxConfig } from 'fox-types'
-import * as c from 'colorette'
 import mergeWith from 'lodash.mergewith'
 import debug from './debug'
+import { log } from './misc'
 
 /**
  * @description get all necessary data from parent module
@@ -15,13 +15,7 @@ export async function getProjectData(): Promise<IProject> {
 		normalize: false,
 	})
 	if (!pkgUpObj) {
-		console.error(
-			c.bold(
-				c.red(
-					"we couldn't get the package.json of your project. exiting.",
-				),
-			),
-		)
+		log.error("we couldn't get the package.json of your project. exiting.")
 		process.exit(1)
 	}
 	const { packageJson: packageJson, path: packageJsonPath } = pkgUpObj
@@ -96,13 +90,7 @@ async function getFoxConfig(projectLocation: string): Promise<[IFoxConfig, strin
 	}
 
 	if (!foxConfig || !foxConfigPath) {
-		console.log(
-			c.bold(
-				c.red(
-					"fox.config.[c|m]?js file missing or not valid. see details: https://github.com/eankeen/fox-suite#fox-suite"
-				)
-			)
-		);
+		log.error("fox.config.[c|m]?js file missing or not valid. see details: https://github.com/eankeen/fox-suite#fox-suite");
 		process.exit(1)
 	}
 
