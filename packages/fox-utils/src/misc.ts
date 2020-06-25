@@ -19,3 +19,5 @@ export async function writeFile(
 	}
 	await fs.promises.writeFile(path.join(filePath), content, { mode: 0o644 })
 }
+
+// TODO: log

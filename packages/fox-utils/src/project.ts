@@ -99,12 +99,12 @@ async function getFoxConfig(projectLocation: string): Promise<[IFoxConfig, strin
 		console.log(
 			c.bold(
 				c.red(
-					"fox.config.[c|m]?js file missing. see details: https://github.com/eankeen/fox-suite#fox-suite"
+					"fox.config.[c|m]?js file missing or not valid. see details: https://github.com/eankeen/fox-suite#fox-suite"
 				)
 			)
 		);
 		process.exit(1)
 	}
-	return [ foxConfig, foxConfigPath ]
 
+	return [ foxConfig, foxConfigPath ]
 }
