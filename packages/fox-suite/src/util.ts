@@ -3,6 +3,9 @@ import fs from 'fs'
 import type { Dirent } from 'fs'
 import type { IPluginExportIndex, IProject } from 'fox-types'
 import debug from './debug'
+import * as foxUtils from 'fox-utils'
+
+const { log } = foxUtils
 
 export function getPluginNameFromPath(pluginPath: string): string {
 	let str = pluginPath.slice(pluginPath.lastIndexOf('fox-plugin-'))

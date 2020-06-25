@@ -30,11 +30,11 @@ Description:
   A sly suite of tools for web development
 
 Options:
-	--listPlugins  List all installed plugins. Note that plugins
-	               installed multiple times may only be shown once
+  --listPlugins  List all installed plugins. Note that plugins
+	              installed multiple times may only be shown once
   --bootstrap    Bootstraps configuration
   --fix          Fixes all files with all formatters
-	--clearCache   Nukes cache in \`.config/.cache\`
+  --clearCache   Nukes cache in \`.config/.cache\`
   --help         Show help
 
 Notes:
@@ -132,6 +132,7 @@ Examples:
 function getPluginSelectionFromList(foxPluginPaths: string[], plugins: string): number[] {
 	debug('pluginSelectionFromList: foxPluginPaths: %o', foxPluginPaths)
 	debug('pluginSelectionFromList: plugins: %o', plugins)
+
 	const pluginSelection: number[] = []
 	const foxPluginNames = foxPluginPaths.map(util.getPluginNameFromPath)
 	for (const plugin of plugins) {

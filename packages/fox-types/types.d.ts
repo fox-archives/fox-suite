@@ -233,15 +233,3 @@ export interface IPluginExportInfo {
 	 */
 	descriptionLong: string
 }
-
-/**
- * @description basically a single unit that has information
- * about the stuff we want to do to a specific project
- */
-export interface IAction {
-	foxPlugins: IPluginExportIndex[];
-	foxPluginPaths: string[];
-	projectData: IProject;
-	pluginSelection: number | number[];
-	actionFunctionName: "bootstrapFunction" | "fixFunction";
-}

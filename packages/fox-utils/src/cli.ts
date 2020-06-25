@@ -1,6 +1,7 @@
 import minimist from 'minimist'
 import { IBuildCli } from 'fox-types'
 import { log } from './misc'
+import { getProjectData } from './project'
 
 export async function buildCli(
 	nodeArgv: NodeJS.Process['argv'],
@@ -48,7 +49,7 @@ Examples:
 		}
 	} else if (argv.action) {
 		try {
-			const projectData = await foxUtils.getProjectData()
+			const projectData = await getProjectData()
 			await fixFunction(projectData.foxConfig)
 		} catch (err) {
 			console.error(err)
