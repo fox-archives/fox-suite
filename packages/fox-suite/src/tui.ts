@@ -53,21 +53,6 @@ export async function tui(): Promise<void> {
 		}
 	}
 
-	// add 'all' choices, but only if there are two or more elements that already exist
-	if (bootstrapChoices.length > 2)
-		bootstrapChoices.unshift({
-			title: 'All',
-			description: 'Bootstrap all configuration',
-			value: -1,
-		})
-
-	if (fixChoices.length > 2)
-		fixChoices.unshift({
-			title: 'All',
-			description: 'Format files from all config',
-			value: -1,
-		})
-
 	const actionChoices: prompts.Choice[] = []
 	if (bootstrapChoices.length > 0)
 		actionChoices.push({
@@ -98,7 +83,7 @@ export async function tui(): Promise<void> {
 
 	if (action === 'bootstrap') {
 		const { pluginSelection }: { pluginSelection: number } = await prompts({
-			type: 'select',
+			type: 'multiselect',
 			name: 'pluginSelection',
 			message: 'which configuration would you like to bootstrap?',
 			choices: bootstrapChoices,
@@ -113,7 +98,7 @@ export async function tui(): Promise<void> {
 		})
 	} else if (action === 'fix') {
 		const { pluginSelection }: { pluginSelection: number } = await prompts({
-			type: 'select',
+			type: 'multiselect',
 			name: 'pluginSelection',
 			message: 'Which formatter would you like to use?',
 			choices: fixChoices,
@@ -128,7 +113,7 @@ export async function tui(): Promise<void> {
 		})
 	} else if (action === 'watch') {
 		const { pluginSelection }: { pluginSelection: number } = await prompts({
-			type: 'select',
+			type: 'multiselect',
 			name: 'pluginSelection',
 			message: 'Which formatter would you like to use?',
 			choices: fixChoices,
