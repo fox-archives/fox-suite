@@ -4,6 +4,7 @@ import type { Dirent } from 'fs'
 import type { IPluginExportIndex, IProject } from 'fox-types'
 import debug from './debug'
 import * as foxUtils from 'fox-utils'
+import * as util from './util'
 
 const { log } = foxUtils
 
@@ -72,11 +73,23 @@ export async function importFoxPlugins(
 	foxPluginPaths: string[],
 ): Promise<IPluginExportIndex[]> {
 	const promises: Promise<IPluginExportIndex>[] = []
-	for (const foxPluginPath of foxPluginPaths) {
-		promises.push(import(foxPluginPath))
+	const foxPluginNames = foxPluginPaths.map(util.getPluginNameFromPath)
+
+	for (let i = 0; i < foxPluginPaths.length; i++) {
+		const foxPluginPath = foxPluginPaths[i]
+		const foxPluginNameLong = foxPluginNames[i]
+		const foxPluginName = foxPluginNameLong.slice('fox-plugin-'.length)
+
+		if (projectData.foxConfig.plugins[foxPluginName] !== 'off') {
+			promises.push(import(foxPluginPath))
+		} else {
+			debug('skipping plugin \'%s\' since it\'s \'off\' in fox.config.js', foxPluginName)
+		}
 	}
 
-	return (await Promise.all(promises)).filter(Boolean)
+	const plugins = (await Promise.all(promises)).filter(Boolean)
+
+	return plugins
 }
 
 type actionFunctions = 'bootstrapFunction' | 'fixFunction'
