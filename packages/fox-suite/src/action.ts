@@ -48,7 +48,6 @@ export async function doAction({
 	for(const obj of pickedFunctions) {
 		if (!obj.fn) continue
 
-		log.info(`running ${obj.name}`)
 		await obj.fn(projectData.foxConfig)
 	}
 

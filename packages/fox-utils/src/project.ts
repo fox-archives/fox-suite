@@ -42,6 +42,7 @@ export async function getProjectData(): Promise<IProject> {
 		packageJsonPath,
 		foxConfig,
 		foxConfigPath,
+		cachePath: path.join(projectLocation, '.config', '.cache'),
 		location: projectLocation,
 	}
 }

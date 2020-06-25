@@ -4,7 +4,6 @@ import type { ParsedArgs } from 'minimist'
 import { doAction, doWatch } from './action'
 import debug from './debug'
 import rimraf from 'rimraf'
-import path from 'path'
 
 const { log } = foxUtils
 
@@ -31,7 +30,7 @@ Description:
 
 Options:
   --listPlugins  List all installed plugins. Note that plugins
-	              installed multiple times may only be shown once
+                 installed multiple times may only be shown once
   --bootstrap    Bootstraps configuration
   --fix          Fixes all files with all formatters
   --clearCache   Nukes cache in \`.config/.cache\`
@@ -41,11 +40,14 @@ Notes:
   Not passing any options opens the tui
 
 Examples:
-	${pluginName}
-    this opens the terminal user interface
-	${pluginName} --bootstrap
-    this bootstraps configuration of all plugins
+  ${pluginName}
+    opens the terminal user interface
+  ${pluginName} --bootstrap
+    bootstraps configuration of all plugins
   ${pluginName} --bootstrap eslint,stylelint
+    bootstraps configuration for the eslint and stylelint plugins
+  ${pluginName} --fix stylelint
+    runs the linter for stylelint
   ${pluginName} --help`
 		console.info(helpText)
 	} else if (argv.list) {
@@ -108,10 +110,9 @@ Examples:
 			projectData,
 		})
 	} else if (argv.clearCache) {
-		const cacheDir = path.join(projectData.location, '.config', '.cache')
-		rimraf(cacheDir, (err) => {
+		rimraf(projectData.cachePath, (err) => {
 			if (err) {
-				log.error('there was an error removing the cache directory')
+				log.error('unexpected error when removing the cache directory')
 				console.error(err)
 				return
 			}

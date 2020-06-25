@@ -37,7 +37,9 @@ export async function fixFunction(): Promise<void> {
 			const sharedOptions: Partial<stylelintType.i> | undefined = {
 				globbyOptions: {
 					cwd: project.location,
-					ignore: [],
+					ignore: [
+						'**/node_modules/**'
+					],
 					caseSensitiveMatch: true, // default
 					dot: false, // default
 					gitignore: false, // default

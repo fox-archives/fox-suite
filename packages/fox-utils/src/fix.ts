@@ -11,51 +11,46 @@ export async function buildFix(opts: IBuildFix): Promise<void> {
 		getPluginData(opts.dirname),
 	])
 
-	const templateFilesExistPromises = pluginData.templateFiles.map(
-		(templateFile: ITemplateFile): Promise<void> => {
+	const templateFilesExistBooleans = pluginData.templateFiles.map(
+		(templateFile: ITemplateFile): boolean => {
 			const templateFileInCurrentProject = path.join(
 				projectData.location,
 				templateFile.relativePath,
 			)
-			return fs.promises.access(
-				templateFileInCurrentProject,
-				fs.constants.F_OK,
-			)
+
+			// TODO: sync
+			try {
+				fs.accessSync(templateFileInCurrentProject, fs.constants.F_OK)
+				return true
+			} catch {
+				return false
+			}
+
 		},
 	)
 
 	// set the environment properly
-	{
-		process.env.FOX_SUITE_FOX_OPTIONS = JSON.stringify(
-			projectData.foxConfig,
-		)
-		// TODO: this performs an extra import, not ideal, but refactoring
-		// to pass in extra parameter may not be worth it
-		const info = (<IPluginExportIndex>(
-			await import(require.resolve(pluginData.pluginRoot))
-		)).info
+	process.env.FOX_SUITE_FOX_OPTIONS = JSON.stringify(projectData.foxConfig)
+	// TODO: this performs an extra import, not ideal, but refactoring
+	// to pass in extra parameter may not be worth it
+	const info = (<IPluginExportIndex>(
+		await import(require.resolve(pluginData.pluginRoot))
+	)).info
 
-		const pluginEnvTierName = `FOX_SUITE_PLUGIN_${info.tool.toLocaleUpperCase()}_TIER`
-		process.env[pluginEnvTierName] =
-			projectData.foxConfig.plugins[info.tool] ||
-			projectData.foxConfig.all
+	const pluginEnvTierName = `FOX_SUITE_PLUGIN_${info.tool.toLocaleUpperCase()}_TIER`
+	process.env[pluginEnvTierName] =
+		projectData.foxConfig.plugins[info.tool] ||
+		projectData.foxConfig.all
+
+
+	const allTemplateFilesExist = () =>
+		templateFilesExistBooleans.every(Boolean)
+
+	if (!allTemplateFilesExist()) {
+		log.warn(`skipping ${info.name}. not all config files were found. do you need to bootstrap first?`)
+		return
 	}
 
-	// this will throw if at least 'one' template file
-	// cannot be found in the user project's directory
-	// if the file is a javascript file, we know it'll
-	// always exist since the rollup build step is
-	// completed before this stage
-	try {
-		await Promise.all(templateFilesExistPromises)
-	} catch {
-		log.error(
-			`skipping ${path.basename(
-				pluginData.pluginRoot,
-			)}. not all config files were found. do you need to bootstrap?`,
-		)
-		process.exit(1)
-	}
-
+	log.info(`running ${info.name} fix`)
 	await opts.fn()
 }

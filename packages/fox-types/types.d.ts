@@ -24,7 +24,7 @@ export interface IBuildCli {
 }
 
 /**
- * @description used when building a bootstrap
+ * @description used when building a 'bootstrap'
  */
 export interface IBuildBootstrap {
 	/**
@@ -36,7 +36,7 @@ export interface IBuildBootstrap {
 }
 
 /**
- * @description used when building a lint
+ * @description used when building a 'lint' or 'format'
  */
 export interface IBuildFix {
 	/**
@@ -99,6 +99,12 @@ export interface IProject {
 	 * @example `/abs/my-react-app/fox.config.js`
 	 */
 	foxConfigPath: string
+
+	/**
+	 * @description location of cache folder
+	 * @example `/abs/my-reacat-app/.config/.cache`
+	 */
+	cachePath: string
 
 	/**
 	 * @description absolute path of the project root
