@@ -35,10 +35,11 @@
 	},
 	"license": "MIT",
 	"dependencies": {
+		"eslint": "^7.2.0",
 		"eslint-config-fox": "workspace:^1.2.1",
 		"fox-esm": "workspace:^1.2.1",
 		"fox-utils": "workspace:^1.2.1",
-		"eslint": "^7.2.0"
+		"lodash.mergewith": "^4.6.2"
 	},
 	"devDependencies": {
 		"fox-test-runner": "workspace:^1.2.1",

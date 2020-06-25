@@ -4,8 +4,27 @@ import * as foxUtils from 'fox-utils'
 import { ESLint } from 'eslint'
 import type { IFoxConfig } from 'fox-types'
 import fs from 'fs'
+import merge from 'lodash.mergewith'
 
-const { debug, c } = foxUtils
+const { debug, log } = foxUtils
+const d = debug('fox-suite:fox-plugin-eslint')
+export const customizer = (
+	destObj: Record<string, any>,
+	srcObj: Record<string, any>,
+): any => {
+	// for arrays that are not rules, merge them
+	// 'extends', 'plugins', etc.
+	if (
+		Array.isArray(destObj) &&
+		Array.isArray(srcObj) &&
+		!destObj.includes('error') &&
+		!srcObj.includes('error') &&
+		!destObj.includes('off') &&
+		!srcObj.includes('off')
+	) {
+		return destObj.concat(srcObj)
+	}
+}
 
 export { info } from './info'
 
@@ -21,23 +40,31 @@ export async function fixFunction() {
 		async fn(): Promise<void> {
 			const project = await foxUtils.getProjectData()
 
-			const config = (await import('eslint-config-fox')).default
-			// @ts-ignore
-			// const tsConfig = (await import('../node_modules/eslint-config-fox/build/typescript/index.js')).default.default
-			// const tsConfig = require('../node_modules/eslint-config-fox/build/typescript/index.js').default
+			const defaultConfig = (await import(
+				require.resolve('eslint-config-fox'))
+			).default
+			const userConfigModule = (await import(
+				require.resolve(path.join(project.location, '.config/eslint.config.js'))
+			))
+			if (typeof userConfigModule.default !== 'function') {
+				log.error('default export is not a function. skipping eslint')
+				return
+			}
+			const userConfig = userConfigModule.default(project.foxConfig)
 
-			// rebuild config
-			debug('rebuilding config')
+			const mergedConfig = merge(defaultConfig, userConfig, customizer)
+
+
 			await foxUtils.writeFile(
 				path.join(project.location, '.config/build/eslint.config.json'),
-				config,
+				mergedConfig,
 			)
 
 			const eslint = new ESLint({
 				cwd: project.location,
 				errorOnUnmatchedPattern: false,
 				ignorePath: path.join(project.location, '.config/eslintignore'),
-				overrideConfig: config,
+				overrideConfig: mergedConfig,
 				resolvePluginsRelativeTo: path.join(
 					__dirname,
 					'../node_modules/eslint-config-fox',
