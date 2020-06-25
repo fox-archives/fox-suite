@@ -1,6 +1,6 @@
 {
 	"name": "fox-plugin-editorconfig",
-	"version": "1.2.0",
+	"version": "1.2.1",
 	"description": "",
 	"main": "build",
 	"scripts": {
@@ -32,11 +32,11 @@
 	},
 	"license": "MIT",
 	"dependencies": {
-		"fox-esm": "workspace:^1.2.0",
-		"fox-utils": "workspace:^1.2.0"
+		"fox-esm": "workspace:^1.2.1",
+		"fox-utils": "workspace:^1.2.1"
 	},
 	"devDependencies": {
-		"fox-test-runner": "workspace:^1.2.0",
-		"fox-types": "workspace:^1.2.0"
+		"fox-test-runner": "workspace:^1.2.1",
+		"fox-types": "workspace:^1.2.1"
 	}
 }

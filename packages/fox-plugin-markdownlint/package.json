@@ -1,6 +1,6 @@
 {
 	"name": "fox-plugin-markdownlint",
-	"version": "1.2.0",
+	"version": "1.2.1",
 	"description": "",
 	"main": "build",
 	"scripts": {
@@ -33,7 +33,7 @@
 	},
 	"license": "MIT",
 	"dependencies": {
-		"fox-utils": "workspace:^1.2.0",
+		"fox-utils": "workspace:^1.2.1",
 		"markdown-extensions": "^1.1.1",
 		"markdownlint": "^0.20.3",
 		"remark": "^12.0.0",
@@ -43,7 +43,7 @@
 		"unified-args": "^8.1.0"
 	},
 	"devDependencies": {
-		"fox-test-runner": "workspace:^1.2.0",
-		"fox-types": "workspace:^1.2.0"
+		"fox-test-runner": "workspace:^1.2.1",
+		"fox-types": "workspace:^1.2.1"
 	}
 }
