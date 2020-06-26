@@ -35,6 +35,7 @@ export async function fixFunction(): Promise<void> {
 				log.error('default export is not a function. skipping prettier')
 				return
 			}
+
 			const userConfig = userConfigModule.default(project.foxConfig)
 
 			const mergedConfig = Object.assign({}, defaultConfig, userConfig)

@@ -7,8 +7,9 @@
  */
 export default function(fox) {
 	return {
+		// your overrides
 		rules: {
-			'no-undef': 'off'
+
 		}
 	}
 }

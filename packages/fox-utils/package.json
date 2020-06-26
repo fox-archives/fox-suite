@@ -40,13 +40,14 @@
 		"typescript": "^3.9.5"
 	},
 	"dependencies": {
-		"minimist": "^1.2.5",
 		"colorette": "^1.2.0",
 		"debug": "^4.1.1",
 		"esm": "^3.2.25",
 		"glob": "^7.1.6",
 		"lodash.merge": "^4.6.2",
 		"lodash.mergewith": "^4.6.2",
+		"minimist": "^1.2.5",
+		"mkdirp": "^1.0.4",
 		"pkg-up": "^3.1.0",
 		"prompts": "^2.3.2",
 		"read-pkg-up": "^7.0.1"

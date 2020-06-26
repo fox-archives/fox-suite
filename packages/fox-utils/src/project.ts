@@ -26,6 +26,7 @@ export async function getProjectData(): Promise<IProject> {
 	// default foxConfig options
 	const defaultFoxConfig: IFoxConfig  = {
 		all: 'cozy',
+		cache: false,
 		monorepo: false,
 		env: [],
 		plugins: {}

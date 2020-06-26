@@ -9,12 +9,16 @@ import { getPluginData } from './plugin.js'
 import debug from './debug'
 import merge from 'lodash.merge'
 import { log } from './misc'
+import mkdirp from 'mkdirp'
 
 /**
  * generate boilerpalte configuration in `.config`
  * folder of local projet
  */
 
+/**
+ * @description do handlebars template
+ */
 async function doHandlebarsTemplate(
 	fileContents: string,
 	{ pluginData, projectData }: { pluginData: IPlugin; projectData: IProject },
@@ -40,6 +44,7 @@ export async function buildBootstrap(opts: IBuildBootstrap): Promise<void> {
 		getPluginData(opts.dirname),
 		getProjectData(),
 	])
+
 	const doTemplate = async (
 		fileToTemplate: ITemplateFile,
 	): Promise<{ fileDest: string; templatedText: string }> => {
@@ -64,17 +69,29 @@ export async function buildBootstrap(opts: IBuildBootstrap): Promise<void> {
 
 	const retryFilesToTemplate: ITemplateFile[] = []
 	for (const fileToTemplate of pluginData.templateFiles) {
+		debug(`trying to copy file '${fileToTemplate.absolutePath}' over`)
 		const { fileDest, templatedText } = await doTemplate(fileToTemplate)
+
 		try {
-			try {
-				await fs.promises.mkdir(path.dirname(fileDest), {
-					mode: 0o755,
-				})
-			} catch {}
-			await fs.promises.writeFile(fileDest, templatedText, {
-				mode: 0o644,
-				flag: 'wx+',
-			})
+			// ensure parent directory exists
+			await mkdirp(path.dirname(fileDest), {
+				mode: 0o755,
+			});
+
+			const destinationText = await fs.promises.readFile(fileDest, { encoding: 'utf8' })
+
+			// if content is the same, don't actually try
+			// and overwrite the file
+			debug(`is destinationText same as templatedText?: ${destinationText === templatedText}`);
+			if (destinationText === templatedText) {
+				log.info(`skipping ${fileToTemplate.relativePath} since contents are the same`);
+			} else {
+				await fs.promises.writeFile(fileDest, templatedText, {
+					mode: 0o644,
+					flag: "wx+",
+				});
+			}
+
 		} catch (err) {
 			if (err.code === 'EEXIST') {
 				// if the file already exists, but is a json file,

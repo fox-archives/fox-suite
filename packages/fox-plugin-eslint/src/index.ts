@@ -4,7 +4,7 @@ import * as foxUtils from 'fox-utils'
 import { ESLint } from 'eslint'
 import type { IFoxConfig } from 'fox-types'
 import fs from 'fs'
-import merge from 'lodash.mergewith'
+import mergewith from 'lodash.mergewith'
 
 const { debug, log } = foxUtils
 const d = debug('fox-suite:fox-plugin-eslint')
@@ -43,24 +43,27 @@ export async function fixFunction() {
 			const defaultConfig = (await import(
 				require.resolve('eslint-config-fox'))
 			).default
-			const userConfigModule = (await import(
-				require.resolve(path.join(project.location, '.config/eslint.config.js'))
-			))
-			if (typeof userConfigModule.default !== 'function') {
-				log.error('default export is not a function. skipping eslint')
+
+			const {
+				mergedConfig
+			} = await foxUtils.getConfigAndIgnores({
+				defaultConfig,
+				userConfigPath: require.resolve(path.join(project.location, '.config/eslint.config.js')),
+				configMergeFn: (defaultConfig, userConfig) => {
+					return mergewith(defaultConfig, userConfig, customizer)
+				}
+			})
+			if (!mergedConfig) {
+				log.error(`failed to merge config for fox-plugin-eslint. skipping.`)
 				return
 			}
-			const userConfig = userConfigModule.default(project.foxConfig)
-
-			const mergedConfig = merge(defaultConfig, userConfig, customizer)
-
 
 			await foxUtils.writeFile(
 				path.join(project.location, '.config/build/eslint.config.json'),
 				mergedConfig,
 			)
 
-			const eslint = new ESLint({
+			const eslintObj: ESLint.Options = {
 				cwd: project.location,
 				errorOnUnmatchedPattern: false,
 				ignorePath: path.join(project.location, '.config/eslintignore'),
@@ -71,12 +74,28 @@ export async function fixFunction() {
 				),
 				useEslintrc: false,
 				fix: true,
-				cache: false,
-				// cacheLocation: path.join(
-				// 	project.location,
-				// 	'.config/.cache/eslintcache',
-				// ),
-			})
+				cache: false
+
+			}
+			const cacheLocation = path.join(
+				project.location,
+				'.config/.cache/eslintcache',
+			)
+			if(project.foxConfig.cache === true) {
+				eslintObj.cache = true,
+				eslintObj.cacheLocation
+			} else {
+				// ensure eslint cache is removed
+				try {
+					await fs.promises.unlink(cacheLocation)
+				} catch (err) {
+					if (err.code !== "ENOENT") {
+						log.error('problem removing eslint cache')
+						console.error(err);
+					}
+				}
+			}
+			const eslint = new ESLint(eslintObj)
 
 			// const tsEslint = new ESLint({
 			// 	cwd: project.location,
