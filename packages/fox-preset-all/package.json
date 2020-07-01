@@ -1,7 +1,7 @@
 {
 	"name": "fox-preset-all",
 	"description": "Contains all plugins included in the fox-suite repository",
-	"version": "1.2.1",
+	"version": "1.2.2",
 	"keywords": [
 		"fox-preset",
 		"fox",
@@ -38,14 +38,14 @@
 		"typescript": "^3.9.5"
 	},
 	"dependencies": {
-		"fox-plugin-editorconfig": "workspace:^1.2.1",
-		"fox-plugin-eslint": "workspace:^1.2.1",
-		"fox-plugin-html-validate": "workspace:^1.2.1",
-		"fox-plugin-htmlhint": "workspace:^1.2.1",
-		"fox-plugin-htmllint": "workspace:^1.2.1",
-		"fox-plugin-markdownlint": "workspace:^1.2.1",
-		"fox-plugin-package-json-lint": "workspace:^1.2.1",
-		"fox-plugin-prettier": "workspace:^1.2.1",
-		"fox-plugin-stylelint": "workspace:^1.2.1"
+		"fox-plugin-editorconfig": "workspace:^1.2.2",
+		"fox-plugin-eslint": "workspace:^1.2.2",
+		"fox-plugin-html-validate": "workspace:^1.2.2",
+		"fox-plugin-htmlhint": "workspace:^1.2.2",
+		"fox-plugin-htmllint": "workspace:^1.2.2",
+		"fox-plugin-markdownlint": "workspace:^1.2.2",
+		"fox-plugin-package-json-lint": "workspace:^1.2.2",
+		"fox-plugin-prettier": "workspace:^1.2.2",
+		"fox-plugin-stylelint": "workspace:^1.2.2"
 	}
 }

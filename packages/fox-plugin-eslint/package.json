@@ -1,6 +1,6 @@
 {
 	"name": "fox-plugin-eslint",
-	"version": "1.2.1",
+	"version": "1.2.2",
 	"description": "",
 	"main": "build",
 	"scripts": {
@@ -36,13 +36,13 @@
 	"license": "MIT",
 	"dependencies": {
 		"eslint": "^7.2.0",
-		"eslint-config-fox": "workspace:^1.2.1",
-		"fox-esm": "workspace:^1.2.1",
-		"fox-utils": "workspace:^1.2.1",
+		"eslint-config-fox": "workspace:^1.2.2",
+		"fox-esm": "workspace:^1.2.2",
+		"fox-utils": "workspace:^1.2.2",
 		"lodash.mergewith": "^4.6.2"
 	},
 	"devDependencies": {
-		"fox-test-runner": "workspace:^1.2.1",
-		"fox-types": "workspace:^1.2.1"
+		"fox-test-runner": "workspace:^1.2.2",
+		"fox-types": "workspace:^1.2.2"
 	}
 }

@@ -1,7 +1,7 @@
 {
 	"name": "fox-preset-recommended",
 	"description": "Recommended preset",
-	"version": "1.2.1",
+	"version": "1.2.2",
 	"keywords": [
 		"fox-preset",
 		"fox",
@@ -38,10 +38,10 @@
 		"typescript": "^3.9.5"
 	},
 	"dependencies": {
-		"fox-plugin-editorconfig": "workspace:^1.2.1",
-		"fox-plugin-eslint": "workspace:^1.2.1",
-		"fox-plugin-markdownlint": "workspace:^1.2.1",
-		"fox-plugin-prettier": "workspace:^1.2.1",
-		"fox-plugin-stylelint": "workspace:^1.2.1"
+		"fox-plugin-editorconfig": "workspace:^1.2.2",
+		"fox-plugin-eslint": "workspace:^1.2.2",
+		"fox-plugin-markdownlint": "workspace:^1.2.2",
+		"fox-plugin-prettier": "workspace:^1.2.2",
+		"fox-plugin-stylelint": "workspace:^1.2.2"
 	}
 }
