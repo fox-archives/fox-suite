@@ -47,7 +47,6 @@
 		"lodash.merge": "^4.6.2",
 		"lodash.mergewith": "^4.6.2",
 		"minimist": "^1.2.5",
-		"mkdirp": "^1.0.4",
 		"pkg-up": "^3.1.0",
 		"prompts": "^2.3.2",
 		"read-pkg-up": "^7.0.1"

@@ -9,7 +9,6 @@ import { getPluginData } from './plugin.js'
 import debug from './debug'
 import merge from 'lodash.merge'
 import { log } from './misc'
-import mkdirp from 'mkdirp'
 
 /**
  * generate boilerpalte configuration in `.config`
@@ -74,9 +73,13 @@ export async function buildBootstrap(opts: IBuildBootstrap): Promise<void> {
 
 		try {
 			// ensure parent directory exists
-			await mkdirp(path.dirname(fileDest), {
-				mode: 0o755,
-			});
+			try {
+				await fs.promises.mkdir(path.dirname(fileDest), {
+					recursive: true,
+					mode: 0o755,
+				});
+			} catch (err) { console.error (err) }
+
 
 			const destinationText = await fs.promises.readFile(fileDest, { encoding: 'utf8' })
 

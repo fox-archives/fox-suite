@@ -17,7 +17,6 @@ importers:
       '@types/lodash.throttle': 4.1.6
       '@types/lodash.uniq': 4.5.6
       '@types/minimist': 1.2.0
-      '@types/mkdirp': 1.0.1
       '@types/node': 14.0.13
       '@types/prettier': 2.0.1
       '@types/prompts': 2.0.8
@@ -43,7 +42,6 @@ importers:
       '@types/lodash.throttle': ^4.1.6
       '@types/lodash.uniq': ^4.5.6
       '@types/minimist': ^1.2.0
-      '@types/mkdirp': ^1.0.1
       '@types/node': ^14.0.13
       '@types/prettier': ^2.0.1
       '@types/prompts': ^2.0.8
@@ -443,7 +441,6 @@ importers:
       lodash.merge: 4.6.2
       lodash.mergewith: 4.6.2
       minimist: 1.2.5
-      mkdirp: 1.0.4
       pkg-up: 3.1.0
       prompts: 2.3.2
       read-pkg-up: 7.0.1
@@ -465,7 +462,6 @@ importers:
       lodash.merge: ^4.6.2
       lodash.mergewith: ^4.6.2
       minimist: ^1.2.5
-      mkdirp: ^1.0.4
       pkg-up: ^3.1.0
       prompts: ^2.3.2
       read-pkg-up: ^7.0.1
@@ -2943,12 +2939,6 @@ packages:
   /@types/minimist/1.2.0:
     resolution:
       integrity: sha1-aaI6OtKcrwCX8G7aWbNh7i8GOfY=
-  /@types/mkdirp/1.0.1:
-    dependencies:
-      '@types/node': 14.0.14
-    dev: true
-    resolution:
-      integrity: sha512-HkGSK7CGAXncr8Qn/0VqNtExEE+PHMWb+qlR1faHMao7ng6P3tAaoWWBMdva0gL5h4zprjIO89GJOLXsMcDm1Q==
   /@types/node/13.13.10:
     dev: true
     resolution:
@@ -2956,10 +2946,6 @@ packages:
   /@types/node/14.0.13:
     resolution:
       integrity: sha512-rouEWBImiRaSJsVA+ITTFM6ZxibuAlTuNOCyxVbwreu6k6+ujs7DfnU9o+PShFhET78pMBl3eH+AGSI5eOTkPA==
-  /@types/node/14.0.14:
-    dev: true
-    resolution:
-      integrity: sha512-syUgf67ZQpaJj01/tRTknkMNoBBLWJOBODF0Zm4NrXmiSuxjymFrxnTu1QVYRubhVkRcZLYZG8STTwJRdVm/WQ==
   /@types/node/6.14.10:
     dev: true
     resolution:
