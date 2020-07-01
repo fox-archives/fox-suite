@@ -1,29 +1,88 @@
 import { PackageJson } from 'type-fest'
 import type { Stats } from 'fs'
-type option = 'off' | 'cozy' | 'strict' | 'excessive'
+
 
 /**
  * @description format of the `fox.config.js` file
  */
 export interface IFoxConfig {
-	all: option
+	/**
+	 * @description changes the lint behavior of all linters
+	 * (plugins that have a `fixFunction` method)
+	 */
+	all: 'off' | 'cozy' | 'strict' | 'excessive'
+
+	/**
+	 * @description set to true if `fox.config.js` is at the
+	 * root of a monorepo (at the same level as `lerna.json`,
+	 * `pnpm-workspace.yaml`, etc.)
+	 */
 	monorepo: boolean
-	env: 'browser' | 'node' | 'deno' | 'browser-node' | 'browser-deno'
-	plugins: Record<string, option>
+
+	/**
+	 * @description set to true to enable caching. caching functionality
+	 * is a plugin dependent feature; some may not have it. once set to false,
+	 * existing caches are removed (for the plugins selected to run)
+	 * @todo make this automatically false for CI
+	 */
+	cache: boolean
+
+	/**
+	 * @deprecated
+	 * @description array containing current environments
+	 * @todo deprecate. this is only useful for javascript, and we can include
+	 * quick commented out good defaults for eslint env property
+	 */
+	env: [ 'browser' ] | [ 'node' ] | [ 'deno' ] | ['browser', 'node' ]
+		| ['browser', 'deno'] | ['node', 'deno'] | ['browser', 'deno', 'node'] | []
+
+	/**
+	 * @description object containing an entry for each plugin,
+	 * to change its linting severity. same options as the 'all' property
+	 * @example
+	 * ```js
+	 * // if `fox-plugin-stylelint` is installed,
+	 * // we can do the following
+	 * plugins: {
+	 *   stylelint: 'strict'
+	 * }
+	 * ```
+	 */
+	plugins: Record<string, 'off' | 'cozy' | 'strict' | 'excessive'>
 }
 
 /**
  * @description used when building a cli
  */
 export interface IBuildCli {
+	/**
+	 * @description the name of your plugin. recommended this
+	 * be the same as in your `info.ts` file
+	 */
 	pluginName: string
+
+	/**
+	 * @description a description of what your plugin does.
+	 * recommended this be the same as in your `info.ts` file`
+	 */
 	pluginDescription: string
+
+	/**
+	 * @description this should be the same function exported
+	 * from your `index.ts` file
+	 */
 	bootstrapFunction?: () => Promise<void>
+
+	/**
+	 * @description this should be the same function exported
+	 * from your `index.ts` file
+	 * @todo make this optional
+	 */
 	fixFunction: (fox: IFoxConfig) => Promise<void>
 }
 
 /**
- * @description used when building a bootstrap
+ * @description used when building a 'bootstrap'
  */
 export interface IBuildBootstrap {
 	/**
@@ -35,7 +94,7 @@ export interface IBuildBootstrap {
 }
 
 /**
- * @description used when building a lint
+ * @description used when building a 'lint' or 'format'
  */
 export interface IBuildFix {
 	/**
@@ -98,6 +157,12 @@ export interface IProject {
 	 * @example `/abs/my-react-app/fox.config.js`
 	 */
 	foxConfigPath: string
+
+	/**
+	 * @description location of cache folder
+	 * @example `/abs/my-reacat-app/.config/.cache`
+	 */
+	cachePath: string
 
 	/**
 	 * @description absolute path of the project root
@@ -231,16 +296,4 @@ export interface IPluginExportInfo {
 	 * like caveats with the plugin
 	 */
 	descriptionLong: string
-}
-
-/**
- * @description basically a single unit that has information
- * about the stuff we want to do to a specific project
- */
-export interface IAction {
-	foxPlugins: IPluginExportIndex[];
-	foxPluginPaths: string[];
-	projectData: IProject;
-	pluginSelection: number | number[];
-	actionFunctionName: "bootstrapFunction" | "fixFunction";
 }

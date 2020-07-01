@@ -2,154 +2,140 @@
 
 A sly suite of tools for web development
 
-Do you ever...
+## Summary
 
--   Get tired of setting up common tools and files (EditorConfig, Prettier, ESLint, Stylelint, lint-staged, husky, markdownlint, conventional-commit etc.) over and over for each project?
--   Want sane defaults for all of these tools without having to think?
--   Want to change increase or decrease general strictness of linting without having to change many settings?
+Fox suite provides a unified interface for formatting and linting tools. It ensures these independent tools _just work_ with _minimal configuration overhead_. It's meant to be used on tiny to medium sided-projects.
 
-If you feel similar, this tool is for you!
+## Features
 
-Fox suite provides a unified interface for formatting and linting. It ensures these independent tools _just work_. It's meant to be used on tiny to medium sided-projects.
-
-## Who is this for?
-
--   the _modern_ web developer
-    -   stylelint `color-function-notation` and `value-no-vendor-prefix` are set to modern values
-    -   target the highest possible ECMAScript when parsing with `eslint` - ensure PostCSS and Sass syntax is parsable by `stylelint` (TODO)
-
-## Configuration
-
-```js
-// fox.config.js
-export default {
-	all: 'off | cozy (default) | strict | excessive',
-	monorepo: true,
-	env: [],
-	plugin: {
-		eslint: 'cozy',
-		stylelint: 'excessive',
-		[pluginName]: '$tier',
-	},
-}
-```
-
-Some other config files are automatically generated, like `.editorconfig` (TODO)
-
-with each project, you may want to slightly change the configuration, geared towards _developer satisfaction_. for example, the above config lints javascript such that only the most aggregous errors are caught and that most autofixable rules are enabled. if your project suddenly becomes a bit more serious / big, you can always increase the parameter to 'strict', or 'excessive', to give more guarentees
+- Automatically configures sane defaults for (EditorConfig, Prettier, ESLint, Stylelint, lint-staged (todo), husky (todo), markdownlint, conventional-commit (todo) etc.)
+- Three options to change strictness of lint (so you can make linting more lenient for smaller / experimental projects or if you want the minimal linting guarentees whilst still moving fast 🚀)
+- Targets the highest possible ECMAScript version and ensures you are using the latest standards correctly
+- All core plugins (ones in `fox-preset-recommended` and `fox-preset-all` are overridable (todo))
 
 ## Usage
 
 Right now it's _beta-ish quality_
 
 ```sh
+# tested with npm, yarn 1, pnpm
 npm i fox-suite fox-preset-recommended
 
-fox
-# or
-fox --help
+fox # opens interactive menu
+fox --help # lists options
 ```
 
-When using with preexisting tools that depend on path to config file (ex. if you're using `eslint-webpack-plugin`), you may need to use `fox > lint` manually to regenerate json config
+## Configuration
 
-## Options
+Configuring `fox-suite` is super easy. Simply create a `fox.config.js` at the root of your repo / monorepo.
 
-With most config key, you can set it to either `off`, `cozy`, `strict`, or `excessive`
+Note that whenever you change `fox.config.js`, we recommend running `fox --fix`. this will regenerate config for all plugins. that way, anything that depends on your config (vscode intellisense, `eslint-webpack-plugin`, etc. will have the latest changes). you may need to reload your editor too
 
-## Behavior
+### Example
 
--   Exceptions include obviously temporary errors (ex. `no-lone-blocks` (`{}`)) (which may be _off_ or _warning_ when `NODE_ENV === development`)
-    -   prevents premature distracting red error lines in code editors
-
-### off
-
-Turns of all functionality
-
-### cozy
-
-Catches code that has / is
-
--   aggregous errors
--   non-aggregous auto-fixable errors
--   hard to debug / easy to be buggy
--   isn't obviously buggy (but is buggy)
--   not unobviously buggy (and isn't)
--   deprecated syntax
-
-### strict
-
-Catches code that has / is
-
--   not up to best practices
--   unecessarily verbose / unecessarily misleading
-    -   ex. needlessly using `.bind()`
--   ambiguous
--   essentially similar to what you would expect from `eslint-config-airbnr`, `stylelint-config-standard`, etc.
-
-### excessive
-
-Essentially the same as `strict`, but includes options that are
-more annoying than helpfull when coding a project
-
--   ex. forcing default to exist at end of switch
-
-## Support
-
-Not everything has been tested generally and with regards to interop
-
--   html-validate
--   markdownlint
--   ESlint
--   Stylelint
--   HTMLHint
--   htmllint
--   html-verify
--   prettier
--   sort-package-json
--   package-json-lint
-
-stuff like commit-convention might be added later
-
--   boilerplating babel, typescript etc configs are out of the scope of this project
-
-## Building your own modules
-
-### How to make a `preset`
-
-TODO: make a template repo so it's actualy clear
-
-it's similar to other tools. feel free to use esmodules and `export default`, since everything (including non-plugin code) is loaded with the `esm` package. within your plugin, you must dynamically import with the `import()` any syntax (or `require()`) any modules that require on `FOX_SUITE` environment variables
-
-### Treatment of `template` files
-
-Files are copied over from your plugin's `template` directly to the project's root directory - templated with `handlebars` (see variables below) - json files are merged with existing json files
-
--   opt to use `(await getProjectData()).location` over `path.dirname((await import('read-pkg-up')()).path)`-ish over `process.cwd()` where applicable
-
-```sh
-these are the variables and options passd to handlebars
-{
-	noEscape: true,
-	data: {
-		projectLocation: projectData.location,
-		projectFoxConfigPath: projectData.foxConfigPath,
-		projectPackageJsonPath: projectData.packageJsonPath,
-		pluginRoot: pluginData.pluginRoot,
-		pluginTemplateDir: pluginData.templateDir
+```js
+/** @type {import("fox-types/types").IFoxConfig} */
+const foxConfig = {
+	// enable strict linting for all linters
+	all: 'strict',
+	monorepo: false // default
+	plugin: {
+		// enable cozy (lenient) linting for 'stylelint' scss/css linter
+		stylelint: 'cozy'
 	}
+}
+
+export default foxConfig
+```
+
+### Configuration Options
+
+If you start with the above `fox.config.js` config, intellisense will take over (todo), or you can just read the following. (todo: `fox init`)
+
+```js
+/**
+ * @description format of the `fox.config.js` file
+ */
+export interface IFoxConfig {
+	/**
+	 * @description changes the lint behavior of all linters
+	 * (plugins that have a `fixFunction` method)
+	 */
+	all: 'off' | 'cozy' | 'strict' | 'excessive'
+
+	/**
+	 * @description set to true if `fox.config.js` is at the
+	 * root of a monorepo (at the same level as `lerna.json`,
+	 * `pnpm-workspace.yaml`, etc.)
+	 */
+	monorepo: boolean
+
+	/**
+	 * @description set to true to enable caching. caching functionality
+	 * is a plugin dependent feature; some may not have it. once set to false,
+	 * existing caches are removed (for the plugins selected to run)
+	 * @todo make this automatically false for CI
+	 */
+	cache: boolean
+
+	/**
+	 * @deprecated
+	 * @description array containing current environments
+	 * @todo deprecate. this is only useful for javascript, and we can include
+	 * quick commented out good defaults for eslint env property
+	 */
+	env: [ 'browser' ] | [ 'node' ] | [ 'deno' ] | ['browser', 'node' ]
+		| ['browser', 'deno'] | ['node', 'deno'] | ['browser', 'deno', 'node'] | []
+
+	/**
+	 * @description object containing an entry for each plugin,
+	 * to change its linting severity. same options as the 'all' property
+	 * @example
+	 * ```js
+	 * // if `fox-plugin-stylelint` is installed,
+	 * // we can do the following
+	 * plugins: {
+	 *   stylelint: 'strict'
+	 * }
+	 * ```
+	 */
+	plugins: Record<string, 'off' | 'cozy' | 'strict' | 'excessive'>
 }
 ```
 
+## Supported Tooling
+
+The following are presets that include support for their respective tooling. Note that support for Babel, Typescript etc. configs are out of the scope of this project since they're not strictly linters / formatters
+
+### `fox-preset-recommended`
+
+You get the following from `fox-preset-recommended`
+
+- EditorConfig (`fox-plugin-editorconfig`)
+- Prettier (`fox-plugin-prettier`)
+- ESlint (`fox-plugin-eslint`)
+- Stylelint (`fox-plugin-stylelint`)
+- markdownlint (`fox-plugin-markdownlint`)
+
+### `fox-plugin-all`
+
+Kinks still being worked out. Contains everything from `fox-preset-recommended` with the additions of:
+
+- html-validate (`fox-plugin-html-validate`)
+- HTMLHint (`fox-plugin-htmlhint`)
+- htmllint (`fox-plugin-htmllint`)
+- sort-package-json (`fox-plugin-sort-package-json`)
+- package-json-lint (`fox-plugin-package-json-lint`)
+- commit-convention (todo)
+- husky (todo)
+- lint-staged (todo)
+
 ## FAQ
+
+### I don't like rule X - can i change it?
+
+Yes! If a plugin supports overriding, they will generate a file in `.config/$pluginName.config.js` for you to modify. All plugins that come in `fox-preset-all` and `fox-preset-recommended (will) support overriding. (right now prettier and eslint only support it)
 
 ### What about Rome?
 
-Rome solves a lot of problems related to tooling interoperability. However, there are some features that Rome will likely not have (such as markdown file linting or easy package release flow). Those seem out of the scope of the project (at least for now). `fox-suite` uses the apis of these somewhat niche tools to help improve your code. Eventually, `fox-suite` will hopefully include a module for easy integration with Rome.
-
-### What about Rush?
-
-Ruch Stack is a great and usefull tool, but I wanted something a but more customizable and lighterweight - something that was able to integrate with existing tooling a bit easier
-
-### I don't like rule X
-
-When you use `prettier`, `stylelint`, `eslint`, etc., there are bound to be rules you don't like. with some rules you can edit what's outputed in `.config`
+Rome solves a lot of headaches related to tooling interoperability. However, it also comes with a bundler, compiler, and testing framework in addition to a formatter and linter. If you don't need those features, and if you want to use the tools that you are used to, then `fox-suite` is for you. Also, `fox-suite` is extensible by plugins, so if you want to integrate it with an existing tool, it's super simple to create a plugin for it

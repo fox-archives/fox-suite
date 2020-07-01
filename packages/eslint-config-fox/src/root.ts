@@ -18,9 +18,11 @@ export function rootConfig(
 			},
 		},
 		extends: [require.resolve('eslint-config-prettier')],
+		rules: {},
 	}
 
-	if (foxConfig.env.includes('node')) {
+	// TODO
+	if (foxConfig.env.includes('node' as never)) {
 		config.env.node = true
 	}
 

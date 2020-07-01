@@ -1,34 +1,54 @@
 import path from 'path'
 import fs from 'fs'
 import readPkgUp from 'read-pkg-up'
-import { IProject } from 'fox-types'
-import * as c from 'colorette'
+import { IProject, IFoxConfig } from 'fox-types'
 import mergeWith from 'lodash.mergewith'
 import debug from './debug'
+import { log } from './misc'
 
 /**
  * @description get all necessary data from parent module
  */
 export async function getProjectData(): Promise<IProject> {
-	const obj = await readPkgUp({
+	const pkgUpObj = await readPkgUp({
 		cwd: process.cwd(),
 		normalize: false,
 	})
-	if (!obj) {
-		console.error(
-			c.bold(
-				c.red(
-					"we couldn't get the package.json of your project. exiting.",
-				),
-			),
-		)
+	if (!pkgUpObj) {
+		log.error("we couldn't get the package.json of your project. exiting.")
 		process.exit(1)
 	}
-	const { packageJson: packageJson, path: packageJsonPath } = obj
+	const { packageJson: packageJson, path: packageJsonPath } = pkgUpObj
 
-	const location = path.dirname(packageJsonPath)
-	const foxConfigPath = path.resolve(location, 'fox.config.js')
+	const projectLocation = path.dirname(packageJsonPath)
+	let [ foxConfig, foxConfigPath ] = await getFoxConfig(projectLocation)
 
+	// default foxConfig options
+	const defaultFoxConfig: IFoxConfig  = {
+		all: 'cozy',
+		cache: false,
+		monorepo: false,
+		env: [],
+		plugins: {}
+	}
+
+	foxConfig = mergeFoxConfig(defaultFoxConfig, foxConfig)
+
+	debug('defaultFoxConfig: %o', defaultFoxConfig)
+	debug('foxConfig: %o', foxConfig)
+	debug('foxConfigPath, %s', foxConfigPath)
+
+	return {
+		packageJson,
+		packageJsonPath,
+		foxConfig,
+		foxConfigPath,
+		cachePath: path.join(projectLocation, '.config', '.cache'),
+		location: projectLocation,
+	}
+}
+
+function mergeFoxConfig(defaultConfig: IFoxConfig, newConfig: IFoxConfig): IFoxConfig {
 	const customizer = (
 		destObj: Record<string, any>,
 		srcObj: Record<string, any>,
@@ -47,42 +67,34 @@ export async function getProjectData(): Promise<IProject> {
 		}
 	}
 
-	let foxConfig
-	try {
-		await fs.promises.access(foxConfigPath, fs.constants.F_OK)
-		foxConfig = (await import(foxConfigPath)).default
+	return mergeWith(defaultConfig, newConfig, customizer)
+}
 
-		// default foxConfig options
-		const defaultFoxConfig = {
-			all: 'cozy',
-			monorepo: false,
-			env: [],
-			plugins: {}
-		}
+async function getFoxConfig(projectLocation: string): Promise<[IFoxConfig, string]> {
+	const foxConfigFilenames = ['fox.config.mjs', 'fox.config.js', 'fox.config.cjs']
 
-		foxConfig = mergeWith(defaultFoxConfig, foxConfig, customizer)
-		debug('defaultFoxConfig: %o', defaultFoxConfig)
-		debug('foxConfig: %o', foxConfig)
-	} catch (err) {
-		if (err.code === 'ENOENT' && err.syscall === 'access') {
-			console.log(
-				c.bold(
-					c.red(
-						"fox.config.js file missing. see details: https://github.com/eankeen/fox-suite#fox-suite"
-					)
-				)
-			);
+	let foxConfigPath: string | null = null
+	let foxConfig: IFoxConfig | null = null
+	for(const filename of foxConfigFilenames) {
+		foxConfigPath = path.resolve(projectLocation, filename)
+
+		try {
+			await fs.promises.access(foxConfigPath, fs.constants.F_OK)
+			foxConfig = (await import(foxConfigPath)).default
+			break
+		} catch (err) {
+			if (err.code === 'ENOENT' && err.syscall === 'access') {
+				continue
+			}
+			console.error(err)
 			process.exit(1)
 		}
-
-		console.error(err)
 	}
 
-	return {
-		packageJson,
-		packageJsonPath,
-		foxConfig,
-		foxConfigPath,
-		location,
+	if (!foxConfig || !foxConfigPath) {
+		log.error("fox.config.[c|m]?js file missing or not valid. see details: https://github.com/eankeen/fox-suite#fox-suite");
+		process.exit(1)
 	}
+
+	return [ foxConfig, foxConfigPath ]
 }

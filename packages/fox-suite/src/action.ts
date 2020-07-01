@@ -1,49 +1,40 @@
-import type { IAction, IPluginExportIndex, IProject } from 'fox-types'
+import type { IDoAction, IDoWatch, actionFunction } from '../@types/index'
+import * as foxUtils from 'fox-utils'
 import chokidar from 'chokidar'
-import * as c from 'colorette'
 import * as util from './util'
 import assert from 'assert'
 import debug from './debug'
+
+const { log } = foxUtils
 
 /**
  * @description bootstraps, formats, or lints a project
  */
 export async function doAction({
 	foxPlugins,
-	foxPluginPaths,
-	projectData,
 	pluginSelection,
+	projectData,
 	actionFunctionName,
-}: IAction): Promise<void> {
+}: IDoAction): Promise<void> {
 	if (pluginSelection === void 0) {
-		console.log(c.bold(c.red("exiting tui")));
+		log.info("closed early. exiting.");
 		return;
 	}
 
-	let name =
-		actionFunctionName === "bootstrapFunction"
-			? "bootstrap"
-			: actionFunctionName === "fixFunction"
-			? "fix"
-			: "action";
+	if ((Array.isArray(pluginSelection) && pluginSelection.length === 0)) {
+		log.warn("no choices made. exiting.")
+		return
+	}
 
-	// console.log(foxPlugins)
-	// const actionFunctions = util.pickSpecificModuleProperty({
-	// 	foxPlugins,
-	// 	specificIndicesToPick: pluginSelection,
-	// 	actionFunction: actionFunctionName,
-	// });
-
-	// debug('actionFunctions: %o', actionFunctions)
-
-	// assert(Array.isArray(actionFunctions));
-
-	type fn = IPluginExportIndex["bootstrapFunction"] | IPluginExportIndex["fixFunction"]
-	const pickedFunctions: { fn: fn, name: string }[] = []
+	const pickedFunctions: { fn: actionFunction, name: string }[] = []
 	for (let i = 0; i < foxPlugins.length; ++i) {
 		const foxPlugin = foxPlugins[i]
-		if (Array.isArray(pluginSelection)) {
-
+		if (pluginSelection === -1) {
+			pickedFunctions.push({
+				fn: foxPlugin[actionFunctionName],
+				name: foxPlugin.info.toolName
+			})
+		} else if (Array.isArray(pluginSelection)) {
 			for(const indice of pluginSelection) {
 				if (indice === i) {
 					pickedFunctions.push({
@@ -53,44 +44,44 @@ export async function doAction({
 				}
 			}
 		} else {
-			if (pluginSelection === i || pluginSelection === -1) {
-				pickedFunctions.push({
-					fn: foxPlugin[actionFunctionName],
-					name: foxPlugin.info.toolName
-				})
-			}
+			log.error('pluginSelection not an expected value. exiting.')
+			return
 		}
 	}
 
 	for(const obj of pickedFunctions) {
 		if (!obj.fn) continue
 
-		console.log(c.bold(c.blue(`running ${obj.name}`)))
 		await obj.fn(projectData.foxConfig)
 	}
 
-	console.log(c.bold(c.blue(`${name} complete`)));
+	let actionFunctionNameNice =
+		actionFunctionName === "bootstrapFunction"
+		? "bootstrap"
+		: actionFunctionName === "fixFunction"
+		? "fix"
+		: "unknown";
+
+	log.success(`'${actionFunctionNameNice}' complete`)
 }
 
-interface IDoWatch {
-	foxPluginPaths: string[]
-	foxPlugins: IPluginExportIndex[]
-	pluginSelection: number | number[]
-	projectData: IProject
-}
 
 /**
  * @description watch files and perform fixFunction on all files
  * if changes are detected
  */
 export async function doWatch({
-	foxPluginPaths,
 	foxPlugins,
 	pluginSelection,
 	projectData,
 }: IDoWatch): Promise<void> {
 	if (pluginSelection === void 0) {
-		console.log(c.bold(c.red('exiting tui')))
+		log.info('exiting tui')
+		return
+	}
+
+	if ((Array.isArray(pluginSelection) && pluginSelection.length === 0)) {
+		log.warn("no choices made. exiting.")
 		return
 	}
 
@@ -118,12 +109,11 @@ export async function doWatch({
 
 		await doAction({
 			foxPlugins,
-			foxPluginPaths,
-			projectData,
 			pluginSelection,
+			projectData,
 			actionFunctionName: "fixFunction",
 		});
 	})
 
-	console.log('starting watcher')
+	log.info('starting watcher')
 }

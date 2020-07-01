@@ -77,10 +77,12 @@ export function rootConfig(
 		rules: {},
 	}
 
+	// @ts-ignore
 	if (foxConfig.env.includes('browser')) {
 		root.env.browser = true
 	}
 
+	// @ts-ignore
 	if (foxConfig.env.includes('node')) {
 		root.env.node = true
 		root.env.commonjs = true

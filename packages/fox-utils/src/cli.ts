@@ -1,7 +1,7 @@
 import minimist from 'minimist'
 import { IBuildCli } from 'fox-types'
-import * as foxUtils from './'
-import * as c from 'colorette'
+import { log } from './misc'
+import { getProjectData } from './project'
 
 export async function buildCli(
 	nodeArgv: NodeJS.Process['argv'],
@@ -39,13 +39,7 @@ Examples:
 	} else if (argv.bootstrap) {
 		try {
 			if (!bootstrapFunction) {
-				console.info(
-					c.bold(
-						c.blue(
-							'this module does not have a bootstrap function',
-						),
-					),
-				)
+				log.info('this module does not have a bootstrap function')
 				return
 			}
 			await bootstrapFunction()
@@ -55,14 +49,14 @@ Examples:
 		}
 	} else if (argv.action) {
 		try {
-			const projectData = await foxUtils.getProjectData()
+			const projectData = await getProjectData()
 			await fixFunction(projectData.foxConfig)
 		} catch (err) {
 			console.error(err)
 			process.exitCode = 1
 		}
 	} else {
-		console.log(`Invalid Options. See \`${pluginName} --help\``)
+		log.error(`Invalid Options. See \`${pluginName} --help\``)
 		process.exitCode = 1
 	}
 }

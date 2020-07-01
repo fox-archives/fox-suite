@@ -3,7 +3,10 @@ import fs from 'fs'
 import type { Dirent } from 'fs'
 import type { IPluginExportIndex, IProject } from 'fox-types'
 import debug from './debug'
-import * as c from 'colorette'
+import * as foxUtils from 'fox-utils'
+import * as util from './util'
+
+const { log } = foxUtils
 
 export function getPluginNameFromPath(pluginPath: string): string {
 	let str = pluginPath.slice(pluginPath.lastIndexOf('fox-plugin-'))
@@ -19,6 +22,18 @@ export async function getFoxPlugins(projectData: IProject): Promise<string[]> {
 		const nodeModules = await fs.promises.readdir(nodeModulesPath, {
 			withFileTypes: true,
 		})
+
+		const addPlugin = (pluginPath: string) => {
+			const pluginNameLong = getPluginNameFromPath(pluginPath)
+			const pluginName = pluginNameLong.slice('fox-plugin-'.length)
+
+			if (projectData.foxConfig.plugins[pluginName] !== 'off')
+				pluginList.push(pluginPath)
+			else
+				log.warn(
+					`skipping plugin '${pluginName}' as it's set to 'off' in fox.config.js`
+				);
+		}
 
 		const isFoxPlugin = (nodePackage: Dirent) => {
 			return (
@@ -39,14 +54,18 @@ export async function getFoxPlugins(projectData: IProject): Promise<string[]> {
 				const pluginPath = require.resolve(
 					path.join(nodeModulesPath, nodeModule.name),
 				)
-				pluginList.push(pluginPath)
+				addPlugin(pluginPath);
 			} else if (isFoxPreset(nodeModule)) {
 				const presetPath = require.resolve(
 					path.join(nodeModulesPath, nodeModule.name),
 				)
-				const presetPluginList = (await import(presetPath)).default
+				const presetPluginList = (await import(presetPath))
+					.default
 					.plugins
-				pluginList = pluginList.concat(presetPluginList)
+
+				for (const presetPluginPath of presetPluginList) {
+					addPlugin(presetPluginPath)
+				}
 			}
 		}
 
@@ -54,13 +73,7 @@ export async function getFoxPlugins(projectData: IProject): Promise<string[]> {
 		pluginList = Array.from(new Set(pluginList))
 
 		if (pluginList.length === 0) {
-			console.log(
-				c.bold(
-					c.red(
-						'no fox-plugins or fox-presets found. please install some to continue',
-					),
-				),
-			)
+			log.error('no fox-plugins or fox-presets found. please install some to continue')
 			process.exit(0)
 		}
 
@@ -76,11 +89,23 @@ export async function importFoxPlugins(
 	foxPluginPaths: string[],
 ): Promise<IPluginExportIndex[]> {
 	const promises: Promise<IPluginExportIndex>[] = []
-	for (const foxPluginPath of foxPluginPaths) {
-		promises.push(import(foxPluginPath))
+	const foxPluginNames = foxPluginPaths.map(util.getPluginNameFromPath)
+
+	for (let i = 0; i < foxPluginPaths.length; i++) {
+		const foxPluginPath = foxPluginPaths[i]
+		const foxPluginNameLong = foxPluginNames[i]
+		const foxPluginName = foxPluginNameLong.slice('fox-plugin-'.length)
+
+		if (projectData.foxConfig.plugins[foxPluginName] !== 'off') {
+			promises.push(import(foxPluginPath))
+		} else {
+			debug('skipping plugin \'%s\' since it\'s \'off\' in fox.config.js', foxPluginName)
+		}
 	}
 
-	return (await Promise.all(promises)).filter(Boolean)
+	const plugins = (await Promise.all(promises)).filter(Boolean)
+
+	return plugins
 }
 
 type actionFunctions = 'bootstrapFunction' | 'fixFunction'

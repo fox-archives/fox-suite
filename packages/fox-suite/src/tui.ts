@@ -3,7 +3,9 @@ import * as foxUtils from 'fox-utils'
 import { doAction, doWatch } from './action'
 import * as util from './util'
 import debug from './debug'
-import * as c from 'colorette'
+import { IPluginExportIndex } from 'fox-types'
+
+const { log } = foxUtils
 
 /**
  * @description if no command line arguments were given,
@@ -19,56 +21,68 @@ export async function tui(): Promise<void> {
 	debug('foxPluginPaths: %o', foxPluginPaths)
 	debug('foxPlugins: %o', foxPlugins)
 
-	const bootstrapChoices: prompts.Choice[] = []
-	const fixChoices: prompts.Choice[] = []
+	const [ bootstrapChoices, fixChoices ] = createActionFunctionPrompts(foxPlugins, foxPluginPaths)
+	const rootChoices = createRootPrompt(bootstrapChoices, fixChoices)
 
-	// if a plugin exports a bootstrapFunction or fixPlugin (or both),
-	// add them to the selection menu so the user can see
-	for (let i = 0; i < foxPlugins.length; ++i) {
-		const foxPluginPath = foxPluginPaths[i]
-		const foxPlugin = foxPlugins[i]
+	const { action } = await prompts({
+		type: 'select',
+		name: 'action',
+		message: 'Choose Action',
+		choices: rootChoices,
+	})
 
-		debug('processing foxPluginModule %s', foxPlugin.info.name)
+	if (action === 'bootstrap') {
+		const { pluginSelection }: { pluginSelection: number[] } = await prompts({
+			type: 'multiselect',
+			name: 'pluginSelection',
+			message: 'which configuration would you like to bootstrap?',
+			choices: bootstrapChoices,
+		})
 
-		if (!foxPlugin.info.name || !foxPlugin.info) {
-			throw new Error(
-				`plugin located at ${foxPluginPath} does not have exported info object. exiting.`,
-			)
-		}
+		await doAction({
+			foxPlugins,
+			pluginSelection,
+			projectData,
+			actionFunctionName: 'bootstrapFunction'
+		})
+	} else if (action === 'fix') {
+		const { pluginSelection }: { pluginSelection: number[] } = await prompts({
+			type: 'multiselect',
+			name: 'pluginSelection',
+			message: 'Which formatter would you like to use?',
+			choices: fixChoices,
+		})
 
-		if (foxPlugin.bootstrapFunction) {
-			bootstrapChoices.push({
-				title: foxPlugin.info.tool,
-				description: foxPlugin.info.description,
-				value: i,
-			})
-		}
+		await doAction({
+			foxPlugins,
+			pluginSelection,
+			projectData,
+			actionFunctionName: 'fixFunction'
+		})
+	} else if (action === 'watch') {
+		const { pluginSelection }: { pluginSelection: number[] } = await prompts({
+			type: 'multiselect',
+			name: 'pluginSelection',
+			message: 'Which formatter would you like to use?',
+			choices: fixChoices,
+		})
 
-		if (foxPlugin.fixFunction) {
-			fixChoices.push({
-				title: foxPlugin.info.tool,
-				description: foxPlugin.info.description,
-				value: i,
-			})
-		}
+		await doWatch({
+			foxPlugins,
+			pluginSelection,
+			projectData,
+		})
+	} else {
+		log.info('exiting tui')
 	}
+}
 
-	// add 'all' choices, but only if there are two or more elements that already exist
-	if (bootstrapChoices.length > 2)
-		bootstrapChoices.unshift({
-			title: 'All',
-			description: 'Bootstrap all configuration',
-			value: -1,
-		})
-
-	if (fixChoices.length > 2)
-		fixChoices.unshift({
-			title: 'All',
-			description: 'Format files from all config',
-			value: -1,
-		})
-
+/**
+ * @description creates the root prompt
+ */
+function createRootPrompt(bootstrapChoices: prompts.Choice[], fixChoices: prompts.Choice[]): prompts.Choice[] {
 	const actionChoices: prompts.Choice[] = []
+
 	if (bootstrapChoices.length > 0)
 		actionChoices.push({
 			title: 'Bootstrap',
@@ -89,58 +103,49 @@ export async function tui(): Promise<void> {
 			value: 'watch',
 		})
 
-	const { action } = await prompts({
-		type: 'select',
-		name: 'action',
-		message: 'choose action',
-		choices: actionChoices,
-	})
+	return actionChoices
+}
 
-	if (action === 'bootstrap') {
-		const { pluginSelection }: { pluginSelection: number } = await prompts({
-			type: 'select',
-			name: 'pluginSelection',
-			message: 'which configuration would you like to bootstrap?',
-			choices: bootstrapChoices,
-		})
+/**
+ * @description if a plugin exports a bootstrapFunction or fixPlugin (or both),
+ * add them to the selection menu so the user can see
+ */
+function createActionFunctionPrompts(foxPlugins: IPluginExportIndex[], foxPluginPaths: string[]):
+	[ prompts.Choice[], prompts.Choice[] ] {
+	const bootstrapChoices: prompts.Choice[] = []
+	const fixChoices: prompts.Choice[] = []
 
-		await doAction({
-			foxPlugins,
-			foxPluginPaths,
-			pluginSelection,
-			projectData,
-			actionFunctionName: 'bootstrapFunction'
-		})
-	} else if (action === 'fix') {
-		const { pluginSelection }: { pluginSelection: number } = await prompts({
-			type: 'select',
-			name: 'pluginSelection',
-			message: 'Which formatter would you like to use?',
-			choices: fixChoices,
-		})
+	for (let i = 0; i < foxPlugins.length; ++i) {
+		const foxPluginPath = foxPluginPaths[i]
+		const foxPlugin = foxPlugins[i]
 
-		await doAction({
-			foxPlugins,
-			foxPluginPaths,
-			pluginSelection,
-			projectData,
-			actionFunctionName: 'fixFunction'
-		})
-	} else if (action === 'watch') {
-		const { pluginSelection }: { pluginSelection: number } = await prompts({
-			type: 'select',
-			name: 'pluginSelection',
-			message: 'Which formatter would you like to use?',
-			choices: fixChoices,
-		})
+		debug('processing foxPluginModule %s', foxPlugin.info.name)
 
-		await doWatch({
-			foxPluginPaths,
-			foxPlugins,
-			pluginSelection,
-			projectData,
-		})
-	} else {
-		console.info(c.bold(c.red('exiting tui')))
+		if (!foxPlugin.info.name || !foxPlugin.info) {
+			throw new Error(
+				`plugin located at ${foxPluginPath} does not have exported info object. exiting.`,
+			)
+		}
+
+		if (foxPlugin.bootstrapFunction) {
+			bootstrapChoices.push({
+				title: foxPlugin.info.toolName,
+				description: foxPlugin.info.description,
+				value: i,
+			})
+		}
+
+		if (foxPlugin.fixFunction) {
+			fixChoices.push({
+				title: foxPlugin.info.toolName,
+				description: foxPlugin.info.description,
+				value: i,
+			})
+		}
 	}
+
+	return [
+		bootstrapChoices,
+		fixChoices
+	]
 }

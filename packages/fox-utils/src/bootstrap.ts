@@ -1,7 +1,6 @@
 import path from 'path'
 import fs from 'fs'
 import prompts from 'prompts'
-import * as c from 'colorette'
 import { getProjectData } from './project.js'
 // @ts-ignore
 import handlebars from 'handlebars'
@@ -9,12 +8,16 @@ import { IBuildBootstrap, ITemplateFile, IPlugin, IProject } from 'fox-types'
 import { getPluginData } from './plugin.js'
 import debug from './debug'
 import merge from 'lodash.merge'
+import { log } from './misc'
 
 /**
  * generate boilerpalte configuration in `.config`
  * folder of local projet
  */
 
+/**
+ * @description do handlebars template
+ */
 async function doHandlebarsTemplate(
 	fileContents: string,
 	{ pluginData, projectData }: { pluginData: IPlugin; projectData: IProject },
@@ -40,6 +43,7 @@ export async function buildBootstrap(opts: IBuildBootstrap): Promise<void> {
 		getPluginData(opts.dirname),
 		getProjectData(),
 	])
+
 	const doTemplate = async (
 		fileToTemplate: ITemplateFile,
 	): Promise<{ fileDest: string; templatedText: string }> => {
@@ -64,17 +68,33 @@ export async function buildBootstrap(opts: IBuildBootstrap): Promise<void> {
 
 	const retryFilesToTemplate: ITemplateFile[] = []
 	for (const fileToTemplate of pluginData.templateFiles) {
+		debug(`trying to copy file '${fileToTemplate.absolutePath}' over`)
 		const { fileDest, templatedText } = await doTemplate(fileToTemplate)
+
 		try {
+			// ensure parent directory exists
 			try {
 				await fs.promises.mkdir(path.dirname(fileDest), {
+					recursive: true,
 					mode: 0o755,
-				})
-			} catch {}
-			await fs.promises.writeFile(fileDest, templatedText, {
-				mode: 0o644,
-				flag: 'wx+',
-			})
+				});
+			} catch (err) { console.error (err) }
+
+
+			const destinationText = await fs.promises.readFile(fileDest, { encoding: 'utf8' })
+
+			// if content is the same, don't actually try
+			// and overwrite the file
+			debug(`is destinationText same as templatedText?: ${destinationText === templatedText}`);
+			if (destinationText === templatedText) {
+				log.info(`skipping ${fileToTemplate.relativePath} since contents are the same`);
+			} else {
+				await fs.promises.writeFile(fileDest, templatedText, {
+					mode: 0o644,
+					flag: "wx+",
+				});
+			}
+
 		} catch (err) {
 			if (err.code === 'EEXIST') {
 				// if the file already exists, but is a json file,
@@ -121,7 +141,7 @@ export async function buildBootstrap(opts: IBuildBootstrap): Promise<void> {
 				})
 			}
 		} else {
-			console.info(c.bold(c.red('exiting tui')))
+			log.info('exiting tui')
 			process.exit(1)
 		}
 	}
@@ -154,24 +174,14 @@ async function mergeJsonFiles(
 		try {
 			JSON.parse(jsonText)
 		} catch (err) {
-			console.error(
-				c.bold(
-					c.red(
-						`your templated json file (read from its respective cnofig) with destination ${fileDest} failed to be parsed`,
-					),
-				),
-			)
+			log.error(`your templated json file (read from its respective config) with destination ${fileDest} failed to be parsed`)
 			console.error(jsonText)
 			console.error(err)
 		}
 		try {
 			JSON.parse(templatedText)
 		} catch (err) {
-			console.error(
-				c.bold(
-					c.red(`the json file at ${fileDest} could not be parsed`),
-				),
-			)
+			log.error(`the json file at ${fileDest} could not be parsed`)
 			console.error(templatedText)
 			console.error(err)
 		}

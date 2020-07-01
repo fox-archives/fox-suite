@@ -3,9 +3,9 @@ import * as util from './util'
 import type { ParsedArgs } from 'minimist'
 import { doAction, doWatch } from './action'
 import debug from './debug'
-import * as c from 'colorette'
 import rimraf from 'rimraf'
-import path from 'path'
+
+const { log } = foxUtils
 
 /**
  * @description start `fox` based on cli arguments if any were given
@@ -29,95 +29,102 @@ Description:
   A sly suite of tools for web development
 
 Options:
-	--listPlugins  List all installed plugins. Note that plugins
-	               installed multiple times may only be shown once
+  --listPlugins  List all installed plugins. Note that plugins
+                 installed multiple times may only be shown once
   --bootstrap    Bootstraps configuration
   --fix          Fixes all files with all formatters
-	--clearCache   Nukes cache in \`.config/.cache\`
+  --clearCache   Nukes cache in \`.config/.cache\`
   --help         Show help
 
 Notes:
   Not passing any options opens the tui
 
 Examples:
-	${pluginName}
-    this opens the terminal user interface
-	${pluginName} --bootstrap
-    this bootstraps configuration of all plugins
+  ${pluginName}
+    opens the terminal user interface
+  ${pluginName} --bootstrap
+    bootstraps configuration of all plugins
   ${pluginName} --bootstrap eslint,stylelint
+    bootstraps configuration for the eslint and stylelint plugins
+  ${pluginName} --fix stylelint
+    runs the linter for stylelint
   ${pluginName} --help`
 		console.info(helpText)
-	} else if (argv.list) {
-		console.info(c.bold(c.blue(foxPluginPaths.map(util.getPluginNameFromPath).join('\n'))))
+	} else if (argv.listPlugins) {
+		console.info(foxPluginPaths.map(util.getPluginNameFromPath).join('\n'))
 	} else if (argv.bootstrap) {
-		if (argv.bootstrap !== "") {
-			const plugins = argv.bootstrap.split(',')
+		if (argv.bootstrap === "") {
 			await doAction({
 				foxPlugins,
-				foxPluginPaths,
-				pluginSelection: getPluginSelectionFromList(foxPluginPaths, plugins),
+				pluginSelection: -1,
 				projectData,
-				actionFunctionName: 'bootstrapFunction'
-			})
+				actionFunctionName: "bootstrapFunction",
+			});
 
 			return
 		}
 
+		const foxPluginNames = argv.bootstrap.split(",");
 		await doAction({
 			foxPlugins,
-			foxPluginPaths,
-			pluginSelection: -1,
+			pluginSelection: getPluginSelectionFromList(foxPluginPaths, foxPluginNames),
 			projectData,
-			actionFunctionName: 'bootstrapFunction'
-		})
+			actionFunctionName: "bootstrapFunction",
+		});
 	} else if (argv.fix) {
-		if (argv.fix !== "") {
-			const plugins = argv.fix.split(',')
+		if (argv.fix === "") {
 			await doAction({
 				foxPlugins,
-				foxPluginPaths,
-				pluginSelection: getPluginSelectionFromList(foxPluginPaths, plugins),
+				pluginSelection: -1,
 				projectData,
-				actionFunctionName: 'fixFunction'
-			})
+				actionFunctionName: "fixFunction",
+			});
+
 			return
 		}
+
+		const foxPluginNames = argv.fix.split(",");
 		await doAction({
 			foxPlugins,
-			foxPluginPaths,
-			pluginSelection: -1,
+			pluginSelection: getPluginSelectionFromList(
+				foxPluginPaths,
+				foxPluginNames
+			),
 			projectData,
-			actionFunctionName: 'fixFunction'
-		})
+			actionFunctionName: "fixFunction",
+		});
+
 	} else if (argv.watch) {
-		if (argv.watch !== "") {
-			const plugins = argv.watch.split(',')
+		if (argv.watch === "") {
 			await doWatch({
 				foxPlugins,
-				foxPluginPaths,
-				pluginSelection: getPluginSelectionFromList(foxPluginPaths, plugins),
-				projectData
-			})
+				pluginSelection: -1,
+				projectData,
+			});
+
 			return
 		}
+
+		const foxPluginNames = argv.watch.split(",");
 		await doWatch({
-			foxPluginPaths,
 			foxPlugins,
-			pluginSelection: -1,
+			pluginSelection: getPluginSelectionFromList(
+				foxPluginPaths,
+				foxPluginNames
+			),
 			projectData,
-		})
+		});
 	} else if (argv.clearCache) {
-		const cacheDir = path.join(projectData.location, '.config', '.cache')
-		rimraf(cacheDir, (err) => {
+		rimraf(projectData.cachePath, (err) => {
 			if (err) {
-				console.error(c.bold(c.red('there was an error removing the cache directory')))
+				log.error('unexpected error when removing the cache directory')
 				console.error(err)
 				return
 			}
-			console.log(c.bold(c.green('cache directory nuked')))
+			log.success('cache directory nuked')
 		})
 	} else {
-		console.info(c.bold(c.red('argument(s) or parameter(s) not understood')))
+		log.warn('argument(s) or parameter(s) not understood')
 	}
 }
 
@@ -131,6 +138,7 @@ Examples:
 function getPluginSelectionFromList(foxPluginPaths: string[], plugins: string): number[] {
 	debug('pluginSelectionFromList: foxPluginPaths: %o', foxPluginPaths)
 	debug('pluginSelectionFromList: plugins: %o', plugins)
+
 	const pluginSelection: number[] = []
 	const foxPluginNames = foxPluginPaths.map(util.getPluginNameFromPath)
 	for (const plugin of plugins) {
@@ -145,13 +153,13 @@ function getPluginSelectionFromList(foxPluginPaths: string[], plugins: string): 
 		}
 
 		if (found === false) {
-			console.error(c.bold(c.red(`plugin ${plugin} not found`)))
+			log.error(`plugin ${plugin} not found`)
 			process.exit(1)
 		}
 	}
 
 	if (pluginSelection.length === 0) {
-		console.info(c.bold(c.red('no plugin selections were made')))
+		log.info('no plugin selections were made')
 		process.exit(1)
 	}
 
