@@ -48,10 +48,11 @@ export async function fixFunction() {
 				mergedConfig
 			} = await foxUtils.getConfigAndIgnores({
 				defaultConfig,
-				userConfigPath: require.resolve(path.join(project.location, '.config/eslint.config.js')),
+				configFile: '.config/eslint.config.js',
 				configMergeFn: (defaultConfig, userConfig) => {
 					return mergewith(defaultConfig, userConfig, customizer)
-				}
+				},
+				ignoreFile: '.config/eslintignore'
 			})
 			if (!mergedConfig) {
 				log.error(`failed to merge config for fox-plugin-eslint. skipping.`)
