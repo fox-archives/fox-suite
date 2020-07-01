@@ -66,8 +66,12 @@ const parseIgnoreFile = async (
 	const ignoreFilePath = path.join(project.location, ignoreFile)
 	const content = await fs.promises.readFile(ignoreFilePath, { encoding: 'utf8' })
 
-	const universalIgnoreFilePath = path.join(project.location, '.config/universal.ignore'
-	
+	const universalIgnoreFilePath = path.join(project.location, '.config/universal.ignore')
+
+	return {
+		ignoreFilePath: '',
+		ignoredFiles: []
+	}
 }
 
 interface IGetConfigAndIgnores {
@@ -100,9 +104,9 @@ interface IGetConfigAndIgnores {
  */
 export async function getConfigAndIgnores({
 	defaultConfig,
-	configFile,
+	configPath,
 	configMergeFn,
-	ignoreFile,
+	pluginIgnorePath,
 }: IGetConfigAndIgnores): Promise<{
 	mergedConfig: Record<string, any> | null,
 	ignoredFiles?: string[] | null
@@ -112,7 +116,7 @@ export async function getConfigAndIgnores({
 	let mergedConfig: Record<string, any> = {}
 	{
 		const userConfigModule = (await import(
-			require.resolve(path.join(project.location, configFile))
+			require.resolve(path.join(project.location, configPath))
 		))
 		if (typeof userConfigModule.default !== 'function') {
 			log.error('default export is not a function. skipping eslint')
@@ -129,10 +133,14 @@ export async function getConfigAndIgnores({
 			mergedConfig = configMergeFn(defaultConfig, userConfig)
 	}
 
-	let {
-		ignoreFilePath,
-		ignoredFiles
-	} = await parseIgnoreFile(project, ignoreFile)
+	pluginIgnorePath = pluginIgnorePath || ''
+
+	let { ignoreFilePath, ignoredFiles } = await parseIgnoreFile(
+		project,
+		pluginIgnorePath
+	);
+
+
 
 	return {
 		mergedConfig,
