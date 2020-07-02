@@ -1,6 +1,6 @@
 {
 	"name": "fox-plugin-package-json-lint",
-	"version": "1.2.5",
+	"version": "1.2.6",
 	"description": "",
 	"main": "build",
 	"scripts": {
@@ -35,13 +35,13 @@
 	},
 	"license": "MIT",
 	"dependencies": {
-		"fox-utils": "workspace:^1.2.5",
-		"npm-package-json-lint-config-fox": "workspace:^1.2.5",
+		"fox-utils": "workspace:^1.2.6",
+		"npm-package-json-lint-config-fox": "workspace:^1.2.6",
 		"npm-package-json-lint": "^5.1.0"
 	},
 	"devDependencies": {
-		"fox-test-runner": "workspace:^1.2.5",
-		"fox-types": "workspace:^1.2.5",
+		"fox-test-runner": "workspace:^1.2.6",
+		"fox-types": "workspace:^1.2.6",
 		"ts-node": "^8.10.2",
 		"typescript": "^3.9.5"
 	}

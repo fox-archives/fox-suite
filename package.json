@@ -1,6 +1,6 @@
 {
 	"name": "fox-suite-root",
-	"version": "1.2.5",
+	"version": "1.2.6",
 	"engines": {
 		"node": ">=12.0.0 || >=13.14.0 || >=14.0.0"
 	},
@@ -28,8 +28,8 @@
 		"@types/prompts": "^2.0.8",
 		"@types/rimraf": "^3.0.0",
 		"@types/stylelint": "^9.10.1",
-		"fox-preset-all": "workspace:^1.2.5",
-		"fox-suite": "workspace:^1.2.5",
+		"fox-preset-all": "workspace:^1.2.6",
+		"fox-suite": "workspace:^1.2.6",
 		"lerna": "^3.22.1"
 	}
 }
