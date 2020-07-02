@@ -47,11 +47,9 @@ importers:
       '@types/prompts': ^2.0.8
       '@types/rimraf': ^3.0.0
       '@types/stylelint': ^9.10.1
-      fox-preset-all: 'workspace:^1.2.1'
-      fox-suite: 'workspace:^1.2.1'
+      fox-preset-all: 'workspace:^1.2.4'
+      fox-suite: 'workspace:^1.2.4'
       lerna: ^3.22.1
-  ../../../../.local/opt/n/pnpm-global:
-    specifiers: {}
   packages/eslint-config-fox:
     dependencies:
       '@typescript-eslint/eslint-plugin': 3.3.0_6fdb627c501e2fa3b09caaebf419fee9
@@ -84,7 +82,7 @@ importers:
       eslint-plugin-import: ^2.21.2
       eslint-plugin-prettier: ^3.1.4
       eslint-plugin-simple-import-sort: ^5.0.3
-      fox-types: 'workspace:^1.2.1'
+      fox-types: ^1.2.1
       jest: ^26.0.1
       jest-extended: ^0.11.5
       lodash.mergewith: ^4.6.2
@@ -105,10 +103,10 @@ importers:
       fox-test-runner: 'link:../fox-test-runner'
       fox-types: 'link:../fox-types'
     specifiers:
-      fox-esm: 'workspace:^1.2.1'
-      fox-test-runner: 'workspace:^1.2.1'
-      fox-types: 'workspace:^1.2.1'
-      fox-utils: 'workspace:^1.2.1'
+      fox-esm: 'workspace:^1.2.4'
+      fox-test-runner: 'workspace:^1.2.4'
+      fox-types: 'workspace:^1.2.4'
+      fox-utils: 'workspace:^1.2.4'
   packages/fox-plugin-eslint:
     dependencies:
       eslint: 7.2.0
@@ -121,11 +119,11 @@ importers:
       fox-types: 'link:../fox-types'
     specifiers:
       eslint: ^7.2.0
-      eslint-config-fox: 'workspace:^1.2.1'
-      fox-esm: 'workspace:^1.2.1'
-      fox-test-runner: 'workspace:^1.2.1'
-      fox-types: 'workspace:^1.2.1'
-      fox-utils: 'workspace:^1.2.1'
+      eslint-config-fox: 'workspace:^1.2.4'
+      fox-esm: 'workspace:^1.2.4'
+      fox-test-runner: 'workspace:^1.2.4'
+      fox-types: 'workspace:^1.2.4'
+      fox-utils: 'workspace:^1.2.4'
       lodash.mergewith: ^4.6.2
   packages/fox-plugin-html-validate:
     dependencies:
@@ -138,10 +136,10 @@ importers:
       ts-node: 8.10.2_typescript@3.9.5
       typescript: 3.9.5
     specifiers:
-      fox-esm: 'workspace:^1.2.1'
-      fox-test-runner: 'workspace:^1.2.1'
-      fox-types: 'workspace:^1.2.1'
-      fox-utils: 'workspace:^1.2.1'
+      fox-esm: 'workspace:^1.2.4'
+      fox-test-runner: 'workspace:^1.2.4'
+      fox-types: 'workspace:^1.2.4'
+      fox-utils: 'workspace:^1.2.4'
       html-validate: ^2.23.0
       ts-node: ^8.10.2
       typescript: ^3.9.5
@@ -156,10 +154,10 @@ importers:
       ts-node: 8.10.2_typescript@3.9.5
       typescript: 3.9.5
     specifiers:
-      fox-esm: 'workspace:^1.2.1'
-      fox-test-runner: 'workspace:^1.2.1'
-      fox-types: 'workspace:^1.2.1'
-      fox-utils: 'workspace:^1.2.1'
+      fox-esm: 'workspace:^1.2.4'
+      fox-test-runner: 'workspace:^1.2.4'
+      fox-types: 'workspace:^1.2.4'
+      fox-utils: 'workspace:^1.2.4'
       htmlhint: ^0.14.0
       ts-node: ^8.10.2
       typescript: ^3.9.5
@@ -174,10 +172,10 @@ importers:
       ts-node: 8.10.2_typescript@3.9.5
       typescript: 3.9.5
     specifiers:
-      fox-esm: 'workspace:^1.2.1'
-      fox-test-runner: 'workspace:^1.2.1'
-      fox-types: 'workspace:^1.2.1'
-      fox-utils: 'workspace:^1.2.1'
+      fox-esm: 'workspace:^1.2.4'
+      fox-test-runner: 'workspace:^1.2.4'
+      fox-types: 'workspace:^1.2.4'
+      fox-utils: 'workspace:^1.2.4'
       htmllint: ^0.8.0
       ts-node: ^8.10.2
       typescript: ^3.9.5
@@ -195,9 +193,9 @@ importers:
       fox-test-runner: 'link:../fox-test-runner'
       fox-types: 'link:../fox-types'
     specifiers:
-      fox-test-runner: 'workspace:^1.2.1'
-      fox-types: 'workspace:^1.2.1'
-      fox-utils: 'workspace:^1.2.1'
+      fox-test-runner: 'workspace:^1.2.4'
+      fox-types: 'workspace:^1.2.4'
+      fox-utils: 'workspace:^1.2.4'
       markdown-extensions: ^1.1.1
       markdownlint: ^0.20.3
       remark: ^12.0.0
@@ -216,11 +214,11 @@ importers:
       ts-node: 8.10.2_typescript@3.9.5
       typescript: 3.9.5
     specifiers:
-      fox-test-runner: 'workspace:^1.2.1'
-      fox-types: 'workspace:^1.2.1'
-      fox-utils: 'workspace:^1.2.1'
+      fox-test-runner: 'workspace:^1.2.4'
+      fox-types: 'workspace:^1.2.4'
+      fox-utils: 'workspace:^1.2.4'
       npm-package-json-lint: ^5.1.0
-      npm-package-json-lint-config-fox: 'workspace:^1.2.1'
+      npm-package-json-lint-config-fox: 'workspace:^1.2.4'
       ts-node: ^8.10.2
       typescript: ^3.9.5
   packages/fox-plugin-prettier:
@@ -241,9 +239,9 @@ importers:
     specifiers:
       '@prettier/plugin-ruby': ^0.18.2
       '@prettier/plugin-xml': ^0.7.2
-      fox-test-runner: 'workspace:^1.2.1'
-      fox-types: 'workspace:^1.2.1'
-      fox-utils: 'workspace:^1.2.1'
+      fox-test-runner: 'workspace:^1.2.4'
+      fox-types: 'workspace:^1.2.4'
+      fox-utils: 'workspace:^1.2.4'
       jest: ^26.0.1
       jest-extended: ^0.11.5
       prettier: ^2.0.5
@@ -280,13 +278,13 @@ importers:
       fox-test-runner: 'link:../fox-test-runner'
       fox-types: 'link:../fox-types'
     specifiers:
-      fox-esm: 'workspace:^1.2.1'
-      fox-test-runner: 'workspace:^1.2.1'
-      fox-types: 'workspace:^1.2.1'
-      fox-utils: 'workspace:^1.2.1'
+      fox-esm: 'workspace:^1.2.4'
+      fox-test-runner: 'workspace:^1.2.4'
+      fox-types: 'workspace:^1.2.4'
+      fox-utils: 'workspace:^1.2.4'
       postcss-scss: ^2.1.1
       stylelint: ^13.6.0
-      stylelint-config-fox: 'workspace:^1.2.1'
+      stylelint-config-fox: 'workspace:^1.2.4'
   packages/fox-preset-all:
     dependencies:
       fox-plugin-editorconfig: 'link:../fox-plugin-editorconfig'
@@ -304,15 +302,15 @@ importers:
       ts-jest: 26.1.0_jest@26.0.1+typescript@3.9.5
       typescript: 3.9.5
     specifiers:
-      fox-plugin-editorconfig: 'workspace:^1.2.1'
-      fox-plugin-eslint: 'workspace:^1.2.1'
-      fox-plugin-html-validate: 'workspace:^1.2.1'
-      fox-plugin-htmlhint: 'workspace:^1.2.1'
-      fox-plugin-htmllint: 'workspace:^1.2.1'
-      fox-plugin-markdownlint: 'workspace:^1.2.1'
-      fox-plugin-package-json-lint: 'workspace:^1.2.1'
-      fox-plugin-prettier: 'workspace:^1.2.1'
-      fox-plugin-stylelint: 'workspace:^1.2.1'
+      fox-plugin-editorconfig: 'workspace:^1.2.4'
+      fox-plugin-eslint: 'workspace:^1.2.4'
+      fox-plugin-html-validate: 'workspace:^1.2.4'
+      fox-plugin-htmlhint: 'workspace:^1.2.4'
+      fox-plugin-htmllint: 'workspace:^1.2.4'
+      fox-plugin-markdownlint: 'workspace:^1.2.4'
+      fox-plugin-package-json-lint: 'workspace:^1.2.4'
+      fox-plugin-prettier: 'workspace:^1.2.4'
+      fox-plugin-stylelint: 'workspace:^1.2.4'
       jest: ^26.0.1
       jest-extended: ^0.11.5
       ts-jest: ^26.1.0
@@ -330,11 +328,11 @@ importers:
       ts-jest: 26.1.0_jest@26.0.1+typescript@3.9.5
       typescript: 3.9.5
     specifiers:
-      fox-plugin-editorconfig: 'workspace:^1.2.0'
-      fox-plugin-eslint: 'workspace:^1.2.0'
-      fox-plugin-markdownlint: 'workspace:^1.2.0'
-      fox-plugin-prettier: 'workspace:^1.2.0'
-      fox-plugin-stylelint: 'workspace:^1.2.0'
+      fox-plugin-editorconfig: 'workspace:^1.2.4'
+      fox-plugin-eslint: 'workspace:^1.2.4'
+      fox-plugin-markdownlint: 'workspace:^1.2.4'
+      fox-plugin-prettier: 'workspace:^1.2.4'
+      fox-plugin-stylelint: 'workspace:^1.2.4'
       jest: ^26.0.1
       jest-extended: ^0.11.5
       ts-jest: ^26.1.0
@@ -346,13 +344,6 @@ importers:
       debug: 4.1.1
       esm: 3.2.25
       fox-esm: 'link:../fox-esm'
-      fox-plugin-eslint: 'link:../fox-plugin-eslint'
-      fox-plugin-htmlhint: 'link:../fox-plugin-htmlhint'
-      fox-plugin-markdownlint: 'link:../fox-plugin-markdownlint'
-      fox-plugin-package-json-lint: 'link:../fox-plugin-package-json-lint'
-      fox-plugin-prettier: 'link:../fox-plugin-prettier'
-      fox-plugin-sort-package-json: 'link:../fox-plugin-sort-package-json'
-      fox-plugin-stylelint: 'link:../fox-plugin-stylelint'
       fox-utils: 'link:../fox-utils'
       handlebars: 4.7.6
       lodash.throttle: 4.1.1
@@ -373,16 +364,9 @@ importers:
       cross-env: ^7.0.2
       debug: ^4.1.1
       esm: ^3.2.25
-      fox-esm: 'workspace:^1.2.1'
-      fox-plugin-eslint: 'workspace:^1.2.1'
-      fox-plugin-htmlhint: 'workspace:^1.2.1'
-      fox-plugin-markdownlint: 'workspace:^1.2.1'
-      fox-plugin-package-json-lint: 'workspace:^1.2.1'
-      fox-plugin-prettier: 'workspace:^1.2.1'
-      fox-plugin-sort-package-json: 'workspace:^1.2.1'
-      fox-plugin-stylelint: 'workspace:^1.2.1'
-      fox-types: 'workspace:^1.2.1'
-      fox-utils: 'workspace:^1.2.1'
+      fox-esm: 'workspace:^1.2.4'
+      fox-types: 'workspace:^1.2.4'
+      fox-utils: 'workspace:^1.2.4'
       handlebars: ^4.7.6
       jest: ^26.0.1
       lodash.throttle: ^4.1.1
@@ -417,9 +401,9 @@ importers:
       '@babel/preset-env': ^7.10.2
       '@babel/preset-typescript': ^7.10.1
       '@babel/types': ^7.10.2
-      fox-esm: 'workspace:^1.2.1'
-      fox-types: 'workspace:^1.2.1'
-      fox-utils: 'workspace:^1.2.1'
+      fox-esm: 'workspace:^1.2.4'
+      fox-types: 'workspace:^1.2.4'
+      fox-utils: 'workspace:^1.2.4'
       jest: ^26.0.1
       jest-esm-transformer: ^1.0.0
       jest-extended: ^0.11.5
@@ -457,7 +441,7 @@ importers:
       cross-env: ^7.0.2
       debug: ^4.1.1
       esm: ^3.2.25
-      fox-types: 'workspace:^1.2.3'
+      fox-types: 'workspace:^1.2.4'
       glob: ^7.1.6
       handlebars: ^4.7.6
       jest: ^26.0.1
@@ -480,7 +464,7 @@ importers:
       typescript: 3.9.5
     specifiers:
       '@types/jest': ^26.0.0
-      fox-types: 'workspace:^1.2.1'
+      fox-types: 'workspace:^1.2.4'
       jest: ^26.0.1
       npm-package-json-lint: ^5.1.0
       ts-node: ^8.10.2
@@ -502,7 +486,7 @@ importers:
       prettier: 2.0.5
     specifiers:
       babel-eslint: ^10.1.0
-      fox-types: 'workspace:^1.2.1'
+      fox-types: 'workspace:^1.2.4'
       jest: ^26.0.1
       jest-extended: ^0.11.5
       lodash.merge: ^4.6.2
@@ -517,8 +501,8 @@ importers:
       fox-suite: 'link:../packages/fox-suite'
       npm-package-json-lint-config-fox: 'link:../packages/npm-package-json-lint-config-fox'
     specifiers:
-      fox-suite: 'workspace:^1.2.0'
-      npm-package-json-lint-config-fox: 'workspace:^1.2.0'
+      fox-suite: 'workspace:^1.2.4'
+      npm-package-json-lint-config-fox: 'workspace:^1.2.4'
 lockfileVersion: 5.1
 packages:
   /@babel/code-frame/7.10.1:
