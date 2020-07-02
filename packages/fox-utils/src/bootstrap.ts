@@ -66,6 +66,12 @@ export async function buildBootstrap(opts: IBuildBootstrap): Promise<void> {
 		}
 	}
 
+	const writeFile = (fileDest: string, templatedText: string): Promise<void> =>
+		fs.promises.writeFile(fileDest, templatedText, {
+			mode: 0o644,
+			flag: "wx+",
+		});
+
 	const retryFilesToTemplate: ITemplateFile[] = []
 	for (const fileToTemplate of pluginData.templateFiles) {
 		debug(`trying to copy file '${fileToTemplate.absolutePath}' over`)
@@ -73,43 +79,61 @@ export async function buildBootstrap(opts: IBuildBootstrap): Promise<void> {
 
 		try {
 			// ensure parent directory exists
-			try {
-				await fs.promises.mkdir(path.dirname(fileDest), {
-					recursive: true,
-					mode: 0o755,
-				});
-			} catch (err) { console.error (err) }
+			{
+				try {
+					await fs.promises.mkdir(path.dirname(fileDest), {
+						recursive: true,
+						mode: 0o755,
+					});
+				} catch (err) { console.error (err) }
+			}
 
+			// get the destination text. if we get a not exists error, then
+			// just write to file
+			let destinationText
+			{
+				try {
+					destinationText = await fs.promises.readFile(fileDest, { encoding: 'utf8' })
+				} catch (err) {
+					if (err.code === 'ENOENT') {
+						await writeFile(fileDest, templatedText)
+					}
+				}
+			}
 
-			const destinationText = await fs.promises.readFile(fileDest, { encoding: 'utf8' })
 
 			// if content is the same, don't actually try
 			// and overwrite the file
 			debug(`is destinationText same as templatedText?: ${destinationText === templatedText}`);
-			if (destinationText === templatedText) {
-				log.info(`skipping ${fileToTemplate.relativePath} since contents are the same`);
-			} else {
-				await fs.promises.writeFile(fileDest, templatedText, {
-					mode: 0o644,
-					flag: "wx+",
-				});
-			}
-
-		} catch (err) {
-			if (err.code === 'EEXIST') {
-				// if the file already exists, but is a json file,
-				// merge the keys instead of throwing
-				if (isJsonFile(fileToTemplate)) {
-					await mergeJsonFiles(fileDest, templatedText, {
-						projectData,
-						pluginData,
-					})
+			try {
+				if (destinationText === templatedText) {
+					log.info(`skipping ${fileToTemplate.relativePath} since contents are the same`);
 				} else {
-					retryFilesToTemplate.push(fileToTemplate)
+					await writeFile(fileDest, templatedText)
 				}
-			} else {
-				throw new Error(err)
+			} catch (err) {
+				if (err.code === 'EEXIST') {
+					// if the file already exists, but is a json file,
+					// merge the keys instead of throwing
+					if (isJsonFile(fileToTemplate)) {
+						const finalJson = await mergeJsonFiles(fileDest, templatedText, {
+							projectData,
+							pluginData,
+						})
+						await fs.promises.writeFile(fileDest, JSON.stringify(finalJson, null, 2), {
+							mode: 0o644,
+						})
+					} else {
+						retryFilesToTemplate.push(fileToTemplate)
+					}
+				} else {
+					throw new Error(err)
+				}
 			}
+		} catch (err) {
+			log.error('Unexpected error occured:')
+			console.error(err)
+			process.exit(1)
 		}
 	}
 
@@ -158,7 +182,7 @@ async function mergeJsonFiles(
 	fileDest: string,
 	templatedText: string,
 	{ pluginData, projectData }: { pluginData: IPlugin; projectData: IProject },
-) {
+): Promise<Record<string, any>> {
 	const fileContent = await fs.promises.readFile(fileDest, {
 		encoding: 'utf8',
 	})
@@ -187,9 +211,5 @@ async function mergeJsonFiles(
 		}
 	}
 
-	const finalJson = merge(JSON.parse(jsonText), JSON.parse(templatedText))
-
-	await fs.promises.writeFile(fileDest, JSON.stringify(finalJson, null, 2), {
-		mode: 0o644,
-	})
+	return merge(JSON.parse(jsonText), JSON.parse(templatedText))
 }
