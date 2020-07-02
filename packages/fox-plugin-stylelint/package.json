@@ -1,6 +1,6 @@
 {
 	"name": "fox-plugin-stylelint",
-	"version": "1.2.2",
+	"version": "1.2.3",
 	"description": "",
 	"main": "build",
 	"scripts": {
@@ -35,14 +35,14 @@
 	},
 	"license": "MIT",
 	"dependencies": {
-		"fox-esm": "workspace:^1.2.2",
-		"fox-utils": "workspace:^1.2.2",
+		"fox-esm": "workspace:^1.2.3",
+		"fox-utils": "workspace:^1.2.3",
 		"stylelint": "^13.6.0",
-		"stylelint-config-fox": "workspace:^1.2.2",
+		"stylelint-config-fox": "workspace:^1.2.3",
 		"postcss-scss": "^2.1.1"
 	},
 	"devDependencies": {
-		"fox-test-runner": "workspace:^1.2.2",
-		"fox-types": "workspace:^1.2.2"
+		"fox-test-runner": "workspace:^1.2.3",
+		"fox-types": "workspace:^1.2.3"
 	}
 }

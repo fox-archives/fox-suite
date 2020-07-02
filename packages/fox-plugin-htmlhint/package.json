@@ -1,6 +1,6 @@
 {
 	"name": "fox-plugin-htmlhint",
-	"version": "1.2.2",
+	"version": "1.2.3",
 	"description": "",
 	"main": "build",
 	"scripts": {
@@ -35,13 +35,13 @@
 	},
 	"license": "MIT",
 	"dependencies": {
-		"fox-esm": "workspace:^1.2.2",
-		"fox-utils": "workspace:^1.2.2",
+		"fox-esm": "workspace:^1.2.3",
+		"fox-utils": "workspace:^1.2.3",
 		"htmlhint": "^0.14.0"
 	},
 	"devDependencies": {
-		"fox-test-runner": "workspace:^1.2.2",
-		"fox-types": "workspace:^1.2.2",
+		"fox-test-runner": "workspace:^1.2.3",
+		"fox-types": "workspace:^1.2.3",
 		"ts-node": "^8.10.2",
 		"typescript": "^3.9.5"
 	}
