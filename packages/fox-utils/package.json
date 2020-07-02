@@ -44,6 +44,7 @@
 		"debug": "^4.1.1",
 		"esm": "^3.2.25",
 		"glob": "^7.1.6",
+		"handlebars": "^4.7.6",
 		"lodash.merge": "^4.6.2",
 		"lodash.mergewith": "^4.6.2",
 		"minimist": "^1.2.5",

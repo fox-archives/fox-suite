@@ -438,6 +438,7 @@ importers:
       debug: 4.1.1
       esm: 3.2.25
       glob: 7.1.6
+      handlebars: 4.7.6
       lodash.merge: 4.6.2
       lodash.mergewith: 4.6.2
       minimist: 1.2.5
@@ -456,8 +457,9 @@ importers:
       cross-env: ^7.0.2
       debug: ^4.1.1
       esm: ^3.2.25
-      fox-types: 'workspace:^1.2.1'
+      fox-types: 'workspace:^1.2.3'
       glob: ^7.1.6
+      handlebars: ^4.7.6
       jest: ^26.0.1
       lodash.merge: ^4.6.2
       lodash.mergewith: ^4.6.2
@@ -4297,10 +4299,6 @@ packages:
       node: '>= 0.8'
     resolution:
       integrity: sha512-FQN4MRfuJeHf7cBbBMJFXhKSDq+2kAArBlmRBvcvFE5BB1HZKXtSFASDhdlz9zOYwxh8lDdnvmMOe/+5cdoEdg==
-  /commander/2.20.3:
-    optional: true
-    resolution:
-      integrity: sha512-GpVkmM8vF2vQUkj2LvZmD35JxeJOLCwJ9cUkugyk2nuhbv3+mJvpLYYt+0+USMxE+oj+ey/lJEnhZw75x/OMcQ==
   /commander/5.1.0:
     dev: false
     engines:
@@ -6221,7 +6219,7 @@ packages:
       node: '>=0.4.7'
     hasBin: true
     optionalDependencies:
-      uglify-js: 3.9.4
+      uglify-js: 3.10.0
     resolution:
       integrity: sha512-1f2BACcBfiwAfStCKZNrUCgqNZkGsAT7UM3kkYtXuLo0KnaVfjKOyf7PRzB6++aK9STyT1Pd2ZCPe3EGOXleXA==
   /har-schema/2.0.0:
@@ -12119,15 +12117,13 @@ packages:
     dev: false
     resolution:
       integrity: sha512-8Y75pvTYkLJW2hWQHXxoqRgV7qb9B+9vFEtidML+7koHUFapnVJAZ6cKs+Qjz5Aw3aZWHMC6u0wJE3At+nSGwA==
-  /uglify-js/3.9.4:
-    dependencies:
-      commander: 2.20.3
+  /uglify-js/3.10.0:
     engines:
       node: '>=0.8.0'
     hasBin: true
     optional: true
     resolution:
-      integrity: sha512-8RZBJq5smLOa7KslsNsVcSH+KOXf1uDU8yqLeNuVKwmT0T3FA0ZoXlinQfRad7SDcbZZRZE4ov+2v71EnxNyCA==
+      integrity: sha512-Esj5HG5WAyrLIdYU74Z3JdG2PxdIusvj6IWHMtlyESxc7kcDz7zYlYjpnSokn1UbpV0d/QX9fan7gkCNd/9BQA==
   /uid-number/0.0.6:
     dev: true
     resolution:
