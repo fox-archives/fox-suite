@@ -2,6 +2,10 @@
 
 A sly suite of tools for web development
 
+## Archived
+
+This project has been archived
+
 ## Summary
 
 Fox suite provides a unified interface for formatting and linting tools. It ensures these independent tools _just work_ with _minimal configuration overhead_. It's meant to be used on tiny to medium sided-projects.
